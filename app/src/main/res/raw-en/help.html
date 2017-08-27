@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<meta charset="UTF-8"/>
+<body>
+<h3 align="left">Data input</h3>
+<p align="justify">Following input formats are supported:
+<ul><tt>
+    <li>HH:MM:SS</li>
+    <li>HH:MM</li>
+    <li>MM:SS.sss</li>
+</tt></ul>
+Where <tt>H</tt> - hours, <tt>M</tt> - minutes, <tt>S</tt> - seconds, <tt>s</tt> -
+milliseconds.<br/>
+You can also input milliseconds (3 signs after dot) when you enter data in HH:MM:SS format.</p>
+
+<p alight="justify">You can also input decimal numbers. All negative values must be enclosed in
+    parentheses. Please note, that currently negative time units input is not supported. </p>
+<h4 align="left">Examples</h4>
+<p align="justify"><font color="green">&#10004;</font> <tt>00:10</tt><br/>
+    <font color="green">&#10004;</font> <tt>10:24</tt> <font color="#424242"><tt>- HH:MM</tt></font><br/>
+    <font color="green">&#10004;</font> <tt>10:24.005</tt> <font color="#424242"><tt> -
+        MM:SS.sss</tt></font><br/>
+    <font color="green">&#10004;</font> <tt>02:00:30</tt><br/>
+    <font color="green">&#10004;</font> <tt>0:10:40.5</tt><br/>
+    <font color="red">&#10008;</font> <tt>10:30.5</tt><br/>
+    <font color="red">&#10008;</font> <tt>:4:05</tt><br/>
+    <font color="green">&#10004;</font> <tt>8</tt> <font color="#424242"><tt> -
+        number</tt></font><br/>
+    <font color="green">&#10004;</font> <tt>(-8)</tt> <font color="#424242"><tt> -
+        number</tt></font><br/>
+    <font color="red">&#10008;</font> <tt>-4</tt><br/>
+</p>
+
+<h3 align="left">Operations</h3>
+<p align="justify">
+    Currently following operations are supported:
+<ul><tt>
+    <li>Addition</li>
+    <li>Subtraction</li>
+    <li>Multiplication</li>
+    <li>Division</li>
+</tt></ul>
+Some operations with time units <tt>Т</tt> and numbers <tt>V</tt> will cause errors. These
+operations are:
+<ul><tt>
+    <li>Multiplication Т*Т</li>
+    <li>Division V/Т</li>
+    <li>Addition V+Т, T+V</li>
+    <li>Subtraction V-Т, T-V</li>
+</tt></ul>
+To group operations, use parentheses<tt>()</tt>.</p>
+<h4 align="left">Examples</h4>
+<p align="justify"><font color="green">&#10004;</font> <tt>00:10*2+01:00</tt><br/>
+    <font color="green">&#10004;</font> <tt>00:35/5-00:01</tt><br/>
+    <font color="red">&#10008;</font> <tt>01:00/01:00:30</tt><br/>
+    <font color="red">&#10008;</font> <tt>00:10*(2+01:00)</tt><br/></p>
+
+<h3 align="left">Output formats</h3>
+<p align="justify">Following output formats are supported:
+<ul><tt>
+    <li>DDd. HH:MM:SS</li>
+    <li>HH:MM:SS</li>
+    <li>MM:SS</li>
+    <li>[HH:MM:SS]mod24</li>
+</tt></ul>
+Where <tt>D</tt> - days, <tt>H</tt> - hours, <tt>M</tt> - minutes, <tt>S</tt> - seconds.<br/>
+Format <tt>[HH:MM:SS]mod24</tt> should be used for time of day calculations.<br/>
+</p>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<resources>
+
+    <!-- input & result related strings -->
+    <string name="error">Помилка у виразі</string>
+    <string name="err_specific">Помилка (</string>
+    <string name="hint_expression">Вираз</string>
+
+    <!-- activity titles -->
+    <string name="title_activity_info">Інструкція</string>
+    <string name="title_activity_settings">Налаштування</string>
+
+    <!-- format labels -->
+    <string name="format_dhms">ДДd. ГГ:ХХ:СС</string>
+    <string name="format_hms">ГГ:ХХ:СС</string>
+    <string name="format_ms">ХХ:СС</string>
+    <string name="format_hms_mod24">[ГГ:ХХ:СС]mod24</string>
+    <string name="format_hm">ГГ:ХХ</string>
+
+    <!-- menu actions -->
+    <string name="title_dialog_format">Формат результату</string>
+    <string name="action_copy">Копіювати результат</string>
+    <string name="action_vibro_enable">Вібрація</string>
+    <string name="action_instructions">Інструкція</string>
+    <string name="action_exit">Вихід</string>
+    <string name="action_rate">Оцінити</string>
+
+    <!-- user notifications -->
+    <string name="toast_copy">Результат скопійовано</string>
+    <string name="toast_ms">Результат збережено</string>
+    <string name="toast_copy_2">Текст скопійовано</string>
+    <string name="toast_copy_error">Буфер обміну містить непідтриувані дані</string>
+    <string name="action_settings">Налаштування</string>
+
+    <!-- Rate dialog -->
+    <string name="title_dialog_rate">Оцінити програму</string>
+    <string name="message_rate_dialog">Бажаєте перейти до Google Play зараз?</string>
+    <string name="btn_yes">Так</string>
+    <string name="btn_no">Ні</string>
+    <string name="prefix_day">"d. "</string>
+    <string name="insert_current_time">Вставити теперішній час</string>
+    <string name="select_time_format">Виберіть формат</string>
+
+</resources>

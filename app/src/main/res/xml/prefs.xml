@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:defaultValue="0"
+        android:entries="@array/layout_type_items"
+        android:entryValues="@array/layout_type_values"
+        android:key="layout"
+        android:title="@string/pref_layout"/>
+
+    <CheckBoxPreference
+        android:id="@+id/pref_vibro"
+        android:defaultValue="false"
+        android:key="vibro_enabled"
+        android:summaryOff="@string/pref_vibro_off"
+        android:summaryOn="@string/pref_vibro_on"
+        android:title="@string/action_vibro_enable"/>
+
+    <ListPreference
+        android:defaultValue="50"
+        android:dependency="vibro_enabled"
+        android:entries="@array/vibro_duration_items"
+        android:entryValues="@array/vibro_duration_values"
+        android:key="vibro_duration"
+        android:title="@string/pref_vibro_duration"/>
+
+</PreferenceScreen>

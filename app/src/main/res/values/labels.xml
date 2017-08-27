@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btn_1" translatable="false">1</string>
+    <string name="btn_2" translatable="false">2</string>
+    <string name="btn_3" translatable="false">3</string>
+    <string name="btn_4" translatable="false">4</string>
+    <string name="btn_5" translatable="false">5</string>
+    <string name="btn_6" translatable="false">6</string>
+    <string name="btn_7" translatable="false">7</string>
+    <string name="btn_8" translatable="false">8</string>
+    <string name="btn_9" translatable="false">9</string>
+    <string name="btn_0" translatable="false">0</string>
+    <string name="btn_clr" translatable="false">CLR</string>
+    <string name="btn_plus" translatable="false">+</string>
+    <string name="btn_minus" translatable="false">-</string>
+    <string name="btn_colon" translatable="false">:</string>
+    <string name="btn_del" translatable="false">BSP</string>
+    <string name="btn_eq" translatable="false">=</string>
+    <string name="eq" translatable="false">=</string>
+    <string name="btn_mr" translatable="false">MR</string>
+    <string name="btn_ms" translatable="false">MS</string>
+    <string name="btn_mul" translatable="false">×</string>
+    <string name="btn_div" translatable="false">÷</string>
+    <string name="btn_dot" translatable="false">.</string>
+    <string name="btn_ans" translatable="false">ANS</string>
+    <string name="par_left" translatable="false">(</string>
+    <string name="par_right" translatable="false">)</string>
+    <string name="btn_par" translatable="false">(…)</string>
+</resources>

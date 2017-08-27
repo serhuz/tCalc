@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"
+           tools:locale="ru">
+
+    <string name="app_name" translatable="false">tCalc</string>
+
+    <!-- input & result related strings -->
+    <string name="hint_expression">Выражение</string>
+    <string name="error">Ошибка в выражении</string>
+    <string name="err_specific">Ошибка (</string>
+
+    <!-- activity titles -->
+    <string name="title_activity_info">Инструкция</string>
+    <string name="title_activity_settings">Настройки</string>
+
+    <!-- format labels -->
+    <string name="format_hms">ЧЧ:ММ:СС</string>
+    <string name="format_ms">ММ:СС</string>
+    <string name="format_dhms">ДДd. ЧЧ:ММ:СС</string>
+    <string name="format_hms_mod24">[ЧЧ:ММ:СС]mod24</string>
+    <string name="format_hm">ЧЧ:ММ</string>
+
+    <string-array name="formats">
+        <item>@string/format_dhms</item>
+        <item>@string/format_hms</item>
+        <item>@string/format_ms</item>
+        <item>@string/format_hms_mod24</item>
+    </string-array>
+
+    <string-array name="timestamp_formats">
+        <item>@string/format_hms</item>
+        <item>@string/format_hm</item>
+    </string-array>
+
+    <!-- menu actions -->
+    <string name="title_dialog_format">Формат результата</string>
+    <string name="action_copy">Копировать результат</string>
+    <string name="action_vibro_enable">Вибрация</string>
+    <string name="action_instructions">Инструкция</string>
+    <string name="action_exit">Выход</string>
+    <string name="action_rate">Оценить</string>
+    <string name="action_settings">Настройки</string>
+
+    <!-- user notifications -->
+    <string name="toast_copy">Результат скопирован</string>
+    <string name="toast_copy_2">Текст скопирован</string>
+    <string name="toast_copy_error">В буфере обмена содержатся неподдерживаемые данные</string>
+    <string name="toast_ms">Результат сохранен</string>
+
+    <!-- Rate dialog -->
+    <string name="title_dialog_rate">Оценить приложение</string>
+    <string name="message_rate_dialog">Хотите перейти в Google Play сейчас?</string>
+    <string name="btn_yes">Да</string>
+    <string name="btn_no">Нет</string>
+    <string name="prefix_day">"d. "</string>
+    <string name="insert_current_time">Вставить текущее время</string>
+
+    <string name="select_time_format">Выберите формат</string>
+
+</resources>

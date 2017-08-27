@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_btn_clr">#FFBB33</color>
+    <color name="color_btn_num">#33B5E5</color>
+    <color name="color_btn_calc">#99CC00</color>
+    <color name="color_btn_pressed">#b0b0b0</color>
+    <color name="color_background">#EEEEEE</color>
+    <color name="color_background_result">#D6D6D6</color>
+    <color name="transparent">#00000000</color>
+    <color name="text">#000000</color>
+    <color name="shadow">#42000000</color>
+</resources>

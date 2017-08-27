@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- input & result related strings -->
+    <string name="hint_expression">Expression</string>
+    <string name="error">Error in expression</string>
+    <string name="err_specific">Error (</string>
+
+    <!-- activity titles -->
+    <string name="title_activity_info">Help</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- format labels -->
+    <string name="format_hms">HH:MM:SS</string>
+    <string name="format_ms">MM:SS</string>
+    <string name="format_dhms">DDd. HH:MM:SS</string>
+    <string name="format_hms_mod24">[HH:MM:SS]mod24</string>
+    <string name="format_hm">HH:MM</string>
+
+    <!-- menu actions -->
+    <string name="title_dialog_format">Output format</string>
+    <string name="action_copy">Copy result</string>
+    <string name="action_vibro_enable">Vibration</string>
+    <string name="action_instructions">Help</string>
+    <string name="action_exit">Exit</string>
+    <string name="action_rate">Rate</string>
+
+    <!-- user notifications -->
+    <string name="toast_copy">Result copied</string>
+    <string name="toast_ms">Result stored</string>
+    <string name="toast_copy_2">Text copied</string>
+    <string name="toast_copy_error">Clipboard contains unsupported characters</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Rate dialog -->
+    <string name="title_dialog_rate">Rate app</string>
+    <string name="message_rate_dialog">Would you like to go to Google Play now?</string>
+    <string name="btn_yes">Yes</string>
+    <string name="btn_no">No</string>
+    <string name="prefix_day">"d. "</string>
+    <string name="insert_current_time">Insert current time</string>
+    <string name="select_time_format">Select time format</string>
+
+</resources>

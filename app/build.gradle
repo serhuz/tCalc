@@ -13,6 +13,7 @@ android {
     defaultConfig {
         applicationId 'ua.sergeimunovarov.tcalc'
         minSdkVersion 15
+        //noinspection OldTargetApi
         targetSdkVersion 25
         versionCode 23
         versionName '4.1'

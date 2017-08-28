@@ -40,7 +40,7 @@ android {
 
     buildTypes {
         debug {
-            applicationIdSuffix '.test'
+            applicationIdSuffix '.debug'
             minifyEnabled false
         }
 

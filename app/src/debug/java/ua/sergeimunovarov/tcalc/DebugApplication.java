@@ -13,8 +13,6 @@ public class DebugApplication extends Application {
 
     @Override
     protected RefWatcher installLeakCanary() {
-        return LeakCanary.refWatcher(this)
-                .maxStoredHeapDumps(5)
-                .buildAndInstall();
+        return LeakCanary.install(this);
     }
 }

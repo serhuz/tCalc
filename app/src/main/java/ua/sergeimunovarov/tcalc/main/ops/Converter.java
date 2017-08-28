@@ -243,7 +243,7 @@ public final class Converter {
      * @return Formatted value string
      * @throws NumberFormatException if given value cannot be parsed as double
      */
-    public static String formatValue(String value) throws NumberFormatException {
+    public static String formatValue(String value) {
         try {
             return VALUE_FORMAT.format(Double.parseDouble(value));
         } catch (NumberFormatException ex) {

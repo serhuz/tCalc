@@ -3,7 +3,8 @@ apply plugin: 'checkstyle'
 check.dependsOn 'checkstyle'
 
 task checkstyle(type: Checkstyle) {
-    ignoreFailures = true
+    ignoreFailures = false
+    showViolations = true
     configFile file("${project(':').projectDir}/tools/checkstyle.xml")
 
     source 'src'

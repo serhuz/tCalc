@@ -3,8 +3,8 @@
 
     <!-- input & result related strings -->
     <string name="hint_expression">Expression</string>
-    <string name="error">Error in expression</string>
-    <string name="err_specific">Error (</string>
+    <string name="result_error_generic">Error in expression</string>
+    <string name="result_error_specific">Error (</string>
 
     <!-- activity titles -->
     <string name="title_activity_info">Help</string>
@@ -20,15 +20,14 @@
     <!-- menu actions -->
     <string name="title_dialog_format">Output format</string>
     <string name="action_copy">Copy result</string>
-    <string name="action_vibro_enable">Vibration</string>
+    <string name="action_vibration_enable">Vibration</string>
     <string name="action_instructions">Help</string>
     <string name="action_exit">Exit</string>
     <string name="action_rate">Rate</string>
 
     <!-- user notifications -->
-    <string name="toast_copy">Result copied</string>
+    <string name="toast_result_copied">Result copied</string>
     <string name="toast_ms">Result stored</string>
-    <string name="toast_copy_2">Text copied</string>
     <string name="toast_copy_error">Clipboard contains unsupported characters</string>
     <string name="action_settings">Settings</string>
 
@@ -37,8 +36,23 @@
     <string name="message_rate_dialog">Would you like to go to Google Play now?</string>
     <string name="btn_yes">Yes</string>
     <string name="btn_no">No</string>
-    <string name="prefix_day">"d. "</string>
     <string name="insert_current_time">Insert current time</string>
     <string name="select_time_format">Select time format</string>
+
+    <string-array name="layout_type_items">
+        <item>Classic</item>
+        <item>Modern</item>
+    </string-array>
+
+    <string-array name="vibration_duration_items">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Long</item>
+    </string-array>
+
+    <string name="pref_vibro_duration">Vibration duration</string>
+    <string name="pref_layout">Layout</string>
+    <string name="pref_vibro_on">Vibration is enabled</string>
+    <string name="pref_vibro_off">Vibration is disabled</string>
 
 </resources>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">tCalc</string>
+
+    <string name="btn_0" translatable="false">0</string>
+    <string name="btn_1" translatable="false">1</string>
+    <string name="btn_2" translatable="false">2</string>
+    <string name="btn_3" translatable="false">3</string>
+    <string name="btn_4" translatable="false">4</string>
+    <string name="btn_5" translatable="false">5</string>
+    <string name="btn_6" translatable="false">6</string>
+    <string name="btn_7" translatable="false">7</string>
+    <string name="btn_8" translatable="false">8</string>
+    <string name="btn_9" translatable="false">9</string>
+    <string name="btn_answer" translatable="false">ANS</string>
+    <string name="btn_backspace" translatable="false">BSP</string>
+    <string name="btn_calculate" translatable="false">=</string>
+    <string name="btn_clear" translatable="false">CLR</string>
+    <string name="btn_colon" translatable="false">:</string>
+    <string name="btn_divide" translatable="false">÷</string>
+    <string name="btn_dot" translatable="false">.</string>
+    <string name="btn_double_parentheses" translatable="false">(…)</string>
+    <string name="btn_plus" translatable="false">+</string>
+    <string name="btn_minus" translatable="false">-</string>
+    <string name="btn_mr" translatable="false">MR</string>
+    <string name="btn_ms" translatable="false">MS</string>
+    <string name="btn_multiply" translatable="false">×</string>
+    <string name="btn_parenthesis_left" translatable="false">(</string>
+    <string name="btn_parenthesis_right" translatable="false">)</string>
+
+    <string name="prefix_day" translatable="false">"d. "</string>
+
+    <string name="link_google_play" translatable="false">market://details?id=ua.sergeimunovarov.tcalc</string>
+    <string name="link_web" translatable="false">http://play.google.com/store/apps/details?id=ua.sergeimunovarov.tcalc</string>
+
+    <string-array name="layout_type_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="vibration_duration_values" translatable="false">
+        <item>25</item>
+        <item>50</item>
+        <item>75</item>
+    </string-array>
+</resources>

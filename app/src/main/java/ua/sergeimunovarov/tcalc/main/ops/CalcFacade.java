@@ -55,31 +55,31 @@ public class CalcFacade {
                         break;
                     default:
                         throw new IllegalArgumentException(
-                                Application.getAppComponent().appContext().getString(R.string.error)
+                                Application.getAppComponent().appContext().getString(R.string.result_error_generic)
                         );
                 }
             } catch (IllegalArgumentException | ArithmeticException ex) {
                 // illegal argument in stack
                 Log.w(TAG, "Illegal argument in stack", ex);
                 output = Application.getAppComponent().appContext()
-                        .getString(R.string.err_specific) + ex.getMessage() + ')';
+                        .getString(R.string.result_error_specific) + ex.getMessage() + ')';
                 type = Result.ResultType.RESULT_ERR;
             } catch (EmptyStackException | IllegalStateException ex) {
                 // thrown when operator and operands don't match
                 Log.w(TAG, "operator and operands don't match", ex);
-                output = Application.getAppComponent().appContext().getString(R.string.error);
+                output = Application.getAppComponent().appContext().getString(R.string.result_error_generic);
                 type = Result.ResultType.RESULT_ERR;
             }
         } catch (IllegalArgumentException ex) {
             // illegal argument fed to parser
             Log.w(TAG, " illegal argument fed to parser", ex);
             output = Application.getAppComponent().appContext()
-                    .getString(R.string.err_specific) + ex.getMessage() + ')';
+                    .getString(R.string.result_error_specific) + ex.getMessage() + ')';
             type = Result.ResultType.RESULT_ERR;
         } catch (NoSuchElementException ex) {
             // brackets mismatch
             Log.w(TAG, "brackets mismatch", ex);
-            output = Application.getAppComponent().appContext().getString(R.string.error);
+            output = Application.getAppComponent().appContext().getString(R.string.result_error_generic);
             type = Result.ResultType.RESULT_ERR;
         }
 

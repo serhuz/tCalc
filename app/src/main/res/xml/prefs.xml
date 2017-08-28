@@ -14,13 +14,13 @@
         android:key="vibro_enabled"
         android:summaryOff="@string/pref_vibro_off"
         android:summaryOn="@string/pref_vibro_on"
-        android:title="@string/action_vibro_enable"/>
+        android:title="@string/action_vibration_enable"/>
 
     <ListPreference
         android:defaultValue="50"
         android:dependency="vibro_enabled"
-        android:entries="@array/vibro_duration_items"
-        android:entryValues="@array/vibro_duration_values"
+        android:entries="@array/vibration_duration_items"
+        android:entryValues="@array/vibration_duration_values"
         android:key="vibro_duration"
         android:title="@string/pref_vibro_duration"/>
 

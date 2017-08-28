@@ -1,8 +1,8 @@
 <resources>
 
     <!-- input & result related strings -->
-    <string name="error">Помилка у виразі</string>
-    <string name="err_specific">Помилка (</string>
+    <string name="result_error_generic">Помилка у виразі</string>
+    <string name="result_error_specific">Помилка (</string>
     <string name="hint_expression">Вираз</string>
 
     <!-- activity titles -->
@@ -19,15 +19,14 @@
     <!-- menu actions -->
     <string name="title_dialog_format">Формат результату</string>
     <string name="action_copy">Копіювати результат</string>
-    <string name="action_vibro_enable">Вібрація</string>
+    <string name="action_vibration_enable">Вібрація</string>
     <string name="action_instructions">Інструкція</string>
     <string name="action_exit">Вихід</string>
     <string name="action_rate">Оцінити</string>
 
     <!-- user notifications -->
-    <string name="toast_copy">Результат скопійовано</string>
+    <string name="toast_result_copied">Результат скопійовано</string>
     <string name="toast_ms">Результат збережено</string>
-    <string name="toast_copy_2">Текст скопійовано</string>
     <string name="toast_copy_error">Буфер обміну містить непідтриувані дані</string>
     <string name="action_settings">Налаштування</string>
 
@@ -36,8 +35,23 @@
     <string name="message_rate_dialog">Бажаєте перейти до Google Play зараз?</string>
     <string name="btn_yes">Так</string>
     <string name="btn_no">Ні</string>
-    <string name="prefix_day">"d. "</string>
     <string name="insert_current_time">Вставити теперішній час</string>
     <string name="select_time_format">Виберіть формат</string>
 
+
+    <string-array name="layout_type_items">
+        <item>Класична</item>
+        <item>Нова</item>
+    </string-array>
+
+    <string-array name="vibration_duration_items">
+        <item>Мала</item>
+        <item>Середня</item>
+        <item>Велика</item>
+    </string-array>
+
+    <string name="pref_vibro_duration">Тривалість вібрації</string>
+    <string name="pref_layout">Раскладка</string>
+    <string name="pref_vibro_on">Вібрація ввімкнена</string>
+    <string name="pref_vibro_off">Вібрація вимкнена</string>
 </resources>

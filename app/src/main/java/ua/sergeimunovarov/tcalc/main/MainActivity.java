@@ -205,7 +205,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         if (!calculationError && calculationResult != null) {
             ClipData clipData = ClipData.newPlainText(LABEL, calculationResult.value());
             mClipboard.setPrimaryClip(clipData);
-            this.showToast(toast, getResources().getString(R.string.toast_copy));
+            this.showToast(toast, getResources().getString(R.string.toast_result_copied));
         }
     }
 

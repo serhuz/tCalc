@@ -146,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:onClick="@{model::handleSymbolInput}"
-                android:text="@string/btn_mul"
+                android:text="@string/btn_multiply"
                 tools:ignore="ButtonStyle"/>
 
         </TableRow>
@@ -190,7 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:onClick="@{model::handleSymbolInput}"
-                android:text="@string/btn_div"
+                android:text="@string/btn_divide"
                 tools:ignore="ButtonStyle"/>
 
         </TableRow>
@@ -207,7 +207,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:onClick="@{model::handleClearInput}"
-                android:text="@string/btn_clr"
+                android:text="@string/btn_clear"
                 tools:ignore="ButtonStyle"/>
 
             <ua.sergeimunovarov.tcalc.main.views.CustomButton
@@ -216,7 +216,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:onClick="@{model::handleDeleteInput}"
-                android:text="@string/btn_del"
+                android:text="@string/btn_backspace"
                 tools:ignore="ButtonStyle"/>
 
             <ua.sergeimunovarov.tcalc.main.views.CustomButton
@@ -225,7 +225,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:onClick="@{model::handleEqualInput}"
-                android:text="@string/btn_eq"
+                android:text="@string/btn_calculate"
                 tools:ignore="ButtonStyle"/>
 
             <ua.sergeimunovarov.tcalc.main.views.CustomButton
@@ -234,7 +234,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:onClick="@{model::handleDoubleBracketsInput}"
-                android:text="@string/btn_par"
+                android:text="@string/btn_double_parentheses"
                 tools:ignore="ButtonStyle"/>
 
         </TableRow>

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="link_google_play" translatable="false">market://details?id=ua.sergeimunovarov.tcalc</string>
-    <string name="link_web" translatable="false">http://play.google.com/store/apps/details?id=ua.sergeimunovarov.tcalc</string>
-</resources>

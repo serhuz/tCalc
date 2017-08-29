@@ -14,16 +14,16 @@ import dagger.Provides;
 @Module
 public class LeakCanaryModule {
 
-    private final RefWatcher refWatcher;
+    private final RefWatcher mRefWatcher;
 
 
     public LeakCanaryModule(RefWatcher refWatcher) {
-        this.refWatcher = refWatcher;
+        this.mRefWatcher = refWatcher;
     }
 
 
     @Provides
     protected RefWatcher provideRefWatcher() {
-        return refWatcher;
+        return mRefWatcher;
     }
 }

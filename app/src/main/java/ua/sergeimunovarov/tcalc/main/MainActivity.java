@@ -76,24 +76,23 @@ public class MainActivity extends AbstractTransitionActivity implements
     @Inject
     ApplicationPreferences preferences;
 
-    private EditText inputBox;
+    private EditText mInputBox;
+    private TextView mResultTextView;
 
-    private TextView resultTextView;
-
-    private boolean hasPermanentMenuKey;
+    private boolean mHasPermanentMenuKey;
 
     private ClipboardManager mClipboard;
     private Vibrator mVibrator;
 
-    private Toast toast = null;
+    private Toast mToast = null;
 
     private int mOutputFormat;
     private boolean mVibroEnabled;
     private int mVibroDuration;
 
-    private boolean calculationError = false;
-    private Result calculationResult = null;
-    private Result storedResult = null;
+    private boolean mCalculationError = false;
+    private Result mCalculationResult = null;
+    private Result mStoredResult = null;
 
     private ActivityMainBinding mBinding;
 
@@ -104,14 +103,14 @@ public class MainActivity extends AbstractTransitionActivity implements
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        inputBox = mBinding.input;
-        resultTextView = mBinding.result;
+        mInputBox = mBinding.input;
+        mResultTextView = mBinding.result;
 
         Application.getAppComponent().inject(this);
 
         getLoaderManager().initLoader(CALC_LOADER_ID, null, this);
 
-        hasPermanentMenuKey = ViewConfiguration.get(this).hasPermanentMenuKey();
+        mHasPermanentMenuKey = ViewConfiguration.get(this).hasPermanentMenuKey();
 
         configureInputBehavior();
         configureActionBar();
@@ -121,8 +120,8 @@ public class MainActivity extends AbstractTransitionActivity implements
 
 
     private void configureInputBehavior() {
-        inputBox.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        inputBox.setTextIsSelectable(true);
+        mInputBox.setRawInputType(InputType.TYPE_CLASS_TEXT);
+        mInputBox.setTextIsSelectable(true);
     }
 
 
@@ -134,7 +133,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         ActionBar bar = getActionBar();
         if (bar != null) {
             if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                if (getActionBar().isShowing() && hasPermanentMenuKey) getActionBar().hide();
+                if (getActionBar().isShowing() && mHasPermanentMenuKey) getActionBar().hide();
             } else if (orientation == Configuration.ORIENTATION_PORTRAIT) {
                 if (!getActionBar().isShowing()) getActionBar().show();
             }
@@ -149,7 +148,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             menu.getItem(0).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.getItem(1).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE && hasPermanentMenuKey) {
+        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE && mHasPermanentMenuKey) {
             menu.getItem(0).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
             menu.getItem(1).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         }
@@ -210,10 +209,10 @@ public class MainActivity extends AbstractTransitionActivity implements
      * there are no calculation errors.
      */
     private void copyResultToClipboard() {
-        if (!calculationError && calculationResult != null) {
-            ClipData clipData = ClipData.newPlainText(LABEL, calculationResult.value());
+        if (!mCalculationError && mCalculationResult != null) {
+            ClipData clipData = ClipData.newPlainText(LABEL, mCalculationResult.value());
             mClipboard.setPrimaryClip(clipData);
-            this.showToast(toast, getResources().getString(R.string.toast_result_copied));
+            this.showToast(mToast, getResources().getString(R.string.toast_result_copied));
         }
     }
 
@@ -234,18 +233,18 @@ public class MainActivity extends AbstractTransitionActivity implements
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(KEY_RESULT, calculationResult);
-        outState.putParcelable(KEY_MEMORY, storedResult);
-        outState.putBoolean(KEY_CALC_ERROR, calculationError);
+        outState.putParcelable(KEY_RESULT, mCalculationResult);
+        outState.putParcelable(KEY_MEMORY, mStoredResult);
+        outState.putBoolean(KEY_CALC_ERROR, mCalculationError);
     }
 
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        calculationError = savedInstanceState.getBoolean(KEY_CALC_ERROR);
-        calculationResult = savedInstanceState.getParcelable(KEY_RESULT);
-        storedResult = savedInstanceState.getParcelable(KEY_MEMORY);
+        mCalculationError = savedInstanceState.getBoolean(KEY_CALC_ERROR);
+        mCalculationResult = savedInstanceState.getParcelable(KEY_RESULT);
+        mStoredResult = savedInstanceState.getParcelable(KEY_MEMORY);
     }
 
 
@@ -287,7 +286,7 @@ public class MainActivity extends AbstractTransitionActivity implements
 
     @Override
     public void onCalculateResult() {
-        String input = inputBox.getText().toString();
+        String input = mInputBox.getText().toString();
         if (!input.isEmpty()) {
             Bundle args = new Bundle();
             args.putInt(CalculationLoader.KEY_FORMAT, mOutputFormat);
@@ -310,15 +309,15 @@ public class MainActivity extends AbstractTransitionActivity implements
      * @param cs text to insert
      */
     private void insertCharacter(CharSequence cs) {
-        int selectionStart = inputBox.getSelectionStart();
-        int selectionEnd = inputBox.getSelectionEnd();
+        int selectionStart = mInputBox.getSelectionStart();
+        int selectionEnd = mInputBox.getSelectionEnd();
 
-        Editable editable = inputBox.getText();
+        Editable editable = mInputBox.getText();
         if (selectionStart == selectionEnd) {
             editable.insert(selectionStart, cs);
         } else {
             editable.replace(selectionStart, selectionEnd, cs);
-            inputBox.setSelection(selectionEnd - (selectionEnd - selectionStart) + 1);
+            mInputBox.setSelection(selectionEnd - (selectionEnd - selectionStart) + 1);
         }
 
         this.vibrate();
@@ -334,22 +333,22 @@ public class MainActivity extends AbstractTransitionActivity implements
 
     @Override
     public void onClearInput() {
-        inputBox.getText().clear();
-        resultTextView.setText("");
-        calculationResult = null;
-        calculationError = false;
+        mInputBox.getText().clear();
+        mResultTextView.setText("");
+        mCalculationResult = null;
+        mCalculationError = false;
         vibrate();
     }
 
 
     @Override
     public void onDeleteInput() {
-        Editable text = inputBox.getText();
+        Editable text = mInputBox.getText();
         if (text.length() == 0) return;
 
         // get cursor/selection parameters
-        int selectionStart = inputBox.getSelectionStart();
-        int selectionEnd = inputBox.getSelectionEnd();
+        int selectionStart = mInputBox.getSelectionStart();
+        int selectionEnd = mInputBox.getSelectionEnd();
         int selectionLength = 1;
 
         if (selectionStart == selectionEnd) { // simple cursor
@@ -360,7 +359,7 @@ public class MainActivity extends AbstractTransitionActivity implements
             selectionLength = selectionEnd - selectionStart;
         }
 
-        inputBox.setSelection(selectionEnd - selectionLength);
+        mInputBox.setSelection(selectionEnd - selectionLength);
         this.vibrate();
     }
 
@@ -372,17 +371,17 @@ public class MainActivity extends AbstractTransitionActivity implements
 
 
     private void encloseSelectionInParentheses() {
-        int selectionStart = inputBox.getSelectionStart();
-        int selectionEnd = inputBox.getSelectionEnd();
+        int selectionStart = mInputBox.getSelectionStart();
+        int selectionEnd = mInputBox.getSelectionEnd();
 
         if (selectionStart == selectionEnd) {
             insertCharacter(BRACKETS);
         } else {
-            StringBuilder sb = new StringBuilder(inputBox.getText().toString());
+            StringBuilder sb = new StringBuilder(mInputBox.getText().toString());
             sb.insert(selectionStart, PAR_LEFT);
             sb.insert(selectionEnd + 1, PAR_RIGHT);
-            inputBox.setText(sb.toString());
-            inputBox.setSelection(selectionEnd + 2);
+            mInputBox.setText(sb.toString());
+            mInputBox.setSelection(selectionEnd + 2);
             vibrate();
         }
     }
@@ -395,8 +394,8 @@ public class MainActivity extends AbstractTransitionActivity implements
 
 
     private void storeResult() {
-        if (calculationResult != null && !calculationError) {
-            storedResult = calculationResult;
+        if (mCalculationResult != null && !mCalculationError) {
+            mStoredResult = mCalculationResult;
             Toast.makeText(this, R.string.toast_ms, Toast.LENGTH_SHORT).show();
             vibrate();
         }
@@ -405,8 +404,8 @@ public class MainActivity extends AbstractTransitionActivity implements
 
     @Override
     public void onMemoryRecall() {
-        if (storedResult != null) {
-            insertStoredValue(storedResult);
+        if (mStoredResult != null) {
+            insertStoredValue(mStoredResult);
         }
     }
 
@@ -440,8 +439,8 @@ public class MainActivity extends AbstractTransitionActivity implements
 
     @Override
     public void onInsertAnswer() {
-        if (calculationResult != null && !calculationError) {
-            insertStoredValue(calculationResult);
+        if (mCalculationResult != null && !mCalculationError) {
+            insertStoredValue(mCalculationResult);
         }
     }
 
@@ -466,14 +465,14 @@ public class MainActivity extends AbstractTransitionActivity implements
 
         switch (data.type()) {
             case RESULT_ERR:
-                calculationError = true;
-                resultTextView.setText(data.value());
+                mCalculationError = true;
+                mResultTextView.setText(data.value());
                 break;
             case RESULT_OK_VALUE:
             case RESULT_OK:
-                calculationError = false;
-                calculationResult = data;
-                resultTextView.setText(
+                mCalculationError = false;
+                mCalculationResult = data;
+                mResultTextView.setText(
                         String.format(PREFIX_RESULT, data.value())
                 );
                 vibrate();

@@ -30,11 +30,11 @@ public class StackMachine {
     private static final String ERR_DIV_BY_ZERO = "/0";
     // --------------------------------------------------------------------------------------------
 
-    private final Stack<Token> stack;
+    private final Stack<Token> mStack;
 
 
     public StackMachine() {
-        stack = new Stack<>();
+        mStack = new Stack<>();
     }
 
 
@@ -45,23 +45,23 @@ public class StackMachine {
             switch (type) {
                 case VALUE:
                 case TIME_UNIT:
-                    stack.push(current);
+                    mStack.push(current);
                     break;
                 default:
                     try {
-                        Token right = stack.pop();
-                        Token left = stack.pop();
-                        stack.push(performOperation(left, right, type));
+                        Token right = mStack.pop();
+                        Token left = mStack.pop();
+                        mStack.push(performOperation(left, right, type));
                     } catch (IllegalStateException ex) {
                         throw new IllegalArgumentException(current.value(), ex);
                     }
             }
         }
 
-        if (stack.size() != 1) {
+        if (mStack.size() != 1) {
             throw new IllegalStateException();
         }
-        return stack.pop();
+        return mStack.pop();
     }
 
 

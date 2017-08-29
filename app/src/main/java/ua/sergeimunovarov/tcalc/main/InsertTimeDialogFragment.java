@@ -14,6 +14,7 @@ import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import ua.sergeimunovarov.tcalc.R;
 
@@ -21,15 +22,6 @@ import static java.lang.System.currentTimeMillis;
 
 
 public class InsertTimeDialogFragment extends DialogFragment {
-
-    public interface TimeInsertionListener {
-
-        int FORMAT_HMS = 0;
-        int FORMAT_HM = 1;
-
-        void onTimeSelected(String timestamp);
-    }
-
 
     private static final String TAG = InsertTimeDialogFragment.class.getSimpleName();
 
@@ -66,16 +58,16 @@ public class InsertTimeDialogFragment extends DialogFragment {
                 .setItems(
                         R.array.timestamp_formats,
                         (dialogInterface, i) -> {
-                            final Date current = new Date(currentTimeMillis());
-                            final String timestamp;
+                            Date current = new Date(currentTimeMillis());
+                            String timestamp;
                             switch (i) {
                                 case TimeInsertionListener.FORMAT_HMS:
                                     timestamp =
-                                            new SimpleDateFormat(FORMAT_TSTAMP_HMS).format(current);
+                                            new SimpleDateFormat(FORMAT_TSTAMP_HMS, Locale.ENGLISH).format(current);
                                     break;
                                 case TimeInsertionListener.FORMAT_HM:
                                     timestamp =
-                                            new SimpleDateFormat(FORMAT_TSTAMP_HM).format(current);
+                                            new SimpleDateFormat(FORMAT_TSTAMP_HM, Locale.ENGLISH).format(current);
                                     break;
                                 default:
                                     throw new IllegalStateException();
@@ -85,5 +77,14 @@ public class InsertTimeDialogFragment extends DialogFragment {
                 );
 
         return builder.create();
+    }
+
+
+    public interface TimeInsertionListener {
+
+        int FORMAT_HMS = 0;
+        int FORMAT_HM = 1;
+
+        void onTimeSelected(String timestamp);
     }
 }

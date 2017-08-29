@@ -25,7 +25,7 @@ import ua.sergeimunovarov.tcalc.R;
 public class SettingsFragment extends PreferenceFragment {
 
     @Inject
-    ApplicationPreferences preferences;
+    ApplicationPreferences mPreferences;
 
 
     public static SettingsFragment create() {
@@ -61,7 +61,7 @@ public class SettingsFragment extends PreferenceFragment {
     private void bindPreferenceSummaryToValue(@NonNull Preference pref) {
         pref.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
 
-        SharedPreferences prefs = preferences.getPreferences();
+        SharedPreferences prefs = mPreferences.getPreferences();
         if (pref instanceof ListPreference) {
             String prefValue = prefs.getString(pref.getKey(), "");
             sBindPreferenceSummaryToValueListener.onPreferenceChange(pref, prefValue);
@@ -72,7 +72,7 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
 
-    private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener =
+    private static final Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener =
             (preference, value) -> {
                 if (preference instanceof CheckBoxPreference) {
                     boolean checked = Boolean.parseBoolean(value.toString());

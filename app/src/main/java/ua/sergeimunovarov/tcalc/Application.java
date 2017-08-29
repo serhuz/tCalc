@@ -21,30 +21,30 @@ import ua.sergeimunovarov.tcalc.di.UtilModule;
 
 public class Application extends android.app.Application {
 
-    private static AppComponent appComponent;
+    private static AppComponent sAppComponent;
 
 
     public static AppComponent getAppComponent() {
-        return appComponent;
+        return sAppComponent;
     }
 
 
     public static void setAppComponent(AppComponent appComponent) {
-        Application.appComponent = appComponent;
+        Application.sAppComponent = appComponent;
     }
 
 
-    private RefWatcher refWatcher;
+    private RefWatcher mRefWatcher;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
         if (LeakCanary.isInAnalyzerProcess(this)) return;
-        refWatcher = installLeakCanary();
+        mRefWatcher = installLeakCanary();
 
         initPreferences();
-        appComponent = buildAppComponent();
+        sAppComponent = buildAppComponent();
     }
 
 
@@ -57,7 +57,7 @@ public class Application extends android.app.Application {
         return DaggerAppComponent.builder()
                 .contextModule(new ContextModule(this))
                 .preferencesModule(new PreferencesModule())
-                .leakCanaryModule(new LeakCanaryModule(refWatcher))
+                .leakCanaryModule(new LeakCanaryModule(mRefWatcher))
                 .utilModule(new UtilModule())
                 .build();
     }

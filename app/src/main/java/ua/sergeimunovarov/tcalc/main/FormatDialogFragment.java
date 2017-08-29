@@ -23,22 +23,10 @@ import ua.sergeimunovarov.tcalc.R;
 public class FormatDialogFragment extends DialogFragment
         implements DialogInterface.OnClickListener {
 
-    @Inject
-    ApplicationPreferences preferences;
-
-
-    public interface FormatSelectionListener {
-
-        /**
-         * Notifies implementing classes about calculation output format change event.
-         *
-         * @param which format position in formats array
-         */
-        void onOutputFormatChanged(int which);
-    }
-
-
     private static final String TAG = FormatDialogFragment.class.getSimpleName();
+
+    @Inject
+    ApplicationPreferences mPreferences;
 
     private FormatSelectionListener mListener;
 
@@ -70,7 +58,7 @@ public class FormatDialogFragment extends DialogFragment
         builder.setTitle(R.string.title_dialog_format)
                 .setSingleChoiceItems(
                         R.array.formats,
-                        preferences.loadFormatPreference(),
+                        mPreferences.loadFormatPreference(),
                         this
                 );
 
@@ -80,8 +68,19 @@ public class FormatDialogFragment extends DialogFragment
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        preferences.storeFormatPreference(which);
+        mPreferences.storeFormatPreference(which);
         mListener.onOutputFormatChanged(which);
         dialog.dismiss();
+    }
+
+
+    public interface FormatSelectionListener {
+
+        /**
+         * Notifies implementing classes about calculation output format change event.
+         *
+         * @param which format position in formats array
+         */
+        void onOutputFormatChanged(int which);
     }
 }

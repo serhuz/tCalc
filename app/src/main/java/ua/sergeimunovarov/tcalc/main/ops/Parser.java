@@ -24,13 +24,13 @@ public class Parser {
 
     private static final String TAG = Parser.class.getSimpleName();
 
-    private final LinkedList<Token> output;
-    private final Stack<Token> operatorStack;
+    private final LinkedList<Token> mOutput;
+    private final Stack<Token> mOperatorStack;
 
 
     public Parser() {
-        output = new LinkedList<>();
-        operatorStack = new Stack<>();
+        mOutput = new LinkedList<>();
+        mOperatorStack = new Stack<>();
     }
 
 
@@ -54,7 +54,7 @@ public class Parser {
                     matchFound = true;
                     switch (parserTokenType.getType()) {
                         case BRACKET_OPEN:
-                            operatorStack.push(Token.create(Token.TokenType.BRACKET_OPEN, token));
+                            mOperatorStack.push(Token.create(Token.TokenType.BRACKET_OPEN, token));
                             break;
                         case BRACKET_CLOSE:
                             processClosingBracket();
@@ -72,7 +72,7 @@ public class Parser {
                             processHigherOrderOperation(token, Token.TokenType.DIV);
                             break;
                         case TIME_UNIT:
-                            output.add(Token.create(
+                            mOutput.add(Token.create(
                                     Token.TokenType.TIME_UNIT, String.valueOf(Converter.toMillis(token))
                             ));
                             break;
@@ -80,7 +80,7 @@ public class Parser {
                             if (token.startsWith(Patterns.PREFIX_SHARP)) {
                                 token = token.replaceFirst(Patterns.PREFIX_SHARP, MINUS);
                             }
-                            output.add(Token.create(Token.TokenType.VALUE, token));
+                            mOutput.add(Token.create(Token.TokenType.VALUE, token));
                             break;
                     }
                     // Since match was found there is no need to iterate further.
@@ -93,21 +93,21 @@ public class Parser {
             }
         }
 
-        while (!operatorStack.isEmpty()) {
-            output.add(operatorStack.pop());
+        while (!mOperatorStack.isEmpty()) {
+            mOutput.add(mOperatorStack.pop());
         }
-        return output;
+        return mOutput;
     }
 
 
     private void processClosingBracket() {
         boolean openingBracketPresent = false;
-        while (!operatorStack.isEmpty()) {
-            if (operatorStack.peek().type() != Token.TokenType.BRACKET_OPEN) {
-                output.add(operatorStack.pop());
+        while (!mOperatorStack.isEmpty()) {
+            if (mOperatorStack.peek().type() != Token.TokenType.BRACKET_OPEN) {
+                mOutput.add(mOperatorStack.pop());
             } else {
                 openingBracketPresent = true;
-                operatorStack.pop();
+                mOperatorStack.pop();
                 break;
             }
         }
@@ -119,14 +119,14 @@ public class Parser {
         if (type != Token.TokenType.PLUS && type != Token.TokenType.MINUS) {
             throw new IllegalStateException();
         }
-        while (!operatorStack.isEmpty()) {
-            if (operatorStack.peek().type() != Token.TokenType.BRACKET_OPEN) {
-                output.add(operatorStack.pop());
+        while (!mOperatorStack.isEmpty()) {
+            if (mOperatorStack.peek().type() != Token.TokenType.BRACKET_OPEN) {
+                mOutput.add(mOperatorStack.pop());
             } else {
                 break;
             }
         }
-        operatorStack.push(Token.create(type, token));
+        mOperatorStack.push(Token.create(type, token));
     }
 
 
@@ -134,14 +134,14 @@ public class Parser {
         if (type != Token.TokenType.MUL && type != Token.TokenType.DIV) {
             throw new IllegalStateException();
         }
-        while (!operatorStack.isEmpty()) {
-            Token.TokenType peekType = operatorStack.peek().type();
+        while (!mOperatorStack.isEmpty()) {
+            Token.TokenType peekType = mOperatorStack.peek().type();
             if (peekType == Token.TokenType.MUL || peekType == Token.TokenType.DIV) {
-                output.add(operatorStack.pop());
+                mOutput.add(mOperatorStack.pop());
             } else {
                 break;
             }
         }
-        operatorStack.push(Token.create(type, token));
+        mOperatorStack.push(Token.create(type, token));
     }
 }

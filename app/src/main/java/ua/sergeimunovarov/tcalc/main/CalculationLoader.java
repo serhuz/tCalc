@@ -18,20 +18,20 @@ import ua.sergeimunovarov.tcalc.main.ops.Result;
 @SuppressWarnings("WeakerAccess")
 public class CalculationLoader extends AsyncTaskLoader<Result> {
 
-    public static final String KEY_FORMAT = "arg.format";
-    public static final String KEY_INPUT = "arg.input";
+    public static final String KEY_FORMAT = "arg.mFormat";
+    public static final String KEY_INPUT = "arg.mString";
 
-    private String input;
-    private int format;
-    private Result result;
+    private String mString;
+    private int mFormat;
+    private Result mResult;
 
 
     public CalculationLoader(@NonNull Context context,
                              @Nullable Bundle args) {
         super(context);
         if (args != null) {
-            format = args.getInt(KEY_FORMAT);
-            input = args.getString(KEY_INPUT);
+            mFormat = args.getInt(KEY_FORMAT);
+            mString = args.getString(KEY_INPUT);
         }
     }
 
@@ -39,8 +39,8 @@ public class CalculationLoader extends AsyncTaskLoader<Result> {
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
-        if (result != null) {
-            deliverResult(result);
+        if (mResult != null) {
+            deliverResult(mResult);
         } else {
             forceLoad();
         }
@@ -49,10 +49,10 @@ public class CalculationLoader extends AsyncTaskLoader<Result> {
 
     @Override
     public Result loadInBackground() {
-        if (input != null) {
-            CalcFacade calcFacade = new CalcFacade(format);
-            result = calcFacade.calculateResult(input);
-            return result;
+        if (mString != null) {
+            CalcFacade calcFacade = new CalcFacade(mFormat);
+            mResult = calcFacade.calculateResult(mString);
+            return mResult;
         } else {
             return null;
         }

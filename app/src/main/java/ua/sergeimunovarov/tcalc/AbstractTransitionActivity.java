@@ -15,9 +15,11 @@ import android.support.annotation.NonNull;
 import android.transition.Fade;
 import android.view.Window;
 
+
 public abstract class AbstractTransitionActivity extends Activity {
 
     protected static final int TRANSITION_DURATION_MILLIS = 500;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public abstract class AbstractTransitionActivity extends Activity {
             setupWindowAnimations();
         }
     }
+
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setupWindowAnimations() {
@@ -41,6 +44,7 @@ public abstract class AbstractTransitionActivity extends Activity {
         getWindow().setEnterTransition(fadeIn);
         getWindow().setExitTransition(fadeOut);
     }
+
 
     public void launchActivity(@NonNull Intent intent) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {

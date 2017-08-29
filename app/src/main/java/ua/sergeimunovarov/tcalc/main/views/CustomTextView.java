@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import ua.sergeimunovarov.tcalc.Application;
 
+
 /**
  * A {@link TextView} subclass with custom font.
  */
@@ -21,17 +22,21 @@ public class CustomTextView extends TextView {
         super(context);
     }
 
+
     public CustomTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+
 
     public CustomTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
+
     {
         init();
     }
+
 
     private void init() {
         Typeface tf = Application.getAppComponent().typefaceHolder().getTypeface();

@@ -36,6 +36,7 @@ public final class Patterns {
 
     public static final String PREFIX_SHARP = "#";
 
+
     private Patterns() {
         throw new AssertionError();
     }

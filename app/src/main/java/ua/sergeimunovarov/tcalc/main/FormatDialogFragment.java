@@ -19,11 +19,13 @@ import ua.sergeimunovarov.tcalc.Application;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.R;
 
+
 public class FormatDialogFragment extends DialogFragment
         implements DialogInterface.OnClickListener {
 
     @Inject
     ApplicationPreferences preferences;
+
 
     public interface FormatSelectionListener {
 
@@ -33,16 +35,18 @@ public class FormatDialogFragment extends DialogFragment
          * @param which format position in formats array
          */
         void onOutputFormatChanged(int which);
-
     }
+
 
     private static final String TAG = FormatDialogFragment.class.getSimpleName();
 
     private FormatSelectionListener mListener;
 
+
     public static FormatDialogFragment create() {
         return new FormatDialogFragment();
     }
+
 
     @CallSuper
     @Override
@@ -55,6 +59,7 @@ public class FormatDialogFragment extends DialogFragment
             Log.e(TAG, "Host activity should implement FormatSelectionListener");
         }
     }
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -71,6 +76,7 @@ public class FormatDialogFragment extends DialogFragment
 
         return builder.create();
     }
+
 
     @Override
     public void onClick(DialogInterface dialog, int which) {

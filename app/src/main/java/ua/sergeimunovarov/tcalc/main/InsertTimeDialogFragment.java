@@ -19,6 +19,7 @@ import ua.sergeimunovarov.tcalc.R;
 
 import static java.lang.System.currentTimeMillis;
 
+
 public class InsertTimeDialogFragment extends DialogFragment {
 
     public interface TimeInsertionListener {
@@ -29,6 +30,7 @@ public class InsertTimeDialogFragment extends DialogFragment {
         void onTimeSelected(String timestamp);
     }
 
+
     private static final String TAG = InsertTimeDialogFragment.class.getSimpleName();
 
     private static final String FORMAT_TSTAMP_HMS = "HH:mm:ss";
@@ -36,9 +38,11 @@ public class InsertTimeDialogFragment extends DialogFragment {
 
     private TimeInsertionListener mListener;
 
+
     public static InsertTimeDialogFragment create() {
         return new InsertTimeDialogFragment();
     }
+
 
     @CallSuper
     @Override
@@ -50,6 +54,7 @@ public class InsertTimeDialogFragment extends DialogFragment {
             Log.e(TAG, "Host activity should implement TimeInsertionListener");
         }
     }
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

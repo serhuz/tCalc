@@ -8,6 +8,7 @@ package ua.sergeimunovarov.tcalc;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
+
 /**
  * Provides global access to application preferences.
  */
@@ -15,13 +16,16 @@ public class ApplicationPreferences {
 
     private SharedPreferences mPreferences;
 
+
     public ApplicationPreferences(@NonNull SharedPreferences preferences) {
         mPreferences = preferences;
     }
 
+
     public SharedPreferences getPreferences() {
         return mPreferences;
     }
+
 
     /**
      * Stores selected calculation format
@@ -36,6 +40,7 @@ public class ApplicationPreferences {
                 .apply();
     }
 
+
     /**
      * Loads calculation format
      *
@@ -46,6 +51,7 @@ public class ApplicationPreferences {
         return getPreferences().getInt(PreferenceKeys.KEY_FORMAT, Defaults.DEFAULT_FORMAT);
     }
 
+
     /**
      * Loads vibration preference
      *
@@ -54,6 +60,7 @@ public class ApplicationPreferences {
     public boolean loadVibrationPreference() {
         return getPreferences().getBoolean(PreferenceKeys.KEY_VIBRO_ENABLED, false);
     }
+
 
     /**
      * Loads vibration duration preference
@@ -69,6 +76,7 @@ public class ApplicationPreferences {
         );
     }
 
+
     /**
      * Loads input layout preference
      *
@@ -80,6 +88,7 @@ public class ApplicationPreferences {
                 getPreferences().getString(PreferenceKeys.KEY_LAYOUT, Defaults.DEFAULT_LAYOUT)
         );
     }
+
 
     /**
      * Preference identifiers for calculator layouts
@@ -99,8 +108,8 @@ public class ApplicationPreferences {
          * @see ua.sergeimunovarov.tcalc.main.input.CalcInputFragment
          */
         public static final int LAYOUT_NEW = 1;
-
     }
+
 
     /**
      * Contains default preference values
@@ -121,8 +130,8 @@ public class ApplicationPreferences {
          * Default input layout.
          */
         public static final String DEFAULT_LAYOUT = String.valueOf(LayoutConstants.LAYOUT_OLD);
-
     }
+
 
     /**
      * Contains preference key identifiers
@@ -148,8 +157,8 @@ public class ApplicationPreferences {
          * Calculation output format key.
          */
         public final static String KEY_FORMAT = "format";
-
     }
+
 
     /**
      * Contains available calculation format types
@@ -175,6 +184,5 @@ public class ApplicationPreferences {
          * (HH:MM:SS)%24H format
          */
         public static final int HMS_MOD24 = 3;
-
     }
 }

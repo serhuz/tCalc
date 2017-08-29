@@ -15,11 +15,13 @@ import android.os.Bundle;
 
 import ua.sergeimunovarov.tcalc.R;
 
+
 public class RateAppDialog extends DialogFragment {
 
     public static RateAppDialog create() {
         return new RateAppDialog();
     }
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

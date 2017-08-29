@@ -19,6 +19,7 @@ import ua.sergeimunovarov.tcalc.Patterns;
 
 import static ua.sergeimunovarov.tcalc.Patterns.MINUS;
 
+
 public class Parser {
 
     private static final String TAG = Parser.class.getSimpleName();
@@ -26,10 +27,12 @@ public class Parser {
     private final LinkedList<Token> output;
     private final Stack<Token> operatorStack;
 
+
     public Parser() {
         output = new LinkedList<>();
         operatorStack = new Stack<>();
     }
+
 
     public LinkedList<Token> tokenizeExpression(@NonNull String expression) {
         String s = expression.replaceAll(" ", "");
@@ -96,6 +99,7 @@ public class Parser {
         return output;
     }
 
+
     private void processClosingBracket() {
         boolean openingBracketPresent = false;
         while (!operatorStack.isEmpty()) {
@@ -109,6 +113,7 @@ public class Parser {
         }
         if (!openingBracketPresent) throw new NoSuchElementException("(");
     }
+
 
     private void processLowerOrderOperation(@NonNull String token, @NonNull Token.TokenType type) {
         if (type != Token.TokenType.PLUS && type != Token.TokenType.MINUS) {
@@ -124,6 +129,7 @@ public class Parser {
         operatorStack.push(Token.create(type, token));
     }
 
+
     private void processHigherOrderOperation(@NonNull String token, @NonNull Token.TokenType type) {
         if (type != Token.TokenType.MUL && type != Token.TokenType.DIV) {
             throw new IllegalStateException();
@@ -138,5 +144,4 @@ public class Parser {
         }
         operatorStack.push(Token.create(type, token));
     }
-
 }

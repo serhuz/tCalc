@@ -45,6 +45,7 @@ import ua.sergeimunovarov.tcalc.main.ops.Converter;
 import ua.sergeimunovarov.tcalc.main.ops.Result;
 import ua.sergeimunovarov.tcalc.settings.SettingsActivity;
 
+
 public class MainActivity extends AbstractTransitionActivity implements
         FormatDialogFragment.FormatSelectionListener, InputListener,
         InsertTimeDialogFragment.TimeInsertionListener, LoaderManager.LoaderCallbacks<Result> {
@@ -96,6 +97,7 @@ public class MainActivity extends AbstractTransitionActivity implements
 
     private ActivityMainBinding mBinding;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,10 +119,12 @@ public class MainActivity extends AbstractTransitionActivity implements
         mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
     }
 
+
     private void configureInputBehavior() {
         inputBox.setRawInputType(InputType.TYPE_CLASS_TEXT);
         inputBox.setTextIsSelectable(true);
     }
+
 
     /**
      * Configures ActionBar visibility for landscape and portrait orientations.
@@ -135,8 +139,8 @@ public class MainActivity extends AbstractTransitionActivity implements
                 if (!getActionBar().isShowing()) getActionBar().show();
             }
         }
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -152,6 +156,7 @@ public class MainActivity extends AbstractTransitionActivity implements
 
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -178,6 +183,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         }
     }
 
+
     /**
      * Shows dialog with output format selection.
      */
@@ -189,6 +195,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         FormatDialogFragment.create().show(transaction, TAG_FORMAT);
     }
 
+
     private void showTimestampDialog() {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         Fragment fragment = getFragmentManager().findFragmentByTag(TAG_TSTAMP);
@@ -196,6 +203,7 @@ public class MainActivity extends AbstractTransitionActivity implements
 
         InsertTimeDialogFragment.create().show(transaction, TAG_TSTAMP);
     }
+
 
     /**
      * Copies calculation result to system clipboard if and only if
@@ -209,6 +217,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         }
     }
 
+
     private void showToast(Toast t, String msg) {
         if (t == null) {
             t = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
@@ -221,6 +230,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         t.show();
     }
 
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -229,6 +239,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         outState.putBoolean(KEY_CALC_ERROR, calculationError);
     }
 
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -236,6 +247,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         calculationResult = savedInstanceState.getParcelable(KEY_RESULT);
         storedResult = savedInstanceState.getParcelable(KEY_MEMORY);
     }
+
 
     @Override
     protected void onResume() {
@@ -265,11 +277,13 @@ public class MainActivity extends AbstractTransitionActivity implements
                 .commit();
     }
 
+
     @Override
     public void onOutputFormatChanged(int which) {
         mOutputFormat = which;
         onCalculateResult();
     }
+
 
     @Override
     public void onCalculateResult() {
@@ -282,10 +296,12 @@ public class MainActivity extends AbstractTransitionActivity implements
         }
     }
 
+
     @Override
     public void onInputReceived(CharSequence cs) {
         insertCharacter(cs);
     }
+
 
     /**
      * Inserts string into EditText element. If multiple characters inside
@@ -308,11 +324,13 @@ public class MainActivity extends AbstractTransitionActivity implements
         this.vibrate();
     }
 
+
     private void vibrate() {
         if (mVibroEnabled && mVibrator.hasVibrator()) {
             mVibrator.vibrate(mVibroDuration);
         }
     }
+
 
     @Override
     public void onClearInput() {
@@ -322,6 +340,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         calculationError = false;
         vibrate();
     }
+
 
     @Override
     public void onDeleteInput() {
@@ -345,10 +364,12 @@ public class MainActivity extends AbstractTransitionActivity implements
         this.vibrate();
     }
 
+
     @Override
     public void onInsertBrackets() {
         encloseSelectionInParentheses();
     }
+
 
     private void encloseSelectionInParentheses() {
         int selectionStart = inputBox.getSelectionStart();
@@ -366,10 +387,12 @@ public class MainActivity extends AbstractTransitionActivity implements
         }
     }
 
+
     @Override
     public void onMemoryStore() {
         storeResult();
     }
+
 
     private void storeResult() {
         if (calculationResult != null && !calculationError) {
@@ -379,12 +402,14 @@ public class MainActivity extends AbstractTransitionActivity implements
         }
     }
 
+
     @Override
     public void onMemoryRecall() {
         if (storedResult != null) {
             insertStoredValue(storedResult);
         }
     }
+
 
     private void insertStoredValue(Result result) {
         String value;
@@ -404,12 +429,14 @@ public class MainActivity extends AbstractTransitionActivity implements
         vibrate();
     }
 
+
     private String formatValue(String value) {
         if (value.startsWith(Patterns.MINUS)) {
             value = PAR_LEFT + value + PAR_RIGHT;
         }
         return value;
     }
+
 
     @Override
     public void onInsertAnswer() {
@@ -418,15 +445,18 @@ public class MainActivity extends AbstractTransitionActivity implements
         }
     }
 
+
     @Override
     public void onTimeSelected(String timestamp) {
         insertCharacter(timestamp);
     }
 
+
     @Override
     public Loader<Result> onCreateLoader(int id, Bundle args) {
         return new CalculationLoader(this, args);
     }
+
 
     @Override
     public void onLoadFinished(Loader<Result> loader, Result data) {
@@ -452,6 +482,7 @@ public class MainActivity extends AbstractTransitionActivity implements
 
         getLoaderManager().destroyLoader(loader.getId());
     }
+
 
     @Override
     public void onLoaderReset(Loader<Result> loader) {

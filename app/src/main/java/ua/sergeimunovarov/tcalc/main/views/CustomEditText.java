@@ -25,6 +25,7 @@ import ua.sergeimunovarov.tcalc.main.ops.ParserTokenType;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 
+
 /**
  * An {@link EditText} subclass with custom font.
  */
@@ -34,22 +35,27 @@ public class CustomEditText extends EditText {
         super(context);
     }
 
+
     public CustomEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+
 
     public CustomEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
+
     {
         init();
     }
+
 
     private void init() {
         Typeface tf = Application.getAppComponent().typefaceHolder().getTypeface();
         this.setTypeface(tf, Typeface.NORMAL);
     }
+
 
     @Override
     public boolean onTextContextMenuItem(int id) {
@@ -61,6 +67,7 @@ public class CustomEditText extends EditText {
                 return super.onTextContextMenuItem(id);
         }
     }
+
 
     private void paste() {
         ClipboardManager clipboardManager =
@@ -106,7 +113,6 @@ public class CustomEditText extends EditText {
                 ).show();
                 return;
             }
-
         }
 
         int selectionStart = this.getSelectionStart();
@@ -120,5 +126,4 @@ public class CustomEditText extends EditText {
             this.getText().replace(selectionStart, selectionEnd, builder.toString());
         }
     }
-
 }

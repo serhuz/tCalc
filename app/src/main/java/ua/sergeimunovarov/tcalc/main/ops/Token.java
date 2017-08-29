@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 
 import com.google.auto.value.AutoValue;
 
+
 @AutoValue
 public abstract class Token {
 
@@ -17,9 +18,11 @@ public abstract class Token {
         return new AutoValue_Token(type, value);
     }
 
+
     public abstract TokenType type();
 
     public abstract String value();
+
 
     public enum TokenType {
         BRACKET_OPEN,

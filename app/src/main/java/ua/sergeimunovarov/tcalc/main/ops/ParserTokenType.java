@@ -22,6 +22,7 @@ import static ua.sergeimunovarov.tcalc.Patterns.PLUS;
 import static ua.sergeimunovarov.tcalc.Patterns.VALUE;
 import static ua.sergeimunovarov.tcalc.Patterns.VALUE_NEGATIVE;
 
+
 public enum ParserTokenType {
 
     TYPE_BRACKET_OPEN(BRACKET_OPEN, Token.TokenType.BRACKET_OPEN),
@@ -40,14 +41,17 @@ public enum ParserTokenType {
     private final Pattern pattern;
     private final Token.TokenType type;
 
+
     ParserTokenType(@NonNull String pattern, @NonNull Token.TokenType type) {
         this.pattern = Pattern.compile(pattern);
         this.type = type;
     }
 
+
     public Pattern getPattern() {
         return pattern;
     }
+
 
     public Token.TokenType getType() {
         return type;

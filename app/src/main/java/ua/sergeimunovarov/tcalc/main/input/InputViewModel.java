@@ -10,13 +10,16 @@ import android.widget.Button;
 
 import ua.sergeimunovarov.tcalc.R;
 
+
 public class InputViewModel {
 
     private final InputListener mInputListener;
 
+
     public InputViewModel(InputListener inputListener) {
         mInputListener = inputListener;
     }
+
 
     public void handleSymbolInput(View view) {
         Button inputButton = (Button) view;
@@ -33,29 +36,36 @@ public class InputViewModel {
         }
     }
 
+
     public void handleEqualInput(View view) {
         mInputListener.onCalculateResult();
     }
+
 
     public void handleClearInput(View view) {
         mInputListener.onClearInput();
     }
 
+
     public void handleDeleteInput(View view) {
         mInputListener.onDeleteInput();
     }
+
 
     public void handleDoubleBracketsInput(View view) {
         mInputListener.onInsertBrackets();
     }
 
+
     public void handleMemoryStoreInput(View view) {
         mInputListener.onMemoryStore();
     }
 
+
     public void handleMemoryRecallInput(View view) {
         mInputListener.onMemoryRecall();
     }
+
 
     public void handleInsertPreviousAnswerInput(View view) {
         mInputListener.onInsertAnswer();

@@ -18,6 +18,7 @@ import ua.sergeimunovarov.tcalc.main.MainActivity;
 import ua.sergeimunovarov.tcalc.main.views.TypefaceHolder;
 import ua.sergeimunovarov.tcalc.settings.SettingsFragment;
 
+
 @Singleton
 @Component(modules = {
         ContextModule.class,

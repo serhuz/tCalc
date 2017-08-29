@@ -21,14 +21,17 @@ import ua.sergeimunovarov.tcalc.Application;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.R;
 
+
 public class SettingsFragment extends PreferenceFragment {
 
     @Inject
     ApplicationPreferences preferences;
 
+
     public static SettingsFragment create() {
         return new SettingsFragment();
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,8 +55,8 @@ public class SettingsFragment extends PreferenceFragment {
             disablePreference(vibroEnabled);
             disablePreference(vibroDuration);
         }
-
     }
+
 
     private void bindPreferenceSummaryToValue(@NonNull Preference pref) {
         pref.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
@@ -67,6 +70,7 @@ public class SettingsFragment extends PreferenceFragment {
             sBindPreferenceSummaryToValueListener.onPreferenceChange(pref, isEnabled);
         }
     }
+
 
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener =
             (preference, value) -> {
@@ -85,6 +89,7 @@ public class SettingsFragment extends PreferenceFragment {
                 }
                 return true;
             };
+
 
     private static void disablePreference(@NonNull Preference preference) {
         preference.setShouldDisableView(true);

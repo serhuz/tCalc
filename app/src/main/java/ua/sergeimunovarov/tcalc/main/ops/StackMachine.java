@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import java.util.LinkedList;
 import java.util.Stack;
 
+
 public class StackMachine {
 
     // Arithmetic operations ----------------------------------------------------------------------
@@ -31,9 +32,11 @@ public class StackMachine {
 
     private final Stack<Token> stack;
 
+
     public StackMachine() {
         stack = new Stack<>();
     }
+
 
     public Token evaluate(LinkedList<Token> list) {
         while (!list.isEmpty()) {
@@ -61,6 +64,7 @@ public class StackMachine {
         return stack.pop();
     }
 
+
     private static Token performOperation(@NonNull Token left,
                                           @NonNull Token right,
                                           @NonNull Token.TokenType type) {
@@ -77,6 +81,7 @@ public class StackMachine {
                 throw new IllegalStateException();
         }
     }
+
 
     static Token add(@NonNull Token left, @NonNull Token right) {
         Token.TokenType type;
@@ -115,6 +120,7 @@ public class StackMachine {
         return Token.create(type, result);
     }
 
+
     static Token subtract(@NonNull Token left, @NonNull Token right) {
         Token.TokenType type;
         String result;
@@ -151,6 +157,7 @@ public class StackMachine {
 
         return Token.create(type, result);
     }
+
 
     static Token multiply(@NonNull Token left, @NonNull Token right) {
         Token.TokenType type;
@@ -193,6 +200,7 @@ public class StackMachine {
         return Token.create(type, result);
     }
 
+
     static Token divide(@NonNull Token left, @NonNull Token right) {
         Token.TokenType type;
         String result;
@@ -216,7 +224,6 @@ public class StackMachine {
                 default:
                     throw new IllegalArgumentException(OP_DIV + right.value());
             }
-
         } else if (left.type() == Token.TokenType.TIME_UNIT) {
             switch (right.type()) {
                 case VALUE:

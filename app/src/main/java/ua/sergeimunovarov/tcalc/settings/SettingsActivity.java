@@ -10,6 +10,7 @@ import android.os.Bundle;
 import ua.sergeimunovarov.tcalc.AbstractTransitionActivity;
 import ua.sergeimunovarov.tcalc.R;
 
+
 /**
  * Holds {@link SettingsFragment}.
  */

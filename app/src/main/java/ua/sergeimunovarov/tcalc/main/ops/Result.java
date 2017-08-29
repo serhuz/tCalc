@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 
 import com.google.auto.value.AutoValue;
 
+
 @AutoValue
 public abstract class Result implements Parcelable {
 
@@ -18,9 +19,11 @@ public abstract class Result implements Parcelable {
         return new AutoValue_Result(resultType, value);
     }
 
+
     public abstract ResultType type();
 
     public abstract String value();
+
 
     /**
      * Defines type for calculation result

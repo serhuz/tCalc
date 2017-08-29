@@ -27,6 +27,7 @@ public class HelpActivity extends AbstractTransitionActivity {
     private static final String TAG = HelpActivity.class.getSimpleName();
     private static final String TAG_RATE = "rate";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class HelpActivity extends AbstractTransitionActivity {
         webView.setOnLongClickListener(v -> true);
         webView.loadData(getHelpData(), "text/html", "utf-8");
     }
+
 
     private String getHelpData() {
         String data = "";
@@ -55,11 +57,13 @@ public class HelpActivity extends AbstractTransitionActivity {
         return data;
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_info, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -75,6 +79,7 @@ public class HelpActivity extends AbstractTransitionActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
     private void showRateDialog() {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();

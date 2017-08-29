@@ -15,6 +15,7 @@ import dagger.Module;
 import dagger.Provides;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 
+
 @Module
 public class PreferencesModule {
 

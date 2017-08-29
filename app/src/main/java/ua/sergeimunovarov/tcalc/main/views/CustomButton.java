@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import ua.sergeimunovarov.tcalc.Application;
 
+
 /**
  * A {@link Button} subclass with custom font.
  */
@@ -22,13 +23,16 @@ public class CustomButton extends Button {
         super(context);
     }
 
+
     public CustomButton(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
+
     public CustomButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
+
 
     {
         init();
@@ -37,6 +41,7 @@ public class CustomButton extends Button {
             this.setStateListAnimator(null);
         }
     }
+
 
     private void init() {
         Typeface tf = Application.getAppComponent().typefaceHolder().getTypeface();

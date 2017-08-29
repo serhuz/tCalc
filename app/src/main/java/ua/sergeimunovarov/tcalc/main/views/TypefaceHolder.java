@@ -11,16 +11,19 @@ import android.support.annotation.NonNull;
 
 import com.google.auto.value.AutoValue;
 
+
 @AutoValue
 public abstract class TypefaceHolder {
 
     private static final String TYPEFACE_LATO_LIGHT = "fonts/Lato-Light.ttf";
+
 
     public static TypefaceHolder create(@NonNull Context context) {
         return new AutoValue_TypefaceHolder(
                 Typeface.createFromAsset(context.getAssets(), TYPEFACE_LATO_LIGHT)
         );
     }
+
 
     @NonNull
     public abstract Typeface getTypeface();

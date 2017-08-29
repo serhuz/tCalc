@@ -18,19 +18,24 @@ import ua.sergeimunovarov.tcalc.di.LeakCanaryModule;
 import ua.sergeimunovarov.tcalc.di.PreferencesModule;
 import ua.sergeimunovarov.tcalc.di.UtilModule;
 
+
 public class Application extends android.app.Application {
 
     private static AppComponent appComponent;
+
 
     public static AppComponent getAppComponent() {
         return appComponent;
     }
 
+
     public static void setAppComponent(AppComponent appComponent) {
         Application.appComponent = appComponent;
     }
 
+
     private RefWatcher refWatcher;
+
 
     @Override
     public void onCreate() {
@@ -42,9 +47,11 @@ public class Application extends android.app.Application {
         appComponent = buildAppComponent();
     }
 
+
     protected RefWatcher installLeakCanary() {
         return RefWatcher.DISABLED;
     }
+
 
     protected AppComponent buildAppComponent() {
         return DaggerAppComponent.builder()
@@ -54,6 +61,7 @@ public class Application extends android.app.Application {
                 .utilModule(new UtilModule())
                 .build();
     }
+
 
     private void initPreferences() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);

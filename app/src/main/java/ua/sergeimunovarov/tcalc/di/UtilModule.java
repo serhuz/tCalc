@@ -13,6 +13,7 @@ import dagger.Module;
 import dagger.Provides;
 import ua.sergeimunovarov.tcalc.main.views.TypefaceHolder;
 
+
 @Module
 public class UtilModule {
 

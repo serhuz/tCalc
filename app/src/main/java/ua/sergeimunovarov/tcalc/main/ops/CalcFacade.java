@@ -16,6 +16,7 @@ import ua.sergeimunovarov.tcalc.Application;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.R;
 
+
 public class CalcFacade {
 
     private static final String TAG = CalcFacade.class.getSimpleName();
@@ -27,9 +28,11 @@ public class CalcFacade {
      */
     private int mFormat;
 
+
     public CalcFacade(int format) {
         this.mFormat = format;
     }
+
 
     public Result calculateResult(@NonNull String expression) {
         String output;
@@ -86,6 +89,7 @@ public class CalcFacade {
         return Result.create(type, output);
     }
 
+
     protected String makeResult(@NonNull String timeUnit) {
         long millis;
         try {
@@ -124,5 +128,4 @@ public class CalcFacade {
         }
         return result;
     }
-
 }

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import ua.sergeimunovarov.tcalc.BR;
 
+
 /**
  * A base class for fragments which contain input layouts.
  */
@@ -24,6 +25,7 @@ public abstract class BaseInputFragment extends Fragment {
     public static final String TAG = BaseInputFragment.class.getSimpleName();
 
     protected InputListener mListener;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public abstract class BaseInputFragment extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
@@ -44,6 +47,7 @@ public abstract class BaseInputFragment extends Fragment {
         binding.setVariable(BR.model, new InputViewModel(mListener));
         return binding.getRoot();
     }
+
 
     protected abstract int getFragmentLayoutId();
 }

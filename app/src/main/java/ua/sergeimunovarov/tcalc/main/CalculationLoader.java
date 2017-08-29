@@ -25,6 +25,7 @@ public class CalculationLoader extends AsyncTaskLoader<Result> {
     private int format;
     private Result result;
 
+
     public CalculationLoader(@NonNull Context context,
                              @Nullable Bundle args) {
         super(context);
@@ -33,6 +34,7 @@ public class CalculationLoader extends AsyncTaskLoader<Result> {
             input = args.getString(KEY_INPUT);
         }
     }
+
 
     @Override
     protected void onStartLoading() {
@@ -43,6 +45,7 @@ public class CalculationLoader extends AsyncTaskLoader<Result> {
             forceLoad();
         }
     }
+
 
     @Override
     public Result loadInBackground() {

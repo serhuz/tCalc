@@ -12,7 +12,9 @@ import java.text.DecimalFormatSymbols;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public final class Converter {
+
     private static final int MILLIS_IN_SECOND = 1000;
     private static final int MILLIS_IN_MINUTE = 60000;
     private static final int MILLIS_IN_HOUR = 3600000;
@@ -25,6 +27,7 @@ public final class Converter {
     private static final DecimalFormat HMS_FORMAT = new DecimalFormat("00");
     private static final DecimalFormat MILLIS_FORMAT = new DecimalFormat("000");
     private static final DecimalFormat VALUE_FORMAT;
+
 
     static {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
@@ -131,6 +134,7 @@ public final class Converter {
         return sb.toString();
     }
 
+
     /**
      * Converts given milliseconds to [hh:mm:ss.SSS]mod24 format.
      *
@@ -150,6 +154,7 @@ public final class Converter {
         }
         return formatDurationHms(result);
     }
+
 
     /**
      * Converts given milliseconds to hh:mm:ss.SSS format.
@@ -187,6 +192,7 @@ public final class Converter {
 
         return sb.toString();
     }
+
 
     /**
      * Converts given milliseconds to DDd. hh:mm:ss.SSS format.
@@ -260,9 +266,11 @@ public final class Converter {
 
         private final Pattern pattern;
 
+
         TimeUnit(String pattern) {
             this.pattern = Pattern.compile("^(" + pattern + ")$");
         }
+
 
         public Pattern getPattern() {
             return pattern;

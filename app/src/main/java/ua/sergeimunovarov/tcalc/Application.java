@@ -5,9 +5,6 @@
 
 package ua.sergeimunovarov.tcalc;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -23,6 +20,8 @@ public class Application extends android.app.Application {
 
     private static AppComponent sAppComponent;
 
+    private RefWatcher mRefWatcher;
+
 
     public static AppComponent getAppComponent() {
         return sAppComponent;
@@ -34,16 +33,12 @@ public class Application extends android.app.Application {
     }
 
 
-    private RefWatcher mRefWatcher;
-
-
     @Override
     public void onCreate() {
         super.onCreate();
         if (LeakCanary.isInAnalyzerProcess(this)) return;
         mRefWatcher = installLeakCanary();
 
-        initPreferences();
         sAppComponent = buildAppComponent();
     }
 
@@ -60,23 +55,5 @@ public class Application extends android.app.Application {
                 .leakCanaryModule(new LeakCanaryModule(mRefWatcher))
                 .utilModule(new UtilModule())
                 .build();
-    }
-
-
-    private void initPreferences() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        boolean readAgain;
-        if (BuildConfig.DEBUG) {
-            readAgain = true;
-
-            // To avoid bugs in debug mode all preferences are cleared.
-            // This should help avoid crashes due to NPEs and other stuff.
-            preferences.edit().clear().apply();
-        } else {
-            readAgain = false;
-        }
-
-        PreferenceManager.setDefaultValues(this, R.xml.prefs, readAgain);
     }
 }

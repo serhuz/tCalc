@@ -6,6 +6,9 @@
 package ua.sergeimunovarov.tcalc;
 
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -13,7 +16,24 @@ import com.squareup.leakcanary.RefWatcher;
 public class DebugApplication extends Application {
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+        initPreferences();
+    }
+
+
+    @Override
     protected RefWatcher installLeakCanary() {
         return LeakCanary.install(this);
+    }
+
+
+    protected void initPreferences() {
+        if (!BuildConfig.SHOULD_CLEAR_PREFS_ON_START) return;
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.edit().clear().apply();
+
+        PreferenceManager.setDefaultValues(this, R.xml.prefs, true);
     }
 }

@@ -42,6 +42,8 @@ android {
         debug {
             applicationIdSuffix '.debug'
             minifyEnabled false
+
+            buildConfigField "boolean", "SHOULD_CLEAR_PREFS_ON_START", "false"
         }
 
         release {

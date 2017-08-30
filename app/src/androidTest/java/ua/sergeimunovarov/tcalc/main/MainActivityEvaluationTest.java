@@ -142,4 +142,28 @@ public class MainActivityEvaluationTest {
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= -00:10:00"));
     }
+
+
+    @Test
+    public void performEvaluation16() throws Exception {
+        onView().withId(R.id.input).perform().typeText("0:20/0:20");
+        onView().withId(R.id.btn_eq).perform().click();
+        onView().withId(R.id.result).check().matches(withText("= 1"));
+    }
+
+
+    @Test
+    public void performEvaluation17() throws Exception {
+        onView().withId(R.id.input).perform().typeText("0:20/0:10");
+        onView().withId(R.id.btn_eq).perform().click();
+        onView().withId(R.id.result).check().matches(withText("= 2"));
+    }
+
+
+    @Test
+    public void performEvaluation18() throws Exception {
+        onView().withId(R.id.input).perform().typeText("0:20*0:10");
+        onView().withId(R.id.btn_eq).perform().click();
+        onView().withId(R.id.result).check().matches(withText("Error (T*T)"));
+    }
 }

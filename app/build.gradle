@@ -93,7 +93,7 @@ ext {
 
     butterknifeVersion = '8.8.1'
     assertjVersion = '2.8.0'
-    mockitoVersion = '2.8.47'
+    mockitoVersion = '2.9.0'
 }
 
 configurations.all {

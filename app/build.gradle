@@ -93,6 +93,7 @@ ext {
 
     assertjVersion = '2.8.0'
     mockitoVersion = '2.9.0'
+    espressoVersion = '3.0.1'
 }
 
 configurations.all {
@@ -106,8 +107,8 @@ dependencies {
     testCompile "org.mockito:mockito-core:$mockitoVersion"
     testCompile "org.assertj:assertj-core:$assertjVersion"
 
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.0'
-    androidTestCompile 'com.android.support.test.espresso:espresso-intents:3.0.0'
+    androidTestCompile "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:$espressoVersion"
     androidTestCompile 'com.android.support.test:runner:1.0.1'
     androidTestCompile 'com.android.support.test:rules:1.0.1'
     androidTestCompile "org.mockito:mockito-android:$mockitoVersion"

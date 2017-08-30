@@ -6,7 +6,11 @@
 package ua.sergeimunovarov.tcalc;
 
 import android.content.SharedPreferences;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 
 /**
@@ -14,16 +18,11 @@ import android.support.annotation.NonNull;
  */
 public class ApplicationPreferences {
 
-    private SharedPreferences mPreferences;
+    private final SharedPreferences mPreferences;
 
 
     public ApplicationPreferences(@NonNull SharedPreferences preferences) {
         mPreferences = preferences;
-    }
-
-
-    public SharedPreferences getPreferences() {
-        return mPreferences;
     }
 
 
@@ -33,11 +32,16 @@ public class ApplicationPreferences {
      * @param formatId format int defined in {@link FormatConstants}
      * @see FormatConstants
      */
-    public void storeFormatPreference(int formatId) {
+    public void storeFormatPreference(@FormatConstants.FormatId int formatId) {
         getPreferences()
                 .edit()
                 .putInt(PreferenceKeys.KEY_FORMAT, formatId)
                 .apply();
+    }
+
+
+    public SharedPreferences getPreferences() {
+        return mPreferences;
     }
 
 
@@ -184,5 +188,12 @@ public class ApplicationPreferences {
          * (HH:MM:SS)%24H format
          */
         public static final int HMS_MOD24 = 3;
+
+
+        @IntDef({DHMS, HMS, MS, HMS_MOD24})
+        @Retention(RetentionPolicy.SOURCE)
+        @interface FormatId {
+
+        }
     }
 }

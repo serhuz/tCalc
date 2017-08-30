@@ -91,7 +91,6 @@ ext {
 
     leakCanaryVersion = '1.5.1'
 
-    butterknifeVersion = '8.8.1'
     assertjVersion = '2.8.0'
     mockitoVersion = '2.9.0'
 }
@@ -109,8 +108,8 @@ dependencies {
 
     androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.0'
     androidTestCompile 'com.android.support.test.espresso:espresso-intents:3.0.0'
-    androidTestCompile 'com.android.support.test:runner:1.0.0'
-    androidTestCompile 'com.android.support.test:rules:1.0.0'
+    androidTestCompile 'com.android.support.test:runner:1.0.1'
+    androidTestCompile 'com.android.support.test:rules:1.0.1'
     androidTestCompile "org.mockito:mockito-android:$mockitoVersion"
     androidTestCompile "org.assertj:assertj-core:$assertjVersion"
     androidTestCompile 'com.github.fabioCollini:DaggerMock:0.7.0'

@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 public class MainActivityInputTest {
 
     @Rule
-    public final DaggerMockRule daggerMockRule = new DaggerMockRule();
+    public final DaggerMockRule mDaggerMockRule = new DaggerMockRule();
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class, true, false);

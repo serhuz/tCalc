@@ -3,10 +3,13 @@ package ua.sergeimunovarov.tcalc.main;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import it.cosenonjaviste.daggermock.InjectFromComponent;
+import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.DaggerMockRule;
 import ua.sergeimunovarov.tcalc.R;
 
@@ -23,9 +26,19 @@ public class MainActivityEvaluationTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
+    @SuppressWarnings("WeakerAccess")
+    @InjectFromComponent
+    ApplicationPreferences mApplicationPreferences;
+
+
+    @Before
+    public void setUp() throws Exception {
+        mApplicationPreferences.getPreferences().edit().clear().apply();
+    }
+
 
     @Test
-    public void performEvaluation() throws Exception {
+    public void performEvaluation1() throws Exception {
         onView().withId(R.id.input).perform().typeText("2+2");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= 4"));
@@ -165,5 +178,13 @@ public class MainActivityEvaluationTest {
         onView().withId(R.id.input).perform().typeText("0:20*0:10");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("Error (T*T)"));
+    }
+
+
+    @Test
+    public void performEvaluation19() throws Exception {
+        onView().withId(R.id.input).perform().typeText("0:20+1");
+        onView().withId(R.id.btn_eq).perform().click();
+        onView().withId(R.id.result).check().matches(withText("Error (T+V)"));
     }
 }

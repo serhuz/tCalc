@@ -42,6 +42,9 @@ public class SettingsFragment extends PreferenceFragment {
         Preference layout = findPreference(ApplicationPreferences.PreferenceKeys.KEY_LAYOUT);
         bindPreferenceSummaryToValue(layout);
 
+        Preference precision = findPreference(ApplicationPreferences.PreferenceKeys.KEY_PRECISION);
+        bindPreferenceSummaryToValue(precision);
+
         Preference vibroEnabled =
                 findPreference(ApplicationPreferences.PreferenceKeys.KEY_VIBRO_ENABLED);
         bindPreferenceSummaryToValue(vibroEnabled);
@@ -68,6 +71,9 @@ public class SettingsFragment extends PreferenceFragment {
         } else if (pref instanceof CheckBoxPreference) {
             boolean isEnabled = prefs.getBoolean(pref.getKey(), false);
             sBindPreferenceSummaryToValueListener.onPreferenceChange(pref, isEnabled);
+        } else if (pref instanceof SeekBarPreference) {
+            int prefValue = prefs.getInt(pref.getKey(), 3);
+            sBindPreferenceSummaryToValueListener.onPreferenceChange(pref, prefValue);
         }
     }
 

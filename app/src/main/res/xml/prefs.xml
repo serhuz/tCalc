@@ -8,6 +8,14 @@
         android:key="layout"
         android:title="@string/pref_layout"/>
 
+    <ua.sergeimunovarov.tcalc.settings.SeekBarPreference
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:defaultValue="3"
+        android:key="precision"
+        android:title="@string/pref_precision"
+        app:max="5"
+        app:min="1"/>
+
     <CheckBoxPreference
         android:id="@+id/pref_vibro"
         android:defaultValue="false"

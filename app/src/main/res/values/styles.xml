@@ -22,7 +22,6 @@
 
     <style name="StyleNumberButton" parent="StyleGenericButton">
         <item name="android:background">@drawable/selector_btn_num</item>
-
     </style>
 
     <style name="StyleControlButton" parent="StyleGenericButton">
@@ -31,6 +30,10 @@
 
     <style name="StyleOperatorButton" parent="StyleGenericButton">
         <item name="android:background">@drawable/selector_btn_calc</item>
+    </style>
+
+    <style name="StyleControlButton.Backspace">
+        <item name="android:padding">@dimen/button_backspace_padding</item>
     </style>
 
     <style name="DlgAnim">

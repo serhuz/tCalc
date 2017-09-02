@@ -13,7 +13,6 @@
     <string name="btn_8" translatable="false">8</string>
     <string name="btn_9" translatable="false">9</string>
     <string name="btn_answer" translatable="false">ANS</string>
-    <string name="btn_backspace" translatable="false">BSP</string>
     <string name="btn_calculate" translatable="false">=</string>
     <string name="btn_clear" translatable="false">CLR</string>
     <string name="btn_colon" translatable="false">:</string>

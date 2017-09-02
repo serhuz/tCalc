@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -97,13 +98,13 @@
                 tools:ignore="ButtonStyle"/>
 
 
-            <ua.sergeimunovarov.tcalc.main.views.CustomButton
+            <android.support.v7.widget.AppCompatImageButton
                 android:id="@+id/btn_del"
-                style="@style/StyleControlButton"
+                style="@style/StyleControlButton.Backspace"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:onClick="@{model::handleDeleteInput}"
-                android:text="@string/btn_backspace"
+                app:srcCompat="@drawable/ic_backspace"
                 tools:ignore="ButtonStyle"/>
         </TableRow>
 

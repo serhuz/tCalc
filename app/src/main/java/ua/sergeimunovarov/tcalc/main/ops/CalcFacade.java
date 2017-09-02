@@ -49,7 +49,10 @@ public class CalcFacade {
 
                 switch (resultToken.type()) {
                     case VALUE:
-                        output = Converter.formatValue(resultToken.value());
+                        output = Converter.formatValue(
+                                resultToken.value(),
+                                Application.getAppComponent().appPreferences().loadPrecisionPreference()
+                        );
                         type = Result.ResultType.RESULT_OK_VALUE;
                         break;
                     case TIME_UNIT:

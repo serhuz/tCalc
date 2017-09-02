@@ -103,6 +103,7 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
 
         SavedState savedState = (SavedState) state;
         super.onRestoreInstanceState(savedState.getSuperState());
+        mCurrentValue = ((SavedState) state).mValue;
         mPrecisionSeekBar.setProgress(mCurrentValue - mMin);
     }
 

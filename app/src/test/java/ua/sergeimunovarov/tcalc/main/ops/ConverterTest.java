@@ -53,4 +53,18 @@ public class ConverterTest {
         assertThat(Converter.formatDurationDhms(DAY_STRING, 3600000)).isEqualTo("0d. 01:00:00");
         assertThat(Converter.formatDurationDhms(DAY_STRING, -3600000)).isEqualTo("-0d. 01:00:00");
     }
+
+
+    @Test
+    public void formatValue() throws Exception {
+        String value = Converter.formatValue("1.789", 1);
+        assertThat(value).isNotEmpty().hasSize(3).isEqualTo("1.8");
+    }
+
+
+    @Test
+    public void formatValue1() throws Exception {
+        String value = Converter.formatValue("1.6779", 2);
+        assertThat(value).isNotEmpty().hasSize(4).isEqualTo("1.68");
+    }
 }

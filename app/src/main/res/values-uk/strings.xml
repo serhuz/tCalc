@@ -54,4 +54,7 @@
     <string name="pref_layout">Раскладка</string>
     <string name="pref_vibro_on">Вібрація ввімкнена</string>
     <string name="pref_vibro_off">Вібрація вимкнена</string>
+    <string name="btn_cancel">Відміна</string>
+    <string name="btn_ok">ОК</string>
+    <string name="pref_precision">Точність</string>
 </resources>

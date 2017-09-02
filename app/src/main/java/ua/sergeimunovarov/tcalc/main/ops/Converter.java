@@ -5,6 +5,7 @@
 
 package ua.sergeimunovarov.tcalc.main.ops;
 
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
 import java.text.DecimalFormat;
@@ -15,10 +16,10 @@ import java.util.regex.Pattern;
 
 public final class Converter {
 
+    static final int MILLIS_IN_DAY = 86400000;
     private static final int MILLIS_IN_SECOND = 1000;
     private static final int MILLIS_IN_MINUTE = 60000;
     private static final int MILLIS_IN_HOUR = 3600000;
-    static final int MILLIS_IN_DAY = 86400000;
 
     private static final char CHAR_COLON = ':';
     private static final char CHAR_MINUS = '-';
@@ -26,14 +27,6 @@ public final class Converter {
 
     private static final DecimalFormat HMS_FORMAT = new DecimalFormat("00");
     private static final DecimalFormat MILLIS_FORMAT = new DecimalFormat("000");
-    private static final DecimalFormat VALUE_FORMAT;
-
-
-    static {
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-        symbols.setDecimalSeparator(CHAR_DOT);
-        VALUE_FORMAT = new DecimalFormat("#.#####", symbols);
-    }
 
 
     private Converter() {
@@ -245,13 +238,25 @@ public final class Converter {
     /**
      * Formats given value to 5 digits after decimal separator (if present).
      *
-     * @param value string representation of some number
+     * @param value     string representation of some number
+     * @param precision amount of digits after decimal separator
      * @return Formatted value string
      * @throws NumberFormatException if given value cannot be parsed as double
      */
-    public static String formatValue(String value) {
+    public static String formatValue(String value, @IntRange(from = 1, to = 5) int precision) {
+        String formatPattern = "#.";
+        for (int i = 0; i < precision; i++) {
+            formatPattern += "#";
+        }
+
+        DecimalFormat decimalFormat = new DecimalFormat(formatPattern);
+
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setDecimalSeparator(CHAR_DOT);
+
+        decimalFormat.setDecimalFormatSymbols(symbols);
         try {
-            return VALUE_FORMAT.format(Double.parseDouble(value));
+            return decimalFormat.format(Double.parseDouble(value));
         } catch (NumberFormatException ex) {
             throw new NumberFormatException(ex.getMessage());
         }

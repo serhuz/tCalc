@@ -94,6 +94,10 @@ public class ApplicationPreferences {
     }
 
 
+    public int loadPrecisionPreference() {
+        return getPreferences().getInt(PreferenceKeys.KEY_PRECISION, Defaults.DEFAULT_PRECISION);
+    }
+
     /**
      * Preference identifiers for calculator layouts
      */
@@ -134,6 +138,11 @@ public class ApplicationPreferences {
          * Default input layout.
          */
         public static final String DEFAULT_LAYOUT = String.valueOf(LayoutConstants.LAYOUT_OLD);
+
+        /**
+         * Default calculation precision
+         */
+        public static final int DEFAULT_PRECISION = 5;
     }
 
 
@@ -161,6 +170,11 @@ public class ApplicationPreferences {
          * Calculation output format key.
          */
         public final static String KEY_FORMAT = "format";
+
+        /**
+         * Calculation precision key
+         */
+        public static final String KEY_PRECISION = "precision";
     }
 
 

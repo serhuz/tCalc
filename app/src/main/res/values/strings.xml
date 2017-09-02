@@ -66,7 +66,10 @@
 
     <string name="pref_vibro_duration">Продолжительность вибрации</string>
     <string name="pref_layout">Раскладка</string>
+    <string name="pref_precision">Точность</string>
     <string name="pref_vibro_on">Вибрация включена</string>
     <string name="pref_vibro_off">Вибрация отключена</string>
 
+    <string name="btn_ok">ОК</string>
+    <string name="btn_cancel">Отмена</string>
 </resources>

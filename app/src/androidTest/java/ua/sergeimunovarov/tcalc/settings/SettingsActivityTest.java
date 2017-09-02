@@ -20,10 +20,14 @@ import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.DaggerMockRule;
 import ua.sergeimunovarov.tcalc.R;
 
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static cortado.Cortado.onTextView;
 import static cortado.Cortado.onView;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static ua.sergeimunovarov.tcalc.ApplicationPreferences.LayoutConstants.LAYOUT_NEW;
 import static ua.sergeimunovarov.tcalc.ApplicationPreferences.LayoutConstants.LAYOUT_OLD;
+import static ua.sergeimunovarov.tcalc.CustomViewActions.swipeSeekBar;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -70,6 +74,19 @@ public class SettingsActivityTest {
         onView().withText(getStringFromArray(1)).perform().click();
 
         assertThat(mApplicationPreferences.loadLayoutPreference()).isEqualTo(LAYOUT_NEW);
+    }
+
+
+    @Test
+    public void changePrecision() throws Exception {
+        onView().withText(R.string.pref_precision).perform().click();
+        onView().withId(R.id.seekbar).perform(swipeSeekBar(1));
+
+        onTextView().withId(R.id.seekbar_value).check(matches(withText("2")));
+
+        onView().withText(R.string.btn_ok).perform().click();
+
+        assertThat(mApplicationPreferences.loadPrecisionPreference()).isEqualTo(2);
     }
 
     // TODO: 30.08.2017 figure out how to enable vibration setting on AVD and add tests for vibration prefs

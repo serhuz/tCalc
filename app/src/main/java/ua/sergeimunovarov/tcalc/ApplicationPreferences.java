@@ -142,7 +142,7 @@ public class ApplicationPreferences {
         /**
          * Default calculation precision
          */
-        public static final int DEFAULT_PRECISION = 3;
+        public static final int DEFAULT_PRECISION = 5;
     }
 
 

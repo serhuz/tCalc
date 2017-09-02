@@ -10,7 +10,7 @@
 
     <ua.sergeimunovarov.tcalc.settings.SeekBarPreference
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:defaultValue="3"
+        android:defaultValue="5"
         android:key="precision"
         android:title="@string/pref_precision"
         app:max="5"

@@ -72,7 +72,7 @@ public class SettingsFragment extends PreferenceFragment {
             boolean isEnabled = prefs.getBoolean(pref.getKey(), false);
             sBindPreferenceSummaryToValueListener.onPreferenceChange(pref, isEnabled);
         } else if (pref instanceof SeekBarPreference) {
-            int prefValue = prefs.getInt(pref.getKey(), 3);
+            int prefValue = prefs.getInt(pref.getKey(), ApplicationPreferences.Defaults.DEFAULT_PRECISION);
             sBindPreferenceSummaryToValueListener.onPreferenceChange(pref, prefValue);
         }
     }

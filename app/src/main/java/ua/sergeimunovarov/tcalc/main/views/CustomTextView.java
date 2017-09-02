@@ -5,6 +5,7 @@
 
 package ua.sergeimunovarov.tcalc.main.views;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
@@ -16,6 +17,7 @@ import ua.sergeimunovarov.tcalc.Application;
 /**
  * A {@link TextView} subclass with custom font.
  */
+@SuppressLint("AppCompatCustomView")
 public class CustomTextView extends TextView {
 
     public CustomTextView(Context context) {

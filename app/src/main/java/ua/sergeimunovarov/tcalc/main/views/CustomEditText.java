@@ -5,6 +5,7 @@
 
 package ua.sergeimunovarov.tcalc.main.views;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -29,6 +30,7 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 /**
  * An {@link EditText} subclass with custom font.
  */
+@SuppressLint("AppCompatCustomView")
 public class CustomEditText extends EditText {
 
     public CustomEditText(Context context) {

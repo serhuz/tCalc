@@ -73,7 +73,11 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
     @Override
     protected void onDialogClosed(boolean positiveResult) {
         if (positiveResult) {
-            persistInt(mPrecisionSeekBar.getProgress() + mMin);
+            persistInt(mCurrentValue);
+            OnPreferenceChangeListener changeListener = getOnPreferenceChangeListener();
+            if (changeListener != null) {
+                changeListener.onPreferenceChange(this, mCurrentValue);
+            }
         }
     }
 

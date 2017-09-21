@@ -90,7 +90,7 @@ android {
 ext {
     supportVersion = '25.4.0'
     daggerVersion = '2.11'
-    autoValueVersion = '1.5'
+    autoValueVersion = '1.5.1'
 
     leakCanaryVersion = '1.5.1'
 

@@ -124,7 +124,7 @@ dependencies {
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
-    compile 'com.google.android.gms:play-services-oss-licenses:11.2.2'
+    compile 'com.google.android.gms:play-services-oss-licenses:11.4.0'
 
     compile "com.android.support:support-annotations:$supportVersion"
     compile "com.android.support:support-core-utils:$supportVersion"

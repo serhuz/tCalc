@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:tools="http://schemas.android.com/tools"
-      xmlns:android="http://schemas.android.com/apk/res/android">
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_rate"
         android:icon="@drawable/ic_action_rate"
         android:showAsAction="ifRoom"
         android:title="@string/action_rate"
         tools:ignore="AppCompatResource"/>
+    <item android:id="@+id/action_licenses"
+          app:showAsAction="never"
+          android:title="@string/action_licenses"
+          tools:ignore="AppCompatResource"/>
 </menu>

@@ -18,7 +18,7 @@ import it.cosenonjaviste.daggermock.InjectFromComponent;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.DaggerMockRule;
 import ua.sergeimunovarov.tcalc.R;
-import ua.sergeimunovarov.tcalc.info.HelpActivity;
+import ua.sergeimunovarov.tcalc.help.HelpActivity;
 import ua.sergeimunovarov.tcalc.settings.SettingsActivity;
 
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.oss.licenses.plugin'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.getkeepsafe.dexcount'
 
@@ -122,6 +123,8 @@ dependencies {
     androidTestCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+
+    compile 'com.google.android.gms:play-services-oss-licenses:11.2.2'
 
     compile "com.android.support:support-annotations:$supportVersion"
     compile "com.android.support:support-core-utils:$supportVersion"

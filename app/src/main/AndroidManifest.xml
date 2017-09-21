@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".info.HelpActivity"
+            android:name=".help.HelpActivity"
             android:label="@string/title_activity_info"
             android:parentActivityName=".main.MainActivity">
             <meta-data
@@ -39,6 +39,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".main.MainActivity"/>
         </activity>
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:label="@string/oss_license_title"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
     </application>
 
 </manifest>

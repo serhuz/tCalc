@@ -3,7 +3,7 @@
  * See LICENCE.txt for license details.
  */
 
-package ua.sergeimunovarov.tcalc.info;
+package ua.sergeimunovarov.tcalc.help;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

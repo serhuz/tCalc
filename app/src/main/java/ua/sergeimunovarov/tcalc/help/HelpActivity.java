@@ -3,16 +3,19 @@
  * See LICENCE.txt for license details.
  */
 
-package ua.sergeimunovarov.tcalc.info;
+package ua.sergeimunovarov.tcalc.help;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
+
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,7 +63,7 @@ public class HelpActivity extends AbstractTransitionActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_info, menu);
+        getMenuInflater().inflate(R.menu.menu_help, menu);
         return true;
     }
 
@@ -73,11 +76,20 @@ public class HelpActivity extends AbstractTransitionActivity {
             case R.id.action_rate:
                 showRateDialog();
                 return true;
+            case R.id.action_licenses:
+                showOssLicences();
             default:
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private void showOssLicences() {
+        Intent intent = new Intent(this, OssLicensesMenuActivity.class);
+        intent.putExtra("title", getString(R.string.action_licenses));
+        startActivity(intent);
     }
 
 

@@ -36,7 +36,7 @@ import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.Patterns;
 import ua.sergeimunovarov.tcalc.R;
 import ua.sergeimunovarov.tcalc.databinding.ActivityMainBinding;
-import ua.sergeimunovarov.tcalc.info.HelpActivity;
+import ua.sergeimunovarov.tcalc.help.HelpActivity;
 import ua.sergeimunovarov.tcalc.main.input.BaseInputFragment;
 import ua.sergeimunovarov.tcalc.main.input.CalcInputFragment;
 import ua.sergeimunovarov.tcalc.main.input.InputListener;

@@ -57,5 +57,6 @@
     <string name="btn_cancel">Cancel</string>
     <string name="btn_ok">Ok</string>
     <string name="pref_precision">Precision</string>
+    <string name="action_licenses">OSS Licenses</string>
 
 </resources>

@@ -21,13 +21,13 @@ public class StackMachine {
     // --------------------------------------------------------------------------------------------
 
     // Errors -------------------------------------------------------------------------------------
-    private static final String ERR_V_PLUS_T = "V+T";
-    private static final String ERR_T_PLUS_V = "T+V";
-    private static final String ERR_V_MINUS_T = "V-T";
-    private static final String ERR_T_MINUS_V = "T-V";
-    private static final String ERR_T_MUL_T = "T*T";
-    private static final String ERR_V_DIV_T = "V/T";
-    private static final String ERR_DIV_BY_ZERO = "/0";
+    static final String ERR_V_PLUS_T = "V+T";
+    static final String ERR_T_PLUS_V = "T+V";
+    static final String ERR_V_MINUS_T = "V-T";
+    static final String ERR_T_MINUS_V = "T-V";
+    static final String ERR_T_MUL_T = "T*T";
+    static final String ERR_V_DIV_T = "V/T";
+    static final String ERR_DIV_BY_ZERO = "/0";
     // --------------------------------------------------------------------------------------------
 
     private final Stack<Token> mStack;

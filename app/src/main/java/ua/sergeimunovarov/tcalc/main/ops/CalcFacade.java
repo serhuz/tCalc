@@ -14,6 +14,7 @@ import java.util.NoSuchElementException;
 
 import ua.sergeimunovarov.tcalc.Application;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
+import ua.sergeimunovarov.tcalc.ApplicationPreferences.FormatConstants.FormatId;
 import ua.sergeimunovarov.tcalc.R;
 
 
@@ -26,10 +27,11 @@ public class CalcFacade {
      *
      * @see ua.sergeimunovarov.tcalc.ApplicationPreferences.FormatConstants
      */
+    @FormatId
     private int mFormat;
 
 
-    public CalcFacade(int format) {
+    public CalcFacade(@FormatId int format) {
         this.mFormat = format;
     }
 

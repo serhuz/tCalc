@@ -16,10 +16,10 @@ import java.util.regex.Pattern;
 
 public final class Converter {
 
-    static final int MILLIS_IN_DAY = 86400000;
-    private static final int MILLIS_IN_SECOND = 1000;
-    private static final int MILLIS_IN_MINUTE = 60000;
-    private static final int MILLIS_IN_HOUR = 3600000;
+    static final int MILLIS_IN_DAY = 86_400_000;
+    private static final int MILLIS_IN_SECOND = 1_000;
+    private static final int MILLIS_IN_MINUTE = 60_000;
+    private static final int MILLIS_IN_HOUR = 3_600_000;
 
     private static final char CHAR_COLON = ':';
     private static final char CHAR_MINUS = '-';
@@ -40,7 +40,7 @@ public final class Converter {
      * @param timeUnit Formatted time unit token
      * @return Amount of milliseconds in the given token
      */
-    public static long toMillis(String timeUnit) {
+    public static long toMillis(@NonNull String timeUnit) {
         boolean match = false;
         long millis = 0;
 
@@ -243,7 +243,7 @@ public final class Converter {
      * @return Formatted value string
      * @throws NumberFormatException if given value cannot be parsed as double
      */
-    public static String formatValue(String value, @IntRange(from = 1, to = 5) int precision) {
+    public static String formatValue(@NonNull String value, @IntRange(from = 1, to = 5) int precision) {
         String formatPattern = "#.";
         for (int i = 0; i < precision; i++) {
             formatPattern += "#";

@@ -9,7 +9,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
@@ -28,6 +27,9 @@ public class InsertTimeDialogFragment extends DialogFragment {
     private static final String FORMAT_TSTAMP_HMS = "HH:mm:ss";
     private static final String FORMAT_TSTAMP_HM = "HH:mm";
 
+    private static final int FORMAT_HMS = 0;
+    private static final int FORMAT_HM = 1;
+
     private TimeInsertionListener mListener;
 
 
@@ -36,7 +38,6 @@ public class InsertTimeDialogFragment extends DialogFragment {
     }
 
 
-    @CallSuper
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,15 +58,15 @@ public class InsertTimeDialogFragment extends DialogFragment {
         builder.setTitle(R.string.select_time_format)
                 .setItems(
                         R.array.timestamp_formats,
-                        (dialogInterface, i) -> {
+                        (dialogInterface, which) -> {
                             Date current = new Date(currentTimeMillis());
                             String timestamp;
-                            switch (i) {
-                                case TimeInsertionListener.FORMAT_HMS:
+                            switch (which) {
+                                case FORMAT_HMS:
                                     timestamp =
                                             new SimpleDateFormat(FORMAT_TSTAMP_HMS, Locale.ENGLISH).format(current);
                                     break;
-                                case TimeInsertionListener.FORMAT_HM:
+                                case FORMAT_HM:
                                     timestamp =
                                             new SimpleDateFormat(FORMAT_TSTAMP_HM, Locale.ENGLISH).format(current);
                                     break;
@@ -81,9 +82,6 @@ public class InsertTimeDialogFragment extends DialogFragment {
 
 
     public interface TimeInsertionListener {
-
-        int FORMAT_HMS = 0;
-        int FORMAT_HM = 1;
 
         void onTimeSelected(String timestamp);
     }

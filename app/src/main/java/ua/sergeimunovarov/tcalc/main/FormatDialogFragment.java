@@ -10,7 +10,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
 import android.util.Log;
 
 import javax.inject.Inject;
@@ -36,7 +35,6 @@ public class FormatDialogFragment extends DialogFragment
     }
 
 
-    @CallSuper
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

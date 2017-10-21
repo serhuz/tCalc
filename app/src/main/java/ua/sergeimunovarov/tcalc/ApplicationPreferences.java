@@ -206,7 +206,7 @@ public class ApplicationPreferences {
 
         @IntDef({DHMS, HMS, MS, HMS_MOD24})
         @Retention(RetentionPolicy.SOURCE)
-        @interface FormatId {
+        public @interface FormatId {
 
         }
     }

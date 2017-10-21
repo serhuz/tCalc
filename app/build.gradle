@@ -92,7 +92,7 @@ ext {
     daggerVersion = '2.12'
     autoValueVersion = '1.5.2'
 
-    leakCanaryVersion = '1.5.1'
+    leakCanaryVersion = '1.5.4'
 
     assertjVersion = '2.8.0'
     mockitoVersion = '2.11.0'

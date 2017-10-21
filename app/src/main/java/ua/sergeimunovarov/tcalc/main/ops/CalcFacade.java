@@ -28,7 +28,7 @@ public class CalcFacade {
      * @see ua.sergeimunovarov.tcalc.ApplicationPreferences.FormatConstants
      */
     @FormatId
-    private int mFormat;
+    private final int mFormat;
 
 
     public CalcFacade(@FormatId int format) {
@@ -52,13 +52,13 @@ public class CalcFacade {
                 switch (resultToken.type()) {
                     case VALUE:
                         output = Converter.formatValue(
-                                resultToken.value(),
+                                Double.class.cast(resultToken.value()),
                                 Application.getAppComponent().appPreferences().loadPrecisionPreference()
                         );
                         type = Result.ResultType.RESULT_OK_VALUE;
                         break;
                     case TIME_UNIT:
-                        output = makeResult(resultToken.value());
+                        output = makeResult(Long.class.cast(resultToken.value()));
                         type = Result.ResultType.RESULT_OK;
                         break;
                     default:
@@ -95,20 +95,7 @@ public class CalcFacade {
     }
 
 
-    protected String makeResult(@NonNull String timeUnit) {
-        long millis;
-        try {
-            millis = Long.parseLong(timeUnit);
-        } catch (NumberFormatException ex) {
-            Log.d(TAG, "Result parsing error" + timeUnit, ex);
-            // Since time units are checked beforehand in Parser, Converter
-            // and StackMachine classes, this block should never be executed.
-            // If it is executed, the token probably was tampered with.
-            // Or the other checks have failed.
-            // We won't notify user about this exception and simply return null.
-            return null;
-        }
-
+    private String makeResult(long millis) {
         String result;
         switch (mFormat) {
             case ApplicationPreferences.FormatConstants.DHMS:

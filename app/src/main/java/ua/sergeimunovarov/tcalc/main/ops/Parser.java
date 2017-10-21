@@ -73,14 +73,14 @@ public class Parser {
                             break;
                         case TIME_UNIT:
                             mOutput.add(Token.create(
-                                    Token.TokenType.TIME_UNIT, String.valueOf(Converter.toMillis(token))
+                                    Token.TokenType.TIME_UNIT, Converter.toMillis(token)
                             ));
                             break;
                         case VALUE:
                             if (token.startsWith(Patterns.PREFIX_SHARP)) {
                                 token = token.replaceFirst(Patterns.PREFIX_SHARP, MINUS);
                             }
-                            mOutput.add(Token.create(Token.TokenType.VALUE, token));
+                            mOutput.add(Token.create(Token.TokenType.VALUE, Double.parseDouble(token)));
                             break;
                     }
                     // Since match was found there is no need to iterate further.

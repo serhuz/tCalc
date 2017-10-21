@@ -11,17 +11,18 @@ import com.google.auto.value.AutoValue;
 
 
 @AutoValue
-public abstract class Token {
+public abstract class Token<T> {
 
-    public static Token create(@NonNull TokenType type,
-                               @NonNull String value) {
-        return new AutoValue_Token(type, value);
+    public static <T> Token<T> create(@NonNull TokenType type, @NonNull T value) {
+        return new AutoValue_Token<T>(type, value);
     }
 
 
+    @NonNull
     public abstract TokenType type();
 
-    public abstract String value();
+    @NonNull
+    public abstract T value();
 
 
     public enum TokenType {

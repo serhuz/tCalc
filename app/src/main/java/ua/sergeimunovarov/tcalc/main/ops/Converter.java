@@ -243,7 +243,7 @@ public final class Converter {
      * @return Formatted value string
      * @throws NumberFormatException if given value cannot be parsed as double
      */
-    public static String formatValue(@NonNull String value, @IntRange(from = 1, to = 5) int precision) {
+    public static String formatValue(double value, @IntRange(from = 1, to = 5) int precision) {
         String formatPattern = "#.";
         for (int i = 0; i < precision; i++) {
             formatPattern += "#";
@@ -256,7 +256,7 @@ public final class Converter {
 
         decimalFormat.setDecimalFormatSymbols(symbols);
         try {
-            return decimalFormat.format(Double.parseDouble(value));
+            return decimalFormat.format(value);
         } catch (NumberFormatException ex) {
             throw new NumberFormatException(ex.getMessage());
         }

@@ -57,14 +57,14 @@ public class ConverterTest {
 
     @Test
     public void formatValue() throws Exception {
-        String value = Converter.formatValue("1.789", 1);
+        String value = Converter.formatValue(1.789, 1);
         assertThat(value).isNotEmpty().hasSize(3).isEqualTo("1.8");
     }
 
 
     @Test
     public void formatValue1() throws Exception {
-        String value = Converter.formatValue("1.6779", 2);
+        String value = Converter.formatValue(1.6779, 2);
         assertThat(value).isNotEmpty().hasSize(4).isEqualTo("1.68");
     }
 }

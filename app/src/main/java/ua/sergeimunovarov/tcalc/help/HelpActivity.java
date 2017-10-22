@@ -13,12 +13,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 import ua.sergeimunovarov.tcalc.AbstractTransitionActivity;
 import ua.sergeimunovarov.tcalc.R;
@@ -42,7 +44,10 @@ public class HelpActivity extends AbstractTransitionActivity {
         });
         webView.setLongClickable(false);
         webView.setOnLongClickListener(v -> true);
-        webView.loadData(getHelpData(), "text/html", "utf-8");
+
+        WebSettings settings = webView.getSettings();
+        settings.setDefaultTextEncodingName("utf-8");
+        webView.loadDataWithBaseURL(null, getHelpData(), "text/html", "utf-8", null);
     }
 
 
@@ -52,7 +57,7 @@ public class HelpActivity extends AbstractTransitionActivity {
         try {
             byte[] buffer = new byte[inputStream.available()];
             inputStream.read(buffer);
-            data = new String(buffer);
+            data = new String(buffer, Charset.forName("utf-8"));
             inputStream.close();
         } catch (IOException e) {
             Log.w(TAG, "Cannot read help file", e);

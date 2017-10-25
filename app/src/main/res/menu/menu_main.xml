@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="ua.sergeimunovarov.tcalc.Tcalc">
+      tools:context="ua.sergeimunovarov.tcalc.main.MainActivity">
 
     <item
         android:id="@+id/action_format"
@@ -16,6 +16,10 @@
     <item
         android:id="@+id/action_timestamp"
         android:title="@string/insert_current_time"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_history"
+        android:title="@string/action_history"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_settings"

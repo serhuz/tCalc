@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -31,6 +32,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import ua.sergeimunovarov.tcalc.AbstractTransitionActivity;
@@ -40,6 +44,12 @@ import ua.sergeimunovarov.tcalc.Patterns;
 import ua.sergeimunovarov.tcalc.R;
 import ua.sergeimunovarov.tcalc.databinding.ActivityMainBinding;
 import ua.sergeimunovarov.tcalc.help.HelpActivity;
+import ua.sergeimunovarov.tcalc.main.history.HistoryDaoLoader;
+import ua.sergeimunovarov.tcalc.main.history.HistoryDialogFragment;
+import ua.sergeimunovarov.tcalc.main.history.db.Entry;
+import ua.sergeimunovarov.tcalc.main.history.db.HistoryDao;
+import ua.sergeimunovarov.tcalc.main.history.db.HistoryDbHelper;
+import ua.sergeimunovarov.tcalc.main.history.listeners.InsertListener;
 import ua.sergeimunovarov.tcalc.main.input.BaseInputFragment;
 import ua.sergeimunovarov.tcalc.main.input.CalcInputFragment;
 import ua.sergeimunovarov.tcalc.main.input.InputListener;
@@ -51,7 +61,7 @@ import ua.sergeimunovarov.tcalc.settings.SettingsActivity;
 
 public class MainActivity extends AbstractTransitionActivity implements
         FormatDialogFragment.FormatSelectionListener, InputListener,
-        InsertTimeDialogFragment.TimeInsertionListener, LoaderManager.LoaderCallbacks<Result> {
+        InsertTimeDialogFragment.TimeInsertionListener, InsertListener {
 
     public static final String BRACKETS = "()";
     public static final char PAR_LEFT = '(';
@@ -62,10 +72,12 @@ public class MainActivity extends AbstractTransitionActivity implements
     private static final String KEY_CALC_ERROR = "err";
     private static final String KEY_MEMORY = "mem";
     private static final String KEY_RESULT = "result";
+    private static final String KEY_PENDING = "pending";
 
     private static final String TAG_FORMAT = "fmt";
     private static final String TAG_INPUT = "inp";
     private static final String TAG_TSTAMP = "tstamp";
+    private static final String TAG_HISTORY = "hist";
 
     /**
      * Clipboard label.
@@ -73,9 +85,18 @@ public class MainActivity extends AbstractTransitionActivity implements
     private static final String LABEL = MainActivity.class.getName();
 
     private static final int CALC_LOADER_ID = 128;
+    private static final int DAO_LOADER_ID = 130;
+
+    private final ResultLoaderCallbacks mResultCallbacks = new ResultLoaderCallbacks();
+    private final HistoryDaoLoaderCallbacks mDaoCallbacks = new HistoryDaoLoaderCallbacks();
 
     @Inject
     ApplicationPreferences preferences;
+
+    @Inject
+    HistoryDbHelper mDbHelper;
+
+    private List<Entry> mPendingEntries;
 
     private EditText mInputBox;
     private TextView mResultTextView;
@@ -92,6 +113,8 @@ public class MainActivity extends AbstractTransitionActivity implements
     private Result mCalculationResult = null;
     private Result mStoredResult = null;
 
+    private HistoryDao mDao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +127,8 @@ public class MainActivity extends AbstractTransitionActivity implements
 
         Application.getAppComponent().inject(this);
 
-        getSupportLoaderManager().initLoader(CALC_LOADER_ID, null, this);
+        getSupportLoaderManager().initLoader(CALC_LOADER_ID, null, mResultCallbacks);
+        getSupportLoaderManager().initLoader(DAO_LOADER_ID, null, mDaoCallbacks);
 
         mHasPermanentMenuKey = ViewConfiguration.get(this).hasPermanentMenuKey();
 
@@ -112,6 +136,13 @@ public class MainActivity extends AbstractTransitionActivity implements
         configureActionBar();
 
         mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+        if (savedInstanceState == null) {
+            mPendingEntries = new ArrayList<>();
+        } else {
+            mPendingEntries = savedInstanceState.getParcelableArrayList(KEY_PENDING);
+        }
+        mDao = new HistoryDao(mDbHelper.getWritableDatabase());
     }
 
 
@@ -134,6 +165,25 @@ public class MainActivity extends AbstractTransitionActivity implements
                 if (!getActionBar().isShowing()) getActionBar().show();
             }
         }
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(KEY_RESULT, mCalculationResult);
+        outState.putParcelable(KEY_MEMORY, mStoredResult);
+        outState.putBoolean(KEY_CALC_ERROR, mCalculationError);
+        outState.putParcelableArrayList(KEY_PENDING, (ArrayList<? extends Parcelable>) mPendingEntries);
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mCalculationError = savedInstanceState.getBoolean(KEY_CALC_ERROR);
+        mCalculationResult = savedInstanceState.getParcelable(KEY_RESULT);
+        mStoredResult = savedInstanceState.getParcelable(KEY_MEMORY);
     }
 
 
@@ -173,6 +223,9 @@ public class MainActivity extends AbstractTransitionActivity implements
             case R.id.action_settings:
                 launchActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 return true;
+            case R.id.action_history:
+                showDialog(HistoryDialogFragment.create(), TAG_HISTORY);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -206,24 +259,6 @@ public class MainActivity extends AbstractTransitionActivity implements
                 Log.w(TAG, "ClipboardManager is null");
             }
         }
-    }
-
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable(KEY_RESULT, mCalculationResult);
-        outState.putParcelable(KEY_MEMORY, mStoredResult);
-        outState.putBoolean(KEY_CALC_ERROR, mCalculationError);
-    }
-
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        mCalculationError = savedInstanceState.getBoolean(KEY_CALC_ERROR);
-        mCalculationResult = savedInstanceState.getParcelable(KEY_RESULT);
-        mStoredResult = savedInstanceState.getParcelable(KEY_MEMORY);
     }
 
 
@@ -263,48 +298,19 @@ public class MainActivity extends AbstractTransitionActivity implements
 
 
     @Override
+    public void onInputReceived(CharSequence cs) {
+        insertCharacter(cs);
+    }
+
+
+    @Override
     public void onCalculateResult() {
         String input = mInputBox.getText().toString();
         if (!input.isEmpty()) {
             Bundle args = new Bundle();
             args.putInt(CalculationLoader.KEY_FORMAT, mOutputFormat);
             args.putString(CalculationLoader.KEY_INPUT, input);
-            getSupportLoaderManager().restartLoader(CALC_LOADER_ID, args, this);
-        }
-    }
-
-
-    @Override
-    public void onInputReceived(CharSequence cs) {
-        insertCharacter(cs);
-    }
-
-
-    /**
-     * Inserts string into EditText element. If multiple characters inside
-     * EditText are selected, they are replaced with the given character.
-     *
-     * @param cs text to insert
-     */
-    private void insertCharacter(CharSequence cs) {
-        int selectionStart = mInputBox.getSelectionStart();
-        int selectionEnd = mInputBox.getSelectionEnd();
-
-        Editable editable = mInputBox.getText();
-        if (selectionStart == selectionEnd) {
-            editable.insert(selectionStart, cs);
-        } else {
-            editable.replace(selectionStart, selectionEnd, cs);
-            mInputBox.setSelection(selectionEnd - (selectionEnd - selectionStart) + 1);
-        }
-
-        this.vibrate();
-    }
-
-
-    private void vibrate() {
-        if (mVibroEnabled && mVibrator.hasVibrator()) {
-            mVibrator.vibrate(mVibroDuration);
+            getSupportLoaderManager().restartLoader(CALC_LOADER_ID, args, mResultCallbacks);
         }
     }
 
@@ -423,6 +429,35 @@ public class MainActivity extends AbstractTransitionActivity implements
     }
 
 
+    /**
+     * Inserts string into EditText element. If multiple characters inside
+     * EditText are selected, they are replaced with the given character.
+     *
+     * @param cs text to insert
+     */
+    private void insertCharacter(CharSequence cs) {
+        int selectionStart = mInputBox.getSelectionStart();
+        int selectionEnd = mInputBox.getSelectionEnd();
+
+        Editable editable = mInputBox.getText();
+        if (selectionStart == selectionEnd) {
+            editable.insert(selectionStart, cs);
+        } else {
+            editable.replace(selectionStart, selectionEnd, cs);
+            mInputBox.setSelection(selectionEnd - (selectionEnd - selectionStart) + 1);
+        }
+
+        this.vibrate();
+    }
+
+
+    private void vibrate() {
+        if (mVibroEnabled && mVibrator.hasVibrator()) {
+            mVibrator.vibrate(mVibroDuration);
+        }
+    }
+
+
     @Override
     public void onTimeSelected(String timestamp) {
         insertCharacter(timestamp);
@@ -430,36 +465,81 @@ public class MainActivity extends AbstractTransitionActivity implements
 
 
     @Override
-    public Loader<Result> onCreateLoader(int id, Bundle args) {
-        return new CalculationLoader(this, args);
+    public void onInsert(Entry entry) {
+        insertCharacter(entry.resultValue());
     }
 
 
-    @Override
-    public void onLoadFinished(Loader<Result> loader, Result data) {
-        if (data == null) {
-            return;
+    private class ResultLoaderCallbacks implements LoaderManager.LoaderCallbacks<Result> {
+
+        @Override
+        public Loader<Result> onCreateLoader(int id, Bundle args) {
+            return new CalculationLoader(MainActivity.this, args);
         }
 
-        switch (data.type()) {
-            case RESULT_ERR:
-                mCalculationError = true;
-                mResultTextView.setText(data.value());
-                break;
-            case RESULT_OK_VALUE:
-            case RESULT_OK:
-                mCalculationError = false;
-                mCalculationResult = data;
-                mResultTextView.setText(getString(R.string.eq, data.value()));
-                vibrate();
-                break;
+
+        @Override
+        public void onLoadFinished(Loader<Result> loader, Result data) {
+            if (data == null) {
+                return;
+            }
+
+            switch (data.type()) {
+                case RESULT_ERR:
+                    mCalculationError = true;
+                    mResultTextView.setText(data.value());
+                    break;
+                case RESULT_OK_VALUE:
+                case RESULT_OK:
+                    mCalculationError = false;
+                    mCalculationResult = data;
+                    mResultTextView.setText(getString(R.string.eq, data.value()));
+                    vibrate();
+                    Entry entry = Entry.create(null,
+                            mInputBox.getText().toString(),
+                            data.type().toString(),
+                            data.value(),
+                            System.currentTimeMillis(
+                            ));
+                    if (mDao != null) {
+                        mDao.addEntry(entry);
+                    } else {
+                        mPendingEntries.add(entry);
+                    }
+                    break;
+            }
+
+            getSupportLoaderManager().destroyLoader(loader.getId());
         }
 
-        getLoaderManager().destroyLoader(loader.getId());
+
+        @Override
+        public void onLoaderReset(Loader<Result> loader) {
+
+        }
     }
 
 
-    @Override
-    public void onLoaderReset(Loader<Result> loader) {
+    private class HistoryDaoLoaderCallbacks implements LoaderManager.LoaderCallbacks<HistoryDao> {
+
+        @Override
+        public Loader<HistoryDao> onCreateLoader(int id, Bundle args) {
+            return new HistoryDaoLoader(MainActivity.this, mDbHelper);
+        }
+
+
+        @Override
+        public void onLoadFinished(Loader<HistoryDao> loader, HistoryDao data) {
+            mDao = data;
+            if (!mPendingEntries.isEmpty()) {
+                mDao.addEntries(mPendingEntries);
+            }
+        }
+
+
+        @Override
+        public void onLoaderReset(Loader<HistoryDao> loader) {
+
+        }
     }
 }

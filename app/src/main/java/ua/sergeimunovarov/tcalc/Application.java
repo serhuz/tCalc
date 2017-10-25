@@ -11,6 +11,7 @@ import com.squareup.leakcanary.RefWatcher;
 import ua.sergeimunovarov.tcalc.di.AppComponent;
 import ua.sergeimunovarov.tcalc.di.ContextModule;
 import ua.sergeimunovarov.tcalc.di.DaggerAppComponent;
+import ua.sergeimunovarov.tcalc.di.DbModule;
 import ua.sergeimunovarov.tcalc.di.LeakCanaryModule;
 import ua.sergeimunovarov.tcalc.di.PreferencesModule;
 import ua.sergeimunovarov.tcalc.di.UtilModule;
@@ -51,6 +52,7 @@ public class Application extends android.app.Application {
     protected AppComponent buildAppComponent() {
         return DaggerAppComponent.builder()
                 .contextModule(new ContextModule(this))
+                .dbModule(new DbModule())
                 .preferencesModule(new PreferencesModule())
                 .leakCanaryModule(new LeakCanaryModule(mRefWatcher))
                 .utilModule(new UtilModule())

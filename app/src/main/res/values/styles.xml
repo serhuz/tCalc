@@ -47,4 +47,13 @@
         <item name="android:windowFrame">@color/transparent</item>
     </style>
 
+    <style name="InputStyle">
+        <item name="android:digits">0123456789./*+-:()</item>
+        <item name="android:ems">10</item>
+        <item name="android:gravity">top|start</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:saveEnabled">true</item>
+        <item name="android:background">@drawable/input_background</item>
+    </style>
+
 </resources>

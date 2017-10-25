@@ -58,4 +58,8 @@
     <string name="btn_ok">ОК</string>
     <string name="pref_precision">Точність</string>
     <string name="action_licenses">Ліцензії ПЗ</string>
+    <string name="label_history_empty">Історія пуста</string>
+    <string name="title_dialog_history">Історія</string>
+    <string name="btn_close">Закрити</string>
+    <string name="action_history">Історія</string>
 </resources>

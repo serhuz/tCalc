@@ -17,9 +17,11 @@ import ua.sergeimunovarov.tcalc.R;
 
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static cortado.Cortado.onEditText;
 import static cortado.Cortado.onView;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
+
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityInputTest {
@@ -33,6 +35,7 @@ public class MainActivityInputTest {
     @Mock
     ApplicationPreferences mApplicationPreferences;
 
+
     @Before
     public void setUp() throws Exception {
         when(mApplicationPreferences.loadVibrationPreference()).thenReturn(false);
@@ -40,10 +43,12 @@ public class MainActivityInputTest {
         when(mApplicationPreferences.loadFormatPreference()).thenReturn(ApplicationPreferences.FormatConstants.HMS);
     }
 
+
     @After
     public void tearDown() throws Exception {
         reset(mApplicationPreferences);
     }
+
 
     @Test
     public void inputOldFormatPortrait() throws Exception {
@@ -71,6 +76,7 @@ public class MainActivityInputTest {
 
         onView().withId(R.id.input).check().matches(withText("0123456789.+-*/()"));
     }
+
 
     @Test
     public void inputOldFormatLandscape() throws Exception {
@@ -100,6 +106,7 @@ public class MainActivityInputTest {
         onView().withId(R.id.input).check().matches(withText("0123456789.+-*/()"));
     }
 
+
     @Test
     public void inputNewFormatPortrait() throws Exception {
         when(mApplicationPreferences.loadLayoutPreference()).thenReturn(ApplicationPreferences.LayoutConstants.LAYOUT_NEW);
@@ -127,6 +134,7 @@ public class MainActivityInputTest {
         onView().withId(R.id.input).check().matches(withText("0123456789.+-*/()"));
     }
 
+
     @Test
     public void inputNewFormatLandscape() throws Exception {
         when(mApplicationPreferences.loadLayoutPreference()).thenReturn(ApplicationPreferences.LayoutConstants.LAYOUT_NEW);
@@ -153,5 +161,27 @@ public class MainActivityInputTest {
         onView().withId(R.id.btn_par2).perform(click());
 
         onView().withId(R.id.input).check().matches(withText("0123456789.+-*/()"));
+    }
+
+
+    @Test
+    public void filterInputInPortraitMode() throws Exception {
+        mActivityTestRule.launchActivity(null);
+        mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        onEditText().withId(R.id.input).perform().typeText("abc123+1");
+
+        onEditText().withId(R.id.input).check().matches(withText("123+1"));
+    }
+
+
+    @Test
+    public void filterInputInLandscapeMode() throws Exception {
+        mActivityTestRule.launchActivity(null);
+        mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        onEditText().withId(R.id.input).perform().typeText("abc123+1");
+
+        onEditText().withId(R.id.input).check().matches(withText("123+1"));
     }
 }

@@ -6,18 +6,18 @@
 package ua.sergeimunovarov.tcalc.main;
 
 import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.app.LoaderManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.text.Editable;
 import android.text.InputType;
 import android.util.Log;
@@ -108,7 +108,7 @@ public class MainActivity extends AbstractTransitionActivity implements
 
         Application.getAppComponent().inject(this);
 
-        getLoaderManager().initLoader(CALC_LOADER_ID, null, this);
+        getSupportLoaderManager().initLoader(CALC_LOADER_ID, null, this);
 
         mHasPermanentMenuKey = ViewConfiguration.get(this).hasPermanentMenuKey();
 
@@ -187,8 +187,8 @@ public class MainActivity extends AbstractTransitionActivity implements
      * Shows dialog with output format selection.
      */
     private void showFormatDialog() {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        Fragment fragment = getFragmentManager().findFragmentByTag(TAG_FORMAT);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_FORMAT);
         if (fragment != null) transaction.remove(fragment);
 
         FormatDialogFragment.create().show(transaction, TAG_FORMAT);
@@ -196,8 +196,8 @@ public class MainActivity extends AbstractTransitionActivity implements
 
 
     private void showTimestampDialog() {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        Fragment fragment = getFragmentManager().findFragmentByTag(TAG_TSTAMP);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_TSTAMP);
         if (fragment != null) transaction.remove(fragment);
 
         InsertTimeDialogFragment.create().show(transaction, TAG_TSTAMP);
@@ -270,7 +270,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         }
 
         Log.d(TAG, "Input fragment is " + inputFragment.getClass().getSimpleName());
-        getFragmentManager()
+        getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.numpad_container, inputFragment, TAG_INPUT)
                 .commit();
@@ -291,7 +291,7 @@ public class MainActivity extends AbstractTransitionActivity implements
             Bundle args = new Bundle();
             args.putInt(CalculationLoader.KEY_FORMAT, mOutputFormat);
             args.putString(CalculationLoader.KEY_INPUT, input);
-            getLoaderManager().restartLoader(CALC_LOADER_ID, args, this);
+            getSupportLoaderManager().restartLoader(CALC_LOADER_ID, args, this);
         }
     }
 

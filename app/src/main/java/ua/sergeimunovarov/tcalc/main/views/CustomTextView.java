@@ -5,20 +5,18 @@
 
 package ua.sergeimunovarov.tcalc.main.views;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 import ua.sergeimunovarov.tcalc.Application;
 
 
 /**
- * A {@link TextView} subclass with custom font.
+ * A {@link AppCompatTextView} subclass with custom font.
  */
-@SuppressLint("AppCompatCustomView")
-public class CustomTextView extends TextView {
+public class CustomTextView extends AppCompatTextView {
 
     public CustomTextView(Context context) {
         super(context);

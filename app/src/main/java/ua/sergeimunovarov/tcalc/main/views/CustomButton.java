@@ -5,21 +5,19 @@
 
 package ua.sergeimunovarov.tcalc.main.views;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
-import android.widget.Button;
 
 import ua.sergeimunovarov.tcalc.Application;
 
 
 /**
- * A {@link Button} subclass with custom font.
+ * An {@link AppCompatButton} subclass with custom font.
  */
-@SuppressLint("AppCompatCustomView")
-public class CustomButton extends Button {
+public class CustomButton extends AppCompatButton {
 
     public CustomButton(Context context) {
         super(context);

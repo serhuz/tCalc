@@ -5,11 +5,11 @@
 
 package ua.sergeimunovarov.tcalc.help;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -99,8 +99,8 @@ public class HelpActivity extends AbstractTransitionActivity {
 
 
     private void showRateDialog() {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        Fragment fragment = getFragmentManager().findFragmentByTag(TAG_RATE);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_RATE);
         if (fragment != null) {
             transaction.remove(fragment);
         }

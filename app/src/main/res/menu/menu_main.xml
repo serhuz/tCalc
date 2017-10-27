@@ -1,38 +1,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="ua.sergeimunovarov.tcalc.Tcalc">
 
     <item
         android:id="@+id/action_format"
         android:icon="@drawable/ic_action_format"
-        android:showAsAction="ifRoom"
         android:title="@string/title_dialog_format"
-        tools:ignore="AppCompatResource"/>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_copy"
         android:icon="@drawable/ic_action_copy"
-        android:showAsAction="ifRoom"
         android:title="@string/action_copy"
-        tools:ignore="AppCompatResource"/>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_timestamp"
-        android:showAsAction="never"
         android:title="@string/insert_current_time"
-        tools:ignore="AppCompatResource"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/action_settings"
-        android:showAsAction="never"
         android:title="@string/action_settings"
-        tools:ignore="AppCompatResource"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/action_instructions"
-        android:showAsAction="never"
         android:title="@string/action_instructions"
-        tools:ignore="AppCompatResource"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/action_exit"
-        android:showAsAction="never"
         android:title="@string/action_exit"
-        tools:ignore="AppCompatResource"/>
+        app:showAsAction="never"/>
 
 </menu>

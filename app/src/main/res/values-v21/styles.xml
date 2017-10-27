@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="AppBaseTheme" parent="android:Theme.Material.Light.DarkActionBar">
-    </style>
-
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="android:windowActivityTransitions">true</item>
     </style>
 
-    <style name="DialogAnimation" parent="@android:style/Theme.Material.Light.Dialog">
+    <style name="DialogAnimation" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowAnimationStyle">@style/DlgAnim</item>
         <item name="android:windowFrame">@color/transparent</item>
     </style>

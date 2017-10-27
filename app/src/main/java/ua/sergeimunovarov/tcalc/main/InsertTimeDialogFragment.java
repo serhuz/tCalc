@@ -7,8 +7,9 @@ package ua.sergeimunovarov.tcalc.main;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
@@ -20,7 +21,7 @@ import ua.sergeimunovarov.tcalc.R;
 import static java.lang.System.currentTimeMillis;
 
 
-public class InsertTimeDialogFragment extends DialogFragment {
+public class InsertTimeDialogFragment extends AppCompatDialogFragment {
 
     private static final String TAG = InsertTimeDialogFragment.class.getSimpleName();
 
@@ -49,6 +50,7 @@ public class InsertTimeDialogFragment extends DialogFragment {
     }
 
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(

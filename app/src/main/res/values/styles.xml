@@ -4,7 +4,7 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     </style>
 
     <!-- Application theme. -->
@@ -34,6 +34,7 @@
 
     <style name="StyleControlButton.Backspace">
         <item name="android:padding">@dimen/button_backspace_padding</item>
+        <item name="android:scaleType">fitCenter</item>
     </style>
 
     <style name="DlgAnim">
@@ -41,7 +42,7 @@
         <item name="android:windowExitAnimation">@anim/slide_out_down</item>
     </style>
 
-    <style name="DialogAnimation" parent="@android:style/Theme.Holo.Light.Dialog">
+    <style name="DialogAnimation" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowAnimationStyle">@style/DlgAnim</item>
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowFrame">@color/transparent</item>

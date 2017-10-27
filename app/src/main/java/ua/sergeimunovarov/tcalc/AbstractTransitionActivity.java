@@ -6,17 +6,17 @@
 package ua.sergeimunovarov.tcalc;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.view.Window;
 
 
-public abstract class AbstractTransitionActivity extends Activity {
+public abstract class AbstractTransitionActivity extends AppCompatActivity {
 
     protected static final int TRANSITION_DURATION_MILLIS = 500;
 
@@ -52,7 +52,7 @@ public abstract class AbstractTransitionActivity extends Activity {
         } else {
             //noinspection unchecked
             super.startActivity(
-                    intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
+                    intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle()
             );
         }
     }

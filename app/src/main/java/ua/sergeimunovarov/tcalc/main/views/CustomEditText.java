@@ -5,14 +5,13 @@
 
 package ua.sergeimunovarov.tcalc.main.views;
 
-import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.StringTokenizer;
@@ -28,10 +27,9 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 
 
 /**
- * An {@link EditText} subclass with custom font.
+ * An {@link AppCompatEditText} subclass with custom font.
  */
-@SuppressLint("AppCompatCustomView")
-public class CustomEditText extends EditText {
+public class CustomEditText extends AppCompatEditText {
 
     public CustomEditText(Context context) {
         super(context);

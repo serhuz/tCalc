@@ -14,6 +14,9 @@ import ua.sergeimunovarov.tcalc.DaggerMockRule;
 import ua.sergeimunovarov.tcalc.R;
 
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static cortado.Cortado.onButton;
+import static cortado.Cortado.onEditText;
+import static cortado.Cortado.onTextView;
 import static cortado.Cortado.onView;
 
 
@@ -186,5 +189,21 @@ public class MainActivityEvaluationTest {
         onView().withId(R.id.input).perform().typeText("0:20+1");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("Error (T+V)"));
+    }
+
+
+    @Test
+    public void preformEvaluation20() throws Exception {
+        onEditText().withId(R.id.input).perform().typeText("0:00:10/3");
+        onButton().withId(R.id.btn_eq).perform().click();
+        onTextView().withId(R.id.result).check().matches(withText("= 00:00:03.333"));
+    }
+
+
+    @Test
+    public void preformEvaluation21() throws Exception {
+        onEditText().withId(R.id.input).perform().typeText("0:00:9/3");
+        onButton().withId(R.id.btn_eq).perform().click();
+        onTextView().withId(R.id.result).check().matches(withText("= 00:00:03"));
     }
 }

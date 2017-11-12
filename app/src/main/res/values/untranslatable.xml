@@ -42,4 +42,6 @@
         <item>50</item>
         <item>75</item>
     </string-array>
+
+    <string name="eq" translatable="false">= %s</string>
 </resources>

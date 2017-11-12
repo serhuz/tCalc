@@ -53,7 +53,6 @@ public class MainActivity extends AbstractTransitionActivity implements
         FormatDialogFragment.FormatSelectionListener, InputListener,
         InsertTimeDialogFragment.TimeInsertionListener, LoaderManager.LoaderCallbacks<Result> {
 
-    public static final String PREFIX_RESULT = "= %s";
     public static final String BRACKETS = "()";
     public static final char PAR_LEFT = '(';
     public static final char PAR_RIGHT = ')';
@@ -83,7 +82,6 @@ public class MainActivity extends AbstractTransitionActivity implements
 
     private boolean mHasPermanentMenuKey;
 
-    private ClipboardManager mClipboard;
     private Vibrator mVibrator;
 
     private Toast mToast = null;
@@ -203,8 +201,14 @@ public class MainActivity extends AbstractTransitionActivity implements
     private void copyResultToClipboard() {
         if (!mCalculationError && mCalculationResult != null) {
             ClipData clipData = ClipData.newPlainText(LABEL, mCalculationResult.value());
-            mClipboard.setPrimaryClip(clipData);
-            this.showToast(mToast, getResources().getString(R.string.toast_result_copied));
+
+            ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            if (clipboardManager != null) {
+                clipboardManager.setPrimaryClip(clipData);
+                this.showToast(mToast, getResources().getString(R.string.toast_result_copied));
+            } else {
+                Log.w(TAG, "ClipboardManager is null");
+            }
         }
     }
 
@@ -243,7 +247,6 @@ public class MainActivity extends AbstractTransitionActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        mClipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
         mVibroEnabled = preferences.loadVibrationPreference();
         mVibroDuration = preferences.loadVibrationDurationPreference();
@@ -464,9 +467,7 @@ public class MainActivity extends AbstractTransitionActivity implements
             case RESULT_OK:
                 mCalculationError = false;
                 mCalculationResult = data;
-                mResultTextView.setText(
-                        String.format(PREFIX_RESULT, data.value())
-                );
+                mResultTextView.setText(getString(R.string.eq, data.value()));
                 vibrate();
                 break;
         }

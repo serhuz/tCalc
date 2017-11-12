@@ -58,12 +58,11 @@ public class MainActivity extends AbstractTransitionActivity implements
     public static final char PAR_LEFT = '(';
     public static final char PAR_RIGHT = ')';
 
-    public static final String KEY_RESULT = "result";
-
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final String KEY_CALC_ERROR = "err";
     private static final String KEY_MEMORY = "mem";
+    private static final String KEY_RESULT = "result";
 
     private static final String TAG_FORMAT = "fmt";
     private static final String TAG_INPUT = "inp";

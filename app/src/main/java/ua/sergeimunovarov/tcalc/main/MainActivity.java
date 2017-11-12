@@ -14,10 +14,13 @@ import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.text.Editable;
 import android.text.InputType;
 import android.util.Log;
@@ -167,10 +170,10 @@ public class MainActivity extends AbstractTransitionActivity implements
                 launchActivity(new Intent(MainActivity.this, HelpActivity.class));
                 return true;
             case R.id.action_format:
-                showFormatDialog();
+                showDialog(FormatDialogFragment.create(), TAG_FORMAT);
                 return true;
             case R.id.action_timestamp:
-                showTimestampDialog();
+                showDialog(InsertTimeDialogFragment.create(), TAG_TSTAMP);
             case R.id.action_copy:
                 copyResultToClipboard();
                 return true;
@@ -183,24 +186,14 @@ public class MainActivity extends AbstractTransitionActivity implements
     }
 
 
-    /**
-     * Shows dialog with output format selection.
-     */
-    private void showFormatDialog() {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_FORMAT);
-        if (fragment != null) transaction.remove(fragment);
+    private void showDialog(@NonNull AppCompatDialogFragment fragment, @NonNull String tag) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
-        FormatDialogFragment.create().show(transaction, TAG_FORMAT);
-    }
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        Fragment foundFragment = fragmentManager.findFragmentByTag(tag);
+        if (foundFragment != null) transaction.remove(foundFragment);
 
-
-    private void showTimestampDialog() {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_TSTAMP);
-        if (fragment != null) transaction.remove(fragment);
-
-        InsertTimeDialogFragment.create().show(transaction, TAG_TSTAMP);
+        fragment.show(transaction, tag);
     }
 
 

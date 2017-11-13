@@ -84,8 +84,6 @@ public class MainActivity extends AbstractTransitionActivity implements
 
     private Vibrator mVibrator;
 
-    private Toast mToast = null;
-
     private int mOutputFormat;
     private boolean mVibroEnabled;
     private int mVibroDuration;
@@ -205,24 +203,11 @@ public class MainActivity extends AbstractTransitionActivity implements
             ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             if (clipboardManager != null) {
                 clipboardManager.setPrimaryClip(clipData);
-                this.showToast(mToast, getResources().getString(R.string.toast_result_copied));
+                Toast.makeText(this, getString(R.string.toast_result_copied), Toast.LENGTH_SHORT).show();
             } else {
                 Log.w(TAG, "ClipboardManager is null");
             }
         }
-    }
-
-
-    private void showToast(Toast t, String msg) {
-        if (t == null) {
-            t = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
-        } else if (t.getView() == null) {
-            t = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
-        } else {
-            t.setText(msg);
-        }
-
-        t.show();
     }
 
 

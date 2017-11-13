@@ -5,7 +5,9 @@
 
 package ua.sergeimunovarov.tcalc.main;
 
+import android.content.ClipboardManager;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -22,12 +24,16 @@ import ua.sergeimunovarov.tcalc.help.HelpActivity;
 import ua.sergeimunovarov.tcalc.settings.SettingsActivity;
 
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static cortado.Cortado.onEditText;
 import static cortado.Cortado.onView;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static ua.sergeimunovarov.tcalc.CustomMatchers.hasText;
+import static ua.sergeimunovarov.tcalc.CustomMatchers.isToast;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -160,5 +166,22 @@ public class MainActivityTest {
         // verify dialog is closed
         onView().withText(R.string.select_time_format).check().doesNotExist();
         onView().withId(R.id.input).check().matches(hasText());
+    }
+
+
+    @Test
+    public void copyResult() throws Exception {
+        onEditText().withId(R.id.input).perform().typeText("2+2");
+        onView().withId(R.id.btn_eq).perform().click();
+
+        onView().withId(R.id.action_copy).perform().click();
+
+        Espresso.onView(withText(R.string.toast_result_copied)).inRoot(isToast()).check(matches(isDisplayed()));
+
+        InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> {
+            ClipboardManager clipboardManager = InstrumentationRegistry.getTargetContext().getSystemService(ClipboardManager.class);
+            assertThat(clipboardManager.hasPrimaryClip()).isTrue();
+            assertThat(clipboardManager.getPrimaryClip().getItemAt(0).getText()).isEqualTo("4");
+        });
     }
 }

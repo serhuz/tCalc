@@ -92,17 +92,15 @@ public class MainActivity extends AbstractTransitionActivity implements
     private Result mCalculationResult = null;
     private Result mStoredResult = null;
 
-    private ActivityMainBinding mBinding;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        mInputBox = mBinding.input;
-        mResultTextView = mBinding.result;
+        mInputBox = binding.input;
+        mResultTextView = binding.result;
 
         Application.getAppComponent().inject(this);
 

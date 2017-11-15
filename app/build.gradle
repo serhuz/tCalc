@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.oss.licenses.plugin'
-apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.getkeepsafe.dexcount'
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -8,14 +7,13 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.3'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId 'ua.sergeimunovarov.tcalc'
         minSdkVersion 15
-        //noinspection OldTargetApi
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 25
         versionName '4.2.1'
 
@@ -61,13 +59,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    retrolambda {
-        //noinspection GroovyAssignabilityCheck
-        javaVersion JavaVersion.VERSION_1_7
-        defaultMethods false
-        incremental true
-    }
-
     dexOptions {
         javaMaxHeapSize '4g'
         preDexLibraries true
@@ -88,7 +79,7 @@ android {
 }
 
 ext {
-    supportVersion = '25.4.0'
+    supportVersion = '26.1.0'
     daggerVersion = '2.12'
     autoValueVersion = '1.5.2'
 
@@ -124,7 +115,7 @@ dependencies {
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
-    compile 'com.google.android.gms:play-services-oss-licenses:11.4.2'
+    compile 'com.google.android.gms:play-services-oss-licenses:11.6.0'
 
     compile "com.android.support:support-annotations:$supportVersion"
     compile "com.android.support:support-core-utils:$supportVersion"

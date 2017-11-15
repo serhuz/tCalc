@@ -32,7 +32,6 @@
         </module>
 
         <module name="EmptyStatement"/>
-        <module name="RedundantThrows"/>
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>
     </module>

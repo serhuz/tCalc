@@ -6,18 +6,6 @@
 
 -keep class **.R$*
 
--keep class butterknife.** { *; }
--dontwarn butterknife.internal.**
--keep class **$$ViewBinder { *; }
-
--keepclasseswithmembernames class * {
-    @butterknife.* <fields>;
-}
-
--keepclasseswithmembernames class * {
-    @butterknife.* <methods>;
-}
-
 -dontwarn java.lang.invoke.*
 
 -assumenosideeffects class android.util.Log {
@@ -28,5 +16,3 @@
     public static int d(...);
     public static int e(...);
 }
-
--dontwarn com.google.android.gms.internal.**

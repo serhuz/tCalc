@@ -97,34 +97,34 @@ configurations.all {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.12'
-    testCompile "org.mockito:mockito-core:$mockitoVersion"
-    testCompile "org.assertj:assertj-core:$assertjVersion"
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "org.assertj:assertj-core:$assertjVersion"
 
-    androidTestCompile "com.android.support.test.espresso:espresso-core:$espressoVersion"
-    androidTestCompile "com.android.support.test.espresso:espresso-intents:$espressoVersion"
-    androidTestCompile 'com.android.support.test:runner:1.0.1'
-    androidTestCompile 'com.android.support.test:rules:1.0.1'
-    androidTestCompile "org.mockito:mockito-android:$mockitoVersion"
-    androidTestCompile "org.assertj:assertj-core:$assertjVersion"
-    androidTestCompile 'com.github.fabioCollini:DaggerMock:0.8.2'
-    androidTestCompile 'com.bartoszlipinski:cortado:1.2.0'
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test:rules:1.0.1'
+    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
+    androidTestImplementation "org.assertj:assertj-core:$assertjVersion"
+    androidTestImplementation 'com.github.fabioCollini:DaggerMock:0.8.2'
+    androidTestImplementation 'com.bartoszlipinski:cortado:1.2.0'
 
-    debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
-    androidTestCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+    androidTestImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
-    compile 'com.google.android.gms:play-services-oss-licenses:11.6.0'
+    implementation 'com.google.android.gms:play-services-oss-licenses:11.6.0'
 
-    compile "com.android.support:support-annotations:$supportVersion"
-    compile "com.android.support:support-core-utils:$supportVersion"
-    compile "com.android.support:appcompat-v7:$supportVersion"
+    implementation "com.android.support:support-annotations:$supportVersion"
+    implementation "com.android.support:support-core-utils:$supportVersion"
+    implementation "com.android.support:appcompat-v7:$supportVersion"
 
-    compile "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 
-    provided "com.google.auto.value:auto-value:$autoValueVersion"
+    compileOnly "com.google.auto.value:auto-value:$autoValueVersion"
     annotationProcessor "com.google.auto.value:auto-value:$autoValueVersion"
     annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.5'
 }

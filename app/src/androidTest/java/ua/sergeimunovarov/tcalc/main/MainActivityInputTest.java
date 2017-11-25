@@ -30,7 +30,7 @@ public class MainActivityInputTest {
     public final DaggerMockRule mDaggerMockRule = new DaggerMockRule();
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class, true, false);
+    public final ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class, true, false);
 
     @Mock
     ApplicationPreferences mApplicationPreferences;

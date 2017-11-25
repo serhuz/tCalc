@@ -21,6 +21,8 @@ import ua.sergeimunovarov.tcalc.R;
 public class SeekBarPreference extends DialogPreference implements SeekBar.OnSeekBarChangeListener {
 
     private static final int LOCAL_DEFAULT_VALUE = 1;
+    private static final int DEFAULT_MIN_VALUE = LOCAL_DEFAULT_VALUE;
+    private static final int DEFAULT_MAX_VALUE = 5;
 
     private SeekBar mPrecisionSeekBar;
     private TextView mSeekBarValue;
@@ -30,6 +32,7 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
     private int mMax;
 
 
+    @SuppressWarnings("unused")
     public SeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
@@ -38,8 +41,8 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
 
     private void init(Context context, AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ua_sergeimunovarov_tcalc_settings_SeekBarPreference);
-        mMin = a.getInt(R.styleable.ua_sergeimunovarov_tcalc_settings_SeekBarPreference_min, 1);
-        mMax = a.getInt(R.styleable.ua_sergeimunovarov_tcalc_settings_SeekBarPreference_max, 5);
+        mMin = a.getInt(R.styleable.ua_sergeimunovarov_tcalc_settings_SeekBarPreference_min, DEFAULT_MIN_VALUE);
+        mMax = a.getInt(R.styleable.ua_sergeimunovarov_tcalc_settings_SeekBarPreference_max, DEFAULT_MAX_VALUE);
         a.recycle();
 
         setDialogLayoutResource(R.layout.seekbar_preference_dialog);
@@ -59,8 +62,8 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
     @Override
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
-        mPrecisionSeekBar = (SeekBar) view.findViewById(R.id.seekbar);
-        mSeekBarValue = (TextView) view.findViewById(R.id.seekbar_value);
+        mPrecisionSeekBar = view.findViewById(R.id.seekbar);
+        mSeekBarValue = view.findViewById(R.id.seekbar_value);
 
         mPrecisionSeekBar.setOnSeekBarChangeListener(this);
         mPrecisionSeekBar.setMax(mMax - mMin);

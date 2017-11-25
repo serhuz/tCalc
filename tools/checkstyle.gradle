@@ -13,6 +13,7 @@ task checkstyle(type: Checkstyle) {
     source 'src'
     include '**/*.java'
     exclude '**/test/java/**'
+    exclude '**/androidTest/java/**'
     exclude '**/gen/**'
     exclude '**/R.java'
     exclude '**/BuildConfig.java'

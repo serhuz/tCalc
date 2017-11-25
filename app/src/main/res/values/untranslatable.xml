@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">tCalc</string>
+    <string name="label_main_activity" translatable="false">tCalc</string>
 
     <string name="btn_0" translatable="false">0</string>
     <string name="btn_1" translatable="false">1</string>

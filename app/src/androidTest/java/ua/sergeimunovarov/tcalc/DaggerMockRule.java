@@ -10,7 +10,9 @@ import ua.sergeimunovarov.tcalc.di.LeakCanaryModule;
 import ua.sergeimunovarov.tcalc.di.PreferencesModule;
 import ua.sergeimunovarov.tcalc.di.UtilModule;
 
+
 public class DaggerMockRule extends it.cosenonjaviste.daggermock.DaggerMockRule<AppComponent> {
+
     public DaggerMockRule() {
         super(AppComponent.class,
                 new ContextModule(InstrumentationRegistry.getTargetContext()),

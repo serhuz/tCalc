@@ -9,6 +9,7 @@ import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 @RunWith(AndroidJUnit4.class)
 public class CalcFacadeAndroidTest {
 
@@ -20,6 +21,7 @@ public class CalcFacadeAndroidTest {
         assertThat(result.value()).isEqualTo("00:20:00");
     }
 
+
     @Test
     public void testCalculateExpression2() throws Exception {
         CalcFacade facade = new CalcFacade(ApplicationPreferences.FormatConstants.HMS);
@@ -27,6 +29,7 @@ public class CalcFacadeAndroidTest {
         assertThat(result.type()).isEqualTo(Result.ResultType.RESULT_OK_VALUE);
         assertThat(result.value()).isEqualTo("4");
     }
+
 
     @Test
     public void testCalculateExpression3() throws Exception {
@@ -36,6 +39,7 @@ public class CalcFacadeAndroidTest {
         assertThat(result.value()).isEqualTo("4");
     }
 
+
     @Test
     public void testCalculateExpression4() throws Exception {
         CalcFacade facade = new CalcFacade(ApplicationPreferences.FormatConstants.HMS);
@@ -43,6 +47,7 @@ public class CalcFacadeAndroidTest {
         assertThat(result.type()).isEqualTo(Result.ResultType.RESULT_OK_VALUE);
         assertThat(result.value()).isEqualTo("1");
     }
+
 
     @Test
     public void testCalculateExpression5() throws Exception {
@@ -52,6 +57,7 @@ public class CalcFacadeAndroidTest {
         assertThat(result.value()).isEqualTo("5");
     }
 
+
     @Test
     public void testCalculateExpression6() throws Exception {
         CalcFacade facade = new CalcFacade(ApplicationPreferences.FormatConstants.HMS);
@@ -59,6 +65,7 @@ public class CalcFacadeAndroidTest {
         assertThat(result.type()).isEqualTo(Result.ResultType.RESULT_OK_VALUE);
         assertThat(result.value()).isEqualTo("2");
     }
+
 
     @Test
     public void testCalculateExpression7() throws Exception {
@@ -68,6 +75,7 @@ public class CalcFacadeAndroidTest {
         assertThat(result.value()).isEqualTo("0");
     }
 
+
     @Test
     public void testCalculateExpression8() throws Exception {
         CalcFacade facade = new CalcFacade(ApplicationPreferences.FormatConstants.HMS);
@@ -75,6 +83,7 @@ public class CalcFacadeAndroidTest {
         assertThat(result.type()).isEqualTo(Result.ResultType.RESULT_OK_VALUE);
         assertThat(result.value()).isEqualTo("2");
     }
+
 
     @Test
     public void testCalculateExpression9() throws Exception {

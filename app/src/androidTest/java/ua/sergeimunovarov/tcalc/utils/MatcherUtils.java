@@ -8,6 +8,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
+
 public class MatcherUtils {
 
     public static Matcher<View> childAtPosition(
@@ -19,6 +20,7 @@ public class MatcherUtils {
                 description.appendText("Child at position " + position + " in parent ");
                 parentMatcher.describeTo(description);
             }
+
 
             @Override
             public boolean matchesSafely(View view) {

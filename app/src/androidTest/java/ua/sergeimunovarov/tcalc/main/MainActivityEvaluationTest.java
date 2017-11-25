@@ -24,10 +24,10 @@ import static cortado.Cortado.onView;
 public class MainActivityEvaluationTest {
 
     @Rule
-    public DaggerMockRule daggerMockRule = new DaggerMockRule();
+    public final DaggerMockRule daggerMockRule = new DaggerMockRule();
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public final ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @SuppressWarnings("WeakerAccess")
     @InjectFromComponent

@@ -43,7 +43,7 @@ public class MainActivityTest {
     public final DaggerMockRule mDaggerMockRule = new DaggerMockRule();
 
     @Rule
-    public IntentsTestRule<MainActivity> mActivityTestRule = new IntentsTestRule<>(MainActivity.class);
+    public final IntentsTestRule<MainActivity> mActivityTestRule = new IntentsTestRule<>(MainActivity.class);
 
     @SuppressWarnings("WeakerAccess")
     @InjectFromComponent

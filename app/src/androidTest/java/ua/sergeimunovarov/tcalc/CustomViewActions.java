@@ -69,7 +69,6 @@ public final class CustomViewActions {
             mProgress = progress;
         }
 
-
         @Override
         public float[] calculateCoordinates(View view) {
             if (!(view instanceof SeekBar)) {

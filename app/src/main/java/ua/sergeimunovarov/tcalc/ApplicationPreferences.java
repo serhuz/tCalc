@@ -51,6 +51,7 @@ public class ApplicationPreferences {
      * @return persisted format or {@link Defaults#DEFAULT_FORMAT} if none is set
      * @see FormatConstants
      */
+    @FormatConstants.FormatId
     public int loadFormatPreference() {
         return getPreferences().getInt(PreferenceKeys.KEY_FORMAT, Defaults.DEFAULT_FORMAT);
     }
@@ -87,6 +88,7 @@ public class ApplicationPreferences {
      * @return layout preference or int representation of {@link Defaults#DEFAULT_LAYOUT}
      * if none is set
      */
+    @LayoutConstants.LayoutId
     public int loadLayoutPreference() {
         return Integer.parseInt(
                 getPreferences().getString(PreferenceKeys.KEY_LAYOUT, Defaults.DEFAULT_LAYOUT)
@@ -97,6 +99,7 @@ public class ApplicationPreferences {
     public int loadPrecisionPreference() {
         return getPreferences().getInt(PreferenceKeys.KEY_PRECISION, Defaults.DEFAULT_PRECISION);
     }
+
 
     /**
      * Preference identifiers for calculator layouts
@@ -116,6 +119,13 @@ public class ApplicationPreferences {
          * @see ua.sergeimunovarov.tcalc.main.input.CalcInputFragment
          */
         public static final int LAYOUT_NEW = 1;
+
+
+        @IntDef({LAYOUT_OLD, LAYOUT_NEW})
+        @Retention(RetentionPolicy.SOURCE)
+        public @interface LayoutId {
+
+        }
     }
 
 

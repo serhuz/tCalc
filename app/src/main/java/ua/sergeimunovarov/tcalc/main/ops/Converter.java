@@ -28,6 +28,23 @@ public final class Converter {
     private static final DecimalFormat HMS_FORMAT = new DecimalFormat("00");
     private static final DecimalFormat MILLIS_FORMAT = new DecimalFormat("000");
 
+    private static final int UNIT_HM_GROUP_HOURS = 2;
+    private static final int UNIT_HM_GROUP_MINUTES = 3;
+
+    private static final int UNIT_MS_GROUP_MILLIS = 5;
+    private static final int UNIT_MS_GROUP_SECONDS = 3;
+    private static final int UNIT_MS_GROUP_MINUTES = 2;
+
+    private static final int UNIT_HMS_GROUP_HOURS = 2;
+    private static final int UNIT_HMS_GROUP_MINUTES = 3;
+    private static final int UNIT_HMS_GROUP_SECONDS = 4;
+    private static final int UNIT_HMS_GROUP_MILLIS = 6;
+
+    private static final int UNIT_DHMS_GROUP_DAYS = 2;
+    private static final int UNIT_DHMS_GROUP_HOURS = 3;
+    private static final int UNIT_DHMS_GROUP_MINUTES = 4;
+    private static final int UNIT_DHMS_GROUP_SECONDS = 5;
+    private static final int UNIT_DHMS_GROUP_MILLIS = 7;
 
     private Converter() {
         throw new AssertionError();
@@ -50,31 +67,31 @@ public final class Converter {
                 match = true;
                 switch (unit) {
                     case UNIT_MS:
-                        millis = Long.parseLong(matcher.group(2)) * MILLIS_IN_MINUTE
-                                + Long.parseLong(matcher.group(3)) * MILLIS_IN_SECOND
-                                + Long.parseLong(matcher.group(5));
+                        millis = Long.parseLong(matcher.group(UNIT_MS_GROUP_MINUTES)) * MILLIS_IN_MINUTE
+                                + Long.parseLong(matcher.group(UNIT_MS_GROUP_SECONDS)) * MILLIS_IN_SECOND
+                                + Long.parseLong(matcher.group(UNIT_MS_GROUP_MILLIS));
                         break;
                     case UNIT_HM:
-                        millis = Long.parseLong(matcher.group(2)) * MILLIS_IN_HOUR
-                                + Long.parseLong(matcher.group(3)) * MILLIS_IN_MINUTE;
+                        millis = Long.parseLong(matcher.group(UNIT_HM_GROUP_HOURS)) * MILLIS_IN_HOUR
+                                + Long.parseLong(matcher.group(UNIT_HM_GROUP_MINUTES)) * MILLIS_IN_MINUTE;
                         break;
                     case UNIT_HMS:
-                        millis = Long.parseLong(matcher.group(2)) * MILLIS_IN_HOUR
-                                + Long.parseLong(matcher.group(3)) * MILLIS_IN_MINUTE
-                                + Long.parseLong(matcher.group(4)) * MILLIS_IN_SECOND;
+                        millis = Long.parseLong(matcher.group(UNIT_HMS_GROUP_HOURS)) * MILLIS_IN_HOUR
+                                + Long.parseLong(matcher.group(UNIT_HMS_GROUP_MINUTES)) * MILLIS_IN_MINUTE
+                                + Long.parseLong(matcher.group(UNIT_HMS_GROUP_SECONDS)) * MILLIS_IN_SECOND;
                         try {
-                            millis += Long.parseLong(matcher.group(6));
+                            millis += Long.parseLong(matcher.group(UNIT_HMS_GROUP_MILLIS));
                         } catch (NumberFormatException ex) {
                             // millis could not be parsed, therefore nothing is added
                         }
                         break;
                     case UNIT_DHMS:
-                        millis = Long.parseLong(matcher.group(2)) * MILLIS_IN_DAY
-                                + Long.parseLong(matcher.group(3)) * MILLIS_IN_HOUR
-                                + Long.parseLong(matcher.group(4)) * MILLIS_IN_MINUTE
-                                + Long.parseLong(matcher.group(5)) * MILLIS_IN_SECOND;
+                        millis = Long.parseLong(matcher.group(UNIT_DHMS_GROUP_DAYS)) * MILLIS_IN_DAY
+                                + Long.parseLong(matcher.group(UNIT_DHMS_GROUP_HOURS)) * MILLIS_IN_HOUR
+                                + Long.parseLong(matcher.group(UNIT_DHMS_GROUP_MINUTES)) * MILLIS_IN_MINUTE
+                                + Long.parseLong(matcher.group(UNIT_DHMS_GROUP_SECONDS)) * MILLIS_IN_SECOND;
                         try {
-                            millis += Long.parseLong(matcher.group(7));
+                            millis += Long.parseLong(matcher.group(UNIT_DHMS_GROUP_MILLIS));
                         } catch (NumberFormatException ex) {
                             // millis could not be parsed, therefore nothing is added
                         }
@@ -244,12 +261,12 @@ public final class Converter {
      * @throws NumberFormatException if given value cannot be parsed as double
      */
     public static String formatValue(double value, @IntRange(from = 1, to = 5) int precision) {
-        String formatPattern = "#.";
+        StringBuilder formatPattern = new StringBuilder("#.");
         for (int i = 0; i < precision; i++) {
-            formatPattern += "#";
+            formatPattern.append("#");
         }
 
-        DecimalFormat decimalFormat = new DecimalFormat(formatPattern);
+        DecimalFormat decimalFormat = new DecimalFormat(formatPattern.toString());
 
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setDecimalSeparator(CHAR_DOT);

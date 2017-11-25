@@ -34,5 +34,14 @@
         <module name="EmptyStatement"/>
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>
+        <module name="EqualsAvoidNull"/>
+        <module name="EmptyStatement"/>
+        <module name="EmptyCatchBlock"/>
+        <module name="MagicNumber">
+            <property name="ignoreHashCodeMethod" value="true"/>
+            <property name="ignoreAnnotation" value="true"/>
+            <property name="ignoreFieldDeclaration" value="true"/>
+        </module>
+        <module name="SuppressWarningsHolder"/>
     </module>
 </module>

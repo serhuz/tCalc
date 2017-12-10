@@ -11,11 +11,13 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import it.cosenonjaviste.daggermock.InjectFromComponent;
+import ua.sergeimunovarov.tcalc.ClearDatabaseRule;
 import ua.sergeimunovarov.tcalc.DaggerMockRule;
 import ua.sergeimunovarov.tcalc.R;
 import ua.sergeimunovarov.tcalc.main.history.db.HistoryDbHelper;
@@ -34,6 +36,9 @@ import static cortado.Cortado.onView;
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class MainActivityHistoryTest {
+
+    @ClassRule
+    public static final ClearDatabaseRule CLEAR_DATABASE_RULE = new ClearDatabaseRule(HistoryDbHelper.DB_NAME);
 
     @Rule
     public final DaggerMockRule daggerMockRule = new DaggerMockRule();

@@ -6,7 +6,6 @@
 package ua.sergeimunovarov.tcalc.main.ops;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
@@ -14,7 +13,6 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 
-import ua.sergeimunovarov.tcalc.BuildConfig;
 import ua.sergeimunovarov.tcalc.Patterns;
 
 import static ua.sergeimunovarov.tcalc.Patterns.MINUS;
@@ -45,12 +43,7 @@ public class Parser {
             boolean matchFound = false;
             for (ParserTokenType parserTokenType : ParserTokenType.values()) {
                 Matcher matcher = parserTokenType.getPattern().matcher(token);
-                if (matcher.find()) {
-
-                    if (BuildConfig.DEBUG) {
-                        Log.d(TAG, "current token: " + token);
-                    }
-
+                if (matcher.matches()) {
                     matchFound = true;
                     switch (parserTokenType.getType()) {
                         case BRACKET_OPEN:

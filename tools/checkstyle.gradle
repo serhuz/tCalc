@@ -14,7 +14,7 @@ task checkstyle(type: Checkstyle) {
     include '**/*.java'
     exclude '**/test/java/**'
     exclude '**/androidTest/java/**'
-    exclude '**/androidTestScreenshotsDebug/java/**'
+    exclude '**/androidTestScreenshots/java/**'
     exclude '**/gen/**'
     exclude '**/R.java'
     exclude '**/BuildConfig.java'

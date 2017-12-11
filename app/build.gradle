@@ -62,6 +62,15 @@ android {
         }
 
         screenshots {
+            sourceSets {
+                androidTest {
+                    java.srcDirs = ['src/androidTestScreenshots/java']
+                }
+                test {
+                    java.srcDirs = []
+                }
+            }
+
             applicationIdSuffix '.screenshots'
             versionNameSuffix '-screens'
         }

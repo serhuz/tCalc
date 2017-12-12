@@ -58,13 +58,49 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+
+        candidate {
+            initWith(release)
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
         }
     }
 
-//    testBuildType 'candidate'
+    productFlavors {
+        app {
+            testBuildType 'debug'
+        }
+
+        screenshots {
+            testBuildType 'candidate'
+        }
+    }
+
+    sourceSets {
+        appAndroidTest {
+            setRoot 'src/androidTest/java'
+        }
+        screenshotsAndroidTest {
+            setRoot 'src/androidTestScreenshots/java'
+        }
+    }
+
+    variantFilter { variant ->
+        def flavorNames = variant.flavors*.name
+        def buildTypes = variant.buildType*.name
+        if (flavorNames.contains('screenshots') && (buildTypes.contains('debug') || buildTypes.contains('release'))) {
+            setIgnore true
+        }
+        if (flavorNames.contains('app') && buildTypes.contains('candidate')) {
+            setIgnore true
+        }
+    }
 
     gradle.taskGraph.useFilter { task ->
-        if (task.name.endsWith('UnitTest') && (task.name.contains('Candidate') || task.name.contains('Release'))) {
+        if (task.name.startsWith('test') && (task.name.contains('Screenshots') || task.name.contains('Release'))) {
             return false
         }
         return true

@@ -54,36 +54,6 @@ android {
         }
     }
 
-    flavorDimensions 'default'
-
-    productFlavors {
-        app {
-
-        }
-
-        screenshots {
-            sourceSets {
-                androidTest {
-                    java.srcDirs = ['src/androidTestScreenshots/java']
-                }
-                test {
-                    java.srcDirs = []
-                }
-            }
-
-            applicationIdSuffix '.screenshots'
-            versionNameSuffix '-screens'
-        }
-    }
-
-    variantFilter { variant ->
-        def flavorNames = variant.flavors*.name
-        def buildTypes = variant.buildType*.name
-        if (flavorNames.contains('screenshots') && buildTypes.contains('release')) {
-            setIgnore true
-        }
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

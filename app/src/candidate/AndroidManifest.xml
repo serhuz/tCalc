@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © Sergei Munovarov. All rights reserved.
+  ~ See LICENCE.txt for license details.
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="ua.sergeimunovarov.tcalc"
+          android:installLocation="auto"
+          tools:ignore="UnusedAttribute">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <application/>
+
+</manifest>

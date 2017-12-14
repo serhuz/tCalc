@@ -47,11 +47,26 @@ android {
             buildConfigField "boolean", "SHOULD_CLEAR_PREFS_ON_START", "false"
         }
 
+        candidate {
+            initWith(release)
+            minifyEnabled false
+            debuggable true
+        }
+
         release {
             signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+//    testBuildType 'candidate'
+
+    gradle.taskGraph.useFilter { task ->
+        if (task.name.endsWith('UnitTest') && (task.name.contains('Candidate') || task.name.contains('Release'))) {
+            return false
+        }
+        return true
     }
 
     compileOptions {
@@ -113,6 +128,7 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     androidTestImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    candidateImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     implementation 'com.google.android.gms:play-services-oss-licenses:11.6.2'

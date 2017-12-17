@@ -8,10 +8,11 @@ package ua.sergeimunovarov.tcalc.main.views;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 
-import ua.sergeimunovarov.tcalc.Application;
+import ua.sergeimunovarov.tcalc.R;
 
 
 /**
@@ -44,7 +45,7 @@ public class CustomButton extends AppCompatButton {
 
 
     private void init() {
-        Typeface tf = Application.getAppComponent().typefaceHolder().getTypeface();
+        Typeface tf = ResourcesCompat.getFont(getContext(), R.font.lato_light);
         this.setTypeface(tf, Typeface.BOLD);
     }
 }

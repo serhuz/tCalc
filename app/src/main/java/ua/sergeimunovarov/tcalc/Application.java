@@ -14,7 +14,6 @@ import ua.sergeimunovarov.tcalc.di.DaggerAppComponent;
 import ua.sergeimunovarov.tcalc.di.DbModule;
 import ua.sergeimunovarov.tcalc.di.LeakCanaryModule;
 import ua.sergeimunovarov.tcalc.di.PreferencesModule;
-import ua.sergeimunovarov.tcalc.di.UtilModule;
 
 
 public class Application extends android.app.Application {
@@ -55,7 +54,6 @@ public class Application extends android.app.Application {
                 .dbModule(new DbModule())
                 .preferencesModule(new PreferencesModule())
                 .leakCanaryModule(new LeakCanaryModule(mRefWatcher))
-                .utilModule(new UtilModule())
                 .build();
     }
 }

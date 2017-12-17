@@ -17,7 +17,6 @@ import ua.sergeimunovarov.tcalc.main.FormatDialogFragment;
 import ua.sergeimunovarov.tcalc.main.MainActivity;
 import ua.sergeimunovarov.tcalc.main.history.HistoryDialogFragment;
 import ua.sergeimunovarov.tcalc.main.history.db.HistoryDbHelper;
-import ua.sergeimunovarov.tcalc.main.views.TypefaceHolder;
 import ua.sergeimunovarov.tcalc.settings.SettingsFragment;
 
 
@@ -26,16 +25,13 @@ import ua.sergeimunovarov.tcalc.settings.SettingsFragment;
         ContextModule.class,
         DbModule.class,
         PreferencesModule.class,
-        LeakCanaryModule.class,
-        UtilModule.class
+        LeakCanaryModule.class
 })
 public interface AppComponent {
 
     Context appContext();
 
     ApplicationPreferences appPreferences();
-
-    TypefaceHolder typefaceHolder();
 
     HistoryDbHelper dbHelper();
 

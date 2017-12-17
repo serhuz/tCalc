@@ -9,4 +9,15 @@
         <item name="android:windowAnimationStyle">@style/DlgAnim</item>
         <item name="android:windowFrame">@color/transparent</item>
     </style>
+
+    <style name="StyleGenericButton">
+        <item name="android:layout_margin">@dimen/button_margin</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/lato_light</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
 </resources>

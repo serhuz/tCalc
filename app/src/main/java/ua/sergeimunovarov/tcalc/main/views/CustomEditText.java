@@ -8,8 +8,6 @@ package ua.sergeimunovarov.tcalc.main.views;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.graphics.Typeface;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -43,17 +41,6 @@ public class CustomEditText extends AppCompatEditText {
 
     public CustomEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-    }
-
-
-    {
-        init();
-    }
-
-
-    private void init() {
-        Typeface tf = ResourcesCompat.getFont(getContext(), R.font.lato_light);
-        this.setTypeface(tf, Typeface.NORMAL);
     }
 
 

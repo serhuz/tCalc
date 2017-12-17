@@ -18,6 +18,8 @@
         <item name="android:padding">0dp</item>
         <item name="android:textSize">@dimen/button_text_size</item>
         <item name="android:textColor">@color/text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/lato_light</item>
     </style>
 
     <style name="StyleNumberButton" parent="StyleGenericButton">
@@ -55,6 +57,18 @@
         <item name="android:inputType">textMultiLine</item>
         <item name="android:saveEnabled">true</item>
         <item name="android:background">@drawable/input_background</item>
+        <item name="fontFamily">@font/lato_light</item>
+    </style>
+
+    <style name="ResultStyle">
+        <item name="android:background">@drawable/shape_result_textview</item>
+        <item name="android:ems">14</item>
+        <item name="android:freezesText">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">@dimen/textview_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/lato_light</item>
     </style>
 
 </resources>

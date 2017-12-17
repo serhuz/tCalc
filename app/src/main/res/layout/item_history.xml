@@ -31,16 +31,18 @@
             android:paddingRight="8dp"
             android:paddingTop="8dp">
 
-            <ua.sergeimunovarov.tcalc.main.views.CustomTextView
+            <TextView
                 android:id="@+id/item_expression"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:text="@{entry.expression()}"
                 android:textSize="24sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/lato_light"
                 tools:text="00:30*2"/>
 
-            <ua.sergeimunovarov.tcalc.main.views.CustomTextView
+            <TextView
                 android:id="@+id/item_result"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,6 +50,7 @@
                 android:text="@{`= ` + entry.resultValue()}"
                 android:textColor="@color/text"
                 android:textSize="28sp"
+                app:fontFamily="@font/lato_light"
                 tools:text="= 01:00"/>
         </LinearLayout>
 

@@ -27,9 +27,7 @@ public class DebugApplication extends Application {
 
 
     protected void installLeakCanary() {
-        LeakCanary.refWatcher(this)
-                .maxStoredHeapDumps(MAX_STORED_HEAP_DUMPS)
-                .buildAndInstall();
+        LeakCanary.install(this);
     }
 
 

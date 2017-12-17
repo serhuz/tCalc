@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:text="@{entry.expression()}"
-                android:textSize="24sp"
+                android:textSize="@dimen/history_item_expression_text_size"
                 android:textStyle="bold"
                 app:fontFamily="@font/lato_light"
                 tools:text="00:30*2"/>
@@ -49,15 +49,15 @@
                 android:layout_marginTop="4dp"
                 android:text="@{`= ` + entry.resultValue()}"
                 android:textColor="@color/text"
-                android:textSize="28sp"
+                android:textSize="@dimen/history_item_result_text_size"
                 app:fontFamily="@font/lato_light"
                 tools:text="= 01:00"/>
         </LinearLayout>
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/item_paste"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/history_item_paste_icon_size"
+            android:layout_height="@dimen/history_item_paste_icon_size"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

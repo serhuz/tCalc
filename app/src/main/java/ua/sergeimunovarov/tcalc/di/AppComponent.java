@@ -7,8 +7,6 @@ package ua.sergeimunovarov.tcalc.di;
 
 import android.content.Context;
 
-import com.squareup.leakcanary.RefWatcher;
-
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -24,8 +22,7 @@ import ua.sergeimunovarov.tcalc.settings.SettingsFragment;
 @Component(modules = {
         ContextModule.class,
         DbModule.class,
-        PreferencesModule.class,
-        LeakCanaryModule.class
+        PreferencesModule.class
 })
 public interface AppComponent {
 
@@ -34,8 +31,6 @@ public interface AppComponent {
     ApplicationPreferences appPreferences();
 
     HistoryDbHelper dbHelper();
-
-    RefWatcher refWatcher();
 
     void inject(MainActivity mainActivity);
 

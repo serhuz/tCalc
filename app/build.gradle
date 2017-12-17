@@ -49,6 +49,7 @@ android {
 
         candidate {
             initWith(release)
+            signingConfig signingConfigs.release
             minifyEnabled false
             debuggable true
         }
@@ -128,9 +129,6 @@ dependencies {
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     androidTestImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    candidateImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     implementation 'com.google.android.gms:play-services-oss-licenses:11.6.2'
 

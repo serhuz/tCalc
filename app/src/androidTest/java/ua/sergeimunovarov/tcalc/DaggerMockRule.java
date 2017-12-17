@@ -7,7 +7,6 @@ import com.squareup.leakcanary.RefWatcher;
 import ua.sergeimunovarov.tcalc.di.AppComponent;
 import ua.sergeimunovarov.tcalc.di.ContextModule;
 import ua.sergeimunovarov.tcalc.di.DbModule;
-import ua.sergeimunovarov.tcalc.di.LeakCanaryModule;
 import ua.sergeimunovarov.tcalc.di.PreferencesModule;
 
 

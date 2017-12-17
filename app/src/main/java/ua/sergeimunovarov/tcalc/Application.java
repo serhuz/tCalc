@@ -5,22 +5,16 @@
 
 package ua.sergeimunovarov.tcalc;
 
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
-
 import ua.sergeimunovarov.tcalc.di.AppComponent;
 import ua.sergeimunovarov.tcalc.di.ContextModule;
 import ua.sergeimunovarov.tcalc.di.DaggerAppComponent;
 import ua.sergeimunovarov.tcalc.di.DbModule;
-import ua.sergeimunovarov.tcalc.di.LeakCanaryModule;
 import ua.sergeimunovarov.tcalc.di.PreferencesModule;
 
 
 public class Application extends android.app.Application {
 
     private static AppComponent sAppComponent;
-
-    private RefWatcher mRefWatcher;
 
 
     public static AppComponent getAppComponent() {
@@ -36,15 +30,7 @@ public class Application extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        if (LeakCanary.isInAnalyzerProcess(this)) return;
-        mRefWatcher = installLeakCanary();
-
         sAppComponent = buildAppComponent();
-    }
-
-
-    protected RefWatcher installLeakCanary() {
-        return RefWatcher.DISABLED;
     }
 
 
@@ -53,7 +39,6 @@ public class Application extends android.app.Application {
                 .contextModule(new ContextModule(this))
                 .dbModule(new DbModule())
                 .preferencesModule(new PreferencesModule())
-                .leakCanaryModule(new LeakCanaryModule(mRefWatcher))
                 .build();
     }
 }

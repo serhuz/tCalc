@@ -8,4 +8,9 @@
     <item name="numpad_weight" format="float" type="dimen">0.6</item>
     <dimen name="button_backspace_padding">12dp</dimen>
     <dimen name="seekbar_value_padding">8dp</dimen>
+    <dimen name="history_icon_size">36dp</dimen>
+    <dimen name="history_empty_view_text_size">16sp</dimen>
+    <dimen name="history_item_expression_text_size">24sp</dimen>
+    <dimen name="history_item_result_text_size">28sp</dimen>
+    <dimen name="history_item_paste_icon_size">40dp</dimen>
 </resources>

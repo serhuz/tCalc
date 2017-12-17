@@ -54,8 +54,8 @@
                 android:visibility="@{model.mEmptyViewVisible ? View.VISIBLE : View.GONE}">
 
                 <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    android:layout_width="@dimen/history_icon_size"
+                    android:layout_height="@dimen/history_icon_size"
                     android:layout_gravity="center_horizontal"
                     android:contentDescription="@string/label_history_empty"
                     android:scaleType="fitXY"
@@ -65,6 +65,7 @@
                     android:id="@+id/empty_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/history_empty_view_text_size"
                     android:text="@string/label_history_empty"/>
             </LinearLayout>
 

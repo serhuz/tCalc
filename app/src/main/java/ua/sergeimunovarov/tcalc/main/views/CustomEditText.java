@@ -9,6 +9,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -17,7 +18,6 @@ import android.widget.Toast;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 
-import ua.sergeimunovarov.tcalc.Application;
 import ua.sergeimunovarov.tcalc.BuildConfig;
 import ua.sergeimunovarov.tcalc.R;
 import ua.sergeimunovarov.tcalc.main.ops.Converter;
@@ -52,7 +52,7 @@ public class CustomEditText extends AppCompatEditText {
 
 
     private void init() {
-        Typeface tf = Application.getAppComponent().typefaceHolder().getTypeface();
+        Typeface tf = ResourcesCompat.getFont(getContext(), R.font.lato_light);
         this.setTypeface(tf, Typeface.NORMAL);
     }
 

@@ -37,6 +37,7 @@ android {
 
     dataBinding {
         enabled true
+        version '3.0.1'
     }
 
     buildTypes {

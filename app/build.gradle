@@ -124,7 +124,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:rules:1.0.1'
     androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
     androidTestImplementation "org.assertj:assertj-core:$assertjVersion"
-    androidTestImplementation 'com.github.fabioCollini:DaggerMock:0.8.2'
+    androidTestImplementation 'com.github.fabioCollini:DaggerMock:0.8.4'
     androidTestImplementation 'com.bartoszlipinski:cortado:1.2.0'
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"

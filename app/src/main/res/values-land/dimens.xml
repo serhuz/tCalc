@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <item name="input_weight" format="float" type="dimen">0.5</item>
     <item name="numpad_weight" format="float" type="dimen">0.5</item>
     <dimen name="button_backspace_padding">8dp</dimen>
 </resources>

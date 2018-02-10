@@ -15,7 +15,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.4">
+            android:layout_weight="@dimen/input_weight">
 
             <ua.sergeimunovarov.tcalc.main.views.CustomEditText
                 android:id="@+id/input"

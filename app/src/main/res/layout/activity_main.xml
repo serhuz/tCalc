@@ -1,5 +1,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="actionsModel"
+            type="ua.sergeimunovarov.tcalc.main.actions.ActionsModel"/>
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +43,7 @@
                 android:id="@+id/scroll_textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_above="@+id/actions_layout"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:background="@color/color_background_result"
@@ -49,6 +57,11 @@
                     tools:text="= 01:10:30"/>
 
             </HorizontalScrollView>
+
+            <include
+                android:id="@+id/actions_layout"
+                layout="@layout/layout_actions"
+                bind:model="@{actionsModel}"/>
 
         </RelativeLayout>
 

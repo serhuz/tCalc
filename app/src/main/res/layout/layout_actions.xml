@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © Sergei Munovarov. All rights reserved.
+  ~ See LICENCE.txt for license details.
+  -->
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="ua.sergeimunovarov.tcalc.main.actions.ActionsModel"/>
+    </data>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        tools:ignore="ObsoleteLayoutParam">
+
+        <TextSwitcher
+            android:id="@+id/indicator_format"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:onClick="@{()-> model.selectResultFormat()}"
+            android:text="@{model.mResultFormat}"
+            bind:inAnimation="@{@anim/fade_in}"
+            bind:outAnimation="@{@anim/fade_out}"
+            tools:text="HH:MM:SS"/>
+
+        <ImageButton
+            android:id="@+id/btn_history_toggle"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_toLeftOf="@+id/btn_copy"
+            android:layout_toStartOf="@+id/btn_copy"
+            android:background="@null"
+            android:onClick="@{()->model.toggleHistory()}"
+            app:srcCompat="@drawable/ic_history"/>
+
+        <ImageButton
+            android:id="@+id/btn_copy"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_toLeftOf="@+id/btn_menu"
+            android:layout_toStartOf="@+id/btn_menu"
+            android:background="@null"
+            android:onClick="@{()-> model.copyContent()}"
+            app:srcCompat="@drawable/ic_copy"/>
+
+        <ImageButton
+            android:id="@+id/btn_menu"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@null"
+            android:onClick="@{(view)-> model.openMenu(view)}"
+            app:srcCompat="@drawable/ic_more"/>
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © Sergei Munovarov. All rights reserved.
+  ~ See LICENCE.txt for license details.
+  -->
+
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/FormatIndicatorStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="28dp"/>

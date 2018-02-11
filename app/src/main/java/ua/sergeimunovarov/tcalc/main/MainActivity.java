@@ -25,10 +25,12 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.text.Editable;
 import android.text.InputType;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +46,7 @@ import ua.sergeimunovarov.tcalc.Patterns;
 import ua.sergeimunovarov.tcalc.R;
 import ua.sergeimunovarov.tcalc.databinding.ActivityMainBinding;
 import ua.sergeimunovarov.tcalc.help.HelpActivity;
+import ua.sergeimunovarov.tcalc.main.actions.ActionsModel;
 import ua.sergeimunovarov.tcalc.main.history.HistoryDaoLoader;
 import ua.sergeimunovarov.tcalc.main.history.HistoryDialogFragment;
 import ua.sergeimunovarov.tcalc.main.history.db.Entry;
@@ -61,7 +64,7 @@ import ua.sergeimunovarov.tcalc.settings.SettingsActivity;
 
 public class MainActivity extends AbstractTransitionActivity implements
         FormatDialogFragment.FormatSelectionListener, InputListener,
-        InsertTimeDialogFragment.TimeInsertionListener, InsertListener {
+        InsertTimeDialogFragment.TimeInsertionListener, InsertListener, ActionsModel.ActionListener {
 
     public static final String BRACKETS = "()";
     public static final char PAR_LEFT = '(';
@@ -114,18 +117,35 @@ public class MainActivity extends AbstractTransitionActivity implements
     private Result mStoredResult = null;
 
     private HistoryDao mDao;
+    private ActivityMainBinding mBinding;
+    private ActionsModel mActionsModel;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
-        mInputBox = binding.input;
-        mResultTextView = binding.result;
-
         Application.getAppComponent().inject(this);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        // For some reason factory is set after setText on TextSwitcher in binding causing NPE
+        mBinding.actionsLayout.indicatorFormat.setFactory(
+                () -> LayoutInflater
+                        .from(MainActivity.this)
+                        .inflate(
+                                R.layout.view_indicator_format,
+                                mBinding.actionsLayout.indicatorFormat,
+                                false
+                        )
+        );
+        mActionsModel = new ActionsModel(
+                getResources().getStringArray(R.array.formats)[preferences.loadFormatPreference()],
+                this
+        );
+        mBinding.setActionsModel(mActionsModel);
+
+        mInputBox = mBinding.input;
+        mResultTextView = mBinding.result;
 
         getSupportLoaderManager().initLoader(CALC_LOADER_ID, null, mResultCallbacks);
         getSupportLoaderManager().initLoader(DAO_LOADER_ID, null, mDaoCallbacks);
@@ -185,52 +205,6 @@ public class MainActivity extends AbstractTransitionActivity implements
         mCalculationResult = savedInstanceState.getParcelable(KEY_RESULT);
         mStoredResult = savedInstanceState.getParcelable(KEY_MEMORY);
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            menu.getItem(0).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-            menu.getItem(1).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE && mHasPermanentMenuKey) {
-            menu.getItem(0).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-            menu.getItem(1).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        }
-
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_exit:
-                finish();
-                return true;
-            case R.id.action_instructions:
-                launchActivity(new Intent(MainActivity.this, HelpActivity.class));
-                return true;
-            case R.id.action_format:
-                showDialog(FormatDialogFragment.create(), TAG_FORMAT);
-                return true;
-            case R.id.action_timestamp:
-                showDialog(InsertTimeDialogFragment.create(), TAG_TSTAMP);
-            case R.id.action_copy:
-                copyResultToClipboard();
-                return true;
-            case R.id.action_settings:
-                launchActivity(new Intent(MainActivity.this, SettingsActivity.class));
-                return true;
-            case R.id.action_history:
-                showDialog(HistoryDialogFragment.create(), TAG_HISTORY);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
 
     private void showDialog(@NonNull AppCompatDialogFragment fragment, @NonNull String tag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -293,6 +267,9 @@ public class MainActivity extends AbstractTransitionActivity implements
     @Override
     public void onOutputFormatChanged(int which) {
         mOutputFormat = which;
+        mActionsModel.mResultFormat.set(getResources().getStringArray(R.array.formats)[which]);
+
+        // TODO add ability to change this behavior via settings
         onCalculateResult();
     }
 
@@ -459,6 +436,16 @@ public class MainActivity extends AbstractTransitionActivity implements
 
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            onOpenMenu(mBinding.actionsLayout.btnMenu);
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
     public void onTimeSelected(String timestamp) {
         insertCharacter(timestamp);
     }
@@ -467,6 +454,52 @@ public class MainActivity extends AbstractTransitionActivity implements
     @Override
     public void onInsert(Entry entry) {
         insertCharacter(entry.resultValue());
+    }
+
+
+    @Override
+    public void onOpenMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu.inflate(R.menu.menu_more);
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.action_exit:
+                    finish();
+                    break;
+                case R.id.action_instructions:
+                    launchActivity(new Intent(MainActivity.this, HelpActivity.class));
+                    break;
+                case R.id.action_timestamp:
+                    showDialog(InsertTimeDialogFragment.create(), TAG_TSTAMP);
+                    break;
+                case R.id.action_settings:
+                    launchActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                    break;
+                default:
+                    throw new IllegalStateException("Illegal item id: " + item.getItemId());
+            }
+            return true;
+        });
+        popupMenu.show();
+    }
+
+
+    @Override
+    public void onCopyContent() {
+        copyResultToClipboard();
+    }
+
+
+    @Override
+    public void onToggleHistory() {
+        // TODO show history in bottom sheet
+        showDialog(HistoryDialogFragment.create(), TAG_HISTORY);
+    }
+
+
+    @Override
+    public void onSelectResultFormat() {
+        showDialog(FormatDialogFragment.create(), TAG_FORMAT);
     }
 
 

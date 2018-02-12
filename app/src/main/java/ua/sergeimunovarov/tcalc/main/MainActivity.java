@@ -5,17 +5,16 @@
 
 package ua.sergeimunovarov.tcalc.main;
 
-import android.app.ActionBar;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -23,19 +22,17 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.text.Editable;
-import android.text.InputType;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewConfiguration;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 import javax.inject.Inject;
 
@@ -47,12 +44,11 @@ import ua.sergeimunovarov.tcalc.R;
 import ua.sergeimunovarov.tcalc.databinding.ActivityMainBinding;
 import ua.sergeimunovarov.tcalc.help.HelpActivity;
 import ua.sergeimunovarov.tcalc.main.actions.ActionsModel;
-import ua.sergeimunovarov.tcalc.main.history.HistoryDaoLoader;
-import ua.sergeimunovarov.tcalc.main.history.HistoryDialogFragment;
+import ua.sergeimunovarov.tcalc.main.history.HistoryAdapter;
+import ua.sergeimunovarov.tcalc.main.history.HistoryBottomSheetViewModel;
+import ua.sergeimunovarov.tcalc.main.history.HistoryEntryClickListener;
 import ua.sergeimunovarov.tcalc.main.history.db.Entry;
-import ua.sergeimunovarov.tcalc.main.history.db.HistoryDao;
-import ua.sergeimunovarov.tcalc.main.history.db.HistoryDbHelper;
-import ua.sergeimunovarov.tcalc.main.history.listeners.InsertListener;
+import ua.sergeimunovarov.tcalc.main.history.db.EntryDao;
 import ua.sergeimunovarov.tcalc.main.input.BaseInputFragment;
 import ua.sergeimunovarov.tcalc.main.input.CalcInputFragment;
 import ua.sergeimunovarov.tcalc.main.input.InputListener;
@@ -64,7 +60,7 @@ import ua.sergeimunovarov.tcalc.settings.SettingsActivity;
 
 public class MainActivity extends AbstractTransitionActivity implements
         FormatDialogFragment.FormatSelectionListener, InputListener,
-        InsertTimeDialogFragment.TimeInsertionListener, InsertListener, ActionsModel.ActionListener {
+        InsertTimeDialogFragment.TimeInsertionListener, ActionsModel.ActionListener, HistoryEntryClickListener {
 
     public static final String BRACKETS = "()";
     public static final char PAR_LEFT = '(';
@@ -75,12 +71,10 @@ public class MainActivity extends AbstractTransitionActivity implements
     private static final String KEY_CALC_ERROR = "err";
     private static final String KEY_MEMORY = "mem";
     private static final String KEY_RESULT = "result";
-    private static final String KEY_PENDING = "pending";
 
     private static final String TAG_FORMAT = "fmt";
     private static final String TAG_INPUT = "inp";
     private static final String TAG_TSTAMP = "tstamp";
-    private static final String TAG_HISTORY = "hist";
 
     /**
      * Clipboard label.
@@ -88,23 +82,20 @@ public class MainActivity extends AbstractTransitionActivity implements
     private static final String LABEL = MainActivity.class.getName();
 
     private static final int CALC_LOADER_ID = 128;
-    private static final int DAO_LOADER_ID = 130;
 
     private final ResultLoaderCallbacks mResultCallbacks = new ResultLoaderCallbacks();
-    private final HistoryDaoLoaderCallbacks mDaoCallbacks = new HistoryDaoLoaderCallbacks();
 
     @Inject
     ApplicationPreferences preferences;
 
     @Inject
-    HistoryDbHelper mDbHelper;
+    EntryDao mDao;
 
-    private List<Entry> mPendingEntries;
+    @Inject
+    ExecutorService mIOExecutor;
 
     private EditText mInputBox;
     private TextView mResultTextView;
-
-    private boolean mHasPermanentMenuKey;
 
     private Vibrator mVibrator;
 
@@ -116,9 +107,10 @@ public class MainActivity extends AbstractTransitionActivity implements
     private Result mCalculationResult = null;
     private Result mStoredResult = null;
 
-    private HistoryDao mDao;
     private ActivityMainBinding mBinding;
     private ActionsModel mActionsModel;
+    private BottomSheetBehavior<View> mBottomSheetBehavior;
+    private HistoryBottomSheetViewModel mHistoryBottomSheetViewModel;
 
 
     @Override
@@ -128,7 +120,8 @@ public class MainActivity extends AbstractTransitionActivity implements
         Application.getAppComponent().inject(this);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        // For some reason factory is set after setText on TextSwitcher in binding causing NPE
+        // For some reason factory is set after setText is called on TextSwitcher
+        // in generated binding class causing NPE
         mBinding.actionsLayout.indicatorFormat.setFactory(
                 () -> LayoutInflater
                         .from(MainActivity.this)
@@ -147,43 +140,74 @@ public class MainActivity extends AbstractTransitionActivity implements
         mInputBox = mBinding.input;
         mResultTextView = mBinding.result;
 
+        View historyRoot = mBinding.historyBottonSheet.getRoot();
+        mBottomSheetBehavior = BottomSheetBehavior.from(historyRoot);
+
+        mBinding.historyBottonSheet.historyEntries.setAdapter(new HistoryAdapter(this));
+
+        mHistoryBottomSheetViewModel = ViewModelProviders.of(this).get(HistoryBottomSheetViewModel.class);
+        mBinding.historyBottonSheet.setModel(mHistoryBottomSheetViewModel);
+        mHistoryBottomSheetViewModel.mLiveHistoryItems.observe(
+                this,
+                historyItems -> {
+                    if (historyItems != null && !historyItems.isEmpty()) {
+                        mHistoryBottomSheetViewModel.mEntries.clear();
+                        mHistoryBottomSheetViewModel.mEntries.addAll(historyItems);
+                    }
+                }
+        );
+
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        mBinding.numpadContainer.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        mBinding.numpadContainer.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+
+                        int height = mBinding.numpadContainer.getHeight();
+
+                        ViewGroup.LayoutParams layoutParams = historyRoot.getLayoutParams();
+                        layoutParams.height = height;
+                        historyRoot.setLayoutParams(layoutParams);
+                        historyRoot.requestLayout();
+
+                        mBottomSheetBehavior.setPeekHeight(height);
+                    }
+                }
+        );
+
         getSupportLoaderManager().initLoader(CALC_LOADER_ID, null, mResultCallbacks);
-        getSupportLoaderManager().initLoader(DAO_LOADER_ID, null, mDaoCallbacks);
-
-        mHasPermanentMenuKey = ViewConfiguration.get(this).hasPermanentMenuKey();
-
-        configureInputBehavior();
-        configureActionBar();
 
         mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-
-        if (savedInstanceState == null) {
-            mPendingEntries = new ArrayList<>();
-        } else {
-            mPendingEntries = savedInstanceState.getParcelableArrayList(KEY_PENDING);
-        }
-        mDao = new HistoryDao(mDbHelper.getWritableDatabase());
-    }
-
-
-    private void configureInputBehavior() {
-        mInputBox.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        mInputBox.setTextIsSelectable(true);
     }
 
 
     /**
-     * Configures ActionBar visibility for landscape and portrait orientations.
+     * Inserts string into EditText element. If multiple characters inside
+     * EditText are selected, they are replaced with the given character.
+     *
+     * @param cs text to insert
      */
-    private void configureActionBar() {
-        int orientation = getResources().getConfiguration().orientation;
-        ActionBar bar = getActionBar();
-        if (bar != null) {
-            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                if (getActionBar().isShowing() && mHasPermanentMenuKey) getActionBar().hide();
-            } else if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                if (!getActionBar().isShowing()) getActionBar().show();
-            }
+    private void insertCharacter(CharSequence cs) {
+        int selectionStart = mInputBox.getSelectionStart();
+        int selectionEnd = mInputBox.getSelectionEnd();
+
+        Editable editable = mInputBox.getText();
+        if (selectionStart == selectionEnd) {
+            editable.insert(selectionStart, cs);
+        } else {
+            editable.replace(selectionStart, selectionEnd, cs);
+            mInputBox.setSelection(selectionEnd - (selectionEnd - selectionStart) + 1);
+        }
+
+        this.vibrate();
+    }
+
+
+    private void vibrate() {
+        if (mVibroEnabled && mVibrator.hasVibrator()) {
+            mVibrator.vibrate(mVibroDuration);
         }
     }
 
@@ -194,7 +218,6 @@ public class MainActivity extends AbstractTransitionActivity implements
         outState.putParcelable(KEY_RESULT, mCalculationResult);
         outState.putParcelable(KEY_MEMORY, mStoredResult);
         outState.putBoolean(KEY_CALC_ERROR, mCalculationError);
-        outState.putParcelableArrayList(KEY_PENDING, (ArrayList<? extends Parcelable>) mPendingEntries);
     }
 
 
@@ -204,35 +227,6 @@ public class MainActivity extends AbstractTransitionActivity implements
         mCalculationError = savedInstanceState.getBoolean(KEY_CALC_ERROR);
         mCalculationResult = savedInstanceState.getParcelable(KEY_RESULT);
         mStoredResult = savedInstanceState.getParcelable(KEY_MEMORY);
-    }
-
-    private void showDialog(@NonNull AppCompatDialogFragment fragment, @NonNull String tag) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        Fragment foundFragment = fragmentManager.findFragmentByTag(tag);
-        if (foundFragment != null) transaction.remove(foundFragment);
-
-        fragment.show(transaction, tag);
-    }
-
-
-    /**
-     * Copies calculation result to system clipboard if and only if
-     * there are no calculation errors.
-     */
-    private void copyResultToClipboard() {
-        if (!mCalculationError && mCalculationResult != null) {
-            ClipData clipData = ClipData.newPlainText(LABEL, mCalculationResult.value());
-
-            ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-            if (clipboardManager != null) {
-                clipboardManager.setPrimaryClip(clipData);
-                Toast.makeText(this, getString(R.string.toast_result_copied), Toast.LENGTH_SHORT).show();
-            } else {
-                Log.w(TAG, "ClipboardManager is null");
-            }
-        }
     }
 
 
@@ -406,54 +400,9 @@ public class MainActivity extends AbstractTransitionActivity implements
     }
 
 
-    /**
-     * Inserts string into EditText element. If multiple characters inside
-     * EditText are selected, they are replaced with the given character.
-     *
-     * @param cs text to insert
-     */
-    private void insertCharacter(CharSequence cs) {
-        int selectionStart = mInputBox.getSelectionStart();
-        int selectionEnd = mInputBox.getSelectionEnd();
-
-        Editable editable = mInputBox.getText();
-        if (selectionStart == selectionEnd) {
-            editable.insert(selectionStart, cs);
-        } else {
-            editable.replace(selectionStart, selectionEnd, cs);
-            mInputBox.setSelection(selectionEnd - (selectionEnd - selectionStart) + 1);
-        }
-
-        this.vibrate();
-    }
-
-
-    private void vibrate() {
-        if (mVibroEnabled && mVibrator.hasVibrator()) {
-            mVibrator.vibrate(mVibroDuration);
-        }
-    }
-
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU) {
-            onOpenMenu(mBinding.actionsLayout.btnMenu);
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }
-
-
     @Override
     public void onTimeSelected(String timestamp) {
         insertCharacter(timestamp);
-    }
-
-
-    @Override
-    public void onInsert(Entry entry) {
-        insertCharacter(entry.resultValue());
     }
 
 
@@ -484,22 +433,63 @@ public class MainActivity extends AbstractTransitionActivity implements
     }
 
 
+    private void showDialog(@NonNull AppCompatDialogFragment fragment, @NonNull String tag) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        Fragment foundFragment = fragmentManager.findFragmentByTag(tag);
+        if (foundFragment != null) transaction.remove(foundFragment);
+
+        fragment.show(transaction, tag);
+    }
+
+
     @Override
     public void onCopyContent() {
         copyResultToClipboard();
     }
 
 
+    /**
+     * Copies calculation result to system clipboard if and only if
+     * there are no calculation errors.
+     */
+    private void copyResultToClipboard() {
+        if (!mCalculationError && mCalculationResult != null) {
+            ClipData clipData = ClipData.newPlainText(LABEL, mCalculationResult.value());
+
+            ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            if (clipboardManager != null) {
+                clipboardManager.setPrimaryClip(clipData);
+                Toast.makeText(this, getString(R.string.toast_result_copied), Toast.LENGTH_SHORT).show();
+            } else {
+                Log.w(TAG, "ClipboardManager is null");
+            }
+        }
+    }
+
+
     @Override
     public void onToggleHistory() {
-        // TODO show history in bottom sheet
-        showDialog(HistoryDialogFragment.create(), TAG_HISTORY);
+        int state = mBottomSheetBehavior.getState();
+        mBottomSheetBehavior.setState(
+                state == BottomSheetBehavior.STATE_HIDDEN ?
+                        BottomSheetBehavior.STATE_COLLAPSED :
+                        BottomSheetBehavior.STATE_HIDDEN
+        );
     }
 
 
     @Override
     public void onSelectResultFormat() {
         showDialog(FormatDialogFragment.create(), TAG_FORMAT);
+    }
+
+
+    @Override
+    public void onInsert(Entry item) {
+        // TODO add ability to check for result time format and convert to current result format when inserting
+        insertCharacter(item.getResultValue());
     }
 
 
@@ -528,17 +518,14 @@ public class MainActivity extends AbstractTransitionActivity implements
                     mCalculationResult = data;
                     mResultTextView.setText(getString(R.string.eq, data.value()));
                     vibrate();
-                    Entry entry = Entry.create(null,
-                            mInputBox.getText().toString(),
-                            data.type().toString(),
-                            data.value(),
-                            System.currentTimeMillis(
-                            ));
-                    if (mDao != null) {
-                        mDao.addEntry(entry);
-                    } else {
-                        mPendingEntries.add(entry);
-                    }
+                    mIOExecutor.execute(() -> mDao.insertItem(
+                            new Entry(
+                                    mInputBox.getText().toString(),
+                                    data.type(),
+                                    data.value(),
+                                    System.currentTimeMillis()
+                            )
+                    ));
                     break;
             }
 
@@ -548,30 +535,6 @@ public class MainActivity extends AbstractTransitionActivity implements
 
         @Override
         public void onLoaderReset(Loader<Result> loader) {
-
-        }
-    }
-
-
-    private class HistoryDaoLoaderCallbacks implements LoaderManager.LoaderCallbacks<HistoryDao> {
-
-        @Override
-        public Loader<HistoryDao> onCreateLoader(int id, Bundle args) {
-            return new HistoryDaoLoader(MainActivity.this, mDbHelper);
-        }
-
-
-        @Override
-        public void onLoadFinished(Loader<HistoryDao> loader, HistoryDao data) {
-            mDao = data;
-            if (!mPendingEntries.isEmpty()) {
-                mDao.addEntries(mPendingEntries);
-            }
-        }
-
-
-        @Override
-        public void onLoaderReset(Loader<HistoryDao> loader) {
 
         }
     }

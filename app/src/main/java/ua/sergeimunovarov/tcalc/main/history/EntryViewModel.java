@@ -6,20 +6,19 @@
 package ua.sergeimunovarov.tcalc.main.history;
 
 import ua.sergeimunovarov.tcalc.main.history.db.Entry;
-import ua.sergeimunovarov.tcalc.main.history.listeners.HistoryEntryClickListener;
 
 
-public class HistoryEntryViewModel {
+public class EntryViewModel {
 
     private final HistoryEntryClickListener mClickListener;
 
 
-    public HistoryEntryViewModel(HistoryEntryClickListener clickListener) {
+    public EntryViewModel(HistoryEntryClickListener clickListener) {
         mClickListener = clickListener;
     }
 
 
-    public void insert(Entry entry) {
-        mClickListener.onInsert(entry);
+    public void insert(Entry item) {
+        mClickListener.onInsert(item);
     }
 }

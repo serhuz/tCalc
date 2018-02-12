@@ -10,17 +10,12 @@ import android.support.test.filters.SmallTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.junit.After;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import it.cosenonjaviste.daggermock.InjectFromComponent;
-import ua.sergeimunovarov.tcalc.ClearDatabaseRule;
 import ua.sergeimunovarov.tcalc.DaggerMockRule;
 import ua.sergeimunovarov.tcalc.R;
-import ua.sergeimunovarov.tcalc.main.history.db.HistoryDbHelper;
 
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -37,23 +32,11 @@ import static cortado.Cortado.onView;
 @SmallTest
 public class MainActivityHistoryTest {
 
-    @ClassRule
-    public static final ClearDatabaseRule CLEAR_DATABASE_RULE = new ClearDatabaseRule(HistoryDbHelper.DB_NAME);
-
     @Rule
     public final DaggerMockRule daggerMockRule = new DaggerMockRule();
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
-
-    @InjectFromComponent
-    HistoryDbHelper mDbHelper;
-
-
-    @After
-    public void tearDown() throws Exception {
-        mDbHelper.clearData();
-    }
 
 
     @Test

@@ -12,11 +12,14 @@ import android.support.v7.widget.RecyclerView;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.List;
+
+import ua.sergeimunovarov.tcalc.main.history.db.Entry;
 
 
-public final class BindingAdapters {
+public final class RecyclerViewBindingAdapters {
 
-    private BindingAdapters() {
+    private RecyclerViewBindingAdapters() {
         throw new AssertionError();
     }
 
@@ -25,6 +28,14 @@ public final class BindingAdapters {
     public static void setDividerItemDecorator(RecyclerView view,
                                                @DecoratorOrientation int orientation) {
         view.addItemDecoration(new DividerItemDecoration(view.getContext(), orientation));
+    }
+
+
+    @BindingAdapter("historyItems")
+    public static void setHistoryItems(RecyclerView view,
+                                       List<Entry> items) {
+        HistoryAdapter.class.cast(view.getAdapter()).setItems(items);
+        view.scrollToPosition(0);
     }
 
 

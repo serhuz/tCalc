@@ -7,69 +7,86 @@
         <variable
             name="actionsModel"
             type="ua.sergeimunovarov.tcalc.main.actions.ActionsModel"/>
+
+        <variable
+            name="inputType"
+            type="android.text.InputType"/>
     </data>
 
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
-        android:background="@color/color_background"
-        android:orientation="vertical"
-        android:weightSum="1">
+        tools:context=".main.MainActivity">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="@dimen/input_weight">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/color_background"
+            android:orientation="vertical"
+            android:weightSum="1">
 
-            <ua.sergeimunovarov.tcalc.main.views.CustomEditText
-                android:id="@+id/input"
-                style="@style/InputStyle"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/scroll_textView"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:hint="@string/hint_expression"
-                android:textSize="@dimen/textview_text_size"/>
+                android:layout_height="0dp"
+                android:layout_weight="@dimen/input_weight">
 
-            <HorizontalScrollView
-                android:id="@+id/scroll_textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/actions_layout"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:background="@color/color_background_result"
-                android:scrollbars="none">
-
-                <TextView
-                    android:id="@+id/result"
-                    style="@style/ResultStyle"
-                    android:layout_width="wrap_content"
+                <ua.sergeimunovarov.tcalc.main.views.CustomEditText
+                    android:id="@+id/input"
+                    style="@style/InputStyle"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="= 01:10:30"/>
+                    android:layout_above="@+id/scroll_textView"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:hint="@string/hint_expression"
+                    android:textSize="@dimen/textview_text_size"
+                    bind:rawInputType="@{inputType.TYPE_CLASS_TEXT}"
+                    bind:textIsSelectable="@{true}"/>
 
-            </HorizontalScrollView>
+                <HorizontalScrollView
+                    android:id="@+id/scroll_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/actions_layout"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:background="@color/color_background_result"
+                    android:scrollbars="none">
 
-            <include
-                android:id="@+id/actions_layout"
-                layout="@layout/layout_actions"
-                bind:model="@{actionsModel}"/>
+                    <TextView
+                        android:id="@+id/result"
+                        style="@style/ResultStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="= 01:10:30"/>
 
-        </RelativeLayout>
+                </HorizontalScrollView>
 
-        <FrameLayout
-            android:id="@+id/numpad_container"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="@dimen/numpad_weight"/>
+                <include
+                    android:id="@+id/actions_layout"
+                    layout="@layout/layout_actions"
+                    bind:model="@{actionsModel}"/>
 
-    </LinearLayout>
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/numpad_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="@dimen/numpad_weight"/>
+
+        </LinearLayout>
+
+        <include
+            android:id="@+id/history_botton_sheet"
+            layout="@layout/layout_history"/>
+
+    </android.support.design.widget.CoordinatorLayout>
 </layout>

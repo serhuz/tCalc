@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ua.sergeimunovarov.tcalc.main.history.db.Entry;
-import ua.sergeimunovarov.tcalc.main.history.listeners.HistoryEntryClickListener;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -19,17 +18,17 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 
-public class HistoryEntryViewModelTest {
+public class EntryViewModelTest {
 
 
     private HistoryEntryClickListener mMock;
-    private HistoryEntryViewModel mHistoryEntryViewModel;
+    private EntryViewModel mEntryViewModel;
 
 
     @Before
     public void setUp() throws Exception {
         mMock = mock(HistoryEntryClickListener.class);
-        mHistoryEntryViewModel = new HistoryEntryViewModel(mMock);
+        mEntryViewModel = new EntryViewModel(mMock);
     }
 
 
@@ -43,7 +42,7 @@ public class HistoryEntryViewModelTest {
     public void insert() throws Exception {
         Entry entry = mock(Entry.class);
 
-        mHistoryEntryViewModel.insert(entry);
+        mEntryViewModel.insert(entry);
 
         verify(mMock, times(1)).onInsert(eq(entry));
     }

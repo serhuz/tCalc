@@ -6,6 +6,7 @@
 package ua.sergeimunovarov.tcalc.main.history;
 
 import android.support.annotation.NonNull;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -13,26 +14,25 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.sergeimunovarov.tcalc.databinding.ItemHistoryBinding;
+import ua.sergeimunovarov.tcalc.databinding.ItemEntryBinding;
 import ua.sergeimunovarov.tcalc.main.history.db.Entry;
-import ua.sergeimunovarov.tcalc.main.history.listeners.HistoryEntryClickListener;
 
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.EntryViewHolder> {
 
-    private final HistoryEntryViewModel mViewModel;
-    private final List<Entry> mEntries;
+    private final EntryViewModel mViewModel;
+    private final List<Entry> mItems;
 
 
     public HistoryAdapter(HistoryEntryClickListener clickListener) {
-        mViewModel = new HistoryEntryViewModel(clickListener);
-        mEntries = new ArrayList<>();
+        mViewModel = new EntryViewModel(clickListener);
+        mItems = new ArrayList<>();
     }
 
 
     @Override
     public EntryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemHistoryBinding binding = ItemHistoryBinding.inflate(
+        ItemEntryBinding binding = ItemEntryBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
                 false
@@ -45,42 +45,72 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.EntryVie
     public void onBindViewHolder(EntryViewHolder holder, int position) {
         holder.setViewModel(mViewModel);
 
-        Entry entry = mEntries.get(position);
+        Entry entry = mItems.get(position);
         holder.bind(entry);
     }
 
 
     @Override
     public int getItemCount() {
-        return mEntries.size();
+        return mItems.size();
     }
 
 
-    public void setEntries(@NonNull List<Entry> entries) {
-        mEntries.clear();
-        mEntries.addAll(entries);
-        notifyDataSetChanged();
+    public void setItems(@NonNull List<Entry> items) {
+        if (items.isEmpty()) {
+            mItems.addAll(items);
+            notifyDataSetChanged();
+        } else {
+            DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+                @Override
+                public int getOldListSize() {
+                    return mItems.size();
+                }
+
+
+                @Override
+                public int getNewListSize() {
+                    return items.size();
+                }
+
+
+                @Override
+                public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                    return mItems.get(oldItemPosition).getId() == items.get(newItemPosition).getId();
+                }
+
+
+                @Override
+                public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                    return mItems.get(oldItemPosition).equals(items.get(newItemPosition));
+                }
+            });
+            mItems.clear();
+            mItems.addAll(items);
+            result.dispatchUpdatesTo(this);
+        }
     }
 
 
+    @SuppressWarnings("WeakerAccess")
     static class EntryViewHolder extends RecyclerView.ViewHolder {
 
-        private final ItemHistoryBinding mBinding;
+        private final ItemEntryBinding mBinding;
 
 
-        public EntryViewHolder(ItemHistoryBinding binding) {
+        public EntryViewHolder(ItemEntryBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }
 
 
-        public void bind(Entry entry) {
-            mBinding.setEntry(entry);
+        public void bind(Entry item) {
+            mBinding.setItem(item);
             mBinding.executePendingBindings();
         }
 
 
-        public void setViewModel(HistoryEntryViewModel viewModel) {
+        public void setViewModel(EntryViewModel viewModel) {
             mBinding.setModel(viewModel);
         }
     }

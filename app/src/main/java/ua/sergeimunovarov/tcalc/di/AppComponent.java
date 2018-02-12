@@ -13,8 +13,7 @@ import dagger.Component;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.main.FormatDialogFragment;
 import ua.sergeimunovarov.tcalc.main.MainActivity;
-import ua.sergeimunovarov.tcalc.main.history.HistoryDialogFragment;
-import ua.sergeimunovarov.tcalc.main.history.db.HistoryDbHelper;
+import ua.sergeimunovarov.tcalc.main.history.HistoryBottomSheetViewModel;
 import ua.sergeimunovarov.tcalc.settings.SettingsFragment;
 
 
@@ -30,13 +29,11 @@ public interface AppComponent {
 
     ApplicationPreferences appPreferences();
 
-    HistoryDbHelper dbHelper();
-
     void inject(MainActivity mainActivity);
 
     void inject(FormatDialogFragment formatDialogFragment);
 
     void inject(SettingsFragment settingsFragment);
 
-    void inject(HistoryDialogFragment historyDialogFragment);
+    void inject(HistoryBottomSheetViewModel historyBottomSheetViewModel);
 }

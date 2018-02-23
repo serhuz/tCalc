@@ -12,7 +12,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
@@ -44,6 +43,7 @@ import ua.sergeimunovarov.tcalc.R;
 import ua.sergeimunovarov.tcalc.databinding.ActivityMainBinding;
 import ua.sergeimunovarov.tcalc.help.HelpActivity;
 import ua.sergeimunovarov.tcalc.main.actions.ActionsModel;
+import ua.sergeimunovarov.tcalc.main.feedback.HapticFeedback;
 import ua.sergeimunovarov.tcalc.main.history.HistoryAdapter;
 import ua.sergeimunovarov.tcalc.main.history.HistoryBottomSheetViewModel;
 import ua.sergeimunovarov.tcalc.main.history.HistoryEntryClickListener;
@@ -94,10 +94,11 @@ public class MainActivity extends AbstractTransitionActivity implements
     @Inject
     ExecutorService mIOExecutor;
 
+    @Inject
+    HapticFeedback mVibrator;
+
     private EditText mInputBox;
     private TextView mResultTextView;
-
-    private Vibrator mVibrator;
 
     private int mOutputFormat;
     private boolean mVibroEnabled;
@@ -178,8 +179,6 @@ public class MainActivity extends AbstractTransitionActivity implements
         );
 
         getSupportLoaderManager().initLoader(CALC_LOADER_ID, null, mResultCallbacks);
-
-        mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
     }
 
 
@@ -201,14 +200,7 @@ public class MainActivity extends AbstractTransitionActivity implements
             mInputBox.setSelection(selectionEnd - (selectionEnd - selectionStart) + 1);
         }
 
-        this.vibrate();
-    }
-
-
-    private void vibrate() {
-        if (mVibroEnabled && mVibrator.hasVibrator()) {
-            mVibrator.vibrate(mVibroDuration);
-        }
+        mVibrator.vibrate();
     }
 
 
@@ -233,9 +225,6 @@ public class MainActivity extends AbstractTransitionActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-
-        mVibroEnabled = preferences.loadVibrationPreference();
-        mVibroDuration = preferences.loadVibrationDurationPreference();
         mOutputFormat = preferences.loadFormatPreference();
 
         BaseInputFragment inputFragment;
@@ -250,7 +239,6 @@ public class MainActivity extends AbstractTransitionActivity implements
                 throw new IllegalStateException("Unrecognized preference");
         }
 
-        Log.d(TAG, "Input fragment is " + inputFragment.getClass().getSimpleName());
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.numpad_container, inputFragment, TAG_INPUT)
@@ -292,7 +280,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         mResultTextView.setText("");
         mCalculationResult = null;
         mCalculationError = false;
-        vibrate();
+        mVibrator.vibrate();
     }
 
 
@@ -315,7 +303,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         }
 
         mInputBox.setSelection(selectionEnd - selectionLength);
-        this.vibrate();
+        mVibrator.vibrate();
     }
 
 
@@ -337,7 +325,7 @@ public class MainActivity extends AbstractTransitionActivity implements
             sb.insert(selectionEnd + 1, PAR_RIGHT);
             mInputBox.setText(sb.toString());
             mInputBox.setSelection(selectionEnd + 2);
-            vibrate();
+            mVibrator.vibrate();
         }
     }
 
@@ -352,7 +340,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         if (mCalculationResult != null && !mCalculationError) {
             mStoredResult = mCalculationResult;
             Toast.makeText(this, R.string.toast_ms, Toast.LENGTH_SHORT).show();
-            vibrate();
+            mVibrator.vibrate();
         }
     }
 
@@ -380,7 +368,7 @@ public class MainActivity extends AbstractTransitionActivity implements
                 return;
         }
         insertCharacter(value);
-        vibrate();
+        mVibrator.vibrate();
     }
 
 
@@ -517,7 +505,7 @@ public class MainActivity extends AbstractTransitionActivity implements
                     mCalculationError = false;
                     mCalculationResult = data;
                     mResultTextView.setText(getString(R.string.eq, data.value()));
-                    vibrate();
+                    mVibrator.vibrate();
                     mIOExecutor.execute(() -> mDao.insertItem(
                             new Entry(
                                     mInputBox.getText().toString(),

@@ -6,21 +6,24 @@
 package ua.sergeimunovarov.tcalc.di;
 
 import android.content.Context;
+import android.os.Vibrator;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 
+import static android.content.Context.VIBRATOR_SERVICE;
+
 
 @Module
-public class ContextModule {
+public class ApplicationModule {
 
     private Context mContext;
 
 
-    public ContextModule(Context context) {
-        this.mContext = context;
+    public ApplicationModule(Context context) {
+        mContext = context;
     }
 
 
@@ -28,5 +31,11 @@ public class ContextModule {
     @Singleton
     protected Context provideContext() {
         return mContext.getApplicationContext();
+    }
+
+
+    @Provides
+    protected Vibrator provideVibrator() {
+        return (Vibrator) mContext.getSystemService(VIBRATOR_SERVICE);
     }
 }

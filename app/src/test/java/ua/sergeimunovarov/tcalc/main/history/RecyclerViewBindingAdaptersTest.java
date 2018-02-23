@@ -31,7 +31,7 @@ public class RecyclerViewBindingAdaptersTest {
         Entry item = new Entry("2+2", Result.ResultType.RESULT_OK, "4", 1000);
 
         List<Entry> items = Collections.singletonList(item);
-        RecyclerViewBindingAdapters.setItems(recyclerView, items);
+        RecyclerViewBindingAdapters.setHistoryItems(recyclerView, items);
 
         verify(adapter).setItems(eq(items));
     }

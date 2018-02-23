@@ -6,10 +6,8 @@
 package ua.sergeimunovarov.tcalc;
 
 import ua.sergeimunovarov.tcalc.di.AppComponent;
-import ua.sergeimunovarov.tcalc.di.ContextModule;
+import ua.sergeimunovarov.tcalc.di.ApplicationModule;
 import ua.sergeimunovarov.tcalc.di.DaggerAppComponent;
-import ua.sergeimunovarov.tcalc.di.DbModule;
-import ua.sergeimunovarov.tcalc.di.PreferencesModule;
 
 
 public class Application extends android.app.Application {
@@ -23,7 +21,7 @@ public class Application extends android.app.Application {
 
 
     public static void setAppComponent(AppComponent appComponent) {
-        Application.sAppComponent = appComponent;
+        sAppComponent = appComponent;
     }
 
 
@@ -36,9 +34,7 @@ public class Application extends android.app.Application {
 
     protected AppComponent buildAppComponent() {
         return DaggerAppComponent.builder()
-                .contextModule(new ContextModule(this))
-                .dbModule(new DbModule())
-                .preferencesModule(new PreferencesModule())
+                .applicationModule(new ApplicationModule(this))
                 .build();
     }
 }

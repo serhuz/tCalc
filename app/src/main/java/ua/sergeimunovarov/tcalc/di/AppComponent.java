@@ -19,9 +19,10 @@ import ua.sergeimunovarov.tcalc.settings.SettingsFragment;
 
 @Singleton
 @Component(modules = {
-        ContextModule.class,
+        ApplicationModule.class,
         DbModule.class,
-        PreferencesModule.class
+        PreferencesModule.class,
+        UtilsModule.class
 })
 public interface AppComponent {
 

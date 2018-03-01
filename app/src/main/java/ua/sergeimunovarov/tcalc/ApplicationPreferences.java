@@ -5,6 +5,7 @@
 
 package ua.sergeimunovarov.tcalc;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
@@ -19,10 +20,13 @@ import java.lang.annotation.RetentionPolicy;
 public class ApplicationPreferences {
 
     private final SharedPreferences mPreferences;
+    private final Context mContext;
 
 
-    public ApplicationPreferences(@NonNull SharedPreferences preferences) {
+    public ApplicationPreferences(@NonNull SharedPreferences preferences,
+                                  @NonNull Context context) {
         mPreferences = preferences;
+        mContext = context;
     }
 
 
@@ -42,6 +46,11 @@ public class ApplicationPreferences {
 
     public SharedPreferences getPreferences() {
         return mPreferences;
+    }
+
+
+    public String loadFormatPreferenceString() {
+        return mContext.getResources().getStringArray(R.array.formats)[loadFormatPreference()];
     }
 
 

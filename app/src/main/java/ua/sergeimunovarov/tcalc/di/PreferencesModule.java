@@ -23,6 +23,6 @@ public class PreferencesModule {
     @Singleton
     protected ApplicationPreferences provideApplicationPreferences(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return new ApplicationPreferences(sharedPreferences);
+        return new ApplicationPreferences(sharedPreferences, context);
     }
 }

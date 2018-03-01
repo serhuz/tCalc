@@ -101,8 +101,6 @@ public class MainActivity extends AbstractTransitionActivity implements
     private TextView mResultTextView;
 
     private int mOutputFormat;
-    private boolean mVibroEnabled;
-    private int mVibroDuration;
 
     private boolean mCalculationError = false;
     private Result mCalculationResult = null;
@@ -132,10 +130,11 @@ public class MainActivity extends AbstractTransitionActivity implements
                                 false
                         )
         );
-        mActionsModel = new ActionsModel(
-                getResources().getStringArray(R.array.formats)[preferences.loadFormatPreference()],
-                this
-        );
+
+        String initialFormat = preferences.loadFormatPreferenceString();
+        mActionsModel = ViewModelProviders
+                .of(this, new ActionsModel.Factory(initialFormat, this))
+                .get(ActionsModel.class);
         mBinding.setActionsModel(mActionsModel);
 
         mInputBox = mBinding.input;
@@ -146,7 +145,10 @@ public class MainActivity extends AbstractTransitionActivity implements
 
         mBinding.historyBottonSheet.historyEntries.setAdapter(new HistoryAdapter(this));
 
-        mHistoryBottomSheetViewModel = ViewModelProviders.of(this).get(HistoryBottomSheetViewModel.class);
+        mHistoryBottomSheetViewModel = ViewModelProviders
+                .of(this, new HistoryBottomSheetViewModel.Factory(mDao))
+                .get(HistoryBottomSheetViewModel.class);
+
         mBinding.historyBottonSheet.setModel(mHistoryBottomSheetViewModel);
         mHistoryBottomSheetViewModel.mLiveHistoryItems.observe(
                 this,

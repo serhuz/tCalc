@@ -5,13 +5,16 @@
 
 package ua.sergeimunovarov.tcalc.main.actions;
 
-import android.databinding.BaseObservable;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 import android.view.View;
 
+import ua.sergeimunovarov.tcalc.main.BaseObservableViewModel;
 
-public class ActionsModel extends BaseObservable {
+
+public class ActionsModel extends BaseObservableViewModel {
 
     public final ObservableField<String> mResultFormat;
 
@@ -19,7 +22,8 @@ public class ActionsModel extends BaseObservable {
     private final ActionListener mListener;
 
 
-    public ActionsModel(@NonNull String initialFormat, @NonNull ActionListener listener) {
+    public ActionsModel(@NonNull String initialFormat,
+                        @NonNull ActionListener listener) {
         mResultFormat = new ObservableField<>(initialFormat);
         mListener = listener;
     }
@@ -43,6 +47,31 @@ public class ActionsModel extends BaseObservable {
     public void selectResultFormat() {
         mListener.onSelectResultFormat();
     }
+
+
+    public static class Factory implements ViewModelProvider.Factory {
+
+        @NonNull
+        private final String mInitialFormat;
+        @NonNull
+        private final ActionListener mListener;
+
+
+        public Factory(@NonNull String initialFormat,
+                       @NonNull ActionListener listener) {
+            mInitialFormat = initialFormat;
+            mListener = listener;
+        }
+
+
+        @SuppressWarnings("unchecked")
+        @NonNull
+        @Override
+        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+            return (T) new ActionsModel(mInitialFormat, mListener);
+        }
+    }
+
 
 
     public interface ActionListener {

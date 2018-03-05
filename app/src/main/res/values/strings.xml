@@ -12,7 +12,6 @@
     <string name="title_activity_settings">Настройки</string>
     <string name="title_dialog_format">Формат результата</string>
     <string name="title_dialog_rate">Оценить приложение</string>
-    <string name="title_dialog_history">История</string>
 
     <!-- format labels -->
     <string name="format_hms">ЧЧ:ММ:СС</string>
@@ -34,13 +33,11 @@
     </string-array>
 
     <!-- menu actions -->
-    <string name="action_copy">Копировать результат</string>
     <string name="action_vibration_enable">Вибрация</string>
     <string name="action_instructions">Инструкция</string>
     <string name="action_exit">Выход</string>
     <string name="action_rate">Оценить</string>
     <string name="action_settings">Настройки</string>
-    <string name="action_history">История</string>
 
     <!-- user notifications -->
     <string name="toast_result_copied">Результат скопирован</string>
@@ -74,7 +71,6 @@
 
     <string name="btn_ok">ОК</string>
     <string name="btn_cancel">Отмена</string>
-    <string name="btn_close">Закрыть</string>
 
     <string name="action_licenses">Лицензии ПО</string>
 

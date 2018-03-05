@@ -197,7 +197,7 @@ public class CustomActivityTestRule<T extends Activity> implements TestRule {
 
 
     @Override
-    public Statement apply(final Statement base, Description description) {
+    public Statement apply(Statement base, Description description) {
         return new ActivityStatement(base);
     }
 
@@ -422,7 +422,7 @@ public class CustomActivityTestRule<T extends Activity> implements TestRule {
      * @param runnable runnable containing test code in the {@link Runnable#run()} method
      * @see UiThreadTest
      */
-    public void runOnUiThread(final Runnable runnable) throws Throwable {
+    public void runOnUiThread(Runnable runnable) throws Throwable {
         UiThreadStatement.runOnUiThread(runnable);
     }
 

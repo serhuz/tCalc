@@ -12,7 +12,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class TokenTest {
 
     @Test
-    public void equals() throws Exception {
+    public void equals() {
         Token first = Token.create(Token.TokenType.VALUE, "-1");
         Token second = Token.create(Token.TokenType.VALUE, "-1");
 

@@ -35,13 +35,13 @@ public class MainActivityEvaluationTest {
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         mApplicationPreferences.getPreferences().edit().clear().apply();
     }
 
 
     @Test
-    public void performEvaluation1() throws Exception {
+    public void performEvaluation1() {
         onView().withId(R.id.input).perform().typeText("2+2");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= 4"));
@@ -49,7 +49,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation2() throws Exception {
+    public void performEvaluation2() {
         onView().withId(R.id.input).perform().typeText("2+2*2");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= 6"));
@@ -57,7 +57,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation3() throws Exception {
+    public void performEvaluation3() {
         onView().withId(R.id.input).perform().typeText("(2+2)*2");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= 8"));
@@ -65,7 +65,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation4() throws Exception {
+    public void performEvaluation4() {
         onView().withId(R.id.input).perform().typeText("2/0");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("Error (/0)"));
@@ -73,7 +73,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation5() throws Exception {
+    public void performEvaluation5() {
         onView().withId(R.id.input).perform().typeText("2*0");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= 0"));
@@ -81,7 +81,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation6() throws Exception {
+    public void performEvaluation6() {
         onView().withId(R.id.input).perform().typeText("2*(-1)");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= -2"));
@@ -89,7 +89,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation7() throws Exception {
+    public void performEvaluation7() {
         onView().withId(R.id.input).perform().typeText("2/(-1)");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= -2"));
@@ -97,7 +97,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation8() throws Exception {
+    public void performEvaluation8() {
         onView().withId(R.id.input).perform().typeText("(-1)/2");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= -0.5"));
@@ -105,7 +105,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation9() throws Exception {
+    public void performEvaluation9() {
         onView().withId(R.id.input).perform().typeText("(-1)/2+0.5");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= 0"));
@@ -113,7 +113,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation10() throws Exception {
+    public void performEvaluation10() {
         onView().withId(R.id.input).perform().typeText("0:10*2");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= 00:20:00"));
@@ -121,7 +121,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation11() throws Exception {
+    public void performEvaluation11() {
         onView().withId(R.id.input).perform().typeText("0:10/2");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= 00:05:00"));
@@ -129,7 +129,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation12() throws Exception {
+    public void performEvaluation12() {
         onView().withId(R.id.input).perform().typeText("0:10*2+0:05");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= 00:25:00"));
@@ -137,7 +137,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation13() throws Exception {
+    public void performEvaluation13() {
         onView().withId(R.id.input).perform().typeText("0:10*2+4*0:10");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= 01:00:00"));
@@ -145,7 +145,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation14() throws Exception {
+    public void performEvaluation14() {
         onView().withId(R.id.input).perform().typeText("0:10-0:10");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= 00:00:00"));
@@ -153,7 +153,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation15() throws Exception {
+    public void performEvaluation15() {
         onView().withId(R.id.input).perform().typeText("0:10-0:20");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= -00:10:00"));
@@ -161,7 +161,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation16() throws Exception {
+    public void performEvaluation16() {
         onView().withId(R.id.input).perform().typeText("0:20/0:20");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= 1"));
@@ -169,7 +169,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation17() throws Exception {
+    public void performEvaluation17() {
         onView().withId(R.id.input).perform().typeText("0:20/0:10");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("= 2"));
@@ -177,7 +177,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation18() throws Exception {
+    public void performEvaluation18() {
         onView().withId(R.id.input).perform().typeText("0:20*0:10");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("Error (T*T)"));
@@ -185,7 +185,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void performEvaluation19() throws Exception {
+    public void performEvaluation19() {
         onView().withId(R.id.input).perform().typeText("0:20+1");
         onView().withId(R.id.btn_eq).perform().click();
         onView().withId(R.id.result).check().matches(withText("Error (T+V)"));
@@ -193,7 +193,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void preformEvaluation20() throws Exception {
+    public void preformEvaluation20() {
         onEditText().withId(R.id.input).perform().typeText("0:00:10/3");
         onButton().withId(R.id.btn_eq).perform().click();
         onTextView().withId(R.id.result).check().matches(withText("= 00:00:03.333"));
@@ -201,7 +201,7 @@ public class MainActivityEvaluationTest {
 
 
     @Test
-    public void preformEvaluation21() throws Exception {
+    public void preformEvaluation21() {
         onEditText().withId(R.id.input).perform().typeText("0:00:9/3");
         onButton().withId(R.id.btn_eq).perform().click();
         onTextView().withId(R.id.result).check().matches(withText("= 00:00:03"));

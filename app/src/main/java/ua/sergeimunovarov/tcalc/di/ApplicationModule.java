@@ -19,7 +19,7 @@ import static android.content.Context.VIBRATOR_SERVICE;
 @Module
 public class ApplicationModule {
 
-    private Context mContext;
+    private final Context mContext;
 
 
     public ApplicationModule(Context context) {

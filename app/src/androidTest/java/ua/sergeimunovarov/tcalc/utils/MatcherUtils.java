@@ -9,10 +9,15 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 
-public class MatcherUtils {
+public final class MatcherUtils {
+
+    private MatcherUtils() {
+        throw new AssertionError();
+    }
+
 
     public static Matcher<View> childAtPosition(
-            final Matcher<View> parentMatcher, final int position) {
+            Matcher<View> parentMatcher, int position) {
 
         return new TypeSafeMatcher<View>() {
             @Override

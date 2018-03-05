@@ -14,7 +14,7 @@ import com.google.auto.value.AutoValue;
 public abstract class Token<T> {
 
     public static <T> Token<T> create(@NonNull TokenType type, @NonNull T value) {
-        return new AutoValue_Token<T>(type, value);
+        return new AutoValue_Token<>(type, value);
     }
 
 

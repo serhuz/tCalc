@@ -17,7 +17,6 @@
         app:min="1"/>
 
     <CheckBoxPreference
-        android:id="@+id/pref_vibro"
         android:defaultValue="false"
         android:key="vibro_enabled"
         android:summaryOff="@string/pref_vibro_off"

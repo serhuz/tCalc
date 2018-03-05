@@ -19,7 +19,6 @@
 
     <!-- menu actions -->
     <string name="title_dialog_format">Output format</string>
-    <string name="action_copy">Copy result</string>
     <string name="action_vibration_enable">Vibration</string>
     <string name="action_instructions">Help</string>
     <string name="action_exit">Exit</string>
@@ -55,12 +54,9 @@
     <string name="pref_vibro_on">Vibration is enabled</string>
     <string name="pref_vibro_off">Vibration is disabled</string>
     <string name="btn_cancel">Cancel</string>
-    <string name="btn_ok">Ok</string>
+    <string name="btn_ok">OK</string>
     <string name="pref_precision">Precision</string>
     <string name="action_licenses">OSS Licenses</string>
-    <string name="title_dialog_history">History</string>
-    <string name="btn_close">Close</string>
     <string name="label_history_empty">History is empty</string>
-    <string name="action_history">History</string>
 
 </resources>

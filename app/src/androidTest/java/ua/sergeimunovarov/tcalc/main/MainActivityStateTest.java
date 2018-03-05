@@ -6,7 +6,6 @@
 package ua.sergeimunovarov.tcalc.main;
 
 import android.content.pm.ActivityInfo;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -17,10 +16,10 @@ import org.junit.runner.RunWith;
 
 import ua.sergeimunovarov.tcalc.R;
 
-import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static cortado.Cortado.onEditText;
+import static cortado.Cortado.onImageButton;
 import static cortado.Cortado.onTextView;
 import static cortado.Cortado.onView;
 
@@ -34,7 +33,7 @@ public class MainActivityStateTest {
 
     @Ignore("after configuration change text == 4.")
     @Test
-    public void dataSurvivesScreenRotation() throws Exception {
+    public void dataSurvivesScreenRotation() {
         String expression = "2+2";
         onView().withId(R.id.input).perform().typeText(expression);
         onView().withId(R.id.btn_eq).perform().click();
@@ -47,8 +46,8 @@ public class MainActivityStateTest {
 
 
     @Test
-    public void outputFormatSurvivesScreenRotation() throws Exception {
-        onView().withId(R.id.action_format).perform().click();
+    public void outputFormatSurvivesScreenRotation() {
+        onView().withId(R.id.indicator_format).perform().click();
 
         mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
@@ -57,8 +56,8 @@ public class MainActivityStateTest {
 
 
     @Test
-    public void insertCurrentTimeSurvivesScreenRotation() throws Exception {
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+    public void insertCurrentTimeSurvivesScreenRotation() {
+        onImageButton().withId(R.id.btn_menu).perform().click();
         onView().withText(R.string.insert_current_time).perform().click();
 
         mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);

@@ -10,6 +10,8 @@ import android.support.test.filters.SmallTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +19,6 @@ import org.junit.runner.RunWith;
 import ua.sergeimunovarov.tcalc.DaggerMockRule;
 import ua.sergeimunovarov.tcalc.R;
 
-import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
@@ -39,39 +40,38 @@ public class MainActivityHistoryTest {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
 
+    @BeforeClass
+    public static void setUpAll() {
+        InstrumentationRegistry.getTargetContext().deleteDatabase("tcalc.db");
+    }
+
+
+    @After
+    public void tearDown() {
+        InstrumentationRegistry.getTargetContext().deleteDatabase("tcalc.db");
+    }
+
+
     @Test
-    public void showEmptyHistory() throws Exception {
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-        onView().withText(R.string.action_history).perform().click();
+    public void showEmptyHistory() {
+        onView().withId(R.id.btn_history_toggle).perform().click();
 
         onView().withText(R.string.label_history_empty).check().matches(isDisplayed());
     }
 
 
     @Test
-    public void showCalculationHistory() throws Exception {
+    public void showCalculationHistory() {
         onEditText().withId(R.id.input).perform().typeText("2+2");
         onButton().withId(R.id.btn_eq).perform().click();
         onEditText().withId(R.id.input).perform().clearText();
         onEditText().withId(R.id.input).perform().typeText("0:10*2");
         onButton().withId(R.id.btn_eq).perform().click();
 
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-        onView().withText(R.string.action_history).perform().click();
+        onView().withId(R.id.btn_history_toggle).perform().click();
 
         onView().withId(R.id.history_entries).check(matches(hasChildCount(2)));
         onView().withId(R.id.history_entries).check(matches(hasDescendant(withText("2+2"))));
         onView().withId(R.id.history_entries).check(matches(hasDescendant(withText("0:10*2"))));
-    }
-
-
-    @Test
-    public void closeDialog() throws Exception {
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-        onView().withText(R.string.action_history).perform().click();
-
-        onView().withText(R.string.btn_close).perform().click();
-
-        onView().withText(R.string.title_dialog_history).check().doesNotExist();
     }
 }

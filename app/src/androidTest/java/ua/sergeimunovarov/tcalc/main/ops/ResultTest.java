@@ -13,7 +13,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class ResultTest {
 
     @Test
-    public void equals() throws Exception {
+    public void equals() {
         Result first = Result.create(Result.ResultType.RESULT_OK_VALUE, "2");
         Result second = Result.create(Result.ResultType.RESULT_OK_VALUE, "2");
 
@@ -22,7 +22,7 @@ public class ResultTest {
 
 
     @Test
-    public void parcel() throws Exception {
+    public void parcel() {
         Result expected = Result.create(Result.ResultType.RESULT_OK_VALUE, "1");
 
         Parcel parcel = Parcel.obtain();

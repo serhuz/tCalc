@@ -40,13 +40,13 @@ public class HelpActivityTest {
 
 
     @Test
-    public void displayWebView() throws Exception {
+    public void displayWebView() {
         onView().withId(R.id.info_webview).check().matches(isDisplayed());
     }
 
 
     @Test
-    public void displayDialogOnClick() throws Exception {
+    public void displayDialogOnClick() {
         onView().withId(R.id.action_rate).perform(click());
 
         onView().withText(R.string.title_dialog_rate).check().matches(isDisplayed());
@@ -57,7 +57,7 @@ public class HelpActivityTest {
 
 
     @Test
-    public void hideDialogOnCancel() throws Exception {
+    public void hideDialogOnCancel() {
         onView().withId(R.id.action_rate).perform(click());
 
         onView().withText(R.string.btn_no).perform(click());
@@ -67,7 +67,7 @@ public class HelpActivityTest {
 
 
     @Test
-    public void goToGooglePlay() throws Exception {
+    public void goToGooglePlay() {
         onView().withId(R.id.action_rate).perform(click());
 
         onView().withText(R.string.btn_yes).perform(click());
@@ -82,7 +82,7 @@ public class HelpActivityTest {
 
 
     @Test
-    public void goToOSSLicenseActivity() throws Exception {
+    public void goToOSSLicenseActivity() {
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
 
         onView().withText(R.string.action_licenses).perform().click();

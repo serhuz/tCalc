@@ -1,5 +1,6 @@
 package ua.sergeimunovarov.tcalc.main;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.content.pm.ActivityInfo;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -14,6 +15,7 @@ import org.mockito.Mock;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.DaggerMockRule;
 import ua.sergeimunovarov.tcalc.R;
+import ua.sergeimunovarov.tcalc.main.history.db.EntryDao;
 
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -35,23 +37,27 @@ public class MainActivityInputTest {
     @Mock
     ApplicationPreferences mApplicationPreferences;
 
+    @Mock
+    EntryDao mEntryDao;
+
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         when(mApplicationPreferences.loadVibrationPreference()).thenReturn(false);
         when(mApplicationPreferences.loadVibrationDurationPreference()).thenReturn(ApplicationPreferences.Defaults.DEFAULT_DURATION);
         when(mApplicationPreferences.loadFormatPreference()).thenReturn(ApplicationPreferences.FormatConstants.HMS);
+        when(mEntryDao.getAll()).thenReturn(new MutableLiveData<>());
     }
 
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         reset(mApplicationPreferences);
     }
 
 
     @Test
-    public void inputOldFormatPortrait() throws Exception {
+    public void inputOldFormatPortrait() {
         when(mApplicationPreferences.loadLayoutPreference()).thenReturn(ApplicationPreferences.LayoutConstants.LAYOUT_OLD);
 
         mActivityTestRule.launchActivity(null);
@@ -79,7 +85,7 @@ public class MainActivityInputTest {
 
 
     @Test
-    public void inputOldFormatLandscape() throws Exception {
+    public void inputOldFormatLandscape() {
         when(mApplicationPreferences.loadLayoutPreference()).thenReturn(ApplicationPreferences.LayoutConstants.LAYOUT_OLD);
 
         mActivityTestRule.launchActivity(null);
@@ -108,7 +114,7 @@ public class MainActivityInputTest {
 
 
     @Test
-    public void inputNewFormatPortrait() throws Exception {
+    public void inputNewFormatPortrait() {
         when(mApplicationPreferences.loadLayoutPreference()).thenReturn(ApplicationPreferences.LayoutConstants.LAYOUT_NEW);
 
         mActivityTestRule.launchActivity(null);
@@ -136,7 +142,7 @@ public class MainActivityInputTest {
 
 
     @Test
-    public void inputNewFormatLandscape() throws Exception {
+    public void inputNewFormatLandscape() {
         when(mApplicationPreferences.loadLayoutPreference()).thenReturn(ApplicationPreferences.LayoutConstants.LAYOUT_NEW);
 
         mActivityTestRule.launchActivity(null);
@@ -165,7 +171,7 @@ public class MainActivityInputTest {
 
 
     @Test
-    public void filterInputInPortraitMode() throws Exception {
+    public void filterInputInPortraitMode() {
         mActivityTestRule.launchActivity(null);
         mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -176,7 +182,7 @@ public class MainActivityInputTest {
 
 
     @Test
-    public void filterInputInLandscapeMode() throws Exception {
+    public void filterInputInLandscapeMode() {
         mActivityTestRule.launchActivity(null);
         mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 

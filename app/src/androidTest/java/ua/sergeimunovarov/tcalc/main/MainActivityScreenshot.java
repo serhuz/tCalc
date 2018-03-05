@@ -58,7 +58,7 @@ public class MainActivityScreenshot {
 
     @Test
     public void formatSelectionDialog() throws Exception {
-        onView(withId(R.id.action_format)).perform(click());
+        onView(withId(R.id.indicator_format)).perform(click());
     }
 
 

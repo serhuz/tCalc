@@ -95,7 +95,7 @@ android {
 }
 
 ext {
-    supportVersion = '27.0.2'
+    supportVersion = '27.1.0'
     daggerVersion = '2.12'
     autoValueVersion = '1.5.3'
 

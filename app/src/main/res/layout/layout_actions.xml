@@ -16,12 +16,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:paddingBottom="8dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="8dp"
-        tools:ignore="ObsoleteLayoutParam">
+        android:padding="8dp">
 
         <TextSwitcher
             android:id="@+id/indicator_format"

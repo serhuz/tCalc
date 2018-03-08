@@ -1,21 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright © Sergei Munovarov. All rights reserved.
   ~ See LICENCE.txt for license details.
   -->
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:bind="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="model"
-            type="ua.sergeimunovarov.tcalc.main.actions.ActionsModel"/>
+            type="ua.sergeimunovarov.tcalc.main.actions.ActionsModel" />
     </data>
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -36,7 +34,7 @@
             android:text="@{model.mResultFormat}"
             bind:inAnimation="@{@anim/fade_in}"
             bind:outAnimation="@{@anim/fade_out}"
-            tools:text="HH:MM:SS"/>
+            tools:text="HH:MM:SS" />
 
         <ImageButton
             android:id="@+id/btn_history_toggle"
@@ -46,9 +44,9 @@
             android:layout_marginStart="8dp"
             android:layout_toLeftOf="@+id/btn_copy"
             android:layout_toStartOf="@+id/btn_copy"
-            android:background="@null"
+            android:background="@drawable/selector_btn_action"
             android:onClick="@{()->model.toggleHistory()}"
-            app:srcCompat="@drawable/ic_history"/>
+            app:srcCompat="@drawable/ic_history" />
 
         <ImageButton
             android:id="@+id/btn_copy"
@@ -58,9 +56,9 @@
             android:layout_marginStart="8dp"
             android:layout_toLeftOf="@+id/btn_menu"
             android:layout_toStartOf="@+id/btn_menu"
-            android:background="@null"
+            android:background="@drawable/selector_btn_action"
             android:onClick="@{()-> model.copyContent()}"
-            app:srcCompat="@drawable/ic_copy"/>
+            app:srcCompat="@drawable/ic_copy" />
 
         <ImageButton
             android:id="@+id/btn_menu"
@@ -70,9 +68,9 @@
             android:layout_alignParentRight="true"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:background="@null"
+            android:background="@drawable/selector_btn_action"
             android:onClick="@{(view)-> model.openMenu(view)}"
-            app:srcCompat="@drawable/ic_more"/>
+            app:srcCompat="@drawable/ic_more" />
 
     </RelativeLayout>
 </layout>

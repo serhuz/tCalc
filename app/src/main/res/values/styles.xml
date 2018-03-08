@@ -79,7 +79,7 @@
     </style>
 
     <style name="FormatIndicatorStyle">
-        <item name="android:background">@drawable/shape_format_background</item>
+        <item name="android:background">@drawable/selector_format_background</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
         <item name="android:paddingLeft">8dp</item>

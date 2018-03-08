@@ -12,4 +12,5 @@
     <dimen name="history_item_expression_text_size">24sp</dimen>
     <dimen name="history_item_result_text_size">28sp</dimen>
     <dimen name="history_item_paste_icon_size">40dp</dimen>
+    <dimen name="action_bg_shape_corner_radius">5dp</dimen>
 </resources>

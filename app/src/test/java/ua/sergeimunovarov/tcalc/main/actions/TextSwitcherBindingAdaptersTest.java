@@ -11,6 +11,8 @@ import android.widget.ViewSwitcher;
 
 import org.junit.Test;
 
+import ua.sergeimunovarov.tcalc.main.views.TextSwitcherBindingAdapters;
+
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;

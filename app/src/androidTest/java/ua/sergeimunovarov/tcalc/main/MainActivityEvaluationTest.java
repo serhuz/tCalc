@@ -13,11 +13,10 @@ import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.DaggerMockRule;
 import ua.sergeimunovarov.tcalc.R;
 
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static cortado.Cortado.onButton;
 import static cortado.Cortado.onEditText;
-import static cortado.Cortado.onTextView;
 import static cortado.Cortado.onView;
+import static ua.sergeimunovarov.tcalc.CustomMatchers.hasCurrentText;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -44,7 +43,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation1() {
         onView().withId(R.id.input).perform().typeText("2+2");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= 4"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 4"));
     }
 
 
@@ -52,7 +51,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation2() {
         onView().withId(R.id.input).perform().typeText("2+2*2");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= 6"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 6"));
     }
 
 
@@ -60,7 +59,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation3() {
         onView().withId(R.id.input).perform().typeText("(2+2)*2");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= 8"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 8"));
     }
 
 
@@ -68,7 +67,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation4() {
         onView().withId(R.id.input).perform().typeText("2/0");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("Error (/0)"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("Error (/0)"));
     }
 
 
@@ -76,7 +75,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation5() {
         onView().withId(R.id.input).perform().typeText("2*0");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= 0"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 0"));
     }
 
 
@@ -84,7 +83,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation6() {
         onView().withId(R.id.input).perform().typeText("2*(-1)");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= -2"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= -2"));
     }
 
 
@@ -92,7 +91,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation7() {
         onView().withId(R.id.input).perform().typeText("2/(-1)");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= -2"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= -2"));
     }
 
 
@@ -100,7 +99,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation8() {
         onView().withId(R.id.input).perform().typeText("(-1)/2");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= -0.5"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= -0.5"));
     }
 
 
@@ -108,7 +107,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation9() {
         onView().withId(R.id.input).perform().typeText("(-1)/2+0.5");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= 0"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 0"));
     }
 
 
@@ -116,7 +115,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation10() {
         onView().withId(R.id.input).perform().typeText("0:10*2");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= 00:20:00"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 00:20:00"));
     }
 
 
@@ -124,7 +123,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation11() {
         onView().withId(R.id.input).perform().typeText("0:10/2");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= 00:05:00"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 00:05:00"));
     }
 
 
@@ -132,7 +131,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation12() {
         onView().withId(R.id.input).perform().typeText("0:10*2+0:05");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= 00:25:00"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 00:25:00"));
     }
 
 
@@ -140,7 +139,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation13() {
         onView().withId(R.id.input).perform().typeText("0:10*2+4*0:10");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= 01:00:00"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 01:00:00"));
     }
 
 
@@ -148,7 +147,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation14() {
         onView().withId(R.id.input).perform().typeText("0:10-0:10");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= 00:00:00"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 00:00:00"));
     }
 
 
@@ -156,7 +155,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation15() {
         onView().withId(R.id.input).perform().typeText("0:10-0:20");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= -00:10:00"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= -00:10:00"));
     }
 
 
@@ -164,7 +163,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation16() {
         onView().withId(R.id.input).perform().typeText("0:20/0:20");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= 1"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 1"));
     }
 
 
@@ -172,7 +171,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation17() {
         onView().withId(R.id.input).perform().typeText("0:20/0:10");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("= 2"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 2"));
     }
 
 
@@ -180,7 +179,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation18() {
         onView().withId(R.id.input).perform().typeText("0:20*0:10");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("Error (T*T)"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("Error (T*T)"));
     }
 
 
@@ -188,7 +187,7 @@ public class MainActivityEvaluationTest {
     public void performEvaluation19() {
         onView().withId(R.id.input).perform().typeText("0:20+1");
         onView().withId(R.id.btn_eq).perform().click();
-        onView().withId(R.id.result).check().matches(withText("Error (T+V)"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("Error (T+V)"));
     }
 
 
@@ -196,7 +195,7 @@ public class MainActivityEvaluationTest {
     public void preformEvaluation20() {
         onEditText().withId(R.id.input).perform().typeText("0:00:10/3");
         onButton().withId(R.id.btn_eq).perform().click();
-        onTextView().withId(R.id.result).check().matches(withText("= 00:00:03.333"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 00:00:03.333"));
     }
 
 
@@ -204,6 +203,6 @@ public class MainActivityEvaluationTest {
     public void preformEvaluation21() {
         onEditText().withId(R.id.input).perform().typeText("0:00:9/3");
         onButton().withId(R.id.btn_eq).perform().click();
-        onTextView().withId(R.id.result).check().matches(withText("= 00:00:03"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 00:00:03"));
     }
 }

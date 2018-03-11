@@ -15,7 +15,7 @@
 
         <variable
             name="model"
-            type="ua.sergeimunovarov.tcalc.main.history.HistoryBottomSheetViewModel" />
+            type="ua.sergeimunovarov.tcalc.main.history.HistoryViewModel" />
     </data>
 
     <FrameLayout

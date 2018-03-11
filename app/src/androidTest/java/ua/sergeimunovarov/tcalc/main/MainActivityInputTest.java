@@ -1,7 +1,10 @@
 package ua.sergeimunovarov.tcalc.main;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.content.pm.ActivityInfo;
+import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -11,6 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.stubbing.Answer;
 
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.DaggerMockRule;
@@ -21,10 +25,14 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static cortado.Cortado.onEditText;
 import static cortado.Cortado.onView;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 
+@LargeTest
 @RunWith(AndroidJUnit4.class)
 public class MainActivityInputTest {
 
@@ -46,6 +54,15 @@ public class MainActivityInputTest {
         when(mApplicationPreferences.loadVibrationPreference()).thenReturn(false);
         when(mApplicationPreferences.loadVibrationDurationPreference()).thenReturn(ApplicationPreferences.Defaults.DEFAULT_DURATION);
         when(mApplicationPreferences.loadFormatPreference()).thenReturn(ApplicationPreferences.FormatConstants.HMS);
+
+        ApplicationPreferences.ResultFormatPref formatPref = mock(ApplicationPreferences.ResultFormatPref.class);
+        doAnswer((Answer<Void>) invocation -> {
+            Observer<String> observer = invocation.getArgument(1);
+            observer.onChanged("HH:MM:SS");
+            return null;
+        }).when(formatPref).observe(any(LifecycleOwner.class), any(Observer.class));
+        when(mApplicationPreferences.getResultFormat()).thenReturn(formatPref);
+
         when(mEntryDao.getAll()).thenReturn(new MutableLiveData<>());
     }
 
@@ -59,6 +76,14 @@ public class MainActivityInputTest {
     @Test
     public void inputOldFormatPortrait() {
         when(mApplicationPreferences.loadLayoutPreference()).thenReturn(ApplicationPreferences.LayoutConstants.LAYOUT_OLD);
+
+        ApplicationPreferences.LayoutPref layoutPref = mock(ApplicationPreferences.LayoutPref.class);
+        doAnswer((Answer<Void>) invocation -> {
+            Observer<Integer> observer = invocation.getArgument(1);
+            observer.onChanged(ApplicationPreferences.LayoutConstants.LAYOUT_OLD);
+            return null;
+        }).when(layoutPref).observe(any(LifecycleOwner.class), any(Observer.class));
+        when(mApplicationPreferences.getLayout()).thenReturn(layoutPref);
 
         mActivityTestRule.launchActivity(null);
         mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -87,6 +112,14 @@ public class MainActivityInputTest {
     @Test
     public void inputOldFormatLandscape() {
         when(mApplicationPreferences.loadLayoutPreference()).thenReturn(ApplicationPreferences.LayoutConstants.LAYOUT_OLD);
+
+        ApplicationPreferences.LayoutPref layoutPref = mock(ApplicationPreferences.LayoutPref.class);
+        doAnswer((Answer<Void>) invocation -> {
+            Observer<Integer> observer = invocation.getArgument(1);
+            observer.onChanged(ApplicationPreferences.LayoutConstants.LAYOUT_OLD);
+            return null;
+        }).when(layoutPref).observe(any(LifecycleOwner.class), any(Observer.class));
+        when(mApplicationPreferences.getLayout()).thenReturn(layoutPref);
 
         mActivityTestRule.launchActivity(null);
         mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -117,6 +150,14 @@ public class MainActivityInputTest {
     public void inputNewFormatPortrait() {
         when(mApplicationPreferences.loadLayoutPreference()).thenReturn(ApplicationPreferences.LayoutConstants.LAYOUT_NEW);
 
+        ApplicationPreferences.LayoutPref layoutPref = mock(ApplicationPreferences.LayoutPref.class);
+        doAnswer((Answer<Void>) invocation -> {
+            Observer<Integer> observer = invocation.getArgument(1);
+            observer.onChanged(ApplicationPreferences.LayoutConstants.LAYOUT_NEW);
+            return null;
+        }).when(layoutPref).observe(any(LifecycleOwner.class), any(Observer.class));
+        when(mApplicationPreferences.getLayout()).thenReturn(layoutPref);
+
         mActivityTestRule.launchActivity(null);
         mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -145,6 +186,14 @@ public class MainActivityInputTest {
     public void inputNewFormatLandscape() {
         when(mApplicationPreferences.loadLayoutPreference()).thenReturn(ApplicationPreferences.LayoutConstants.LAYOUT_NEW);
 
+        ApplicationPreferences.LayoutPref layoutPref = mock(ApplicationPreferences.LayoutPref.class);
+        doAnswer((Answer<Void>) invocation -> {
+            Observer<Integer> observer = invocation.getArgument(1);
+            observer.onChanged(ApplicationPreferences.LayoutConstants.LAYOUT_OLD);
+            return null;
+        }).when(layoutPref).observe(any(LifecycleOwner.class), any(Observer.class));
+        when(mApplicationPreferences.getLayout()).thenReturn(layoutPref);
+
         mActivityTestRule.launchActivity(null);
         mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
@@ -172,6 +221,14 @@ public class MainActivityInputTest {
 
     @Test
     public void filterInputInPortraitMode() {
+        ApplicationPreferences.LayoutPref layoutPref = mock(ApplicationPreferences.LayoutPref.class);
+        doAnswer((Answer<Void>) invocation -> {
+            Observer<Integer> observer = invocation.getArgument(1);
+            observer.onChanged(ApplicationPreferences.LayoutConstants.LAYOUT_OLD);
+            return null;
+        }).when(layoutPref).observe(any(LifecycleOwner.class), any(Observer.class));
+        when(mApplicationPreferences.getLayout()).thenReturn(layoutPref);
+
         mActivityTestRule.launchActivity(null);
         mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -183,6 +240,14 @@ public class MainActivityInputTest {
 
     @Test
     public void filterInputInLandscapeMode() {
+        ApplicationPreferences.LayoutPref layoutPref = mock(ApplicationPreferences.LayoutPref.class);
+        doAnswer((Answer<Void>) invocation -> {
+            Observer<Integer> observer = invocation.getArgument(1);
+            observer.onChanged(ApplicationPreferences.LayoutConstants.LAYOUT_OLD);
+            return null;
+        }).when(layoutPref).observe(any(LifecycleOwner.class), any(Observer.class));
+        when(mApplicationPreferences.getLayout()).thenReturn(layoutPref);
+
         mActivityTestRule.launchActivity(null);
         mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 

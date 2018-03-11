@@ -91,7 +91,7 @@ public class CalcFacade {
             type = Result.ResultType.RESULT_ERR;
         }
 
-        return Result.create(type, output);
+        return Result.create(type, output, expression);
     }
 
 

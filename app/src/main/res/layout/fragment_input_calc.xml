@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="ua.sergeimunovarov.tcalc.main.input.InputViewModel"/>
+            type="ua.sergeimunovarov.tcalc.main.MainActivityViewModel" />
     </data>
 
     <TableLayout
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        android:background="@color/color_background"
+        android:background="@color/white_ish"
         android:shrinkColumns="*"
         android:stretchColumns="*">
 
@@ -30,7 +30,7 @@
                 style="@style/StyleNumberButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_7"
                 tools:ignore="ButtonStyle"/>
 
@@ -39,7 +39,7 @@
                 style="@style/StyleNumberButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_8"
                 tools:ignore="ButtonStyle"/>
 
@@ -48,7 +48,7 @@
                 style="@style/StyleNumberButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_9"
                 tools:ignore="ButtonStyle"/>
 
@@ -57,7 +57,7 @@
                 style="@style/StyleOperatorButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_plus"
                 tools:ignore="ButtonStyle"/>
 
@@ -73,7 +73,7 @@
                 style="@style/StyleNumberButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_4"
                 tools:ignore="ButtonStyle"/>
 
@@ -82,7 +82,7 @@
                 style="@style/StyleNumberButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_5"
                 tools:ignore="ButtonStyle"/>
 
@@ -91,7 +91,7 @@
                 style="@style/StyleNumberButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_6"
                 tools:ignore="ButtonStyle"/>
 
@@ -100,7 +100,7 @@
                 style="@style/StyleOperatorButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_minus"
                 tools:ignore="ButtonStyle"/>
 
@@ -117,7 +117,7 @@
                 style="@style/StyleNumberButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_1"
                 tools:ignore="ButtonStyle"/>
 
@@ -126,7 +126,7 @@
                 style="@style/StyleNumberButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_2"
                 tools:ignore="ButtonStyle"/>
 
@@ -135,7 +135,7 @@
                 style="@style/StyleNumberButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_3"
                 tools:ignore="ButtonStyle"/>
 
@@ -144,7 +144,7 @@
                 style="@style/StyleOperatorButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_multiply"
                 tools:ignore="ButtonStyle"/>
 
@@ -161,7 +161,7 @@
                 style="@style/StyleNumberButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_colon"
                 tools:ignore="ButtonStyle"/>
 
@@ -170,7 +170,7 @@
                 style="@style/StyleNumberButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_0"
                 tools:ignore="ButtonStyle"/>
 
@@ -179,7 +179,7 @@
                 style="@style/StyleNumberButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_dot"
                 tools:ignore="ButtonStyle"/>
 
@@ -188,7 +188,7 @@
                 style="@style/StyleOperatorButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleSymbolInput}"
+                android:onClick="@{model::input}"
                 android:text="@string/btn_divide"
                 tools:ignore="ButtonStyle"/>
 
@@ -205,7 +205,7 @@
                 style="@style/StyleControlButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleClearInput}"
+                android:onClick="@{() -> model.clear()}"
                 android:text="@string/btn_clear"
                 tools:ignore="ButtonStyle"/>
 
@@ -214,7 +214,7 @@
                 style="@style/StyleControlButton.Backspace"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleDeleteInput}"
+                android:onClick="@{() -> model.delete()}"
                 app:srcCompat="@drawable/ic_backspace"
                 tools:ignore="ButtonStyle"/>
 
@@ -223,7 +223,7 @@
                 style="@style/StyleControlButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleEqualInput}"
+                android:onClick="@{() -> model.calculate()}"
                 android:text="@string/btn_calculate"
                 tools:ignore="ButtonStyle"/>
 
@@ -232,7 +232,7 @@
                 style="@style/StyleOperatorButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::handleDoubleBracketsInput}"
+                android:onClick="@{() -> model.inputDoubleBrackets()}"
                 android:text="@string/btn_double_parentheses"
                 tools:ignore="ButtonStyle"/>
 

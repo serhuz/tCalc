@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="actionsModel"
-            type="ua.sergeimunovarov.tcalc.main.actions.ActionsModel" />
+            name="viewModel"
+            type="ua.sergeimunovarov.tcalc.main.MainActivityViewModel" />
 
         <variable
             name="inputType"
@@ -28,7 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="@dimen/input_weight"
-                android:background="@color/color_background">
+                android:background="@color/white_ish"
+                android:elevation="2dp">
 
                 <include
                     android:id="@+id/actions_layout"
@@ -36,21 +37,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    bind:model="@{actionsModel}" />
+                    bind:model="@{viewModel}" />
 
                 <HorizontalScrollView
                     android:id="@+id/scroll_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
+                    android:layout_above="@id/actions_layout"
                     android:scrollbars="none">
 
-                    <TextView
+                    <ua.sergeimunovarov.tcalc.main.views.ResultTextSwitcher
                         android:id="@+id/result"
-                        style="@style/ResultStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:text="= 01:10:30" />
+                        android:text="@{viewModel.mResult}"
+                        bind:inAnimation="@{@anim/slide_in_right}"
+                        bind:outAnimation="@{@anim/slide_out_left}" />
 
                 </HorizontalScrollView>
 
@@ -59,11 +61,13 @@
                     style="@style/InputStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_above="@id/actions_layout"
-                    android:layout_below="@id/scroll_textView"
+                    android:layout_alignParentTop="true"
+                    android:layout_above="@id/scroll_textView"
                     android:hint="@string/hint_expression"
                     android:textSize="@dimen/textview_text_size"
+                    bind:editable="@={viewModel.mEditableInput}"
                     bind:rawInputType="@{inputType.TYPE_CLASS_TEXT}"
+                    bind:selectionState="@={viewModel.mSelectionState}"
                     bind:textIsSelectable="@{true}" />
 
             </RelativeLayout>
@@ -77,7 +81,7 @@
         </LinearLayout>
 
         <include
-            android:id="@+id/history_botton_sheet"
+            android:id="@+id/history_bottom_sheet"
             layout="@layout/layout_history" />
 
     </android.support.design.widget.CoordinatorLayout>

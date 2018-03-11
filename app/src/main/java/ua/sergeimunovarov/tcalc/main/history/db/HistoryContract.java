@@ -17,15 +17,15 @@ public final class HistoryContract {
 
     public static final class HistoryEntry implements BaseColumns {
 
-        public HistoryEntry() {
-            throw new AssertionError();
-        }
-
-
         public static final String TABLE_NAME = "history";
         public static final String COLUMN_NAME_TIMESTAMP = "ts";
         public static final String COLUMN_NAME_RESULT_TYPE = "res_typ";
         public static final String COLUMN_NAME_RESULT_VALUE = "res_val";
         public static final String COLUMN_NAME_EXPRESSION = "expr";
+
+
+        public HistoryEntry() {
+            throw new AssertionError();
+        }
     }
 }

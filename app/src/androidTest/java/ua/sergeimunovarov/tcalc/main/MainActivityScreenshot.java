@@ -6,6 +6,7 @@
 package ua.sergeimunovarov.tcalc.main;
 
 import android.content.pm.ActivityInfo;
+import android.support.test.filters.LargeTest;
 import android.support.test.rule.GrantPermissionRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -30,6 +31,7 @@ import static ua.sergeimunovarov.tcalc.Locales.russian;
 import static ua.sergeimunovarov.tcalc.Locales.ukrainian;
 
 
+@LargeTest
 @RunWith(AndroidJUnit4.class)
 public class MainActivityScreenshot {
 

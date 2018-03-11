@@ -3,7 +3,7 @@
  * See LICENCE.txt for license details.
  */
 
-package ua.sergeimunovarov.tcalc.main.actions;
+package ua.sergeimunovarov.tcalc.main.views;
 
 import android.databinding.BindingAdapter;
 import android.support.annotation.AnimRes;

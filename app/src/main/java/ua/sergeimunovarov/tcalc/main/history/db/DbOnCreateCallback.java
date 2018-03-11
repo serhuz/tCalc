@@ -22,6 +22,7 @@ public class DbOnCreateCallback extends RoomDatabase.Callback {
             + " DESC LIMIT 50); " +
             "END;";
 
+
     @Override
     public void onCreate(@NonNull SupportSQLiteDatabase db) {
         db.execSQL(SQL_CREATE_CLEAN_TRIGGER);

@@ -5,16 +5,24 @@
 
 package ua.sergeimunovarov.tcalc.main.input;
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
+import ua.sergeimunovarov.tcalc.Application;
 import ua.sergeimunovarov.tcalc.BR;
+import ua.sergeimunovarov.tcalc.di.annotation.MainActivityFactory;
+import ua.sergeimunovarov.tcalc.main.MainActivityViewModel;
 
 
 /**
@@ -22,29 +30,30 @@ import ua.sergeimunovarov.tcalc.BR;
  */
 public abstract class BaseInputFragment extends Fragment {
 
-    public static final String TAG = BaseInputFragment.class.getSimpleName();
-
-    protected InputListener mListener;
+    @Inject
+    @MainActivityFactory
+    ViewModelProvider.Factory mFactory;
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try {
-            mListener = (InputListener) getActivity();
-        } catch (ClassCastException e) {
-            Log.e(TAG, "Activity should implement InputListener", e);
-        }
+        Application.getAppComponent().inject(this);
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
+    public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        ViewDataBinding binding = DataBindingUtil.inflate(inflater, getFragmentLayoutId(), container, false);
-        binding.setVariable(BR.model, new InputViewModel(mListener));
+        ViewDataBinding binding = DataBindingUtil.inflate(
+                inflater, getFragmentLayoutId(), container, false
+        );
+
+        MainActivityViewModel viewModel =
+                ViewModelProviders.of(getActivity(), mFactory).get(MainActivityViewModel.class);
+
+        binding.setVariable(BR.model, viewModel);
         return binding.getRoot();
     }
 

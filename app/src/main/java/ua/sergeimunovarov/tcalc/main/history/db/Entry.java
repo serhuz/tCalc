@@ -52,6 +52,17 @@ public class Entry {
 
 
     @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + expression.hashCode();
+        result = 31 * result + resultType.hashCode();
+        result = 31 * result + resultValue.hashCode();
+        result = 31 * result + (int) (timestamp ^ (timestamp >>> 32));
+        return result;
+    }
+
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -63,17 +74,6 @@ public class Entry {
         if (!expression.equals(item.expression)) return false;
         if (resultType != item.resultType) return false;
         return resultValue.equals(item.resultValue);
-    }
-
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + expression.hashCode();
-        result = 31 * result + resultType.hashCode();
-        result = 31 * result + resultValue.hashCode();
-        result = 31 * result + (int) (timestamp ^ (timestamp >>> 32));
-        return result;
     }
 
 

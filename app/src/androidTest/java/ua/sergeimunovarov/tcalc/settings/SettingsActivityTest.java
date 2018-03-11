@@ -88,6 +88,4 @@ public class SettingsActivityTest {
 
         assertThat(mApplicationPreferences.loadPrecisionPreference()).isEqualTo(2);
     }
-
-    // TODO: 30.08.2017 figure out how to enable vibration setting on AVD and add tests for vibration prefs
 }

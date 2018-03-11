@@ -38,6 +38,7 @@ android {
 
     testOptions {
         animationsDisabled true // Works with API 24+ ?
+        unitTests.returnDefaultValues = true
     }
 
     dataBinding {

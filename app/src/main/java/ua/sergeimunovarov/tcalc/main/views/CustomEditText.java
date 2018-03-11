@@ -8,7 +8,9 @@ package ua.sergeimunovarov.tcalc.main.views;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.Editable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.Toast;
@@ -29,6 +31,9 @@ import static android.content.Context.CLIPBOARD_SERVICE;
  */
 public class CustomEditText extends AppCompatEditText {
 
+    private SelectionChangedListener mSelectionChangedListener;
+
+
     public CustomEditText(Context context) {
         super(context);
     }
@@ -41,6 +46,14 @@ public class CustomEditText extends AppCompatEditText {
 
     public CustomEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+    }
+
+
+    @Override
+    protected void onSelectionChanged(int selStart, int selEnd) {
+        if (mSelectionChangedListener != null) {
+            mSelectionChangedListener.onSelectionChanged();
+        }
     }
 
 
@@ -112,5 +125,35 @@ public class CustomEditText extends AppCompatEditText {
             if (BuildConfig.DEBUG) Log.d("paste action", "selection start!=selection end");
             this.getText().replace(selectionStart, selectionEnd, builder.toString());
         }
+    }
+
+
+    public void setSelectionChangeListener(SelectionChangedListener selectionChangeListener) {
+        mSelectionChangedListener = selectionChangeListener;
+    }
+
+
+    public void setEditable(@Nullable Editable editable) {
+        if (editable != null && !getText().toString().equals(editable.toString())) {
+            super.setText(editable);
+        }
+    }
+
+
+    public SelectionState getSelectionState() {
+        return SelectionState.create(getSelectionStart(), getSelectionEnd());
+    }
+
+
+    public void setSelectionState(SelectionState state) {
+        if (state != null && !getSelectionState().equals(state)) {
+            setSelection(state.selectionStart(), state.selectionEnd());
+        }
+    }
+
+
+    public interface SelectionChangedListener {
+
+        void onSelectionChanged();
     }
 }

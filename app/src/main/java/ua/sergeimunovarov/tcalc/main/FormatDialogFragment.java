@@ -11,7 +11,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatDialogFragment;
-import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -23,12 +22,8 @@ import ua.sergeimunovarov.tcalc.R;
 public class FormatDialogFragment extends AppCompatDialogFragment
         implements DialogInterface.OnClickListener {
 
-    private static final String TAG = FormatDialogFragment.class.getSimpleName();
-
     @Inject
     ApplicationPreferences mPreferences;
-
-    private FormatSelectionListener mListener;
 
 
     public static FormatDialogFragment create() {
@@ -40,11 +35,6 @@ public class FormatDialogFragment extends AppCompatDialogFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Application.getAppComponent().inject(this);
-        try {
-            mListener = (FormatSelectionListener) getActivity();
-        } catch (ClassCastException e) {
-            Log.e(TAG, "Host activity should implement FormatSelectionListener");
-        }
     }
 
 
@@ -69,18 +59,6 @@ public class FormatDialogFragment extends AppCompatDialogFragment
     @Override
     public void onClick(DialogInterface dialog, int which) {
         mPreferences.storeFormatPreference(which);
-        mListener.onOutputFormatChanged(which);
         dialog.dismiss();
-    }
-
-
-    public interface FormatSelectionListener {
-
-        /**
-         * Notifies implementing classes about calculation output format change event.
-         *
-         * @param which format position in formats array
-         */
-        void onOutputFormatChanged(int which);
     }
 }

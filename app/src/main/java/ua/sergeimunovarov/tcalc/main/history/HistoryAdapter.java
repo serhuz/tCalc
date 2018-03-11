@@ -16,22 +16,20 @@ import java.util.List;
 
 import ua.sergeimunovarov.tcalc.databinding.ItemEntryBinding;
 import ua.sergeimunovarov.tcalc.main.history.db.Entry;
+import ua.sergeimunovarov.tcalc.main.viewmodel.SingleLiveEvent;
 
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.EntryViewHolder> {
 
-    private final EntryViewModel mViewModel;
-    private final List<Entry> mItems;
+    public final EntryClickEvent mEntryClickEvent = new EntryClickEvent();
+
+    private final EntryViewModel mViewModel = new EntryViewModel(mEntryClickEvent);
+    private final List<Entry> mItems = new ArrayList<>();
 
 
-    public HistoryAdapter(HistoryEntryClickListener clickListener) {
-        mViewModel = new EntryViewModel(clickListener);
-        mItems = new ArrayList<>();
-    }
-
-
+    @NonNull
     @Override
-    public EntryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EntryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemEntryBinding binding = ItemEntryBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
@@ -42,7 +40,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.EntryVie
 
 
     @Override
-    public void onBindViewHolder(EntryViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EntryViewHolder holder, int position) {
         holder.setViewModel(mViewModel);
 
         Entry entry = mItems.get(position);
@@ -113,5 +111,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.EntryVie
         public void setViewModel(EntryViewModel viewModel) {
             mBinding.setModel(viewModel);
         }
+    }
+
+
+    public static class EntryClickEvent extends SingleLiveEvent<Entry> {
+
     }
 }

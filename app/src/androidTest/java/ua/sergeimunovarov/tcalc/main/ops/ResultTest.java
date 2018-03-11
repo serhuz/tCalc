@@ -14,8 +14,8 @@ public class ResultTest {
 
     @Test
     public void equals() {
-        Result first = Result.create(Result.ResultType.RESULT_OK_VALUE, "2");
-        Result second = Result.create(Result.ResultType.RESULT_OK_VALUE, "2");
+        Result first = Result.create(Result.ResultType.RESULT_OK_VALUE, "2", "1+1");
+        Result second = Result.create(Result.ResultType.RESULT_OK_VALUE, "2", "1+1");
 
         assertThat(first).isEqualTo(second);
     }
@@ -23,7 +23,7 @@ public class ResultTest {
 
     @Test
     public void parcel() {
-        Result expected = Result.create(Result.ResultType.RESULT_OK_VALUE, "1");
+        Result expected = Result.create(Result.ResultType.RESULT_OK_VALUE, "1", "0+1");
 
         Parcel parcel = Parcel.obtain();
         expected.writeToParcel(parcel, 0);

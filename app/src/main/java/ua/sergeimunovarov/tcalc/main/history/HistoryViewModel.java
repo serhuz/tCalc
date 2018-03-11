@@ -19,14 +19,14 @@ import ua.sergeimunovarov.tcalc.main.history.db.Entry;
 import ua.sergeimunovarov.tcalc.main.history.db.EntryDao;
 
 
-public class HistoryBottomSheetViewModel extends BaseObservableViewModel {
+public class HistoryViewModel extends BaseObservableViewModel {
 
     public final ObservableList<Entry> mEntries = new ObservableArrayList<>();
     public final LiveData<List<Entry>> mLiveHistoryItems;
 
 
     @SuppressWarnings("WeakerAccess")
-    public HistoryBottomSheetViewModel(@NonNull EntryDao dao) {
+    public HistoryViewModel(@NonNull EntryDao dao) {
         mLiveHistoryItems = dao.getAll();
     }
 
@@ -45,7 +45,7 @@ public class HistoryBottomSheetViewModel extends BaseObservableViewModel {
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) new HistoryBottomSheetViewModel(mDao);
+            return (T) new HistoryViewModel(mDao);
         }
     }
 }

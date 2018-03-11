@@ -13,7 +13,8 @@ import dagger.Component;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.main.FormatDialogFragment;
 import ua.sergeimunovarov.tcalc.main.MainActivity;
-import ua.sergeimunovarov.tcalc.main.history.HistoryBottomSheetViewModel;
+import ua.sergeimunovarov.tcalc.main.history.HistoryViewModel;
+import ua.sergeimunovarov.tcalc.main.input.BaseInputFragment;
 import ua.sergeimunovarov.tcalc.settings.SettingsFragment;
 
 
@@ -22,7 +23,8 @@ import ua.sergeimunovarov.tcalc.settings.SettingsFragment;
         ApplicationModule.class,
         DbModule.class,
         PreferencesModule.class,
-        UtilsModule.class
+        UtilsModule.class,
+        ViewModelModule.class
 })
 public interface AppComponent {
 
@@ -36,5 +38,7 @@ public interface AppComponent {
 
     void inject(SettingsFragment settingsFragment);
 
-    void inject(HistoryBottomSheetViewModel historyBottomSheetViewModel);
+    void inject(HistoryViewModel historyViewModel);
+
+    void inject(BaseInputFragment baseInputFragment);
 }

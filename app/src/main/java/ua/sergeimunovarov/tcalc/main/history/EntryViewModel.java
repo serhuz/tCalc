@@ -10,15 +10,15 @@ import ua.sergeimunovarov.tcalc.main.history.db.Entry;
 
 public class EntryViewModel {
 
-    private final HistoryEntryClickListener mClickListener;
+    private final HistoryAdapter.EntryClickEvent mEvent;
 
 
-    public EntryViewModel(HistoryEntryClickListener clickListener) {
-        mClickListener = clickListener;
+    public EntryViewModel(HistoryAdapter.EntryClickEvent event) {
+        mEvent = event;
     }
 
 
     public void insert(Entry item) {
-        mClickListener.onInsert(item);
+        mEvent.setValue(item);
     }
 }

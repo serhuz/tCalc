@@ -10,25 +10,28 @@
 
         <variable
             name="model"
-            type="ua.sergeimunovarov.tcalc.main.actions.ActionsModel" />
+            type="ua.sergeimunovarov.tcalc.main.MainActivityViewModel" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
 
-        <TextSwitcher
+        <ua.sergeimunovarov.tcalc.main.views.FormatTextSwitcher
             android:id="@+id/indicator_format"
             android:layout_width="wrap_content"
             android:layout_height="28dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:onClick="@{()-> model.selectResultFormat()}"
             android:text="@{model.mResultFormat}"
-            bind:inAnimation="@{@anim/fade_in}"
-            bind:outAnimation="@{@anim/fade_out}"
+            bind:inAnimation="@{@anim/slide_out_left}"
+            bind:outAnimation="@{@anim/slide_in_right}"
             tools:text="HH:MM:SS" />
 
         <ImageButton
@@ -40,7 +43,7 @@
             android:layout_toLeftOf="@+id/btn_copy"
             android:layout_toStartOf="@+id/btn_copy"
             android:background="@drawable/selector_btn_action"
-            android:onClick="@{()->model.toggleHistory()}"
+            android:onClick="@{() -> model.toggleHistory()}"
             app:srcCompat="@drawable/ic_history" />
 
         <ImageButton
@@ -52,7 +55,7 @@
             android:layout_toLeftOf="@+id/btn_menu"
             android:layout_toStartOf="@+id/btn_menu"
             android:background="@drawable/selector_btn_action"
-            android:onClick="@{()-> model.copyContent()}"
+            android:onClick="@{() -> model.copyContent()}"
             app:srcCompat="@drawable/ic_copy" />
 
         <ImageButton
@@ -64,7 +67,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:background="@drawable/selector_btn_action"
-            android:onClick="@{(view)-> model.openMenu(view)}"
+            android:onClick="@{model::openMenu}"
+            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
             app:srcCompat="@drawable/ic_more" />
 
     </RelativeLayout>

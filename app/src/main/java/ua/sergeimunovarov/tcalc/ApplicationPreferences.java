@@ -5,6 +5,7 @@
 
 package ua.sergeimunovarov.tcalc;
 
+import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.IntDef;
@@ -46,6 +47,16 @@ public class ApplicationPreferences {
 
     public SharedPreferences getPreferences() {
         return mPreferences;
+    }
+
+
+    public ResultFormatPref getResultFormat() {
+        return new ResultFormatPref(mPreferences, mContext);
+    }
+
+
+    public LayoutPref getLayout() {
+        return new LayoutPref(mPreferences);
     }
 
 
@@ -227,6 +238,81 @@ public class ApplicationPreferences {
         @Retention(RetentionPolicy.SOURCE)
         public @interface FormatId {
 
+        }
+    }
+
+
+    public static abstract class PrefsLiveData<T> extends LiveData<T> {
+
+        protected final SharedPreferences mPreferences;
+        protected final String mKey;
+
+        private final SharedPreferences.OnSharedPreferenceChangeListener mChangeListener;
+
+
+        public PrefsLiveData(@NonNull SharedPreferences preferences,
+                             @NonNull String key) {
+            mPreferences = preferences;
+            mKey = key;
+
+            mChangeListener = (sharedPreferences, changedKey) -> {
+                if (mKey.equals(changedKey)) {
+                    setValue(getStoredValue());
+                }
+            };
+        }
+
+
+        @Override
+        protected void onActive() {
+            super.onActive();
+            setValue(getStoredValue());
+            mPreferences.registerOnSharedPreferenceChangeListener(mChangeListener);
+        }
+
+
+        @Override
+        protected void onInactive() {
+            super.onInactive();
+            mPreferences.unregisterOnSharedPreferenceChangeListener(mChangeListener);
+        }
+
+
+        public abstract T getStoredValue();
+    }
+
+
+    public static class ResultFormatPref extends PrefsLiveData<String> {
+
+        @NonNull
+        private final Context mContext;
+
+
+        public ResultFormatPref(@NonNull SharedPreferences preferences,
+                                @NonNull Context context) {
+            super(preferences, PreferenceKeys.KEY_FORMAT);
+            mContext = context;
+        }
+
+
+        @Override
+        public String getStoredValue() {
+            int formatId = mPreferences.getInt(mKey, Defaults.DEFAULT_FORMAT);
+            return mContext.getResources().getStringArray(R.array.formats)[formatId];
+        }
+    }
+
+
+    public static class LayoutPref extends PrefsLiveData<Integer> {
+
+        public LayoutPref(@NonNull SharedPreferences preferences) {
+            super(preferences, PreferenceKeys.KEY_LAYOUT);
+        }
+
+
+        @Override
+        public Integer getStoredValue() {
+            return Integer.valueOf(mPreferences.getString(mKey, Defaults.DEFAULT_LAYOUT));
         }
     }
 }

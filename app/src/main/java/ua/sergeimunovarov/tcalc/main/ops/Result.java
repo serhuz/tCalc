@@ -10,19 +10,37 @@ import android.support.annotation.NonNull;
 
 import com.google.auto.value.AutoValue;
 
+import ua.sergeimunovarov.tcalc.Patterns;
+import ua.sergeimunovarov.tcalc.main.Editor;
+
 
 @AutoValue
 public abstract class Result implements Parcelable {
 
     public static Result create(@NonNull ResultType resultType,
-                                @NonNull String value) {
-        return new AutoValue_Result(resultType, value);
+                                @NonNull String value,
+                                @NonNull String expression) {
+        return new AutoValue_Result(resultType, value, expression);
     }
 
 
     public abstract ResultType type();
 
+
+    @NonNull
+    public String formattedValue() {
+        String value = value();
+        if (value().startsWith(Patterns.MINUS)) {
+            value = Editor.PAR_LEFT + value + Editor.PAR_RIGHT;
+        }
+        return value;
+    }
+
+
     public abstract String value();
+
+
+    public abstract String expression();
 
 
     /**

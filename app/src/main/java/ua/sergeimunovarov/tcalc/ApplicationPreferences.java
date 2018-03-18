@@ -5,14 +5,18 @@
 
 package ua.sergeimunovarov.tcalc;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.IntDef;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 /**
@@ -22,12 +26,17 @@ public class ApplicationPreferences {
 
     private final SharedPreferences mPreferences;
     private final Context mContext;
+    private final ResultFormatPref mFormatPref;
+    private final LayoutPref mLayoutPref;
 
 
     public ApplicationPreferences(@NonNull SharedPreferences preferences,
                                   @NonNull Context context) {
         mPreferences = preferences;
         mContext = context;
+
+        mFormatPref = new ResultFormatPref(mPreferences, mContext);
+        mLayoutPref = new LayoutPref(mPreferences);
     }
 
 
@@ -51,12 +60,12 @@ public class ApplicationPreferences {
 
 
     public ResultFormatPref getResultFormat() {
-        return new ResultFormatPref(mPreferences, mContext);
+        return mFormatPref;
     }
 
 
     public LayoutPref getLayout() {
-        return new LayoutPref(mPreferences);
+        return mLayoutPref;
     }
 
 
@@ -248,6 +257,9 @@ public class ApplicationPreferences {
         protected final String mKey;
 
         private final SharedPreferences.OnSharedPreferenceChangeListener mChangeListener;
+        private final AtomicBoolean mPending = new AtomicBoolean(false);
+
+        private T mPrevious;
 
 
         public PrefsLiveData(@NonNull SharedPreferences preferences,
@@ -260,6 +272,29 @@ public class ApplicationPreferences {
                     setValue(getStoredValue());
                 }
             };
+        }
+
+
+        public abstract T getStoredValue();
+
+
+        @MainThread
+        public void observe(LifecycleOwner owner, final Observer<T> observer) {
+            super.observe(owner, t -> {
+                if (mPending.compareAndSet(true, false)) {
+                    observer.onChanged(t);
+                }
+            });
+        }
+
+
+        @Override
+        protected void setValue(T value) {
+            if (mPrevious == null || !mPrevious.equals(value)) {
+                mPending.set(true);
+                mPrevious = value;
+                super.setValue(value);
+            }
         }
 
 
@@ -276,9 +311,6 @@ public class ApplicationPreferences {
             super.onInactive();
             mPreferences.unregisterOnSharedPreferenceChangeListener(mChangeListener);
         }
-
-
-        public abstract T getStoredValue();
     }
 
 

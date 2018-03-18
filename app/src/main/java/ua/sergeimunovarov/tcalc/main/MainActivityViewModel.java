@@ -80,6 +80,8 @@ public class MainActivityViewModel extends BaseObservableViewModel {
 
     public void clear() {
         mEditor.clear(mEditableInput, mSelectionState);
+        mResult.set("");
+        mCalculationError.set(false);
     }
 
 

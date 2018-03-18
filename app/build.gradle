@@ -14,8 +14,8 @@ android {
         applicationId 'ua.sergeimunovarov.tcalc'
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 27
-        versionName '4.3.1'
+        versionCode 28
+        versionName '5.0b'
 
         vectorDrawables.useSupportLibrary = true
 
@@ -98,12 +98,12 @@ android {
 ext {
     supportVersion = '27.1.0'
     daggerVersion = '2.15'
-    autoValueVersion = '1.5.3'
+    autoValueVersion = '1.5.4'
 
     leakCanaryVersion = '1.5.4'
 
     assertjVersion = '2.9.0'
-    mockitoVersion = '2.15.0'
+    mockitoVersion = '2.16.0'
     espressoVersion = '3.0.1'
 }
 

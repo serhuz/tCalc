@@ -12,13 +12,17 @@ import android.support.annotation.NonNull;
 
 public class DbOnCreateCallback extends RoomDatabase.Callback {
 
+    private static final String _ID = "_id";
+    private static final String COLUMN_NAME_TIMESTAMP = "ts";
+    private static final String TABLE_NAME = "history";
+
     private static final String SQL_CREATE_CLEAN_TRIGGER = "CREATE TRIGGER IF NOT EXISTS clean_db "
-            + "AFTER INSERT ON " + HistoryContract.HistoryEntry.TABLE_NAME
+            + "AFTER INSERT ON " + TABLE_NAME
             + " BEGIN "
-            + "DELETE FROM " + HistoryContract.HistoryEntry.TABLE_NAME
-            + " WHERE " + HistoryContract.HistoryEntry.TABLE_NAME + "." + HistoryContract.HistoryEntry._ID + " NOT IN "
-            + "(SELECT " + HistoryContract.HistoryEntry.TABLE_NAME + "." + HistoryContract.HistoryEntry._ID
-            + " FROM " + HistoryContract.HistoryEntry.TABLE_NAME + " ORDER BY " + HistoryContract.HistoryEntry.COLUMN_NAME_TIMESTAMP
+            + "DELETE FROM " + TABLE_NAME
+            + " WHERE " + TABLE_NAME + "." + _ID + " NOT IN "
+            + "(SELECT " + TABLE_NAME + "." + _ID
+            + " FROM " + TABLE_NAME + " ORDER BY " + COLUMN_NAME_TIMESTAMP
             + " DESC LIMIT 50); " +
             "END;";
 

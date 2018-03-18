@@ -36,7 +36,7 @@ public class DbModule {
         return Room.databaseBuilder(
                 context,
                 HistoryDatabase.class,
-                "tcalc.db"
+                "tcalc_room.db"
         ).addCallback(new DbOnCreateCallback()).build();
     }
 

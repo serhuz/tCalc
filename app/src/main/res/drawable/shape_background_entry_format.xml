@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright © Sergei Munovarov. All rights reserved.
+  ~ See LICENCE.txt for license details.
+  -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/orange" />
+    <corners android:radius="@dimen/action_bg_shape_corner_radius" />
+</shape>

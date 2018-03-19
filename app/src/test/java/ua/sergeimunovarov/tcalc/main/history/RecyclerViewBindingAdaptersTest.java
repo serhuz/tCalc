@@ -28,7 +28,7 @@ public class RecyclerViewBindingAdaptersTest {
         RecyclerView recyclerView = mock(RecyclerView.class);
         HistoryAdapter adapter = mock(HistoryAdapter.class);
         when(recyclerView.getAdapter()).thenReturn(adapter);
-        Entry item = new Entry("2+2", Result.ResultType.RESULT_OK, "4", 1000);
+        Entry item = new Entry("2+2", Result.ResultType.RESULT_OK, "4", 1000, 0);
 
         List<Entry> items = Collections.singletonList(item);
         RecyclerViewBindingAdapters.setHistoryItems(recyclerView, items);

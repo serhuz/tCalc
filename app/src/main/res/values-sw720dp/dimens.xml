@@ -8,5 +8,6 @@
     <dimen name="history_empty_view_text_size">36sp</dimen>
     <dimen name="history_item_expression_text_size">46sp</dimen>
     <dimen name="history_item_result_text_size">54sp</dimen>
+    <dimen name="history_item_format_text_size">36sp</dimen>
     <dimen name="history_item_paste_icon_size">60dp</dimen>
 </resources>

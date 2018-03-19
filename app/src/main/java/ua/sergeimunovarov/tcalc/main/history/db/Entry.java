@@ -39,15 +39,20 @@ public class Entry {
     @ColumnInfo(name = "ts")
     private long timestamp;
 
+    @ColumnInfo(name = "fid")
+    private int formatId;
+
 
     public Entry(@NonNull String expression,
                  @NonNull Result.ResultType resultType,
                  @NonNull String resultValue,
-                 @IntRange(from = 0) long timestamp) {
+                 @IntRange(from = 0) long timestamp,
+                 @IntRange(from = 0, to = 3) int formatId) {
         this.expression = expression;
         this.resultType = resultType;
         this.resultValue = resultValue;
         this.timestamp = timestamp;
+        this.formatId = formatId;
     }
 
 
@@ -58,6 +63,7 @@ public class Entry {
         result = 31 * result + resultType.hashCode();
         result = 31 * result + resultValue.hashCode();
         result = 31 * result + (int) (timestamp ^ (timestamp >>> 32));
+        result = 31 * result + formatId;
         return result;
     }
 
@@ -67,13 +73,14 @@ public class Entry {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Entry item = (Entry) o;
+        Entry entry = (Entry) o;
 
-        if (id != item.id) return false;
-        if (timestamp != item.timestamp) return false;
-        if (!expression.equals(item.expression)) return false;
-        if (resultType != item.resultType) return false;
-        return resultValue.equals(item.resultValue);
+        if (id != entry.id) return false;
+        if (timestamp != entry.timestamp) return false;
+        if (formatId != entry.formatId) return false;
+        if (!expression.equals(entry.expression)) return false;
+        if (resultType != entry.resultType) return false;
+        return resultValue.equals(entry.resultValue);
     }
 
 
@@ -124,5 +131,15 @@ public class Entry {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+
+    public int getFormatId() {
+        return formatId;
+    }
+
+
+    public void setFormatId(int formatId) {
+        this.formatId = formatId;
     }
 }

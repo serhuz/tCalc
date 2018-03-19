@@ -313,7 +313,8 @@ public class MainActivity extends AbstractTransitionActivity implements
                                     data.expression(),
                                     data.type(),
                                     data.value(),
-                                    System.currentTimeMillis()
+                                    System.currentTimeMillis(),
+                                    mPreferences.loadFormatPreference()
                             )
                     ));
                 }

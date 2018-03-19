@@ -1,72 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="model"
-            type="ua.sergeimunovarov.tcalc.main.history.EntryViewModel"/>
+            type="ua.sergeimunovarov.tcalc.main.history.EntryViewModel" />
 
         <variable
             name="item"
-            type="ua.sergeimunovarov.tcalc.main.history.db.Entry"/>
+            type="ua.sergeimunovarov.tcalc.main.history.db.Entry" />
+
+        <import type="ua.sergeimunovarov.tcalc.main.ops.Result.ResultType" />
+
+        <import type="android.view.View" />
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_btn_paste"
+        android:onClick="@{()-> model.insert(item)}"
+        android:orientation="vertical"
+        android:padding="8dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/item_expression"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@+id/item_paste"
-            android:layout_toStartOf="@+id/item_paste"
-            android:orientation="vertical"
-            android:paddingBottom="8dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingTop="8dp">
+            android:ellipsize="end"
+            android:text="@{item.getExpression()}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/history_item_expression_text_size"
+            app:fontFamily="@font/lato_light"
+            tools:text="00:30*2" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp">
 
             <TextView
-                android:id="@+id/item_expression"
-                android:layout_width="match_parent"
+                android:id="@+id/item_format"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:text="@{item.getExpression()}"
-                android:textSize="@dimen/history_item_expression_text_size"
-                android:textStyle="bold"
-                app:fontFamily="@font/lato_light"
-                tools:text="00:30*2"/>
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/shape_background_entry_format"
+                android:maxLines="1"
+                android:paddingBottom="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/history_item_format_text_size"
+                android:visibility="@{item.resultType == ResultType.RESULT_OK ? View.VISIBLE : View.GONE}"
+                bind:formatId="@{item.formatId}"
+                bind:formats="@{@stringArray/formats}"
+                tools:text="HH:MM:SS" />
 
             <TextView
                 android:id="@+id/item_result"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@id/item_format"
+                android:layout_toStartOf="@id/item_format"
                 android:text="@{`= ` + item.getResultValue()}"
-                android:textColor="@color/black"
+                android:textColor="@color/blue"
                 android:textSize="@dimen/history_item_result_text_size"
+                android:textStyle="bold"
                 app:fontFamily="@font/lato_light"
-                tools:text="= 01:00"/>
-        </LinearLayout>
+                tools:text="= 01:00" />
+        </RelativeLayout>
+    </LinearLayout>
 
-        <android.support.v7.widget.AppCompatImageButton
-            android:id="@+id/item_paste"
-            android:layout_width="@dimen/history_item_paste_icon_size"
-            android:layout_height="@dimen/history_item_paste_icon_size"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/selector_btn_paste"
-            android:onClick="@{()-> model.insert(item)}"
-            android:padding="8dp"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/ic_paste"/>
-    </RelativeLayout>
 </layout>

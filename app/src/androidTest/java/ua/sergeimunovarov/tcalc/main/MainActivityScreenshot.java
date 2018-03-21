@@ -48,24 +48,24 @@ public class MainActivityScreenshot {
 
 
     @Test
-    public void emptyMainActivityPortrait() throws Exception {
+    public void emptyMainActivityPortrait() {
     }
 
 
     @Test
-    public void emptyMainActivityLandscape() throws Exception {
+    public void emptyMainActivityLandscape() {
         mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
 
     @Test
-    public void formatSelectionDialog() throws Exception {
+    public void formatSelectionDialog() {
         onView(withId(R.id.indicator_format)).perform(click());
     }
 
 
     @Test
-    public void mainActivityEvaluateExpression() throws Exception {
+    public void mainActivityEvaluateExpression() {
         onView(withId(R.id.input)).perform(typeText("20:00-2*5:00"));
         onView(withId(R.id.btn_eq)).perform(click());
     }

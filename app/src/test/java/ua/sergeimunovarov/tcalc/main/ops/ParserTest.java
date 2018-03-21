@@ -20,13 +20,13 @@ public class ParserTest {
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         mParser = new Parser();
     }
 
 
     @Test
-    public void parseExpression1() throws Exception {
+    public void parseExpression1() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("1+2");
 
         Token<Double> one = Token.create(Token.TokenType.VALUE, 1d);
@@ -38,7 +38,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression2() throws Exception {
+    public void parseExpression2() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("1-2");
 
         Token<Double> one = Token.create(Token.TokenType.VALUE, 1d);
@@ -50,7 +50,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression3() throws Exception {
+    public void parseExpression3() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("1*2");
 
         Token<Double> one = Token.create(Token.TokenType.VALUE, 1d);
@@ -62,7 +62,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression4() throws Exception {
+    public void parseExpression4() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("1/2");
 
         Token<Double> one = Token.create(Token.TokenType.VALUE, 1d);
@@ -74,7 +74,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression5() throws Exception {
+    public void parseExpression5() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("0.5");
 
         Token<Double> dotFive = Token.create(Token.TokenType.VALUE, 0.5d);
@@ -84,7 +84,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression6() throws Exception {
+    public void parseExpression6() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("01:00");
 
         Token<Long> hour = Token.create(Token.TokenType.TIME_UNIT, (long) 60 * 60 * 1000);
@@ -94,7 +94,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression7() throws Exception {
+    public void parseExpression7() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("1:0");
 
         Token<Long> hour = Token.create(Token.TokenType.TIME_UNIT, (long) 60 * 60 * 1000);
@@ -104,7 +104,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression8() throws Exception {
+    public void parseExpression8() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("01:00*2");
 
         Token<Long> hour = Token.create(Token.TokenType.TIME_UNIT, (long) 60 * 60 * 1000);
@@ -116,7 +116,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression9() throws Exception {
+    public void parseExpression9() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("01:00/2");
 
         Token<Long> hour = Token.create(Token.TokenType.TIME_UNIT, (long) 60 * 60 * 1000);
@@ -128,7 +128,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression10() throws Exception {
+    public void parseExpression10() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("01:00+2");
 
         Token<Long> hour = Token.create(Token.TokenType.TIME_UNIT, (long) 60 * 60 * 1000);
@@ -140,7 +140,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression11() throws Exception {
+    public void parseExpression11() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("01:00-2");
 
         Token<Long> hour = Token.create(Token.TokenType.TIME_UNIT, (long) 60 * 60 * 1000);
@@ -152,7 +152,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression12() throws Exception {
+    public void parseExpression12() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("2+2*2");
 
         Token<Double> two = Token.create(Token.TokenType.VALUE, 2d);
@@ -164,7 +164,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression13() throws Exception {
+    public void parseExpression13() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("2/2*2");
 
         Token<Double> two = Token.create(Token.TokenType.VALUE, 2d);
@@ -176,7 +176,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression14() throws Exception {
+    public void parseExpression14() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("2+2-2");
 
         Token<Double> two = Token.create(Token.TokenType.VALUE, 2d);
@@ -188,7 +188,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression15() throws Exception {
+    public void parseExpression15() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("(2+2)*2");
 
         Token<Double> two = Token.create(Token.TokenType.VALUE, 2d);
@@ -200,7 +200,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression16() throws Exception {
+    public void parseExpression16() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("(1:00+1:00)*2");
 
         Token<Long> hour = Token.create(Token.TokenType.TIME_UNIT, (long) 60 * 60 * 1000);
@@ -213,7 +213,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression17() throws Exception {
+    public void parseExpression17() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("(1:00+1:00)*(2+2)");
 
         Token<Long> hour = Token.create(Token.TokenType.TIME_UNIT, (long) 60 * 60 * 1000);
@@ -226,7 +226,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression18() throws Exception {
+    public void parseExpression18() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("(1:00+1:00)/(2+2)");
 
         Token<Long> hour = Token.create(Token.TokenType.TIME_UNIT, (long) 60 * 60 * 1000);
@@ -239,7 +239,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression19() throws Exception {
+    public void parseExpression19() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("(1:00+(1:00*2))/(2+2)");
 
         Token<Long> hour = Token.create(Token.TokenType.TIME_UNIT, (long) 60 * 60 * 1000);
@@ -253,7 +253,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression20() throws Exception {
+    public void parseExpression20() {
         LinkedList<Token> tokens = mParser.tokenizeExpression("(1:00+(1:00*2))/(2+2/2)");
 
         Token<Long> hour = Token.create(Token.TokenType.TIME_UNIT, (long) 60 * 60 * 1000);
@@ -267,7 +267,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression21() throws Exception {
+    public void parseExpression21() {
         assertThatThrownBy(() -> mParser.tokenizeExpression("abc*2"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("abc");
@@ -275,7 +275,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression22() throws Exception {
+    public void parseExpression22() {
         assertThatThrownBy(() -> mParser.tokenizeExpression("2a*2"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("2a");
@@ -283,7 +283,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression23() throws Exception {
+    public void parseExpression23() {
         assertThatThrownBy(() -> mParser.tokenizeExpression("a2*2"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("a2");
@@ -291,7 +291,7 @@ public class ParserTest {
 
 
     @Test
-    public void parseExpression24() throws Exception {
+    public void parseExpression24() {
         assertThatThrownBy(() -> mParser.tokenizeExpression("2*2a"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("2a");

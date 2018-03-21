@@ -11,7 +11,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 
@@ -21,6 +20,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 
 @SuppressWarnings("WeakerAccess")
@@ -37,7 +37,7 @@ public class HapticFeedbackTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        initMocks(this);
         mHapticFeedback = new HapticFeedback(mVibrator, mPreferences);
     }
 

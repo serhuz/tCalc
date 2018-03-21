@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 public class TextSwitcherBindingAdaptersTest {
 
     @Test
-    public void setInAnimation() throws Exception {
+    public void setInAnimation() {
         TextSwitcher textSwitcher = mock(TextSwitcher.class);
         Context context = mock(Context.class);
         when(textSwitcher.getContext()).thenReturn(context);
@@ -34,7 +34,7 @@ public class TextSwitcherBindingAdaptersTest {
 
 
     @Test
-    public void setOutAnimation() throws Exception {
+    public void setOutAnimation() {
         TextSwitcher textSwitcher = mock(TextSwitcher.class);
         Context context = mock(Context.class);
         when(textSwitcher.getContext()).thenReturn(context);
@@ -46,7 +46,7 @@ public class TextSwitcherBindingAdaptersTest {
 
 
     @Test
-    public void setTextViewFactory() throws Exception {
+    public void setTextViewFactory() {
         TextSwitcher textSwitcher = mock(TextSwitcher.class);
         ViewSwitcher.ViewFactory viewFactory = mock(ViewSwitcher.ViewFactory.class);
 

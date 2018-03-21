@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 public class RecyclerViewBindingAdaptersTest {
 
     @Test
-    public void setItems() throws Exception {
+    public void setItems() {
         RecyclerView recyclerView = mock(RecyclerView.class);
         HistoryAdapter adapter = mock(HistoryAdapter.class);
         when(recyclerView.getAdapter()).thenReturn(adapter);

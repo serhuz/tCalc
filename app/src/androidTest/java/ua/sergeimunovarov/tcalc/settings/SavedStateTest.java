@@ -19,7 +19,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class SavedStateTest {
 
     @Test
-    public void parcel() throws Exception {
+    public void parcel() {
         SeekBarPreference.SavedState expected = new SeekBarPreference.SavedState(AbsSavedState.EMPTY_STATE);
         expected.mValue = 1;
 

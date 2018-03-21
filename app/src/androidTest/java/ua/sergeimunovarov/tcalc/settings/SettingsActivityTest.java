@@ -45,13 +45,13 @@ public class SettingsActivityTest {
 
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         mApplicationPreferences.getPreferences().edit().clear().apply();
     }
 
 
     @Test
-    public void changeLayoutSettings() throws Exception {
+    public void changeLayoutSettings() {
         onView().withText(R.string.pref_layout).perform().click();
         onView().withText(getStringFromArray(0)).perform().click();
 
@@ -69,7 +69,7 @@ public class SettingsActivityTest {
 
 
     @Test
-    public void changeLayoutSettings1() throws Exception {
+    public void changeLayoutSettings1() {
         onView().withText(R.string.pref_layout).perform().click();
         onView().withText(getStringFromArray(1)).perform().click();
 
@@ -78,7 +78,7 @@ public class SettingsActivityTest {
 
 
     @Test
-    public void changePrecision() throws Exception {
+    public void changePrecision() {
         onView().withText(R.string.pref_precision).perform().click();
         onView().withId(R.id.seekbar).perform(swipeSeekBar(1));
 

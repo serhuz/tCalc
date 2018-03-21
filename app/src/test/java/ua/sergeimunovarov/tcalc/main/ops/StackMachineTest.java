@@ -22,7 +22,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testAdd() throws Exception {
+    public void testAdd() {
         Token a = TOKEN_TIME_10_MINS;
 
         Token result = StackMachine.add(a, a);
@@ -33,7 +33,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testAdd2() throws Exception {
+    public void testAdd2() {
         Token a = TOKEN_VALUE_2;
 
         Token result = StackMachine.add(a, a);
@@ -44,7 +44,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testAdd3() throws Exception {
+    public void testAdd3() {
         Token a = TOKEN_BRACKET_CLOSE;
         Token b = TOKEN_VALUE_2;
 
@@ -55,7 +55,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testAdd4() throws Exception {
+    public void testAdd4() {
         Token a = TOKEN_TIME_10_MINS;
         Token b = TOKEN_VALUE_2;
 
@@ -66,7 +66,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testAdd5() throws Exception {
+    public void testAdd5() {
         Token a = TOKEN_VALUE_2;
         Token b = Token.create(Token.TokenType.TIME_UNIT, 0L);
 
@@ -77,7 +77,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testAdd6() throws Exception {
+    public void testAdd6() {
         Token a = TOKEN_VALUE_2;
         Token b = TOKEN_BRACKET_CLOSE;
 
@@ -88,7 +88,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testSubtract() throws Exception {
+    public void testSubtract() {
         Token a = TOKEN_TIME_10_MINS;
 
         Token result = StackMachine.subtract(a, a);
@@ -99,7 +99,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testSubtract2() throws Exception {
+    public void testSubtract2() {
         Token a = Token.create(Token.TokenType.VALUE, 3d);
         Token b = TOKEN_VALUE_2;
 
@@ -111,7 +111,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testSubtract3() throws Exception {
+    public void testSubtract3() {
         Token a = TOKEN_BRACKET_OPEN;
         Token b = TOKEN_VALUE_2;
 
@@ -122,7 +122,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testSubtract4() throws Exception {
+    public void testSubtract4() {
         Token a = Token.create(Token.TokenType.TIME_UNIT, String.valueOf(0));
         Token b = TOKEN_VALUE_2;
 
@@ -133,7 +133,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testSubtract5() throws Exception {
+    public void testSubtract5() {
         Token a = TOKEN_VALUE_2;
         Token b = Token.create(Token.TokenType.TIME_UNIT, 0L);
 
@@ -144,7 +144,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testSubtract6() throws Exception {
+    public void testSubtract6() {
         Token a = TOKEN_VALUE_2;
         Token b = TOKEN_BRACKET_CLOSE;
 
@@ -155,7 +155,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testMultiply() throws Exception {
+    public void testMultiply() {
         Token a = TOKEN_TIME_10_MINS;
         Token b = TOKEN_VALUE_2;
 
@@ -167,7 +167,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testMultiply2() throws Exception {
+    public void testMultiply2() {
         Token a = TOKEN_VALUE_2;
 
         Token result = StackMachine.multiply(a, a);
@@ -178,7 +178,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testMultiply3() throws Exception {
+    public void testMultiply3() {
         Token a = TOKEN_TIME_10_MINS;
 
         assertThatThrownBy(() -> StackMachine.multiply(a, a))
@@ -188,7 +188,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testMultiply4() throws Exception {
+    public void testMultiply4() {
         Token a = TOKEN_TIME_10_MINS;
         Token b = TOKEN_DIV;
 
@@ -199,7 +199,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testMultiply5() throws Exception {
+    public void testMultiply5() {
         Token a = TOKEN_DIV;
         Token b = TOKEN_TIME_10_MINS;
 
@@ -210,7 +210,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testDivide() throws Exception {
+    public void testDivide() {
         Token a = TOKEN_TIME_10_MINS;
         Token b = TOKEN_VALUE_2;
 
@@ -222,7 +222,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testDivide2() throws Exception {
+    public void testDivide2() {
         Token a = TOKEN_VALUE_2;
 
         Token result = StackMachine.divide(a, a);
@@ -233,7 +233,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testDivide3() throws Exception {
+    public void testDivide3() {
         Token a = TOKEN_VALUE_2;
         Token b = Token.create(Token.TokenType.VALUE, 0d);
 
@@ -244,7 +244,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testDivide4() throws Exception {
+    public void testDivide4() {
         Token a = TOKEN_TIME_10_MINS;
 
         Token result = StackMachine.divide(a, a);
@@ -255,7 +255,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testDivide5() throws Exception {
+    public void testDivide5() {
         Token a = TOKEN_VALUE_2;
         Token b = TOKEN_TIME_10_MINS;
 
@@ -266,7 +266,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testDivide6() throws Exception {
+    public void testDivide6() {
         Token a = TOKEN_MUL;
         Token b = TOKEN_TIME_10_MINS;
 
@@ -277,7 +277,7 @@ public class StackMachineTest {
 
 
     @Test
-    public void testDivide7() throws Exception {
+    public void testDivide7() {
         Token a = TOKEN_TIME_10_MINS;
         Token b = TOKEN_MUL;
 

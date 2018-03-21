@@ -10,8 +10,7 @@ import android.support.test.filters.SmallTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.junit.After;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,15 +39,9 @@ public class MainActivityHistoryTest {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
 
-    @BeforeClass
-    public static void setUpAll() {
-        InstrumentationRegistry.getTargetContext().deleteDatabase("tcalc.db");
-    }
-
-
-    @After
-    public void tearDown() {
-        InstrumentationRegistry.getTargetContext().deleteDatabase("tcalc.db");
+    @Before
+    public void setUp() {
+        InstrumentationRegistry.getTargetContext().deleteDatabase("tcalc_room.db");
     }
 
 

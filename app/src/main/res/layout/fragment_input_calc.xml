@@ -53,12 +53,12 @@
                 tools:ignore="ButtonStyle"/>
 
             <Button
-                android:id="@+id/btn_plus"
+                android:id="@+id/btn_par"
                 style="@style/StyleOperatorButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{model::input}"
-                android:text="@string/btn_plus"
+                android:onClick="@{() -> model.inputDoubleBrackets()}"
+                android:text="@string/btn_double_parentheses"
                 tools:ignore="ButtonStyle"/>
 
         </TableRow>
@@ -96,12 +96,12 @@
                 tools:ignore="ButtonStyle"/>
 
             <Button
-                android:id="@+id/btn_minus"
+                android:id="@+id/btn_divide"
                 style="@style/StyleOperatorButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
-                android:text="@string/btn_minus"
+                android:text="@string/btn_divide"
                 tools:ignore="ButtonStyle"/>
 
         </TableRow>
@@ -184,12 +184,12 @@
                 tools:ignore="ButtonStyle"/>
 
             <Button
-                android:id="@+id/btn_divide"
+                android:id="@+id/btn_minus"
                 style="@style/StyleOperatorButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
-                android:text="@string/btn_divide"
+                android:text="@string/btn_minus"
                 tools:ignore="ButtonStyle"/>
 
         </TableRow>
@@ -228,14 +228,13 @@
                 tools:ignore="ButtonStyle"/>
 
             <Button
-                android:id="@+id/btn_par"
+                android:id="@+id/btn_plus"
                 style="@style/StyleOperatorButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{() -> model.inputDoubleBrackets()}"
-                android:text="@string/btn_double_parentheses"
+                android:onClick="@{model::input}"
+                android:text="@string/btn_plus"
                 tools:ignore="ButtonStyle"/>
-
         </TableRow>
     </TableLayout>
 </layout>

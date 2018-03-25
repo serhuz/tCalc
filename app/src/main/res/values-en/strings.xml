@@ -58,5 +58,8 @@
     <string name="pref_precision">Precision</string>
     <string name="action_licenses">OSS Licenses</string>
     <string name="label_history_empty">History is empty</string>
+    <string name="cd_history_toggle">Toggle history</string>
+    <string name="cd_copy">Copy result</string>
+    <string name="cd_menu">Menu</string>
 
 </resources>

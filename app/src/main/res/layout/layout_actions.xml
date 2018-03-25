@@ -2,7 +2,8 @@
   ~ Copyright © Sergei Munovarov. All rights reserved.
   ~ See LICENCE.txt for license details.
   -->
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -13,7 +14,7 @@
             type="ua.sergeimunovarov.tcalc.main.MainActivityViewModel" />
     </data>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
@@ -28,7 +29,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:onClick="@{()-> model.selectResultFormat()}"
+            android:onClick="@{() -> model.selectResultFormat()}"
             android:text="@{model.mResultFormat}"
             bind:inAnimation="@{@anim/slide_out_left}"
             bind:outAnimation="@{@anim/slide_in_right}"
@@ -43,6 +44,7 @@
             android:layout_toLeftOf="@+id/btn_copy"
             android:layout_toStartOf="@+id/btn_copy"
             android:background="@drawable/selector_btn_action"
+            android:contentDescription="@string/cd_history_toggle"
             android:onClick="@{() -> model.toggleHistory()}"
             app:srcCompat="@drawable/ic_history" />
 
@@ -55,6 +57,7 @@
             android:layout_toLeftOf="@+id/btn_menu"
             android:layout_toStartOf="@+id/btn_menu"
             android:background="@drawable/selector_btn_action"
+            android:contentDescription="@string/cd_copy"
             android:onClick="@{() -> model.copyContent()}"
             app:srcCompat="@drawable/ic_copy" />
 
@@ -64,12 +67,13 @@
             android:layout_height="28dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:background="@drawable/selector_btn_action"
+            android:contentDescription="@string/cd_menu"
             android:onClick="@{model::openMenu}"
-            android:layout_marginRight="8dp"
-            android:layout_marginEnd="8dp"
             app:srcCompat="@drawable/ic_more" />
 
     </RelativeLayout>

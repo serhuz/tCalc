@@ -26,7 +26,7 @@
     <!-- user notifications -->
     <string name="toast_result_copied">Результат скопійовано</string>
     <string name="toast_ms">Результат збережено</string>
-    <string name="toast_copy_error">Буфер обміну містить непідтриувані дані</string>
+    <string name="toast_copy_error">Буфер обміну містить непідтримувані дані</string>
     <string name="action_settings">Налаштування</string>
 
     <!-- Rate dialog -->
@@ -57,5 +57,8 @@
     <string name="btn_ok">ОК</string>
     <string name="pref_precision">Точність</string>
     <string name="action_licenses">Ліцензії ПЗ</string>
-    <string name="label_history_empty">Історія пуста</string>
+    <string name="label_history_empty">Історія порожня</string>
+    <string name="cd_history_toggle">Історія</string>
+    <string name="cd_copy">Скопіювати результат</string>
+    <string name="cd_menu">Меню</string>
 </resources>

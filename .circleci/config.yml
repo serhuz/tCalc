@@ -12,6 +12,9 @@ jobs:
           name: Get Credentials
           command: sh credentials.sh
       - run:
+          name: Get Fabric key
+          command: sh fabric.sh
+      - run:
           name: Make gradlew executable
           command: chmod +x gradlew
       - restore_cache:

@@ -1,10 +1,15 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 apply plugin: 'com.google.gms.oss.licenses.plugin'
 apply plugin: 'com.getkeepsafe.dexcount'
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+def fabricPropertiesFile = rootProject.file("fabric.properties")
+def fabricProperties = new Properties()
+fabricProperties.load(new FileInputStream(fabricPropertiesFile))
 
 android {
     compileSdkVersion 27
@@ -19,7 +24,7 @@ android {
 
         vectorDrawables.useSupportLibrary = true
 
-        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner' 
     }
 
     signingConfigs {
@@ -58,6 +63,29 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "default"
+
+    productFlavors {
+
+        beta {
+            manifestPlaceholders << [FABRIC_API_KEY : fabricProperties['apiKey']]
+
+            versionNameSuffix '-beta'
+        }
+
+        stable {
+            ext.enableCrashlytics = false
+        }
+    }
+
+    variantFilter { variant ->
+        def names = variant.flavors*.name
+        def buildType = variant.buildType.name
+        if (names.contains("beta") && buildType != 'release') {
+            variant.ignore = true
         }
     }
 
@@ -126,6 +154,10 @@ dependencies {
     androidTestImplementation "org.assertj:assertj-core:$assertjVersion"
     androidTestImplementation 'com.github.fabioCollini:DaggerMock:0.8.4'
     androidTestImplementation 'com.bartoszlipinski:cortado:1.2.0'
+
+    betaImplementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
+        transitive = true;
+    }
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     androidTestImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"

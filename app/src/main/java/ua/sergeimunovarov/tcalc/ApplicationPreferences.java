@@ -279,7 +279,7 @@ public class ApplicationPreferences {
 
 
         @MainThread
-        public void observe(LifecycleOwner owner, final Observer<T> observer) {
+        public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<T> observer) {
             super.observe(owner, t -> {
                 if (mPending.compareAndSet(true, false)) {
                     observer.onChanged(t);
@@ -320,6 +320,7 @@ public class ApplicationPreferences {
         private final Context mContext;
 
 
+        @SuppressWarnings("WeakerAccess")
         public ResultFormatPref(@NonNull SharedPreferences preferences,
                                 @NonNull Context context) {
             super(preferences, PreferenceKeys.KEY_FORMAT);
@@ -337,6 +338,7 @@ public class ApplicationPreferences {
 
     public static class LayoutPref extends PrefsLiveData<Integer> {
 
+        @SuppressWarnings("WeakerAccess")
         public LayoutPref(@NonNull SharedPreferences preferences) {
             super(preferences, PreferenceKeys.KEY_LAYOUT);
         }

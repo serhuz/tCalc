@@ -61,5 +61,6 @@
     <string name="cd_history_toggle">Toggle history</string>
     <string name="cd_copy">Copy result</string>
     <string name="cd_menu">Menu</string>
+    <string name="toast_result_not_copied">Can\'t copy result</string>
 
 </resources>

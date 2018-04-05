@@ -13,23 +13,15 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 
-import ua.sergeimunovarov.tcalc.Patterns;
-
-import static ua.sergeimunovarov.tcalc.Patterns.MINUS;
 
 
 public class Parser {
 
-    private static final String TAG = Parser.class.getSimpleName();
+    private static final String PREFIX_NEGATIVE = "#";
+    private static final String REPLACEMENT_MINUS = "-";
 
-    private final LinkedList<Token> mOutput;
-    private final Stack<Token> mOperatorStack;
-
-
-    public Parser() {
-        mOutput = new LinkedList<>();
-        mOperatorStack = new Stack<>();
-    }
+    private final LinkedList<Token> mOutput = new LinkedList<>();
+    private final Stack<Token> mOperatorStack = new Stack<>();
 
 
     public LinkedList<Token> tokenizeExpression(@NonNull String expression) {
@@ -41,39 +33,41 @@ public class Parser {
             String token = tokenizer.nextToken();
 
             boolean matchFound = false;
-            for (ParserTokenType parserTokenType : ParserTokenType.values()) {
-                Matcher matcher = parserTokenType.getPattern().matcher(token);
+            for (InputPattern inputPattern : InputPattern.values()) {
+                if (!inputPattern.supportsParser()) continue;
+
+                Matcher matcher = inputPattern.getPattern().matcher(token);
                 if (matcher.matches()) {
                     matchFound = true;
-                    switch (parserTokenType.getType()) {
+                    switch (inputPattern.getType()) {
                         case BRACKET_OPEN:
-                            mOperatorStack.push(Token.create(Token.TokenType.BRACKET_OPEN, token));
+                            mOperatorStack.push(Token.create(Type.BRACKET_OPEN, token));
                             break;
                         case BRACKET_CLOSE:
                             processClosingBracket();
                             break;
                         case PLUS:
-                            processLowerOrderOperation(token, Token.TokenType.PLUS);
+                            processLowerOrderOperation(token, Type.PLUS);
                             break;
                         case MINUS:
-                            processLowerOrderOperation(token, Token.TokenType.MINUS);
+                            processLowerOrderOperation(token, Type.MINUS);
                             break;
                         case MUL:
-                            processHigherOrderOperation(token, Token.TokenType.MUL);
+                            processHigherOrderOperation(token, Type.MUL);
                             break;
                         case DIV:
-                            processHigherOrderOperation(token, Token.TokenType.DIV);
+                            processHigherOrderOperation(token, Type.DIV);
                             break;
                         case TIME_UNIT:
                             mOutput.add(Token.create(
-                                    Token.TokenType.TIME_UNIT, Converter.toMillis(token)
+                                    Type.TIME_UNIT, Converter.toMillis(token)
                             ));
                             break;
                         case VALUE:
-                            if (token.startsWith(Patterns.PREFIX_SHARP)) {
-                                token = token.replaceFirst(Patterns.PREFIX_SHARP, MINUS);
+                            if (token.startsWith(PREFIX_NEGATIVE)) {
+                                token = token.replaceFirst(PREFIX_NEGATIVE, REPLACEMENT_MINUS);
                             }
-                            mOutput.add(Token.create(Token.TokenType.VALUE, Double.parseDouble(token)));
+                            mOutput.add(Token.create(Type.VALUE, Double.parseDouble(token)));
                             break;
                     }
                     // Since match was found there is no need to iterate further.
@@ -96,7 +90,7 @@ public class Parser {
     private void processClosingBracket() {
         boolean openingBracketPresent = false;
         while (!mOperatorStack.isEmpty()) {
-            if (mOperatorStack.peek().type() != Token.TokenType.BRACKET_OPEN) {
+            if (mOperatorStack.peek().type() != Type.BRACKET_OPEN) {
                 mOutput.add(mOperatorStack.pop());
             } else {
                 openingBracketPresent = true;
@@ -108,12 +102,12 @@ public class Parser {
     }
 
 
-    private void processLowerOrderOperation(@NonNull String token, @NonNull Token.TokenType type) {
-        if (type != Token.TokenType.PLUS && type != Token.TokenType.MINUS) {
+    private void processLowerOrderOperation(@NonNull String token, @NonNull Type type) {
+        if (type != Type.PLUS && type != Type.MINUS) {
             throw new IllegalStateException();
         }
         while (!mOperatorStack.isEmpty()) {
-            if (mOperatorStack.peek().type() != Token.TokenType.BRACKET_OPEN) {
+            if (mOperatorStack.peek().type() != Type.BRACKET_OPEN) {
                 mOutput.add(mOperatorStack.pop());
             } else {
                 break;
@@ -123,13 +117,13 @@ public class Parser {
     }
 
 
-    private void processHigherOrderOperation(@NonNull String token, @NonNull Token.TokenType type) {
-        if (type != Token.TokenType.MUL && type != Token.TokenType.DIV) {
+    private void processHigherOrderOperation(@NonNull String token, @NonNull Type type) {
+        if (type != Type.MUL && type != Type.DIV) {
             throw new IllegalStateException();
         }
         while (!mOperatorStack.isEmpty()) {
-            Token.TokenType peekType = mOperatorStack.peek().type();
-            if (peekType == Token.TokenType.MUL || peekType == Token.TokenType.DIV) {
+            Type peekType = mOperatorStack.peek().type();
+            if (peekType == Type.MUL || peekType == Type.DIV) {
                 mOutput.add(mOperatorStack.pop());
             } else {
                 break;

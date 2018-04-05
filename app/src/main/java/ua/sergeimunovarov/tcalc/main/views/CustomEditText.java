@@ -21,7 +21,7 @@ import java.util.regex.Matcher;
 import ua.sergeimunovarov.tcalc.BuildConfig;
 import ua.sergeimunovarov.tcalc.R;
 import ua.sergeimunovarov.tcalc.main.ops.Converter;
-import ua.sergeimunovarov.tcalc.main.ops.ParserTokenType;
+import ua.sergeimunovarov.tcalc.main.ops.InputPattern;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 
@@ -85,16 +85,15 @@ public class CustomEditText extends AppCompatEditText {
         StringBuilder builder = new StringBuilder();
         while (tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
-            if (BuildConfig.DEBUG) Log.d("paste", String.format("current token: %s", token));
             boolean matchFound = false;
 
-            for (ParserTokenType parserTokenType : ParserTokenType.values()) {
-                Matcher matcher = parserTokenType.getPattern().matcher(token);
+            for (InputPattern inputPattern : InputPattern.values()) {
+                Matcher matcher = inputPattern.getPattern().matcher(token);
 
                 if (matcher.find()) {
                     matchFound = true;
-                    switch (parserTokenType) {
-                        case TYPE_DHMS:
+                    switch (inputPattern) {
+                        case DHMS:
                             long millis = Converter.toMillis(token);
                             builder.append(Converter.formatDurationHms(millis));
                             break;
@@ -119,10 +118,8 @@ public class CustomEditText extends AppCompatEditText {
         int selectionEnd = this.getSelectionEnd();
 
         if (selectionStart == selectionEnd) {
-            if (BuildConfig.DEBUG) Log.d("paste action", "selection start=selection end");
             this.getText().insert(selectionStart, builder.toString());
         } else {
-            if (BuildConfig.DEBUG) Log.d("paste action", "selection start!=selection end");
             this.getText().replace(selectionStart, selectionEnd, builder.toString());
         }
     }

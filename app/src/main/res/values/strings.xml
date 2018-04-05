@@ -79,4 +79,5 @@
     <string name="cd_history_toggle">История</string>
     <string name="cd_copy">Скопировать результат</string>
     <string name="cd_menu">Меню</string>
+    <string name="toast_result_not_copied">Не удается скопировать результат</string>
 </resources>

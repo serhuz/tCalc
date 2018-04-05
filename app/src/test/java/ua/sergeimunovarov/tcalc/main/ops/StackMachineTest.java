@@ -13,12 +13,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class StackMachineTest {
 
 
-    private static final Token TOKEN_TIME_10_MINS = Token.create(Token.TokenType.TIME_UNIT, (long) 10 * 60 * 1000);
-    private static final Token TOKEN_VALUE_2 = Token.create(Token.TokenType.VALUE, 2d);
-    private static final Token TOKEN_BRACKET_CLOSE = Token.create(Token.TokenType.BRACKET_CLOSE, ")");
-    private static final Token TOKEN_BRACKET_OPEN = Token.create(Token.TokenType.BRACKET_OPEN, "(");
-    private static final Token TOKEN_MUL = Token.create(Token.TokenType.MUL, "*");
-    private static final Token TOKEN_DIV = Token.create(Token.TokenType.DIV, "/");
+    private static final Token TOKEN_TIME_10_MINS = Token.create(Type.TIME_UNIT, (long) 10 * 60 * 1000);
+    private static final Token TOKEN_VALUE_2 = Token.create(Type.VALUE, 2d);
+    private static final Token TOKEN_BRACKET_CLOSE = Token.create(Type.BRACKET_CLOSE, ")");
+    private static final Token TOKEN_BRACKET_OPEN = Token.create(Type.BRACKET_OPEN, "(");
+    private static final Token TOKEN_MUL = Token.create(Type.MUL, "*");
+    private static final Token TOKEN_DIV = Token.create(Type.DIV, "/");
 
 
     @Test
@@ -27,7 +27,7 @@ public class StackMachineTest {
 
         Token result = StackMachine.add(a, a);
 
-        assertThat(result.type()).isNotNull().isEqualTo(Token.TokenType.TIME_UNIT);
+        assertThat(result.type()).isNotNull().isEqualTo(Type.TIME_UNIT);
         assertThat(result.value()).isEqualTo((long) 10 * 60 * 1000 * 2);
     }
 
@@ -38,7 +38,7 @@ public class StackMachineTest {
 
         Token result = StackMachine.add(a, a);
 
-        assertThat(result.type()).isNotNull().isEqualTo(Token.TokenType.VALUE);
+        assertThat(result.type()).isNotNull().isEqualTo(Type.VALUE);
         assertThat(result.value()).isEqualTo(4.0);
     }
 
@@ -68,7 +68,7 @@ public class StackMachineTest {
     @Test
     public void testAdd5() {
         Token a = TOKEN_VALUE_2;
-        Token b = Token.create(Token.TokenType.TIME_UNIT, 0L);
+        Token b = Token.create(Type.TIME_UNIT, 0L);
 
         assertThatThrownBy(() -> StackMachine.add(a, b))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -93,19 +93,19 @@ public class StackMachineTest {
 
         Token result = StackMachine.subtract(a, a);
 
-        assertThat(result.type()).isNotNull().isEqualTo(Token.TokenType.TIME_UNIT);
+        assertThat(result.type()).isNotNull().isEqualTo(Type.TIME_UNIT);
         assertThat(result.value()).isEqualTo(0L);
     }
 
 
     @Test
     public void testSubtract2() {
-        Token a = Token.create(Token.TokenType.VALUE, 3d);
+        Token a = Token.create(Type.VALUE, 3d);
         Token b = TOKEN_VALUE_2;
 
         Token result = StackMachine.subtract(a, b);
 
-        assertThat(result.type()).isNotNull().isEqualTo(Token.TokenType.VALUE);
+        assertThat(result.type()).isNotNull().isEqualTo(Type.VALUE);
         assertThat(result.value()).isEqualTo(1.0);
     }
 
@@ -123,7 +123,7 @@ public class StackMachineTest {
 
     @Test
     public void testSubtract4() {
-        Token a = Token.create(Token.TokenType.TIME_UNIT, String.valueOf(0));
+        Token a = Token.create(Type.TIME_UNIT, String.valueOf(0));
         Token b = TOKEN_VALUE_2;
 
         assertThatThrownBy(() -> StackMachine.subtract(a, b))
@@ -135,7 +135,7 @@ public class StackMachineTest {
     @Test
     public void testSubtract5() {
         Token a = TOKEN_VALUE_2;
-        Token b = Token.create(Token.TokenType.TIME_UNIT, 0L);
+        Token b = Token.create(Type.TIME_UNIT, 0L);
 
         assertThatThrownBy(() -> StackMachine.subtract(a, b))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -161,7 +161,7 @@ public class StackMachineTest {
 
         Token result = StackMachine.multiply(a, b);
 
-        assertThat(result.type()).isNotNull().isEqualTo(Token.TokenType.TIME_UNIT);
+        assertThat(result.type()).isNotNull().isEqualTo(Type.TIME_UNIT);
         assertThat(result.value()).isEqualTo((long) 10 * 60 * 1000 * 2);
     }
 
@@ -172,7 +172,7 @@ public class StackMachineTest {
 
         Token result = StackMachine.multiply(a, a);
 
-        assertThat(result.type()).isNotNull().isEqualTo(Token.TokenType.VALUE);
+        assertThat(result.type()).isNotNull().isEqualTo(Type.VALUE);
         assertThat(result.value()).isEqualTo(4.0);
     }
 
@@ -216,7 +216,7 @@ public class StackMachineTest {
 
         Token result = StackMachine.divide(a, b);
 
-        assertThat(result.type()).isNotNull().isEqualTo(Token.TokenType.TIME_UNIT);
+        assertThat(result.type()).isNotNull().isEqualTo(Type.TIME_UNIT);
         assertThat(result.value()).isEqualTo((long) 5 * 60 * 1000);
     }
 
@@ -227,7 +227,7 @@ public class StackMachineTest {
 
         Token result = StackMachine.divide(a, a);
 
-        assertThat(result.type()).isNotNull().isEqualTo(Token.TokenType.VALUE);
+        assertThat(result.type()).isNotNull().isEqualTo(Type.VALUE);
         assertThat(result.value()).isEqualTo(1.0);
     }
 
@@ -235,7 +235,7 @@ public class StackMachineTest {
     @Test
     public void testDivide3() {
         Token a = TOKEN_VALUE_2;
-        Token b = Token.create(Token.TokenType.VALUE, 0d);
+        Token b = Token.create(Type.VALUE, 0d);
 
         assertThatThrownBy(() -> StackMachine.divide(a, b))
                 .isInstanceOf(ArithmeticException.class)
@@ -249,7 +249,7 @@ public class StackMachineTest {
 
         Token result = StackMachine.divide(a, a);
 
-        assertThat(result.type()).isNotNull().isEqualTo(Token.TokenType.VALUE);
+        assertThat(result.type()).isNotNull().isEqualTo(Type.VALUE);
         assertThat(result.value()).isEqualTo(1.0);
     }
 

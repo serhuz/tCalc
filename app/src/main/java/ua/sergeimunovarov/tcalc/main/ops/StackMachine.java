@@ -18,28 +18,25 @@ public class StackMachine {
     static final String ERR_T_PLUS_V = "T+V";
     static final String ERR_V_MINUS_T = "V-T";
     static final String ERR_T_MINUS_V = "T-V";
-    // --------------------------------------------------------------------------------------------
     static final String ERR_T_MUL_T = "T*T";
     static final String ERR_V_DIV_T = "V/T";
     static final String ERR_DIV_BY_ZERO = "/0";
+    // --------------------------------------------------------------------------------------------
+
     // Arithmetic operations ----------------------------------------------------------------------
     private static final String OP_PLUS = "+";
     private static final String OP_MINUS = "-";
     private static final String OP_MUL = "*";
     private static final String OP_DIV = "/";
     // --------------------------------------------------------------------------------------------
-    private final Stack<Token> mStack;
 
-
-    public StackMachine() {
-        mStack = new Stack<>();
-    }
+    private final Stack<Token> mStack = new Stack<>();
 
 
     public Token evaluate(LinkedList<Token> list) {
         while (!list.isEmpty()) {
             Token current = list.pop();
-            Token.TokenType type = current.type();
+            Type type = current.type();
             switch (type) {
                 case VALUE:
                 case TIME_UNIT:
@@ -65,7 +62,7 @@ public class StackMachine {
 
     private static Token performOperation(@NonNull Token left,
                                           @NonNull Token right,
-                                          @NonNull Token.TokenType type) {
+                                          @NonNull Type type) {
         switch (type) {
             case PLUS:
                 return add(left, right);
@@ -82,27 +79,27 @@ public class StackMachine {
 
 
     static Token add(@NonNull Token left, @NonNull Token right) {
-        Token.TokenType type;
+        Type type;
         Object result;
 
-        if (left.type() == Token.TokenType.VALUE) {
+        if (left.type() == Type.VALUE) {
             switch (right.type()) {
                 case VALUE:
                     result = Double.class.cast(left.value()) + Double.class.cast(right.value());
-                    type = Token.TokenType.VALUE;
+                    type = Type.VALUE;
                     break;
                 case TIME_UNIT:
                     throw new IllegalArgumentException(ERR_V_PLUS_T);
                 default:
                     throw new IllegalArgumentException(OP_PLUS + right.value());
             }
-        } else if (left.type() == Token.TokenType.TIME_UNIT) {
+        } else if (left.type() == Type.TIME_UNIT) {
             switch (right.type()) {
                 case VALUE:
                     throw new IllegalArgumentException(ERR_T_PLUS_V);
                 case TIME_UNIT:
                     result = Long.class.cast(left.value()) + Long.class.cast(right.value());
-                    type = Token.TokenType.TIME_UNIT;
+                    type = Type.TIME_UNIT;
                     break;
                 default:
                     throw new IllegalArgumentException(OP_PLUS + right.value());
@@ -116,27 +113,27 @@ public class StackMachine {
 
 
     static Token subtract(@NonNull Token left, @NonNull Token right) {
-        Token.TokenType type;
+        Type type;
         Object result;
 
-        if (left.type() == Token.TokenType.VALUE) {
+        if (left.type() == Type.VALUE) {
             switch (right.type()) {
                 case VALUE:
                     result = Double.class.cast(left.value()) - Double.class.cast(right.value());
-                    type = Token.TokenType.VALUE;
+                    type = Type.VALUE;
                     break;
                 case TIME_UNIT:
                     throw new IllegalArgumentException(ERR_V_MINUS_T);
                 default:
                     throw new IllegalArgumentException(OP_MINUS + right.value());
             }
-        } else if (left.type() == Token.TokenType.TIME_UNIT) {
+        } else if (left.type() == Type.TIME_UNIT) {
             switch (right.type()) {
                 case VALUE:
                     throw new IllegalArgumentException(ERR_T_MINUS_V);
                 case TIME_UNIT:
                     result = Long.class.cast(left.value()) - Long.class.cast(right.value());
-                    type = Token.TokenType.TIME_UNIT;
+                    type = Type.TIME_UNIT;
                     break;
                 default:
                     throw new IllegalArgumentException(OP_MINUS + right.value());
@@ -150,27 +147,27 @@ public class StackMachine {
 
 
     static Token multiply(@NonNull Token left, @NonNull Token right) {
-        Token.TokenType type;
+        Type type;
         Object result;
 
-        if (left.type() == Token.TokenType.VALUE) {
+        if (left.type() == Type.VALUE) {
             switch (right.type()) {
                 case VALUE:
                     result = Double.class.cast(left.value()) * Double.class.cast(right.value());
-                    type = Token.TokenType.VALUE;
+                    type = Type.VALUE;
                     break;
                 case TIME_UNIT:
                     result = Math.round(Double.class.cast(left.value()) * Long.class.cast(right.value()));
-                    type = Token.TokenType.TIME_UNIT;
+                    type = Type.TIME_UNIT;
                     break;
                 default:
                     throw new IllegalArgumentException(OP_MUL + right.value().toString());
             }
-        } else if (left.type() == Token.TokenType.TIME_UNIT) {
+        } else if (left.type() == Type.TIME_UNIT) {
             switch (right.type()) {
                 case VALUE:
                     result = Math.round(Long.class.cast(left.value()) * Double.class.cast(right.value()));
-                    type = Token.TokenType.TIME_UNIT;
+                    type = Type.TIME_UNIT;
                     break;
                 case TIME_UNIT:
                     throw new IllegalArgumentException(ERR_T_MUL_T);
@@ -186,10 +183,10 @@ public class StackMachine {
 
 
     static Token divide(@NonNull Token left, @NonNull Token right) {
-        Token.TokenType type;
+        Type type;
         Object result;
 
-        if (left.type() == Token.TokenType.VALUE) {
+        if (left.type() == Type.VALUE) {
             switch (right.type()) {
                 case VALUE:
                     double leftValue = Double.class.cast(left.value());
@@ -197,7 +194,7 @@ public class StackMachine {
 
                     if (rightValue != 0) {
                         result = leftValue / rightValue;
-                        type = Token.TokenType.VALUE;
+                        type = Type.VALUE;
                     } else {
                         throw new ArithmeticException(ERR_DIV_BY_ZERO);
                     }
@@ -208,7 +205,7 @@ public class StackMachine {
                 default:
                     throw new IllegalArgumentException(OP_DIV + right.value().toString());
             }
-        } else if (left.type() == Token.TokenType.TIME_UNIT) {
+        } else if (left.type() == Type.TIME_UNIT) {
             switch (right.type()) {
                 case VALUE:
                     long millis = Long.class.cast(left.value());
@@ -216,7 +213,7 @@ public class StackMachine {
 
                     if (value != 0) {
                         result = Math.round(millis / value);
-                        type = Token.TokenType.TIME_UNIT;
+                        type = Type.TIME_UNIT;
                     } else {
                         throw new ArithmeticException(ERR_DIV_BY_ZERO);
                     }
@@ -228,7 +225,7 @@ public class StackMachine {
 
                     if (rightMillis != 0) {
                         result = (double) leftMillis / rightMillis;
-                        type = Token.TokenType.VALUE;
+                        type = Type.VALUE;
                     } else {
                         throw new ArithmeticException(ERR_DIV_BY_ZERO);
                     }

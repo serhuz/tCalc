@@ -228,9 +228,9 @@ public class MainActivity extends AbstractTransitionActivity implements
             ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             if (clipboardManager != null) {
                 clipboardManager.setPrimaryClip(clipData);
-                Toast.makeText(this, getString(R.string.toast_result_copied), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.toast_result_copied, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Can't copy result", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.toast_result_not_copied, Toast.LENGTH_SHORT).show();
             }
         }
     }

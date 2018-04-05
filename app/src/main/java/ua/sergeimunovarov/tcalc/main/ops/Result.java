@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 
 import com.google.auto.value.AutoValue;
 
-import ua.sergeimunovarov.tcalc.Patterns;
 import ua.sergeimunovarov.tcalc.main.Editor;
 
 
@@ -30,7 +29,7 @@ public abstract class Result implements Parcelable {
     @NonNull
     public String formattedValue() {
         String value = value();
-        if (value().startsWith(Patterns.MINUS)) {
+        if (value().startsWith("-")) {
             value = Editor.PAR_LEFT + value + Editor.PAR_RIGHT;
         }
         return value;

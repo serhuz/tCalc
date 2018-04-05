@@ -13,8 +13,8 @@ public class TokenTest {
 
     @Test
     public void equals() {
-        Token first = Token.create(Token.TokenType.VALUE, "-1");
-        Token second = Token.create(Token.TokenType.VALUE, "-1");
+        Token first = Token.create(Type.VALUE, "-1");
+        Token second = Token.create(Type.VALUE, "-1");
 
         assertThat(first).isEqualTo(second);
     }

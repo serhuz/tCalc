@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public final class Converter {
@@ -62,21 +61,23 @@ public final class Converter {
         boolean match = false;
         long millis = 0;
 
-        for (TimeUnit unit : TimeUnit.values()) {
-            Matcher matcher = unit.getPattern().matcher(timeUnit);
+        for (InputPattern pattern : InputPattern.values()) {
+            if (!pattern.supportsConverter()) continue;
+
+            Matcher matcher = pattern.getPattern().matcher(timeUnit);
             if (matcher.find()) {
                 match = true;
-                switch (unit) {
-                    case UNIT_MS:
+                switch (pattern) {
+                    case MSS:
                         millis = Long.parseLong(matcher.group(UNIT_MS_GROUP_MINUTES)) * MILLIS_IN_MINUTE
                                 + Long.parseLong(matcher.group(UNIT_MS_GROUP_SECONDS)) * MILLIS_IN_SECOND
                                 + Long.parseLong(matcher.group(UNIT_MS_GROUP_MILLIS));
                         break;
-                    case UNIT_HM:
+                    case HM:
                         millis = Long.parseLong(matcher.group(UNIT_HM_GROUP_HOURS)) * MILLIS_IN_HOUR
                                 + Long.parseLong(matcher.group(UNIT_HM_GROUP_MINUTES)) * MILLIS_IN_MINUTE;
                         break;
-                    case UNIT_HMS:
+                    case HMS:
                         millis = Long.parseLong(matcher.group(UNIT_HMS_GROUP_HOURS)) * MILLIS_IN_HOUR
                                 + Long.parseLong(matcher.group(UNIT_HMS_GROUP_MINUTES)) * MILLIS_IN_MINUTE
                                 + Long.parseLong(matcher.group(UNIT_HMS_GROUP_SECONDS)) * MILLIS_IN_SECOND;
@@ -86,7 +87,7 @@ public final class Converter {
                             // millis could not be parsed, therefore nothing is added
                         }
                         break;
-                    case UNIT_DHMS:
+                    case DHMS:
                         millis = Long.parseLong(matcher.group(UNIT_DHMS_GROUP_DAYS)) * MILLIS_IN_DAY
                                 + Long.parseLong(matcher.group(UNIT_DHMS_GROUP_HOURS)) * MILLIS_IN_HOUR
                                 + Long.parseLong(matcher.group(UNIT_DHMS_GROUP_MINUTES)) * MILLIS_IN_MINUTE
@@ -277,26 +278,6 @@ public final class Converter {
             return decimalFormat.format(value);
         } catch (NumberFormatException ex) {
             throw new NumberFormatException(ex.getMessage());
-        }
-    }
-
-
-    private enum TimeUnit {
-        UNIT_MS("(\\d+):(\\d+)(\\.(\\d{3})){1}"),
-        UNIT_HM("(\\d+):(\\d+)"),
-        UNIT_HMS("(\\d+):(\\d+):(\\d+)(\\.(\\d{3}))?"),
-        UNIT_DHMS("(\\d+)d\\. (\\d+):(\\d+):(\\d+)(\\.(\\d{3}))?");
-
-        private final Pattern pattern;
-
-
-        TimeUnit(String pattern) {
-            this.pattern = Pattern.compile("^(" + pattern + ")$");
-        }
-
-
-        public Pattern getPattern() {
-            return pattern;
         }
     }
 }

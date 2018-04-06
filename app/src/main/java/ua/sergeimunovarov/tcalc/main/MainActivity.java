@@ -25,7 +25,6 @@ import android.text.Editable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import java.util.concurrent.ExecutorService;
@@ -107,7 +106,25 @@ public class MainActivity extends AbstractTransitionActivity implements
             }
         });
         mViewModel.mCalculateResultEvent.observe(this, this::calculateResult);
-        mViewModel.mOpenMenuEvent.observe(this, this::openMenu);
+        mViewModel.mMenuClickEvent.observe(this, id -> {
+            if (id == null) return;
+            switch (id) {
+                case R.id.action_exit:
+                    finish();
+                    break;
+                case R.id.action_instructions:
+                    launchActivity(new Intent(MainActivity.this, HelpActivity.class));
+                    break;
+                case R.id.action_timestamp:
+                    showDialog(InsertTimeDialogFragment.create(), InsertTimeDialogFragment.class.getSimpleName());
+                    break;
+                case R.id.action_settings:
+                    launchActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                    break;
+                default:
+                    throw new IllegalStateException("Illegal item id");
+            }
+        });
         mViewModel.mInteractionEvent.observe(this, interaction -> {
             //noinspection ConstantConditions
             switch (interaction) {
@@ -219,6 +236,17 @@ public class MainActivity extends AbstractTransitionActivity implements
     }
 
 
+    private void showDialog(@NonNull AppCompatDialogFragment fragment, @NonNull String tag) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        Fragment foundFragment = fragmentManager.findFragmentByTag(tag);
+        if (foundFragment != null) transaction.remove(foundFragment);
+
+        fragment.show(transaction, tag);
+    }
+
+
     private void copyResult() {
         boolean calculationError = mViewModel.mCalculationError.get();
         Result result = mViewModel.mCalculationResult.get();
@@ -251,46 +279,9 @@ public class MainActivity extends AbstractTransitionActivity implements
     }
 
 
-    private void showDialog(@NonNull AppCompatDialogFragment fragment, @NonNull String tag) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        Fragment foundFragment = fragmentManager.findFragmentByTag(tag);
-        if (foundFragment != null) transaction.remove(foundFragment);
-
-        fragment.show(transaction, tag);
-    }
-
-
     @Override
     public void onTimeSelected(String time) {
         mViewModel.insertCurrentTime(time);
-    }
-
-
-    public void openMenu(View view) {
-        PopupMenu popupMenu = new PopupMenu(this, view);
-        popupMenu.inflate(R.menu.menu_more);
-        popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.action_exit:
-                    finish();
-                    break;
-                case R.id.action_instructions:
-                    launchActivity(new Intent(MainActivity.this, HelpActivity.class));
-                    break;
-                case R.id.action_timestamp:
-                    showDialog(InsertTimeDialogFragment.create(), InsertTimeDialogFragment.class.getSimpleName());
-                    break;
-                case R.id.action_settings:
-                    launchActivity(new Intent(MainActivity.this, SettingsActivity.class));
-                    break;
-                default:
-                    throw new IllegalStateException("Illegal item id: " + item.getItemId());
-            }
-            return true;
-        });
-        popupMenu.show();
     }
 
 

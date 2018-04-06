@@ -38,8 +38,8 @@ public class MainActivityViewModel extends BaseObservableViewModel {
     public final ObservableField<Result> mStoredResult = new ObservableField<>();
 
     public final InteractionEvent mInteractionEvent = new InteractionEvent();
-    public final OpenMenuEvent mOpenMenuEvent = new OpenMenuEvent();
     public final CalculateResultEvent mCalculateResultEvent = new CalculateResultEvent();
+    public final MenuClickEvent mMenuClickEvent = new MenuClickEvent();
 
     public final ApplicationPreferences.ResultFormatPref mFormatPref;
 
@@ -112,11 +112,6 @@ public class MainActivityViewModel extends BaseObservableViewModel {
 
     public void insertPreviousAnswer() {
         mInteractionEvent.setValue(Interaction.INSERT_ANSWER);
-    }
-
-
-    public void openMenu(View view) {
-        mOpenMenuEvent.setValue(view);
     }
 
 
@@ -230,13 +225,13 @@ public class MainActivityViewModel extends BaseObservableViewModel {
 
 
     @SuppressWarnings("WeakerAccess")
-    public static class OpenMenuEvent extends SingleLiveEvent<View> {
+    public static class CalculateResultEvent extends SingleLiveEvent<String> {
 
     }
 
 
     @SuppressWarnings("WeakerAccess")
-    public static class CalculateResultEvent extends SingleLiveEvent<String> {
+    public static class MenuClickEvent extends SingleLiveEvent<Integer> {
 
     }
 }

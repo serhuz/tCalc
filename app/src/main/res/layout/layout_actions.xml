@@ -61,7 +61,7 @@
             android:onClick="@{() -> model.copyContent()}"
             app:srcCompat="@drawable/ic_copy" />
 
-        <ImageButton
+        <ua.sergeimunovarov.tcalc.main.views.MenuButton
             android:id="@+id/btn_menu"
             android:layout_width="28dp"
             android:layout_height="28dp"
@@ -73,8 +73,8 @@
             android:layout_marginStart="8dp"
             android:background="@drawable/selector_btn_action"
             android:contentDescription="@string/cd_menu"
-            android:onClick="@{model::openMenu}"
-            app:srcCompat="@drawable/ic_more" />
+            app:srcCompat="@drawable/ic_more"
+            bind:menuClickEvent="@{model.mMenuClickEvent}" />
 
     </RelativeLayout>
 </layout>

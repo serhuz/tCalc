@@ -27,7 +27,6 @@ public class ApplicationPreferences {
     private final SharedPreferences mPreferences;
     private final Context mContext;
     private final ResultFormatPref mFormatPref;
-    private final LayoutPref mLayoutPref;
 
 
     public ApplicationPreferences(@NonNull SharedPreferences preferences,
@@ -36,7 +35,6 @@ public class ApplicationPreferences {
         mContext = context;
 
         mFormatPref = new ResultFormatPref(mPreferences, mContext);
-        mLayoutPref = new LayoutPref(mPreferences);
     }
 
 
@@ -65,7 +63,7 @@ public class ApplicationPreferences {
 
 
     public LayoutPref getLayout() {
-        return mLayoutPref;
+        return new LayoutPref(mPreferences);
     }
 
 

@@ -152,7 +152,6 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "org.assertj:assertj-core:$assertjVersion"
 
-    testImplementation "android.arch.core:core-testing:1.1.1"
     testImplementation "android.arch.persistence.room:testing:1.1.0-beta1"
 
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
@@ -164,6 +163,7 @@ dependencies {
     androidTestImplementation "org.assertj:assertj-core:$assertjVersion"
     androidTestImplementation 'com.github.fabioCollini:DaggerMock:0.8.4'
     androidTestImplementation 'com.bartoszlipinski:cortado:1.2.0'
+    androidTestImplementation "android.arch.core:core-testing:1.1.1"
 
     betaImplementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
         transitive = true

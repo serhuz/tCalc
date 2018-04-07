@@ -9,7 +9,6 @@ import android.content.pm.ActivityInfo;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +19,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static cortado.Cortado.onEditText;
 import static cortado.Cortado.onImageButton;
-import static cortado.Cortado.onTextView;
 import static cortado.Cortado.onView;
+import static ua.sergeimunovarov.tcalc.CustomMatchers.hasCurrentText;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -31,7 +30,6 @@ public class MainActivityStateTest {
     public final ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
 
-    @Ignore("after configuration change text == 4.")
     @Test
     public void dataSurvivesScreenRotation() {
         String expression = "2+2";
@@ -41,7 +39,7 @@ public class MainActivityStateTest {
         mActivityTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         onEditText().withId(R.id.input).check().matches(withText(expression));
-        onTextView().withId(R.id.result).check().matches(withText("= 4"));
+        onView().withId(R.id.result).check().matches(hasCurrentText("= 4"));
     }
 
 

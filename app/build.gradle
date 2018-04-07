@@ -133,6 +133,8 @@ ext {
     supportVersion = '27.1.0'
     daggerVersion = '2.15'
     autoValueVersion = '1.6'
+    archVersion = '1.1.1'
+    roomVersion = '1.1.0-beta2'
 
     leakCanaryVersion = '1.5.4'
 
@@ -152,8 +154,6 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "org.assertj:assertj-core:$assertjVersion"
 
-    testImplementation "android.arch.persistence.room:testing:1.1.0-beta1"
-
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
@@ -163,7 +163,8 @@ dependencies {
     androidTestImplementation "org.assertj:assertj-core:$assertjVersion"
     androidTestImplementation 'com.github.fabioCollini:DaggerMock:0.8.4'
     androidTestImplementation 'com.bartoszlipinski:cortado:1.2.0'
-    androidTestImplementation "android.arch.core:core-testing:1.1.1"
+    androidTestImplementation "android.arch.core:core-testing:$archVersion"
+    androidTestImplementation "android.arch.persistence.room:testing:$roomVersion"
 
     betaImplementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
         transitive = true
@@ -180,11 +181,11 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$supportVersion"
     implementation "com.android.support:design:$supportVersion"
 
-    implementation "android.arch.lifecycle:extensions:1.1.1"
-    implementation "android.arch.lifecycle:common-java8:1.1.1"
+    implementation "android.arch.lifecycle:extensions:$archVersion"
+    implementation "android.arch.lifecycle:common-java8:$archVersion"
 
-    implementation "android.arch.persistence.room:runtime:1.1.0-beta1"
-    annotationProcessor "android.arch.persistence.room:compiler:1.1.0-beta1"
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
 
     implementation "com.google.dagger:dagger:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"

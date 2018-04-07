@@ -51,6 +51,14 @@ public final class Converter {
     }
 
 
+    public static long mssToMillis(@NonNull String timeUnit) {
+        return toMillis(
+                InputPattern.MSS.getPattern().matcher(timeUnit).matches() ?
+                        timeUnit : timeUnit + ".000"
+        );
+    }
+
+
     /**
      * Parses given token and calculates amount of milliseconds.
      *

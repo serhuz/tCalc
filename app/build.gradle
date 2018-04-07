@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 apply plugin: 'com.google.gms.oss.licenses.plugin'
 apply plugin: 'com.getkeepsafe.dexcount'
+apply plugin: 'org.ajoberstar.grgit'
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
@@ -19,7 +20,7 @@ android {
         applicationId 'ua.sergeimunovarov.tcalc'
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 29
+        versionCode 30
         versionName '5.0'
 
         vectorDrawables.useSupportLibrary = true
@@ -80,7 +81,7 @@ android {
         beta {
             manifestPlaceholders << [FABRIC_API_KEY : fabricProperties['apiKey']]
 
-            versionNameSuffix '-beta'
+            versionNameSuffix "-beta-${grgit.head().getAbbreviatedId()}"
         }
 
         stable {

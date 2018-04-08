@@ -33,4 +33,14 @@ public class ResultTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+
+    @Test
+    public void formatValue() {
+        Result result = Result.create(Result.ResultType.RESULT_OK_VALUE, "-1", "0-1");
+
+        String actual = result.formattedValue();
+
+        assertThat(actual).isEqualTo("(-1)");
+    }
 }

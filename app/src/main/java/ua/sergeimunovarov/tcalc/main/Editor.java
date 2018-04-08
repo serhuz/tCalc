@@ -11,7 +11,11 @@ import android.text.Editable;
 
 import javax.inject.Inject;
 
+import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.main.feedback.HapticFeedback;
+import ua.sergeimunovarov.tcalc.main.history.db.Entry;
+import ua.sergeimunovarov.tcalc.main.ops.Converter;
+import ua.sergeimunovarov.tcalc.main.ops.Result;
 import ua.sergeimunovarov.tcalc.main.views.SelectionState;
 
 
@@ -21,7 +25,7 @@ public class Editor {
     public static final char PAR_LEFT = '(';
     public static final char PAR_RIGHT = ')';
 
-    private static final int POSITION_START = 0;
+    static final int POSITION_START = 0;
 
     private final HapticFeedback mFeedback;
 
@@ -61,6 +65,7 @@ public class Editor {
             editableInput.set(editable);
         } else {
             editable.replace(state.selectionStart(), state.selectionEnd(), text);
+            editableInput.set(editable);
             int selection = state.selectionEnd() - (state.selectionEnd() - state.selectionStart()) + 1;
             selectionState.set(SelectionState.create(selection));
         }
@@ -106,5 +111,22 @@ public class Editor {
 
     public void vibrate() {
         mFeedback.vibrate();
+    }
+
+
+    public void insertEntry(Entry entry,
+                            ObservableField<Editable> editableInput,
+                            ObservableField<SelectionState> selectionState) {
+        String value = entry.getResultValue();
+        if (entry.getFormatId() == ApplicationPreferences.FormatConstants.MS
+                && entry.getResultType() == Result.ResultType.RESULT_OK) {
+            long millis = Converter.mssToMillis(value);
+            value = Converter.formatDurationHms(millis);
+        } else if (entry.getFormatId() == ApplicationPreferences.FormatConstants.DHMS
+                && entry.getResultType() == Result.ResultType.RESULT_OK) {
+            long millis = Converter.toMillis(value);
+            value = Converter.formatDurationHms(millis);
+        }
+        input(value, editableInput, selectionState);
     }
 }

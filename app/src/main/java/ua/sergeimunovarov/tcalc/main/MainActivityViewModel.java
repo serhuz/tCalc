@@ -17,7 +17,6 @@ import android.widget.Button;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.R;
 import ua.sergeimunovarov.tcalc.main.history.db.Entry;
-import ua.sergeimunovarov.tcalc.main.ops.Converter;
 import ua.sergeimunovarov.tcalc.main.ops.Result;
 import ua.sergeimunovarov.tcalc.main.viewmodel.SingleLiveEvent;
 import ua.sergeimunovarov.tcalc.main.viewmodel.StringProvider;
@@ -165,15 +164,7 @@ public class MainActivityViewModel extends BaseObservableViewModel {
 
 
     public void insertEntry(Entry entry) {
-        String value = entry.getResultValue();
-        if (entry.getFormatId() == ApplicationPreferences.FormatConstants.MS) {
-            long millis = Converter.mssToMillis(value);
-            value = Converter.formatDurationHms(millis);
-        } else if (entry.getFormatId() == ApplicationPreferences.FormatConstants.DHMS) {
-            long millis = Converter.toMillis(value);
-            value = Converter.formatDurationHms(millis);
-        }
-        mEditor.input(value, mEditableInput, mSelectionState);
+        mEditor.insertEntry(entry, mEditableInput, mSelectionState);
     }
 
 

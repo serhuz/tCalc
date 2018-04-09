@@ -12,6 +12,9 @@ import android.util.AttributeSet;
 
 public abstract class TextSwitcher extends android.widget.TextSwitcher {
 
+    private boolean mInitialized = false;
+
+
     {
         // When setting factory using binding adapter,
         // generated binding actually sets factory after applying text from view model.
@@ -28,6 +31,17 @@ public abstract class TextSwitcher extends android.widget.TextSwitcher {
 
     public TextSwitcher(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+
+    @Override
+    public void setText(CharSequence text) {
+        if (mInitialized) {
+            super.setText(text);
+        } else {
+            super.setCurrentText(text);
+            mInitialized = true;
+        }
     }
 
 

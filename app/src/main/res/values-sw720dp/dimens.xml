@@ -2,7 +2,7 @@
 <resources>
 
     <dimen name="button_text_size">48sp</dimen>
-    <dimen name="textview_text_size">54sp</dimen>
+    <dimen name="textview_text_size">58sp</dimen>
     <dimen name="button_backspace_padding">24dp</dimen>
     <dimen name="history_icon_size">60dp</dimen>
     <dimen name="history_empty_view_text_size">36sp</dimen>

@@ -14,7 +14,7 @@
     <string name="btn_9" translatable="false">9</string>
     <string name="btn_answer" translatable="false">ANS</string>
     <string name="btn_calculate" translatable="false">=</string>
-    <string name="btn_clear" translatable="false">CLR</string>
+    <string name="btn_clear" translatable="false">C</string>
     <string name="btn_colon" translatable="false">:</string>
     <string name="btn_divide" translatable="false">÷</string>
     <string name="btn_dot" translatable="false">.</string>

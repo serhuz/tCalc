@@ -62,4 +62,7 @@
     <string name="cd_copy">Скопіювати результат</string>
     <string name="cd_menu">Меню</string>
     <string name="toast_result_not_copied">Не вдається скопіювати результат</string>
+    <string name="pref_recalculate">Перераховувати результат при зміні формату</string>
+    <string name="pref_recalculate_on">Перерахування ввімкнене</string>
+    <string name="pref_recalculate_off">Перерахування вимкнене</string>
 </resources>

@@ -80,4 +80,7 @@
     <string name="cd_copy">Скопировать результат</string>
     <string name="cd_menu">Меню</string>
     <string name="toast_result_not_copied">Не удается скопировать результат</string>
+    <string name="pref_recalculate">Пересчет результата при смене формата</string>
+    <string name="pref_recalculate_on">Пересчет производится</string>
+    <string name="pref_recalculate_off">Пересчет не производится</string>
 </resources>

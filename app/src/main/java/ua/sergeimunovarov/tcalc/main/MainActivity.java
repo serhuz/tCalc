@@ -101,7 +101,8 @@ public class MainActivity extends AbstractTransitionActivity implements
         mViewModel.mFormatPref.observe(this, format -> {
             mViewModel.mResultFormat.set(format);
             Editable editable = mViewModel.mEditableInput.get();
-            if (editable != null) { // can be null when launching
+            if (editable != null /* can be null when launching */
+                    && mPreferences.isRecalculateEnabled()) {
                 calculateResult(editable.toString());
             }
         });

@@ -49,6 +49,10 @@ public class SettingsFragment extends PreferenceFragment {
                 findPreference(ApplicationPreferences.PreferenceKeys.KEY_VIBRO_ENABLED);
         bindPreferenceSummaryToValue(vibroEnabled);
 
+        Preference recalculationEnabled =
+                findPreference(ApplicationPreferences.PreferenceKeys.KEY_RECALCULATE);
+        bindPreferenceSummaryToValue(recalculationEnabled);
+
         Preference vibroDuration =
                 findPreference(ApplicationPreferences.PreferenceKeys.KEY_VIBRO_DURATION);
         bindPreferenceSummaryToValue(vibroDuration);

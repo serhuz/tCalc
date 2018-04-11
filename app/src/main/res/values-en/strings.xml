@@ -62,5 +62,8 @@
     <string name="cd_copy">Copy result</string>
     <string name="cd_menu">Menu</string>
     <string name="toast_result_not_copied">Can\'t copy result</string>
+    <string name="pref_recalculate">Recalculate result after format change</string>
+    <string name="pref_recalculate_on">Recalculate on</string>
+    <string name="pref_recalculate_off">Recalculate off</string>
 
 </resources>

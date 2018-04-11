@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ListPreference
         android:defaultValue="0"
         android:entries="@array/layout_type_items"
         android:entryValues="@array/layout_type_values"
         android:key="layout"
-        android:title="@string/pref_layout"/>
+        android:title="@string/pref_layout" />
 
     <ua.sergeimunovarov.tcalc.settings.SeekBarPreference
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:defaultValue="5"
         android:key="precision"
         android:title="@string/pref_precision"
         app:max="5"
-        app:min="1"/>
+        app:min="1" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="recalculate_auto"
+        android:summaryOff="@string/pref_recalculate_off"
+        android:summaryOn="@string/pref_recalculate_on"
+        android:title="@string/pref_recalculate" />
 
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="vibro_enabled"
         android:summaryOff="@string/pref_vibro_off"
         android:summaryOn="@string/pref_vibro_on"
-        android:title="@string/action_vibration_enable"/>
+        android:title="@string/action_vibration_enable" />
 
     <ListPreference
         android:defaultValue="50"
@@ -29,6 +36,6 @@
         android:entries="@array/vibration_duration_items"
         android:entryValues="@array/vibration_duration_values"
         android:key="vibro_duration"
-        android:title="@string/pref_vibro_duration"/>
+        android:title="@string/pref_vibro_duration" />
 
 </PreferenceScreen>

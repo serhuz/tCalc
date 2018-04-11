@@ -94,6 +94,10 @@ public class ApplicationPreferences {
     }
 
 
+    public boolean isRecalculateEnabled() {
+        return getPreferences().getBoolean(PreferenceKeys.KEY_RECALCULATE, false);
+    }
+
     /**
      * Loads vibration duration preference
      *
@@ -212,6 +216,11 @@ public class ApplicationPreferences {
          * Calculation precision key
          */
         public static final String KEY_PRECISION = "precision";
+
+        /**
+         * Auto recalculation on format change
+         */
+        public static final String KEY_RECALCULATE = "recalculate_auto";
     }
 
 

@@ -300,15 +300,19 @@ public class MainActivity extends AbstractTransitionActivity implements
             if (data != null) {
                 mViewModel.setCalculationResult(data);
                 if (data.type() != Result.ResultType.RESULT_ERR) {
-                    mIOExecutor.execute(() -> mDao.insertItem(
-                            new Entry(
-                                    data.expression(),
-                                    data.type(),
-                                    data.value(),
-                                    System.currentTimeMillis(),
-                                    mPreferences.loadFormatPreference()
-                            )
-                    ));
+                    mIOExecutor.execute(() -> {
+                        Entry last = mDao.getLast();
+                        Entry current = new Entry(
+                                data.expression(),
+                                data.type(),
+                                data.value(),
+                                System.currentTimeMillis(),
+                                mPreferences.loadFormatPreference()
+                        );
+                        if (last == null || !last.sameContents(current)) {
+                            mDao.insertItem(current);
+                        }
+                    });
                 }
             }
 

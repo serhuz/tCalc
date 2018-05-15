@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 import ua.sergeimunovarov.tcalc.DaggerMockRule;
 import ua.sergeimunovarov.tcalc.R;
 
+import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
@@ -66,5 +67,22 @@ public class MainActivityHistoryTest {
         onView().withId(R.id.history_entries).check(matches(hasChildCount(2)));
         onView().withId(R.id.history_entries).check(matches(hasDescendant(withText("2+2"))));
         onView().withId(R.id.history_entries).check(matches(hasDescendant(withText("0:10*2"))));
+    }
+
+
+    @Test
+    public void notAddDuplicates() {
+        onEditText().withId(R.id.input).perform().typeText("2+2");
+        closeSoftKeyboard();
+        onButton().withId(R.id.btn_eq).perform().click();
+        onEditText().withId(R.id.input).perform().clearText();
+        onEditText().withId(R.id.input).perform().typeText("2+2");
+        closeSoftKeyboard();
+        onButton().withId(R.id.btn_eq).perform().click();
+
+        onView().withId(R.id.btn_history_toggle).perform().click();
+
+        onView().withId(R.id.history_entries).check(matches(hasChildCount(1)));
+        onView().withId(R.id.history_entries).check(matches(hasDescendant(withText("2+2"))));
     }
 }

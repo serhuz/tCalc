@@ -84,6 +84,22 @@ public class Entry {
     }
 
 
+    public boolean sameContents(@NonNull Entry other) {
+        if (this.getResultType() == Result.ResultType.RESULT_OK) {
+            return this.getExpression().equals(other.getExpression())
+                    && this.getResultValue().equals(other.getResultValue())
+                    && this.getResultType().equals(other.getResultType())
+                    && this.getFormatId() == other.getFormatId();
+        } else if (this.getResultType() == Result.ResultType.RESULT_OK_VALUE) {
+            return this.getExpression().equals(other.getExpression())
+                    && this.getResultValue().equals(other.getResultValue())
+                    && this.getResultType().equals(other.getResultType());
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+
     public long getId() {
         return id;
     }

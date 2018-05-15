@@ -24,4 +24,7 @@ public interface EntryDao {
 
     @Query("DELETE FROM history")
     void deleteAll();
+
+    @Query("SELECT * FROM history ORDER BY ts DESC LIMIT 1")
+    Entry getLast();
 }

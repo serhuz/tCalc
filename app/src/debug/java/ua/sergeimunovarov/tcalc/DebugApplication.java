@@ -14,8 +14,6 @@ import com.squareup.leakcanary.LeakCanary;
 
 public class DebugApplication extends Application {
 
-    private static final int MAX_STORED_HEAP_DUMPS = 3;
-
 
     @Override
     public void onCreate() {

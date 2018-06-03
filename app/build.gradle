@@ -20,7 +20,7 @@ android {
         applicationId 'ua.sergeimunovarov.tcalc'
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 32
+        versionCode 33
         versionName '5.0'
 
         vectorDrawables.useSupportLibrary = true

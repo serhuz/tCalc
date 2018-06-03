@@ -10,4 +10,7 @@
     <dimen name="history_item_result_text_size">38sp</dimen>
     <dimen name="history_item_format_text_size">22sp</dimen>
     <dimen name="history_item_paste_icon_size">52dp</dimen>
+    <dimen name="action_width">36dp</dimen>
+    <dimen name="action_height">36dp</dimen>
+    <dimen name="action_format_text_size">20sp</dimen>
 </resources>

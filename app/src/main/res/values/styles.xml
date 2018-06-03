@@ -82,10 +82,10 @@
         <item name="android:background">@drawable/selector_format_background</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/action_format_text_size</item>
         <item name="android:paddingLeft">8dp</item>
         <item name="android:paddingRight">8dp</item>
         <item name="fontFamily">@font/lato_light</item>
         <item name="android:gravity">center</item>
     </style>
-
 </resources>

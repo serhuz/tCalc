@@ -23,7 +23,7 @@
         <ua.sergeimunovarov.tcalc.main.views.FormatTextSwitcher
             android:id="@+id/indicator_format"
             android:layout_width="wrap_content"
-            android:layout_height="28dp"
+            android:layout_height="@dimen/action_height"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
@@ -37,8 +37,8 @@
 
         <ImageButton
             android:id="@+id/btn_history_toggle"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="@dimen/action_width"
+            android:layout_height="@dimen/action_height"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_toLeftOf="@+id/btn_copy"
@@ -46,12 +46,13 @@
             android:background="@drawable/selector_btn_action"
             android:contentDescription="@string/cd_history_toggle"
             android:onClick="@{() -> model.toggleHistory()}"
+            android:scaleType="fitXY"
             app:srcCompat="@drawable/ic_history" />
 
         <ImageButton
             android:id="@+id/btn_copy"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="@dimen/action_width"
+            android:layout_height="@dimen/action_height"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_toLeftOf="@+id/btn_menu"
@@ -59,12 +60,13 @@
             android:background="@drawable/selector_btn_action"
             android:contentDescription="@string/cd_copy"
             android:onClick="@{() -> model.copyContent()}"
+            android:scaleType="fitXY"
             app:srcCompat="@drawable/ic_copy" />
 
         <ua.sergeimunovarov.tcalc.main.views.MenuButton
             android:id="@+id/btn_menu"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="@dimen/action_width"
+            android:layout_height="@dimen/action_height"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginEnd="8dp"
@@ -73,6 +75,7 @@
             android:layout_marginStart="8dp"
             android:background="@drawable/selector_btn_action"
             android:contentDescription="@string/cd_menu"
+            android:scaleType="fitXY"
             app:srcCompat="@drawable/ic_more"
             bind:menuClickEvent="@{model.mMenuClickEvent}" />
 

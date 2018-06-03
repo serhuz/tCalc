@@ -149,7 +149,7 @@ ext {
 
     leakCanaryVersion = '1.5.4'
 
-    assertjVersion = '2.9.0'
+    assertjVersion = '2.9.1'
     mockitoVersion = '2.18.3'
     espressoVersion = '3.0.2'
 }
@@ -177,7 +177,7 @@ dependencies {
     androidTestImplementation "android.arch.core:core-testing:$archVersion"
     androidTestImplementation "android.arch.persistence.room:testing:$roomVersion"
 
-    betaImplementation('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
+    betaImplementation('com.crashlytics.sdk.android:crashlytics:2.9.3@aar') {
         transitive = true
     }
 

@@ -51,6 +51,7 @@ android {
     }
 
     testOptions {
+        execution 'ANDROID_TEST_ORCHESTRATOR'
         animationsDisabled true // Works with API 24+ ?
         unitTests {
             returnDefaultValues = true
@@ -142,15 +143,15 @@ android {
 
 ext {
     supportVersion = '27.1.1'
-    daggerVersion = '2.16'
-    autoValueVersion = '1.6'
+    daggerVersion = '2.17'
+    autoValueVersion = '1.6.2'
     archVersion = '1.1.1'
-    roomVersion = '1.1.0'
+    roomVersion = '1.1.1'
 
-    leakCanaryVersion = '1.5.4'
+    leakCanaryVersion = '1.6.1'
 
     assertjVersion = '2.9.1'
-    mockitoVersion = '2.18.3'
+    mockitoVersion = '2.22.0'
     espressoVersion = '3.0.2'
 }
 
@@ -176,15 +177,16 @@ dependencies {
     androidTestImplementation 'com.bartoszlipinski:cortado:1.2.0'
     androidTestImplementation "android.arch.core:core-testing:$archVersion"
     androidTestImplementation "android.arch.persistence.room:testing:$roomVersion"
+    androidTestUtil 'com.android.support.test:orchestrator:1.0.2'
 
-    betaImplementation('com.crashlytics.sdk.android:crashlytics:2.9.3@aar') {
+    betaImplementation('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') {
         transitive = true
     }
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     androidTestImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
-    implementation 'com.google.android.gms:play-services-oss-licenses:15.0.1'
+    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.0'
 
     implementation "com.android.support:support-annotations:$supportVersion"
     implementation "com.android.support:support-core-utils:$supportVersion"

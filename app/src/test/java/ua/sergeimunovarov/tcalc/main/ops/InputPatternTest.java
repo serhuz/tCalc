@@ -6,522 +6,141 @@
 package ua.sergeimunovarov.tcalc.main.ops;
 
 import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.regex.Matcher;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 
+@RunWith(Enclosed.class)
 public class InputPatternTest {
 
-    @Test
-    public void parseOpeningBracket() {
-        Matcher matcher = InputPattern.BRACKET_OPEN.getPattern().matcher("(");
+    @RunWith(Parameterized.class)
+    public static class ExpectTrueTests {
 
-        assertThat(matcher.matches()).isTrue();
+        @Parameterized.Parameter
+        public InputPattern pattern;
+
+        @Parameterized.Parameter(1)
+        public String given;
+
+
+        @Test
+        public void checkMatches() {
+            Matcher matcher = pattern.getPattern().matcher(given);
+
+            assertThat(matcher.matches()).isTrue();
+        }
+
+
+        @Parameterized.Parameters(name = "{0} matches \"{1}\"")
+        public static Collection<Object[]> getParameters() {
+            return Arrays.asList(
+                    new Object[][]{
+                            {InputPattern.BRACKET_OPEN, "("},
+                            {InputPattern.BRACKET_CLOSE, ")"},
+                            {InputPattern.PLUS, "+"},
+                            {InputPattern.MINUS, "-"},
+                            {InputPattern.MUL, "*"},
+                            {InputPattern.DIV, "/"},
+                            {InputPattern.HMS, "00:05:30"},
+                            {InputPattern.HMS, "00:05:30.321"},
+                            {InputPattern.HM, "00:30"},
+                            {InputPattern.MSS, "10:30.123"},
+                            {InputPattern.DHMS, "2d. 10:20:30.123"},
+                            {InputPattern.DHMS, "2d. 10:20:30"},
+                            {InputPattern.VALUE, "2020"},
+                            {InputPattern.VALUE, "1.000777"},
+                            {InputPattern.VALUE_NEGATIVE, "#2020"},
+                            {InputPattern.VALUE_NEGATIVE, "#1.000777"},
+                    }
+            );
+        }
     }
 
 
-    @Test
-    public void notParseOpeningBracket1() {
-        Matcher matcher = InputPattern.BRACKET_OPEN.getPattern().matcher(")");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseOpeningBracket2() {
-        Matcher matcher = InputPattern.BRACKET_OPEN.getPattern().matcher("10");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseOpeningBracket3() {
-        Matcher matcher = InputPattern.BRACKET_OPEN.getPattern().matcher("+");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void parseClosingBracket() {
-        Matcher matcher = InputPattern.BRACKET_CLOSE.getPattern().matcher(")");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void notParseClosingBracket1() {
-        Matcher matcher = InputPattern.BRACKET_CLOSE.getPattern().matcher("(");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseClosingBracket2() {
-        Matcher matcher = InputPattern.BRACKET_CLOSE.getPattern().matcher("10");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseClosingBracket3() {
-        Matcher matcher = InputPattern.BRACKET_CLOSE.getPattern().matcher("+");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void parsePlus() {
-        Matcher matcher = InputPattern.PLUS.getPattern().matcher("+");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void notParsePlus1() {
-        Matcher matcher = InputPattern.PLUS.getPattern().matcher("-");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParsePlus2() {
-        Matcher matcher = InputPattern.PLUS.getPattern().matcher("10");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParsePlus3() {
-        Matcher matcher = InputPattern.PLUS.getPattern().matcher(")");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void parseMinus() {
-        Matcher matcher = InputPattern.MINUS.getPattern().matcher("-");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void notParseMinus1() {
-        Matcher matcher = InputPattern.MINUS.getPattern().matcher("*");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseMinus2() {
-        Matcher matcher = InputPattern.MINUS.getPattern().matcher("10");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseMinus3() {
-        Matcher matcher = InputPattern.MINUS.getPattern().matcher(")");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void parseMultiplication() {
-        Matcher matcher = InputPattern.MUL.getPattern().matcher("*");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void notParseMultiplication1() {
-        Matcher matcher = InputPattern.MUL.getPattern().matcher("-");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseMultiplication2() {
-        Matcher matcher = InputPattern.MUL.getPattern().matcher("10");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseMultiplication3() {
-        Matcher matcher = InputPattern.MUL.getPattern().matcher(")");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void parseDivision() {
-        Matcher matcher = InputPattern.DIV.getPattern().matcher("/");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void notParseDivision1() {
-        Matcher matcher = InputPattern.DIV.getPattern().matcher("-");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseDivision2() {
-        Matcher matcher = InputPattern.DIV.getPattern().matcher("10");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseDivision3() {
-        Matcher matcher = InputPattern.DIV.getPattern().matcher(")");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void parseHMS1() {
-        Matcher matcher = InputPattern.HMS.getPattern().matcher("00:05:30");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void parseHMS2() {
-        Matcher matcher = InputPattern.HMS.getPattern().matcher("00:05:30.321");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void notParseHMS1() {
-        Matcher matcher = InputPattern.HMS.getPattern().matcher("00:-05:30");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseHMS2() {
-        Matcher matcher = InputPattern.HMS.getPattern().matcher("00:30");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseHMS3() {
-        Matcher matcher = InputPattern.HMS.getPattern().matcher("1230");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseHMS4() {
-        Matcher matcher = InputPattern.HMS.getPattern().matcher("*");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseHMS5() {
-        Matcher matcher = InputPattern.HMS.getPattern().matcher("10:30.123");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void parseHM() {
-        Matcher matcher = InputPattern.HM.getPattern().matcher("00:30");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void notParseHM1() {
-        Matcher matcher = InputPattern.HM.getPattern().matcher("10:30:30");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseHM2() {
-        Matcher matcher = InputPattern.HM.getPattern().matcher("10:30:30.123");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseHM3() {
-        Matcher matcher = InputPattern.HM.getPattern().matcher("1230");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseHM4() {
-        Matcher matcher = InputPattern.HM.getPattern().matcher("/");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseHM5() {
-        Matcher matcher = InputPattern.HM.getPattern().matcher("10:30.123");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void parseMS() {
-        Matcher matcher = InputPattern.MSS.getPattern().matcher("10:30.123");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void notParseMS1() {
-        Matcher matcher = InputPattern.MSS.getPattern().matcher("20:40");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseMS2() {
-        Matcher matcher = InputPattern.MSS.getPattern().matcher("20:40:15");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseMS3() {
-        Matcher matcher = InputPattern.MSS.getPattern().matcher("1015");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseMS4() {
-        Matcher matcher = InputPattern.MSS.getPattern().matcher("*");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void parseDHMS1() {
-        Matcher matcher = InputPattern.DHMS.getPattern().matcher("2d. 10:20:30.123");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void parseDHMS2() {
-        Matcher matcher = InputPattern.DHMS.getPattern().matcher("2d. 10:20:30");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void notParseDHMS1() {
-        Matcher matcher = InputPattern.DHMS.getPattern().matcher("10:20:30");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseDHMS2() {
-        Matcher matcher = InputPattern.DHMS.getPattern().matcher("20:30.234");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseDHMS3() {
-        Matcher matcher = InputPattern.DHMS.getPattern().matcher("20:30");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseDHMS4() {
-        Matcher matcher = InputPattern.DHMS.getPattern().matcher("20:30:00.111");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseDHMS5() {
-        Matcher matcher = InputPattern.DHMS.getPattern().matcher("+");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseDHMS6() {
-        Matcher matcher = InputPattern.DHMS.getPattern().matcher("2020");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void parseValue1() {
-        Matcher matcher = InputPattern.VALUE.getPattern().matcher("2020");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void parseValue2() {
-        Matcher matcher = InputPattern.VALUE.getPattern().matcher("1.000777");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void notParseValue1() {
-        Matcher matcher = InputPattern.VALUE.getPattern().matcher("+");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseValue2() {
-        Matcher matcher = InputPattern.VALUE.getPattern().matcher("10:20.222");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseValue3() {
-        Matcher matcher = InputPattern.VALUE.getPattern().matcher("10:15");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseValue4() {
-        Matcher matcher = InputPattern.VALUE.getPattern().matcher("10:15:00.222");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void parseNegativeValue1() {
-        Matcher matcher = InputPattern.VALUE_NEGATIVE.getPattern().matcher("#2020");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void parseNegativeValue2() {
-        Matcher matcher = InputPattern.VALUE_NEGATIVE.getPattern().matcher("#1.000777");
-
-        assertThat(matcher.matches()).isTrue();
-    }
-
-
-    @Test
-    public void notParseNegativeValue1() {
-        Matcher matcher = InputPattern.VALUE_NEGATIVE.getPattern().matcher("+");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseNegativeValue2() {
-        Matcher matcher = InputPattern.VALUE_NEGATIVE.getPattern().matcher("10:20.222");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseNegativeValue3() {
-        Matcher matcher = InputPattern.VALUE_NEGATIVE.getPattern().matcher("10:15");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseNegativeValue4() {
-        Matcher matcher = InputPattern.VALUE_NEGATIVE.getPattern().matcher("10:15:00.222");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseNegativeValue5() {
-        Matcher matcher = InputPattern.VALUE_NEGATIVE.getPattern().matcher("456");
-
-        assertThat(matcher.matches()).isFalse();
-    }
-
-
-    @Test
-    public void notParseNegativeValue6() {
-        Matcher matcher = InputPattern.VALUE_NEGATIVE.getPattern().matcher("456.789000");
-
-        assertThat(matcher.matches()).isFalse();
+    @RunWith(Parameterized.class)
+    public static class ExpectFalseTests {
+
+        @Parameterized.Parameter
+        public InputPattern pattern;
+
+        @Parameterized.Parameter(1)
+        public String given;
+
+
+        @Test
+        public void checkNotMatches() {
+            Matcher matcher = pattern.getPattern().matcher(given);
+
+            assertThat(matcher.matches()).isFalse();
+        }
+
+
+        @Parameterized.Parameters(name = "{0} not matches \"{1}\"")
+        public static Collection<Object[]> getParameters() {
+            return Arrays.asList(
+                    new Object[][]{
+                            {InputPattern.BRACKET_OPEN, ")"},
+                            {InputPattern.BRACKET_OPEN, "10"},
+                            {InputPattern.BRACKET_OPEN, "+"},
+                            {InputPattern.BRACKET_CLOSE, "("},
+                            {InputPattern.BRACKET_CLOSE, "10"},
+                            {InputPattern.BRACKET_CLOSE, "+"},
+                            {InputPattern.PLUS, "-"},
+                            {InputPattern.PLUS, "10"},
+                            {InputPattern.PLUS, ")"},
+                            {InputPattern.MINUS, "*"},
+                            {InputPattern.MINUS, "10"},
+                            {InputPattern.MINUS, ")"},
+                            {InputPattern.MUL, "-"},
+                            {InputPattern.MUL, "10"},
+                            {InputPattern.MUL, ")"},
+                            {InputPattern.DIV, "-"},
+                            {InputPattern.DIV, "10"},
+                            {InputPattern.DIV, ")"},
+                            {InputPattern.HMS, "00:-05:30"},
+                            {InputPattern.HMS, "00:05:30.99999"},
+                            {InputPattern.HMS, "00:30"},
+                            {InputPattern.HMS, "1230"},
+                            {InputPattern.HMS, "*"},
+                            {InputPattern.HMS, "10:30.123"},
+                            {InputPattern.HM, "10:30:30"},
+                            {InputPattern.HM, "10:30:30.123"},
+                            {InputPattern.HM, "1230"},
+                            {InputPattern.HM, "/"},
+                            {InputPattern.HM, "10:30.123"},
+                            {InputPattern.MSS, "20:40"},
+                            {InputPattern.MSS, "20:40:15"},
+                            {InputPattern.MSS, "1015"},
+                            {InputPattern.MSS, "*"},
+                            {InputPattern.DHMS, "10:20:30"},
+                            {InputPattern.DHMS, "20:30.234"},
+                            {InputPattern.DHMS, "20:30"},
+                            {InputPattern.DHMS, "20:30:00.111"},
+                            {InputPattern.DHMS, "+"},
+                            {InputPattern.DHMS, "2020"},
+                            {InputPattern.VALUE, "+"},
+                            {InputPattern.VALUE, "10:20.222"},
+                            {InputPattern.VALUE, "10:15"},
+                            {InputPattern.VALUE, "10:15:00.222"},
+                            {InputPattern.VALUE, "10:15:00.222"},
+                            {InputPattern.VALUE, "#2020"},
+                            {InputPattern.VALUE_NEGATIVE, "+"},
+                            {InputPattern.VALUE_NEGATIVE, "10:20.222"},
+                            {InputPattern.VALUE_NEGATIVE, "10:15"},
+                            {InputPattern.VALUE_NEGATIVE, "10:15:00.222"},
+                            {InputPattern.VALUE_NEGATIVE, "10:15:00.222"},
+                            {InputPattern.VALUE_NEGATIVE, "2020"},
+                            {InputPattern.VALUE_NEGATIVE, "456"},
+                            {InputPattern.VALUE_NEGATIVE, "456.789000"},
+                    }
+            );
+        }
     }
 }

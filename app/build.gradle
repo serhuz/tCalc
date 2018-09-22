@@ -38,6 +38,8 @@ android {
 
         addPreferenceKeyConstant('key_recalculate', 'recalculate_auto')
 
+        buildConfigField "String", "DB_NAME", "\"tcalc_room.db\""
+
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 

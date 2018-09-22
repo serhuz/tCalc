@@ -39,6 +39,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static ua.sergeimunovarov.tcalc.CustomMatchers.hasText;
 import static ua.sergeimunovarov.tcalc.CustomMatchers.isToast;
+import static ua.sergeimunovarov.tcalc.CustomViewActions.setText;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -185,7 +186,7 @@ public class MainActivityTest {
 
     @Test
     public void copyResult() {
-        onEditText().withId(R.id.input).perform().typeText("2+2");
+        onEditText().withId(R.id.input).perform(setText("2+2"));
         onView().withId(R.id.btn_eq).perform().click();
 
         onView().withId(R.id.btn_copy).perform().click();

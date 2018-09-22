@@ -15,6 +15,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import ua.sergeimunovarov.tcalc.BuildConfig;
 import ua.sergeimunovarov.tcalc.main.history.db.DbOnCreateCallback;
 import ua.sergeimunovarov.tcalc.main.history.db.EntryDao;
 import ua.sergeimunovarov.tcalc.main.history.db.HistoryDatabase;
@@ -36,7 +37,7 @@ public class DbModule {
         return Room.databaseBuilder(
                 context,
                 HistoryDatabase.class,
-                "tcalc_room.db"
+                BuildConfig.DB_NAME
         ).addCallback(new DbOnCreateCallback()).build();
     }
 

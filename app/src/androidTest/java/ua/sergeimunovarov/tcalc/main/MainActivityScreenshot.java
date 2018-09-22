@@ -26,6 +26,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static ua.sergeimunovarov.tcalc.CustomViewActions.setText;
 import static ua.sergeimunovarov.tcalc.Locales.english;
 import static ua.sergeimunovarov.tcalc.Locales.russian;
 import static ua.sergeimunovarov.tcalc.Locales.ukrainian;
@@ -66,7 +67,7 @@ public class MainActivityScreenshot {
 
     @Test
     public void mainActivityEvaluateExpression() {
-        onView(withId(R.id.input)).perform(typeText("20:00-2*5:00"));
+        onView(withId(R.id.input)).perform(setText("20:00-2*5:00"));
         onView(withId(R.id.btn_eq)).perform(click());
     }
 }

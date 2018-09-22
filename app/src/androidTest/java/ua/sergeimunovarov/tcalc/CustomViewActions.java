@@ -15,11 +15,15 @@ import android.support.test.espresso.action.Swipe;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.espresso.util.HumanReadables;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.SeekBar;
 
 import org.hamcrest.Matcher;
 
 import static android.support.test.espresso.action.ViewActions.actionWithAssertions;
+import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static org.hamcrest.Matchers.allOf;
 
 
 public final class CustomViewActions {
@@ -29,11 +33,33 @@ public final class CustomViewActions {
     }
 
 
+    public static ViewAction setText(String text) {
+        return new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                return allOf(isDisplayed(), isAssignableFrom(EditText.class));
+            }
+
+
+            @Override
+            public String getDescription() {
+                return "Set text to edit text";
+            }
+
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                ((EditText) view).setText(text);
+            }
+        };
+    }
+
+
     public static ViewAction setProgress(int progress) {
         return new ViewAction() {
             @Override
             public Matcher<View> getConstraints() {
-                return ViewMatchers.isAssignableFrom(SeekBar.class);
+                return isAssignableFrom(SeekBar.class);
             }
 
 

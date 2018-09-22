@@ -14,6 +14,7 @@ import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.main.FormatDialogFragment;
 import ua.sergeimunovarov.tcalc.main.MainActivity;
 import ua.sergeimunovarov.tcalc.main.history.HistoryViewModel;
+import ua.sergeimunovarov.tcalc.main.history.db.EntryDao;
 import ua.sergeimunovarov.tcalc.main.input.BaseInputFragment;
 import ua.sergeimunovarov.tcalc.settings.SettingsFragment;
 
@@ -31,6 +32,8 @@ public interface AppComponent {
     Context appContext();
 
     ApplicationPreferences appPreferences();
+
+    EntryDao entryDao();
 
     void inject(MainActivity mainActivity);
 

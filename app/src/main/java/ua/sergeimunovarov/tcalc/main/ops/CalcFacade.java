@@ -5,13 +5,13 @@
 
 package ua.sergeimunovarov.tcalc.main.ops;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.EmptyStackException;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
+import androidx.annotation.NonNull;
 import ua.sergeimunovarov.tcalc.Application;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences.FormatConstants.FormatId;

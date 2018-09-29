@@ -5,11 +5,11 @@
 
 package ua.sergeimunovarov.tcalc.di;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 
 import javax.inject.Singleton;
 
+import androidx.lifecycle.ViewModelProvider;
 import dagger.Module;
 import dagger.Provides;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;

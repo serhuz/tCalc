@@ -5,9 +5,9 @@
 
 package ua.sergeimunovarov.tcalc.main.history.db;
 
-import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.room.RoomDatabase;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 
 public class DbOnCreateCallback extends RoomDatabase.Callback {

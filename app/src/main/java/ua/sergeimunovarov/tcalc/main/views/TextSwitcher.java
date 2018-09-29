@@ -6,8 +6,9 @@
 package ua.sergeimunovarov.tcalc.main.views;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.util.AttributeSet;
+
+import androidx.annotation.LayoutRes;
 
 
 public abstract class TextSwitcher extends android.widget.TextSwitcher {

@@ -1,10 +1,9 @@
 package ua.sergeimunovarov.tcalc.main.ops;
 
-import android.support.test.runner.AndroidJUnit4;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.test.runner.AndroidJUnit4;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 
 import static org.assertj.core.api.Assertions.assertThat;

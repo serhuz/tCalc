@@ -5,15 +5,14 @@
 
 package ua.sergeimunovarov.tcalc.main.history;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableList;
-import android.support.annotation.NonNull;
-
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableList;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import ua.sergeimunovarov.tcalc.main.BaseObservableViewModel;
 import ua.sergeimunovarov.tcalc.main.history.db.Entry;
 import ua.sergeimunovarov.tcalc.main.history.db.EntryDao;

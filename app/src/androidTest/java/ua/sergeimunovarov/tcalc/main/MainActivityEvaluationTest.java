@@ -5,8 +5,6 @@
 
 package ua.sergeimunovarov.tcalc.main;
 
-import android.support.test.rule.ActivityTestRule;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,15 +14,16 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
+import androidx.test.rule.ActivityTestRule;
 import it.cosenonjaviste.daggermock.InjectFromComponent;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.DaggerMockRule;
 import ua.sergeimunovarov.tcalc.R;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static ua.sergeimunovarov.tcalc.CustomMatchers.hasCurrentText;
 import static ua.sergeimunovarov.tcalc.CustomViewActions.setText;
 

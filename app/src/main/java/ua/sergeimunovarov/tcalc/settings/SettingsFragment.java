@@ -13,10 +13,10 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
 import ua.sergeimunovarov.tcalc.Application;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.R;

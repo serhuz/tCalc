@@ -6,15 +6,15 @@
 package ua.sergeimunovarov.tcalc.main;
 
 import android.content.pm.ActivityInfo;
-import android.support.test.filters.LargeTest;
-import android.support.test.rule.GrantPermissionRule;
-import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.RuleChain;
 import org.junit.runner.RunWith;
 
+import androidx.test.filters.LargeTest;
+import androidx.test.rule.GrantPermissionRule;
+import androidx.test.runner.AndroidJUnit4;
 import ua.sergeimunovarov.tcalc.CustomActivityTestRule;
 import ua.sergeimunovarov.tcalc.LocaleRule;
 import ua.sergeimunovarov.tcalc.R;
@@ -22,10 +22,9 @@ import ua.sergeimunovarov.tcalc.ScreenshotWatcher;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static ua.sergeimunovarov.tcalc.CustomViewActions.setText;
 import static ua.sergeimunovarov.tcalc.Locales.english;
 import static ua.sergeimunovarov.tcalc.Locales.russian;

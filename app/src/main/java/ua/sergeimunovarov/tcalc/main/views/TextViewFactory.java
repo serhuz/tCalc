@@ -5,12 +5,13 @@
 
 package ua.sergeimunovarov.tcalc.main.views;
 
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextSwitcher;
 import android.widget.ViewSwitcher;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 
 
 public class TextViewFactory implements ViewSwitcher.ViewFactory {

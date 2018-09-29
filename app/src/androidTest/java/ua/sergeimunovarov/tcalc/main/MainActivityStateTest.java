@@ -6,17 +6,17 @@
 package ua.sergeimunovarov.tcalc.main;
 
 import android.content.pm.ActivityInfo;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 import ua.sergeimunovarov.tcalc.R;
 
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static cortado.Cortado.onButton;
 import static cortado.Cortado.onEditText;
 import static cortado.Cortado.onImageButton;

@@ -5,11 +5,11 @@
 
 package ua.sergeimunovarov.tcalc;
 
-import android.support.test.InstrumentationRegistry;
-
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
+
+import androidx.test.InstrumentationRegistry;
 
 
 public class ClearDatabaseRule implements TestRule {

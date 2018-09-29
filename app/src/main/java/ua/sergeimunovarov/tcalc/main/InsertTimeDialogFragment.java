@@ -8,14 +8,14 @@ package ua.sergeimunovarov.tcalc.main;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatDialogFragment;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import ua.sergeimunovarov.tcalc.R;
 
 import static java.lang.System.currentTimeMillis;

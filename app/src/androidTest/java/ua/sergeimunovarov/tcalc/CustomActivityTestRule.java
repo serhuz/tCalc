@@ -11,14 +11,6 @@ import android.app.Instrumentation.ActivityResult;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.annotation.UiThreadTest;
-import android.support.test.internal.runner.junit4.statement.UiThreadStatement;
-import android.support.test.runner.MonitoringInstrumentation;
-import android.support.test.runner.intercepting.SingleActivityFactory;
 import android.util.Log;
 
 import org.junit.rules.TestRule;
@@ -27,8 +19,17 @@ import org.junit.runners.model.Statement;
 
 import java.lang.reflect.Field;
 
-import static android.support.test.internal.util.Checks.checkNotNull;
-import static android.support.test.internal.util.Checks.checkState;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.annotation.UiThreadTest;
+import androidx.test.internal.runner.junit4.statement.UiThreadStatement;
+import androidx.test.runner.MonitoringInstrumentation;
+import androidx.test.runner.intercepting.SingleActivityFactory;
+
+import static androidx.test.internal.util.Checks.checkNotNull;
+import static androidx.test.internal.util.Checks.checkState;
 
 
 /**

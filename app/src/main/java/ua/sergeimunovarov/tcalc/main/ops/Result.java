@@ -6,10 +6,10 @@
 package ua.sergeimunovarov.tcalc.main.ops;
 
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
 
 import com.google.auto.value.AutoValue;
 
+import androidx.annotation.NonNull;
 import ua.sergeimunovarov.tcalc.main.Editor;
 
 

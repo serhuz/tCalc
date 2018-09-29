@@ -5,13 +5,13 @@
 
 package ua.sergeimunovarov.tcalc.main.ops;
 
-import android.support.annotation.NonNull;
-
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
+
+import androidx.annotation.NonNull;
 
 
 

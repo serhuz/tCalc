@@ -5,9 +5,9 @@
 
 package ua.sergeimunovarov.tcalc.main.views;
 
-import android.support.annotation.IntRange;
-
 import com.google.auto.value.AutoValue;
+
+import androidx.annotation.IntRange;
 
 
 @AutoValue

@@ -5,10 +5,10 @@
 
 package ua.sergeimunovarov.tcalc.main;
 
-import android.arch.lifecycle.ViewModel;
-import android.databinding.Bindable;
-import android.databinding.Observable;
-import android.databinding.PropertyChangeRegistry;
+import androidx.databinding.Bindable;
+import androidx.databinding.Observable;
+import androidx.databinding.PropertyChangeRegistry;
+import androidx.lifecycle.ViewModel;
 
 
 public class BaseObservableViewModel extends ViewModel implements Observable {

@@ -43,7 +43,6 @@
     <!-- user notifications -->
     <string name="toast_result_copied">Результат скопирован</string>
     <string name="toast_copy_error">В буфере обмена содержатся неподдерживаемые данные</string>
-    <string name="toast_ms">Результат сохранен</string>
 
     <string name="message_rate_dialog">Хотите перейти в Google Play сейчас?</string>
     <string name="btn_yes">Да</string>

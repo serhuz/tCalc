@@ -26,7 +26,6 @@
 
     <!-- user notifications -->
     <string name="toast_result_copied">Result copied</string>
-    <string name="toast_ms">Result stored</string>
     <string name="toast_copy_error">Clipboard contains unsupported characters</string>
     <string name="action_settings">Settings</string>
 

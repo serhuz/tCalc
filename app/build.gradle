@@ -38,6 +38,7 @@ android {
         addPreferenceKeyConstant('key_recalculate', 'recalculate_auto')
 
         buildConfigField "String", "DB_NAME", "\"tcalc_room.db\""
+        buildConfigField "String", "PRIVACY_POLICY_URL", "\"https://serhuz.github.io/tCalc/privacy\""
 
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }

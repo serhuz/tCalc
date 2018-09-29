@@ -65,5 +65,6 @@
     <string name="pref_recalculate">Recalculate result after format change</string>
     <string name="pref_recalculate_on">Recalculate on</string>
     <string name="pref_recalculate_off">Recalculate off</string>
+    <string name="action_privacy_policy">Privacy policy</string>
 
 </resources>

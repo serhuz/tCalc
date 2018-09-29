@@ -7,6 +7,7 @@ package ua.sergeimunovarov.tcalc.help;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -23,6 +24,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 
 import ua.sergeimunovarov.tcalc.AbstractTransitionActivity;
+import ua.sergeimunovarov.tcalc.BuildConfig;
 import ua.sergeimunovarov.tcalc.R;
 import ua.sergeimunovarov.tcalc.databinding.ActivityHelpBinding;
 
@@ -83,6 +85,9 @@ public class HelpActivity extends AbstractTransitionActivity {
                 return true;
             case R.id.action_licenses:
                 showOssLicences();
+            case R.id.action_privacy:
+                goToPrivacyPolicy();
+                break;
             default:
                 break;
         }
@@ -107,5 +112,12 @@ public class HelpActivity extends AbstractTransitionActivity {
         transaction.addToBackStack(null);
 
         RateAppDialog.create().show(transaction, TAG_RATE);
+    }
+
+
+    private void goToPrivacyPolicy() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(BuildConfig.PRIVACY_POLICY_URL));
+        startActivity(intent);
     }
 }

@@ -5,12 +5,12 @@
 
 package ua.sergeimunovarov.tcalc.main;
 
-import android.databinding.ObservableField;
-import android.support.annotation.NonNull;
 import android.text.Editable;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
+import androidx.databinding.ObservableField;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.main.feedback.HapticFeedback;
 import ua.sergeimunovarov.tcalc.main.history.db.Entry;

@@ -5,18 +5,19 @@
 
 package ua.sergeimunovarov.tcalc;
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.IntDef;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 
 /**
@@ -286,7 +287,8 @@ public class ApplicationPreferences {
 
 
         @MainThread
-        public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<T> observer) {
+        @Override
+        public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super T> observer) {
             super.observe(owner, t -> {
                 if (mPending.compareAndSet(true, false)) {
                     observer.onChanged(t);

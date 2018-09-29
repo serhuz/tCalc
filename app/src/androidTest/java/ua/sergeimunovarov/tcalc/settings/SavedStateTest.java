@@ -6,11 +6,12 @@
 package ua.sergeimunovarov.tcalc.settings;
 
 import android.os.Parcel;
-import android.support.test.runner.AndroidJUnit4;
 import android.view.AbsSavedState;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import androidx.test.runner.AndroidJUnit4;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 

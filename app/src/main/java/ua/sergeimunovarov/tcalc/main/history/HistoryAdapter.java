@@ -5,15 +5,15 @@
 
 package ua.sergeimunovarov.tcalc.main.history;
 
-import android.support.annotation.NonNull;
-import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView;
 import ua.sergeimunovarov.tcalc.databinding.ItemEntryBinding;
 import ua.sergeimunovarov.tcalc.main.history.db.Entry;
 import ua.sergeimunovarov.tcalc.main.viewmodel.SingleLiveEvent;

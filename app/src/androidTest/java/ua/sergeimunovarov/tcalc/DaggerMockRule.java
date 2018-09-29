@@ -1,7 +1,6 @@
 package ua.sergeimunovarov.tcalc;
 
-import android.support.test.InstrumentationRegistry;
-
+import androidx.test.InstrumentationRegistry;
 import ua.sergeimunovarov.tcalc.di.AppComponent;
 import ua.sergeimunovarov.tcalc.di.ApplicationModule;
 import ua.sergeimunovarov.tcalc.di.DbModule;

@@ -6,8 +6,8 @@
 package ua.sergeimunovarov.tcalc.main.feedback;
 
 import android.os.Vibrator;
-import android.support.annotation.NonNull;
 
+import androidx.annotation.NonNull;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 
 

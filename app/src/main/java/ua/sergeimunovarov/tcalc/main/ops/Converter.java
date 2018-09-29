@@ -5,12 +5,12 @@
 
 package ua.sergeimunovarov.tcalc.main.ops;
 
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.regex.Matcher;
+
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 
 
 public final class Converter {

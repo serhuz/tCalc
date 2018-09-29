@@ -5,13 +5,12 @@
 
 package ua.sergeimunovarov.tcalc.main.history;
 
-import android.support.v7.widget.RecyclerView;
-
 import org.junit.Test;
 
 import java.util.Collections;
 import java.util.List;
 
+import androidx.recyclerview.widget.RecyclerView;
 import ua.sergeimunovarov.tcalc.main.history.db.Entry;
 import ua.sergeimunovarov.tcalc.main.ops.Result;
 

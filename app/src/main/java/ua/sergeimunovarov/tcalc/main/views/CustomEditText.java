@@ -8,8 +8,6 @@ package ua.sergeimunovarov.tcalc.main.views;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -18,6 +16,8 @@ import android.widget.Toast;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatEditText;
 import ua.sergeimunovarov.tcalc.BuildConfig;
 import ua.sergeimunovarov.tcalc.R;
 import ua.sergeimunovarov.tcalc.main.ops.Converter;

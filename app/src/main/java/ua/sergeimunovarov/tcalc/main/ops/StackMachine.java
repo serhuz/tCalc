@@ -5,10 +5,10 @@
 
 package ua.sergeimunovarov.tcalc.main.ops;
 
-import android.support.annotation.NonNull;
-
 import java.util.LinkedList;
 import java.util.Stack;
+
+import androidx.annotation.NonNull;
 
 
 public class StackMachine {

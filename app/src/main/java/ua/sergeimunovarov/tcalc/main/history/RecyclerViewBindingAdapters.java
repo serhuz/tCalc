@@ -5,15 +5,14 @@
 
 package ua.sergeimunovarov.tcalc.main.history;
 
-import android.databinding.BindingAdapter;
-import android.support.annotation.IntDef;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.RecyclerView;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
+import androidx.annotation.IntDef;
+import androidx.databinding.BindingAdapter;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.RecyclerView;
 import ua.sergeimunovarov.tcalc.main.history.db.Entry;
 
 

@@ -5,8 +5,7 @@
 
 package ua.sergeimunovarov.tcalc.main.history.db;
 
-import android.arch.persistence.room.TypeConverter;
-
+import androidx.room.TypeConverter;
 import ua.sergeimunovarov.tcalc.main.ops.Result;
 
 

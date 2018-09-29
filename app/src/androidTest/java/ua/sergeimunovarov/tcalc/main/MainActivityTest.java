@@ -5,12 +5,7 @@
 
 package ua.sergeimunovarov.tcalc.main;
 
-import android.arch.lifecycle.MutableLiveData;
 import android.content.ClipboardManager;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.intent.rule.IntentsTestRule;
-import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,6 +14,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
+import androidx.lifecycle.MutableLiveData;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.intent.rule.IntentsTestRule;
+import androidx.test.runner.AndroidJUnit4;
 import it.cosenonjaviste.daggermock.InjectFromComponent;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.DaggerMockRule;
@@ -27,11 +27,11 @@ import ua.sergeimunovarov.tcalc.help.HelpActivity;
 import ua.sergeimunovarov.tcalc.main.history.db.EntryDao;
 import ua.sergeimunovarov.tcalc.settings.SettingsActivity;
 
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.intent.Intents.intended;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.intent.Intents.intended;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static cortado.Cortado.onEditText;
 import static cortado.Cortado.onImageButton;
 import static cortado.Cortado.onView;

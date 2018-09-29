@@ -15,6 +15,9 @@ jobs:
           name: Get Fabric key
           command: sh fabric.sh
       - run:
+          name: Generate gradle.properties
+          command: sh props.sh
+      - run:
           name: Make gradlew executable
           command: chmod +x gradlew
       - restore_cache:

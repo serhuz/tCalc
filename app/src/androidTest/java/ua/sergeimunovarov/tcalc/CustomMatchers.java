@@ -6,9 +6,6 @@
 package ua.sergeimunovarov.tcalc;
 
 import android.os.IBinder;
-import android.support.annotation.NonNull;
-import android.support.test.espresso.Root;
-import android.support.test.espresso.matcher.BoundedMatcher;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
@@ -19,6 +16,10 @@ import android.widget.TextView;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+
+import androidx.annotation.NonNull;
+import androidx.test.espresso.Root;
+import androidx.test.espresso.matcher.BoundedMatcher;
 
 
 public final class CustomMatchers {

@@ -5,9 +5,9 @@
 
 package ua.sergeimunovarov.tcalc.main.ops;
 
-import android.support.annotation.NonNull;
-
 import java.util.regex.Pattern;
+
+import androidx.annotation.NonNull;
 
 
 public enum InputPattern {

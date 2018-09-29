@@ -5,8 +5,6 @@
 
 package ua.sergeimunovarov.tcalc.main;
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule;
-import android.support.test.runner.AndroidJUnit4;
 import android.text.Editable;
 
 import org.junit.After;
@@ -16,6 +14,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.test.runner.AndroidJUnit4;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.main.viewmodel.StringProvider;
 

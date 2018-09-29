@@ -6,8 +6,9 @@
 package ua.sergeimunovarov.tcalc.main.viewmodel;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 
 public class StringProvider {

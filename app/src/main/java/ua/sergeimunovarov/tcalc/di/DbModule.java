@@ -5,7 +5,6 @@
 
 package ua.sergeimunovarov.tcalc.di;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import java.util.concurrent.ExecutorService;
@@ -13,6 +12,7 @@ import java.util.concurrent.Executors;
 
 import javax.inject.Singleton;
 
+import androidx.room.Room;
 import dagger.Module;
 import dagger.Provides;
 import ua.sergeimunovarov.tcalc.BuildConfig;

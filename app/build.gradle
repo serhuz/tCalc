@@ -40,7 +40,7 @@ android {
         buildConfigField "String", "DB_NAME", "\"tcalc_room.db\""
         buildConfigField "String", "PRIVACY_POLICY_URL", "\"https://serhuz.github.io/tCalc/privacy\""
 
-        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     signingConfigs {
@@ -53,7 +53,7 @@ android {
     }
 
     testOptions {
-        execution 'ANDROID_TEST_ORCHESTRATOR'
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
         animationsDisabled true // Works with API 24+ ?
         unitTests {
             returnDefaultValues = true
@@ -168,18 +168,18 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "org.assertj:assertj-core:$assertjVersion"
 
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
-    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espressoVersion"
-    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.0-alpha4'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0-alpha4'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
+    androidTestImplementation 'androidx.test:rules:1.1.0-alpha4'
     androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
     androidTestImplementation "org.assertj:assertj-core:$assertjVersion"
     androidTestImplementation 'com.github.fabioCollini:DaggerMock:0.8.4'
     androidTestImplementation 'com.bartoszlipinski:cortado:1.2.0'
-    androidTestImplementation "android.arch.core:core-testing:$archVersion"
-    androidTestImplementation "android.arch.persistence.room:testing:$roomVersion"
-    androidTestUtil 'com.android.support.test:orchestrator:1.0.2'
+    androidTestImplementation 'androidx.arch.core:core-testing:2.0.0'
+    androidTestImplementation 'androidx.room:room-testing:2.0.0-rc01'
+    androidTestUtil 'androidx.test:orchestrator:1.1.0-alpha4'
 
     betaImplementation('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') {
         transitive = true
@@ -190,17 +190,17 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-oss-licenses:16.0.0'
 
-    implementation "com.android.support:support-annotations:$supportVersion"
-    implementation "com.android.support:support-core-utils:$supportVersion"
-    implementation "com.android.support:appcompat-v7:$supportVersion"
-    implementation "com.android.support:recyclerview-v7:$supportVersion"
-    implementation "com.android.support:design:$supportVersion"
+    implementation 'androidx.annotation:annotation:1.0.0'
+    implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
 
-    implementation "android.arch.lifecycle:extensions:$archVersion"
-    implementation "android.arch.lifecycle:common-java8:$archVersion"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.0.0'
 
-    implementation "android.arch.persistence.room:runtime:$roomVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
+    implementation 'androidx.room:room-runtime:2.0.0-rc01'
+    annotationProcessor 'androidx.room:room-compiler:2.0.0-rc01'
 
     implementation "com.google.dagger:dagger:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"

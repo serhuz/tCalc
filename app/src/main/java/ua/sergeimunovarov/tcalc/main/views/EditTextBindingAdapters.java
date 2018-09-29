@@ -5,11 +5,12 @@
 
 package ua.sergeimunovarov.tcalc.main.views;
 
-import android.databinding.BindingAdapter;
-import android.databinding.InverseBindingAdapter;
-import android.databinding.InverseBindingListener;
 import android.text.Editable;
 import android.text.TextWatcher;
+
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.InverseBindingAdapter;
+import androidx.databinding.InverseBindingListener;
 
 
 public final class EditTextBindingAdapters {

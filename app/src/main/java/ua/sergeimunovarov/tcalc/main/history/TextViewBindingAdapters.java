@@ -5,8 +5,9 @@
 
 package ua.sergeimunovarov.tcalc.main.history;
 
-import android.databinding.BindingAdapter;
 import android.widget.TextView;
+
+import androidx.databinding.BindingAdapter;
 
 
 public final class TextViewBindingAdapters {

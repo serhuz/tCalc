@@ -5,7 +5,6 @@
 
 package ua.sergeimunovarov.tcalc.main;
 
-import android.databinding.ObservableField;
 import android.text.Editable;
 
 import org.junit.After;
@@ -13,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import androidx.databinding.ObservableField;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
 import ua.sergeimunovarov.tcalc.main.feedback.HapticFeedback;
 import ua.sergeimunovarov.tcalc.main.history.db.Entry;

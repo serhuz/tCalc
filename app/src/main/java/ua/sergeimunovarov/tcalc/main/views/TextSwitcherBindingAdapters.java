@@ -5,11 +5,12 @@
 
 package ua.sergeimunovarov.tcalc.main.views;
 
-import android.databinding.BindingAdapter;
-import android.support.annotation.AnimRes;
-import android.support.annotation.NonNull;
 import android.widget.TextSwitcher;
 import android.widget.ViewSwitcher;
+
+import androidx.annotation.AnimRes;
+import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
 
 
 @SuppressWarnings("WeakerAccess")

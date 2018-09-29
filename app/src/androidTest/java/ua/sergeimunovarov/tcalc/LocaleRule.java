@@ -7,7 +7,6 @@ package ua.sergeimunovarov.tcalc;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.support.test.InstrumentationRegistry;
 import android.util.DisplayMetrics;
 
 import org.junit.rules.TestRule;
@@ -15,6 +14,8 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 import java.util.Locale;
+
+import androidx.test.InstrumentationRegistry;
 
 
 public class LocaleRule implements TestRule {

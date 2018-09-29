@@ -6,15 +6,16 @@
 package ua.sergeimunovarov.tcalc;
 
 import android.graphics.Bitmap;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.screenshot.ScreenCapture;
-import android.support.test.runner.screenshot.Screenshot;
 
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
 import java.io.IOException;
 import java.util.Locale;
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.screenshot.ScreenCapture;
+import androidx.test.runner.screenshot.Screenshot;
 
 
 public class ScreenshotWatcher extends TestWatcher {

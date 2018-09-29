@@ -5,32 +5,33 @@
 
 package ua.sergeimunovarov.tcalc.main;
 
-import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatDialogFragment;
 import android.text.Editable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
 import java.util.concurrent.ExecutorService;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import ua.sergeimunovarov.tcalc.AbstractTransitionActivity;
 import ua.sergeimunovarov.tcalc.Application;
 import ua.sergeimunovarov.tcalc.ApplicationPreferences;
@@ -92,7 +93,7 @@ public class MainActivity extends AbstractTransitionActivity implements
         initInput();
         initHistory();
 
-        getSupportLoaderManager().initLoader(CALC_LOADER_ID, null, mResultCallbacks);
+        LoaderManager.getInstance(this).initLoader(CALC_LOADER_ID, null, mResultCallbacks);
     }
 
 
@@ -232,7 +233,7 @@ public class MainActivity extends AbstractTransitionActivity implements
             Bundle args = new Bundle();
             args.putInt(CalculationLoader.KEY_FORMAT, mPreferences.loadFormatPreference());
             args.putString(CalculationLoader.KEY_INPUT, expression);
-            getSupportLoaderManager().restartLoader(CALC_LOADER_ID, args, mResultCallbacks);
+            LoaderManager.getInstance(this).restartLoader(CALC_LOADER_ID, args, mResultCallbacks);
         }
     }
 
@@ -316,7 +317,7 @@ public class MainActivity extends AbstractTransitionActivity implements
                 }
             }
 
-            getSupportLoaderManager().destroyLoader(loader.getId());
+            LoaderManager.getInstance(MainActivity.this).destroyLoader(loader.getId());
         }
 
 

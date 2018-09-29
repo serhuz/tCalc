@@ -14,17 +14,22 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import ua.sergeimunovarov.tcalc.BuildConfig;
 import ua.sergeimunovarov.tcalc.DaggerMockRule;
 import ua.sergeimunovarov.tcalc.R;
 
+import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasAction;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasData;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static cortado.Cortado.onView;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
 
@@ -41,36 +46,36 @@ public class HelpActivityTest {
 
     @Test
     public void displayWebView() {
-        onView().withId(R.id.info_webview).check().matches(isDisplayed());
+        onView(withId(R.id.info_webview)).check(matches(isDisplayed()));
     }
 
 
     @Test
     public void displayDialogOnClick() {
-        onView().withId(R.id.action_rate).perform(click());
+        onView(withId(R.id.action_rate)).perform(click());
 
-        onView().withText(R.string.title_dialog_rate).check().matches(isDisplayed());
-        onView().withText(R.string.message_rate_dialog).check().matches(isDisplayed());
-        onView().withText(R.string.btn_yes).check().matches(isDisplayed());
-        onView().withText(R.string.btn_no).check().matches(isDisplayed());
+        onView(withText(R.string.title_dialog_rate)).check(matches(isDisplayed()));
+        onView(withText(R.string.message_rate_dialog)).check(matches(isDisplayed()));
+        onView(withText(R.string.btn_yes)).check(matches(isDisplayed()));
+        onView(withText(R.string.btn_no)).check(matches(isDisplayed()));
     }
 
 
     @Test
     public void hideDialogOnCancel() {
-        onView().withId(R.id.action_rate).perform(click());
+        onView(withId(R.id.action_rate)).perform(click());
 
-        onView().withText(R.string.btn_no).perform(click());
+        onView(withText(R.string.btn_no)).perform(click());
 
-        onView().withText(R.string.title_dialog_rate).check().doesNotExist();
+        onView(withText(R.string.title_dialog_rate)).check(doesNotExist());
     }
 
 
     @Test
     public void goToGooglePlay() {
-        onView().withId(R.id.action_rate).perform(click());
+        onView(withId(R.id.action_rate)).perform(click());
 
-        onView().withText(R.string.btn_yes).perform(click());
+        onView(withText(R.string.btn_yes)).perform(click());
 
         intended(allOf(
                 hasAction(Intent.ACTION_VIEW),
@@ -85,8 +90,18 @@ public class HelpActivityTest {
     public void goToOSSLicenseActivity() {
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
 
-        onView().withText(R.string.action_licenses).perform().click();
+        onView(withText(R.string.action_licenses)).perform(click());
 
         intended(hasComponent(OssLicensesMenuActivity.class.getName()));
+    }
+
+
+    @Test
+    public void openPrivacyPolicy() {
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+
+        onView(withText(R.string.action_privacy_policy)).perform(click());
+
+        intended(hasData(Uri.parse(BuildConfig.PRIVACY_POLICY_URL)));
     }
 }

@@ -25,7 +25,6 @@
 
     <!-- user notifications -->
     <string name="toast_result_copied">Результат скопійовано</string>
-    <string name="toast_ms">Результат збережено</string>
     <string name="toast_copy_error">Буфер обміну містить непідтримувані дані</string>
     <string name="action_settings">Налаштування</string>
 

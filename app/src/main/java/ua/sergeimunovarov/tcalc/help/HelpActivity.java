@@ -85,6 +85,7 @@ public class HelpActivity extends AbstractTransitionActivity {
                 return true;
             case R.id.action_licenses:
                 showOssLicences();
+                break;
             case R.id.action_privacy:
                 goToPrivacyPolicy();
                 break;

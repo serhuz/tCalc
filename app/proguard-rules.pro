@@ -1,3 +1,4 @@
+-keepattributes SourceFile,LineNumberTable
 -keep class ua.sergeimunovarov.tcalc.*
 
 -keepclassmembers class **.R$* {

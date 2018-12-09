@@ -92,3 +92,4 @@ keystore.properties
 /gradle.properties
 
 *.li
+/app/src/beta/google-services.json

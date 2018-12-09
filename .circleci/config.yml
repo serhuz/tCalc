@@ -18,6 +18,9 @@ jobs:
           name: Generate gradle.properties
           command: sh props.sh
       - run:
+          name: Get services.json
+          command: echo $GOOGLE_SERVICES | base64 -d >> ~/tcalc/app/src/beta/google-services.json
+      - run:
           name: Make gradlew executable
           command: chmod +x gradlew
       - restore_cache:

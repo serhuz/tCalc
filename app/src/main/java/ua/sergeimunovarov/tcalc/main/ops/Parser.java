@@ -14,7 +14,7 @@ import java.util.regex.Matcher;
 import androidx.annotation.NonNull;
 
 
-
+@SuppressWarnings("WeakerAccess")
 public class Parser {
 
     private static final String PREFIX_NEGATIVE = "#";

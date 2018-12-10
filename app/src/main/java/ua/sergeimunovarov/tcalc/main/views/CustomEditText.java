@@ -9,6 +9,8 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.text.Editable;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.Toast;
@@ -18,6 +20,7 @@ import java.util.regex.Matcher;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.core.content.res.ResourcesCompat;
 import ua.sergeimunovarov.tcalc.BuildConfig;
 import ua.sergeimunovarov.tcalc.R;
 import ua.sergeimunovarov.tcalc.main.ops.Converter;
@@ -26,12 +29,10 @@ import ua.sergeimunovarov.tcalc.main.ops.InputPattern;
 import static android.content.Context.CLIPBOARD_SERVICE;
 
 
-/**
- * An {@link AppCompatEditText} subclass with custom font.
- */
 public class CustomEditText extends AppCompatEditText {
 
     private SelectionChangedListener mSelectionChangedListener;
+    private final int mSpanColor;
 
 
     public CustomEditText(Context context) {
@@ -49,11 +50,75 @@ public class CustomEditText extends AppCompatEditText {
     }
 
 
+    {
+        mSpanColor = ResourcesCompat.getColor(getResources(), R.color.blue, getContext().getTheme());
+    }
+
+
     @Override
     protected void onSelectionChanged(int selStart, int selEnd) {
         if (mSelectionChangedListener != null) {
             mSelectionChangedListener.onSelectionChanged();
         }
+
+        if (selStart == selEnd && selStart > 0 && getText().length() > 1) {
+            ForegroundColorSpan[] spans = getText().getSpans(0, getText().length(), ForegroundColorSpan.class);
+            for (ForegroundColorSpan span : spans) {
+                getText().removeSpan(span);
+            }
+            if (getText().charAt(selStart - 1) == '(') {
+                int closingPosition = findClosingPosition(getText().toString().toCharArray(), selStart - 1);
+                if (closingPosition > -1) {
+                    setOpeningSpan(closingPosition);
+                    setClosingSpan(selStart);
+                }
+            } else if (getText().charAt(selStart - 1) == ')') {
+                int openPosition = findOpenPosition(getText().toString().toCharArray(), selStart - 1);
+                if (openPosition > -1) {
+                    setOpeningSpan(openPosition);
+                    setClosingSpan(selStart);
+                }
+            }
+        }
+    }
+
+
+    private void setClosingSpan(int position) {
+        setColorSpan(position - 1, position);
+    }
+
+
+    private void setOpeningSpan(int position) {
+        setColorSpan(position, position + 1);
+    }
+
+
+    private void setColorSpan(int start, int end) {
+        getText().setSpan(new ForegroundColorSpan(mSpanColor), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
+
+    public int findClosingPosition(char[] text, int openPos) {
+        int counter = 1;
+        for (int i = openPos + 1; i < text.length; i++) {
+            char c = text[i];
+            if (c == '(') counter++;
+            else if (c == ')') counter--;
+            if (counter == 0) return i;
+        }
+        return -1;
+    }
+
+
+    public int findOpenPosition(char[] text, int closePos) {
+        int counter = 1;
+        for (int i = closePos - 1; i >= 0; i--) {
+            char c = text[i];
+            if (c == ')') counter++;
+            else if (c == '(') counter--;
+            if (counter == 0) return i;
+        }
+        return -1;
     }
 
 

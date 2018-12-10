@@ -5,7 +5,7 @@
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-
+        <item name="fontFamily">@font/lato_regular</item>
     </style>
 
     <!-- Application theme. -->
@@ -13,7 +13,7 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-    <style name="MainActivityThere" parent="AppTheme">
+    <style name="MainActivityTheme" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
@@ -26,7 +26,7 @@
         <item name="android:textSize">@dimen/button_text_size</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
-        <item name="fontFamily">@font/lato_light</item>
+        <item name="fontFamily">@font/lato</item>
     </style>
 
     <style name="StyleNumberButton" parent="StyleGenericButton">
@@ -64,7 +64,7 @@
         <item name="android:inputType">textMultiLine</item>
         <item name="android:saveEnabled">true</item>
         <item name="android:background">@drawable/input_background</item>
-        <item name="fontFamily">@font/lato_light</item>
+        <item name="fontFamily">@font/lato</item>
     </style>
 
     <style name="ResultStyle">
@@ -75,7 +75,7 @@
         <item name="android:textColor">@color/blue</item>
         <item name="android:textSize">@dimen/textview_text_size</item>
         <item name="android:textStyle">bold</item>
-        <item name="fontFamily">@font/lato_light</item>
+        <item name="fontFamily">@font/lato</item>
     </style>
 
     <style name="FormatIndicatorStyle">
@@ -85,7 +85,7 @@
         <item name="android:textSize">@dimen/action_format_text_size</item>
         <item name="android:paddingLeft">8dp</item>
         <item name="android:paddingRight">8dp</item>
-        <item name="fontFamily">@font/lato_light</item>
+        <item name="fontFamily">@font/lato</item>
         <item name="android:gravity">center</item>
     </style>
 </resources>

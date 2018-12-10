@@ -9,6 +9,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
@@ -49,6 +50,8 @@ import ua.sergeimunovarov.tcalc.main.input.CalcInputFragment;
 import ua.sergeimunovarov.tcalc.main.input.PhoneInputFragment;
 import ua.sergeimunovarov.tcalc.main.ops.Result;
 import ua.sergeimunovarov.tcalc.settings.SettingsActivity;
+
+import static android.os.Build.VERSION_CODES.LOLLIPOP;
 
 
 public class MainActivity extends AbstractTransitionActivity implements
@@ -92,6 +95,11 @@ public class MainActivity extends AbstractTransitionActivity implements
         initViewModel();
         initInput();
         initHistory();
+
+        if (Build.VERSION.SDK_INT >= LOLLIPOP) {
+            mBinding.input.requestFocus();
+            mBinding.input.setShowSoftInputOnFocus(false);
+        }
 
         LoaderManager.getInstance(this).initLoader(CALC_LOADER_ID, null, mResultCallbacks);
     }

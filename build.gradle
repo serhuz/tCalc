@@ -6,6 +6,8 @@ buildscript {
         jcenter()
         google()
         maven { url 'https://maven.fabric.io/public' }
+        // TODO remove when google-services available in google() repo
+        maven { url 'https://dl.bintray.com/android/android-tools' }
     }
 
     dependencies {

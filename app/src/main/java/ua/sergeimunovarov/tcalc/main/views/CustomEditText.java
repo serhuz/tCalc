@@ -62,34 +62,26 @@ public class CustomEditText extends AppCompatEditText {
         }
 
         if (selStart == selEnd && selStart > 0 && getText().length() > 1) {
-            ForegroundColorSpan[] spans = getText().getSpans(0, getText().length(), ForegroundColorSpan.class);
-            for (ForegroundColorSpan span : spans) {
-                getText().removeSpan(span);
-            }
-            if (getText().charAt(selStart - 1) == '(') {
-                int closingPosition = findClosingPosition(getText().toString().toCharArray(), selStart - 1);
-                if (closingPosition > -1) {
-                    setOpeningSpan(closingPosition);
-                    setClosingSpan(selStart);
+            post(() -> {
+                ForegroundColorSpan[] spans = getText().getSpans(0, getText().length(), ForegroundColorSpan.class);
+                for (ForegroundColorSpan span : spans) {
+                    getText().removeSpan(span);
                 }
-            } else if (getText().charAt(selStart - 1) == ')') {
-                int openPosition = findOpenPosition(getText().toString().toCharArray(), selStart - 1);
-                if (openPosition > -1) {
-                    setOpeningSpan(openPosition);
-                    setClosingSpan(selStart);
+                if (getText().charAt(selStart - 1) == '(') {
+                    int closingPosition = findClosingPosition(getText().toString().toCharArray(), selStart - 1);
+                    if (closingPosition > -1) {
+                        setColorSpan(selStart - 1, selStart);
+                        setColorSpan(closingPosition, closingPosition + 1);
+                    }
+                } else if (getText().charAt(selStart - 1) == ')') {
+                    int openPosition = findOpenPosition(getText().toString().toCharArray(), selStart - 1);
+                    if (openPosition > -1) {
+                        setColorSpan(selStart - 1, selStart);
+                        setColorSpan(openPosition, openPosition + 1);
+                    }
                 }
-            }
+            });
         }
-    }
-
-
-    private void setClosingSpan(int position) {
-        setColorSpan(position - 1, position);
-    }
-
-
-    private void setOpeningSpan(int position) {
-        setColorSpan(position, position + 1);
     }
 
 

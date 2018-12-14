@@ -216,6 +216,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{() -> model.delete()}"
                 app:srcCompat="@drawable/ic_backspace"
+                app:repeatInterval="@{100}"
                 tools:ignore="ButtonStyle"/>
 
             <Button

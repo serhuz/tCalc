@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -32,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_1"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/btn_2"
@@ -41,7 +41,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_2"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/btn_3"
@@ -50,7 +50,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_3"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
 
             <Button
@@ -60,7 +60,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{() -> model.clear()}"
                 android:text="@string/btn_clear"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
         </TableRow>
 
         <TableRow
@@ -75,7 +75,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_4"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/btn_5"
@@ -84,7 +84,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_5"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/btn_6"
@@ -93,7 +93,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_6"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
 
             <androidx.appcompat.widget.AppCompatImageButton
@@ -102,8 +102,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:onClick="@{() -> model.delete()}"
+                app:repeatInterval="@{100}"
                 app:srcCompat="@drawable/ic_backspace"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
         </TableRow>
 
         <TableRow
@@ -119,7 +120,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_7"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/btn_8"
@@ -128,7 +129,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_8"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/btn_9"
@@ -137,7 +138,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_9"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
 
             <Button
@@ -147,7 +148,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{() -> model.calculate()}"
                 android:text="@string/btn_calculate"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
         </TableRow>
 
         <TableRow
@@ -163,7 +164,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_0"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/btn_col"
@@ -172,7 +173,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_colon"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/btn_dot"
@@ -181,7 +182,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_dot"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
 
             <Button
@@ -191,7 +192,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{() -> model.inputDoubleBrackets()}"
                 android:text="@string/btn_double_parentheses"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
         </TableRow>
 
         <TableRow
@@ -207,7 +208,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_plus"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/btn_minus"
@@ -216,7 +217,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_minus"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/btn_multiply"
@@ -225,7 +226,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_multiply"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/btn_divide"
@@ -234,7 +235,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{model::input}"
                 android:text="@string/btn_divide"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle" />
         </TableRow>
     </TableLayout>
 </layout>
